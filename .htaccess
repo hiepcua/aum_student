@@ -1,0 +1,146 @@
+RewriteEngine On
+
+RewriteRule ^home/?$ 							index.php
+RewriteRule ^login/?$							index.php?com=user&task=login  [QSA]
+RewriteRule ^logout/?$ 	 						index.php?com=user&task=logout  [QSA]
+RewriteRule ^profile/?$ 						index.php?com=user&task=profile  [QSA]
+RewriteRule ^forgotpass/?$  					index.php?com=user&task=forgot  [QSA]
+RewriteRule ^changepass/?$  					index.php?com=user&task=changepass  [QSA]
+RewriteRule ^changetpass/?$  					index.php?com=user&task=changetpass  [QSA]
+
+# Account
+RewriteRule ^account/?$ 						index.php?com=account
+RewriteRule ^account/report?$ 					index.php?com=account&task=report [QSA]
+RewriteRule ^account/view?$ 					index.php?com=account&task=view [QSA]
+
+# order
+RewriteRule ^order/?$ 							index.php?com=order [QSA]
+RewriteRule ^order/all?$ 						index.php?com=order&task=all [QSA]
+RewriteRule ^order/0?$ 							index.php?com=order [QSA]
+RewriteRule ^order/1?$ 							index.php?com=order&task=list1 [QSA]
+RewriteRule ^order/2?$ 							index.php?com=order&task=list2 [QSA]
+RewriteRule ^order/3?$ 							index.php?com=order&task=list3 [QSA]
+RewriteRule ^order/4?$ 							index.php?com=order&task=list4 [QSA]
+RewriteRule ^order/5?$ 							index.php?com=order&task=list5 [QSA]
+RewriteRule ^order/6?$ 							index.php?com=order&task=list6 [QSA]
+RewriteRule ^order/7?$ 							index.php?com=order&task=list7 [QSA]
+RewriteRule ^order/-1?$ 						index.php?com=order&task=list7 [QSA]
+RewriteRule ^order/shop?$ 						index.php?com=order&task=shop [QSA]
+RewriteRule ^order/cus?$ 						index.php?com=order&task=cus [QSA]
+RewriteRule ^order/pro?$ 						index.php?com=order&task=pro [QSA]
+RewriteRule ^order/add?$ 						index.php?com=order&task=add [QSA]
+RewriteRule ^order/edit?$ 						index.php?com=order&task=edit [QSA]
+RewriteRule ^order/view?$ 						index.php?com=order&task=view [QSA]
+RewriteRule ^order/delete?$ 					index.php?com=order&task=delete [QSA]
+RewriteRule ^order/copy?$ 						index.php?com=order&task=copy [QSA]
+
+# order receive
+RewriteRule ^store/?$ 							index.php?com=store [QSA]
+RewriteRule ^store/add?$ 						index.php?com=store&task=add  [QSA]
+RewriteRule ^store/check/([0-9]+)?$ 			index.php?com=store&task=check&id=$1  [QSA]
+RewriteRule ^store/view/([0-9]+)?$ 				index.php?com=store&task=view&id=$1  [QSA]
+
+# Student
+RewriteRule ^hsdaotao/?$  						index.php?com=student&task=hsdaotao
+RewriteRule ^qlhocphi/?$  						index.php?com=student&task=qlhocphi
+RewriteRule ^qlhoctap/?$  						index.php?com=student&task=qlhoctap
+RewriteRule ^lop/?$  							index.php?com=student&task=qllop
+
+RewriteRule ^student/?$ 						index.php?com=student  [QSA]
+RewriteRule ^student/add/?$ 					index.php?com=student&task=add 
+RewriteRule ^student/import/?$ 					index.php?com=student&task=import
+RewriteRule ^student/qlhocphi/?$  				index.php?com=student&task=qlhocphi
+RewriteRule ^student/qlhoctap/?$  				index.php?com=student&task=qlhoctap
+RewriteRule ^student/hsdaotao/?$  				index.php?com=student&task=hsdaotao
+RewriteRule ^student/edit/([0-9A-Za-z]+)?$ 		index.php?com=student&task=edit&id=$1  [QSA]
+RewriteRule ^student/delete/([0-9A-Za-z]+)?$ 	index.php?com=student&task=delete&id=$1  [QSA]
+RewriteRule ^student/profile/([0-9A-Za-z]+)?$  	index.php?com=student&task=profile&id=$1  [QSA]
+RewriteRule ^student/nganh/([0-9A-Za-z]+)?$  	index.php?com=student&task=dangky_nganh&id=$1  [QSA]
+RewriteRule ^student/nhapdiem/([0-9A-Za-z]+)?$  index.php?com=student&task=nhapdiem&id=$1  [QSA]
+RewriteRule ^student/trungtuyen/([0-9A-Za-z]+)?$  	index.php?com=student&task=trungtuyen&id=$1 [QSA]
+RewriteRule ^student/xettuyen/?$  				index.php?com=student&task=xettuyen [QSA]
+RewriteRule ^student/tuyensinh/?$  				index.php?com=student&task=tuyensinh [QSA]
+RewriteRule ^student/hsthi/?$  					index.php?com=student&task=hsthi [QSA]
+RewriteRule ^student/hsdathi/?$  				index.php?com=student&task=hsdathi [QSA]
+RewriteRule ^student/hstruot/?$  				index.php?com=student&task=hstruot [QSA]
+RewriteRule ^student/hstrungtuyen/?$  			index.php?com=student&task=hstrungtuyen [QSA]
+RewriteRule ^student/hsnhaphoc/?$  				index.php?com=student&task=hsnhaphoc [QSA]
+RewriteRule ^student/hocphi/([0-9A-Za-z]+)?$  	index.php?com=student&task=hocphi&id=$1 [QSA]
+RewriteRule ^student/hocphi_history/([0-9A-Za-z]+)?$  	index.php?com=student&task=hocphi_history&id=$1 [QSA]
+RewriteRule ^student/diem/([0-9A-Za-z]+)?$  	index.php?com=student&task=diem&id=$1 [QSA]
+RewriteRule ^student/soyeulylich/([0-9A-Za-z]+)?$  	index.php?com=student&task=soyeulylich&id=$1 [QSA]
+
+#RewriteRule ^student/xettotnghiep?$  			index.php?com=student&task=xettotnghiep [QSA]
+
+# config
+RewriteRule ^config/?$ 							index.php?com=config  [QSA]
+RewriteRule ^config/brief?$ 					index.php?com=config&task=brief [QSA]
+RewriteRule ^config/exam?$ 						index.php?com=config&task=exam [QSA]
+RewriteRule ^config/nhaphoc?$ 					index.php?com=config&task=nhaphoc [QSA]
+
+# wallet
+RewriteRule ^wallet/?$ 							index.php?com=wallet [QSA]
+RewriteRule ^wallet_detail/([0-9A-Za-z]+)?$ 	index.php?com=wallet&task=detail&cusid=$1 [QSA]
+
+# report
+RewriteRule ^report/?$ 							index.php?com=report [QSA]
+RewriteRule ^report/hocphi?$ 					index.php?com=report&task=hocphi [QSA]
+RewriteRule ^report/nganhhoc?$ 					index.php?com=report&task=nganhhoc [QSA]
+RewriteRule ^report/hoso/?$ 					index.php?com=report&task=hoso [QSA]
+RewriteRule ^report/hoso/tonghop?$ 				index.php?com=report&task=hoso_tonghop [QSA]
+RewriteRule ^report/hoso/tinhthanh?$ 			index.php?com=report&task=hoso_tinhthanh [QSA]
+RewriteRule ^report/hoso/doitac?$ 				index.php?com=report&task=hoso_doitac [QSA]
+
+# Mail
+RewriteRule ^mail/?$ 							index.php?com=mail
+RewriteRule ^mail/([0-9]+)?$ 					index.php?com=mail&task=view&id=$1
+RewriteRule ^mail/outbox?$ 						index.php?com=mail&task=outbox
+RewriteRule ^mail/new?$ 						index.php?com=mail&task=new
+RewriteRule ^mail/config?$ 						index.php?com=mail&task=config
+
+# User
+RewriteRule ^user/?$ 							index.php?com=user
+RewriteRule ^user/add?$ 						index.php?com=user&task=add
+RewriteRule ^user/edit/([0-9]+)?$ 				index.php?com=user&task=edit&id=$1
+RewriteRule ^user/active/([0-9]+)?$ 			index.php?com=user&task=active&id=$1
+RewriteRule ^user/delete/([0-9]+)?$ 			index.php?com=user&task=delete&id=$1
+RewriteRule ^user/changepass/([0-9]+)?$ 		index.php?com=user&task=changepass&id=$1
+
+# notify
+RewriteRule ^notify/?$ 							index.php?com=notify [QSA]
+
+<Ifmodule mod_php5.c>
+	php_value upload_max_filesize 20M
+	php_value max_execution_time  1000
+	php_value max_input_time  1000
+	php_value memory_limit  256M
+	php_value post_max_size  20M
+	php_flag register_globals  off
+	php_flag display_errors  on
+	php_flag file_uploads  on
+	php_flag log_errors  on
+	php_flag output_buffering  off
+	php_flag register_argc_argv  on
+	php_flag magic_quotes_gpc   off
+	php_flag magic_quotes_runtime  off
+	php_flag magic_quotes_sybase  off
+	php_flag mysql.allow_persistent  off
+	php_flag register_long_arrays  on
+	php_flag allow_url_fopen  on
+	php_flag cgi.force_redirect  on
+	php_flag enable_dl  on
+	php_flag safe_mode off
+</Ifmodule>
+
+#Bảo vệ file
+<files .htaccess>
+order allow,deny
+deny from all
+</files>
+
+# DISABLE CACHING
+<IfModule mod_headers.c>
+	Header set Cache-Control "no-cache, no-store, must-revalidate"
+	Header set Pragma "no-cache"
+	Header set Expires 0
+</IfModule>
