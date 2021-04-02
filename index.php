@@ -39,8 +39,8 @@ $conf = $config->Fetch_Assoc();
 global $conf;
 
 /* Khởi tạo session */
-if(!isset($_SESSION['THIS_YEAR'])) $_SESSION['THIS_YEAR'] = date('Y');
-if(!isset($_SESSION['THIS_BAC'])) $_SESSION['THIS_BAC'] = 'EEA';
+if(!isset($_SESSION['THIS_YEAR'])) $_SESSION['THIS_YEAR'] = '';
+if(!isset($_SESSION['THIS_BAC'])) $_SESSION['THIS_BAC'] = '';
 if(!isset($_SESSION['THIS_NGANH'])) $_SESSION['THIS_NGANH'] = '';
 
 // style print
@@ -279,10 +279,7 @@ $(document).ready(function(){
 		var ma = $('#right_click_id').val();
 		frm_dangky(ma);
 	})
-	$(".dk_nganh").click(function(){
-		var ma = $(this).attr('dataid');
-		frm_dangky(ma);
-	})
+	
 	$("#contextMenu .nhapdiem").click(function(){
 		var ma = $('#right_click_id').val();
 		frm_nhapdiem(ma);

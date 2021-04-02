@@ -11,14 +11,6 @@ $objuser=new CLS_USER;
 if(!$objuser->isLogin()) die("E01");
 $user = $objuser->getInfo('username');
 if(isset($_POST['ma'])){
-	/*$sbd 		= isset($_POST['sbd'])?addslashes(strip_tags($_POST['sbd'])):'';
-	$diem_ut 	= isset($_POST['diem_ut'])?(float)$_POST['diem_ut']:0;
-	$mon1 		= isset($_POST['mon1'])?(float)$_POST['mon1']:0;
-	$mon2 		= isset($_POST['mon2'])?(float)$_POST['mon2']:0;
-	$mon3 		= isset($_POST['mon3'])?(float)$_POST['mon3']:0;
-	$diem_thuong= isset($_POST['diem_thuong'])?(float)$_POST['diem_thuong']:0;
-	$tong_diem	= isset($_POST['tong_diem'])?(float)$_POST['tong_diem']:0;
-	*/
 	$partner 	= 0;
 	$ma 		= isset($_POST['ma'])?addslashes(strip_tags($_POST['ma'])):'';
 	$masv 		= isset($_POST['masv'])?addslashes(strip_tags($_POST['masv'])):'';
@@ -92,21 +84,24 @@ if(isset($_POST['ma'])){
 	'$qhgd','$qtht','$qthoc','$khenthuong','$kyluat',
 	'$partner','$author',$cdate,$cdate,1)";
 	$result1=$obj->Exec($sql); //echo $sql;
-	//$lastid = $obj->LastInsertID();
+
+	$sql = "INSERT INTO tbl_dangky_tuyensinh (cdate,id_hoso,nhaphoc,author,status,isactive) 
+		VALUES($cdate,'$ma',1,'$user','TS1',1)"; 
+	$result2 = $obj->Exec($sql); //echo $sql;
 	
 	// dang ky note
 	$sql = "INSERT INTO tbl_dangky_note (id_hoso,masv,notes,cdate,author) 
 	VALUES('$ma','$masv','Hồ sơ #$ma ($ho_dem $name) tạo mới thành công',$cdate,'$user')";
-	$result2 = $obj->Exec($sql); //echo $sql;
+	$result4 = $obj->Exec($sql); //echo $sql;
 	
 	// notify
 	$sql = "INSERT INTO tbl_notify (id_hoso,masv,notes,cdate,author) 
 	VALUES('$ma','','Hồ sơ #$ma ($ho_dem $name) tạo mới thành công',$cdate,'$user')";
 	$result3 = $obj->Exec($sql); //echo $sql;
 	
-	if($result1 && $result2 && $result3) {
+	if($result1 && $result2 && $result3 && $result4) {
 		$obj->Exec("COMMIT"); echo $ma;
 	}else {
 		$obj->Exec("ROLLBACK"); echo "error";
-	}			
+	}
 }

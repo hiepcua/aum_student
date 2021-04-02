@@ -36,3 +36,15 @@ $STATUS_DKTS = array(
 	"HS3" 	=> 'Hồ sơ bảo lưu',
 	"HS4" 	=> 'Hồ sơ hủy'
 );
+
+$STATUS_DKTS2 = array(
+	"L0" 	=> 'L0 - Sinh viên nhập học',
+	"L1" 	=> 'L1 - Không xác định',
+	"L2" 	=> 'L2 - Nhập học thành công',
+	"L3" 	=> 'L3 - Đã nộp tiền', // Nộp đủ, thiếu, dư
+	"L4" 	=> 'L4 - Không đủ điều kiện thi',
+	"L5" 	=> 'L5 - Hoãn thi',
+	"L8" 	=> 'L8 - Tốt nghiệp',
+	"L9A" 	=> 'L9A - Bảo lưu',
+	"L9B" 	=> 'l9B - Bỏ học',
+);

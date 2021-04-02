@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : localhost
 Source Server Version : 50505
 Source Host           : localhost:3306
-Source Database       : edaotao
+Source Database       : edaotao2
 
 Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2021-04-01 12:02:51
+Date: 2021-04-02 18:52:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -132,7 +132,7 @@ CREATE TABLE `tbl_dangky_note` (
   `cdate` int(11) DEFAULT NULL,
   `author` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1661 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1678 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_dangky_note
@@ -563,6 +563,23 @@ INSERT INTO `tbl_dangky_note` VALUES ('1657', '1599788697', '', 'Hồ sơ #15997
 INSERT INTO `tbl_dangky_note` VALUES ('1658', '1610940726', '', 'Hồ sơ #1610940726 đã trúng tuyển', '1617251133', 'tranhiep');
 INSERT INTO `tbl_dangky_note` VALUES ('1659', '1610940726', '', 'Hồ sơ #1610940726 đã trúng tuyển', '1617251133', 'tranhiep');
 INSERT INTO `tbl_dangky_note` VALUES ('1660', '1599788697', '20EEA114271', 'Hồ sơ #1599788697 đã nhập học', '1617251342', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1661', '1617339465', '123456789000', 'Hồ sơ #1617339465 ( ABC) tạo mới thành công', '1617339545', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1662', '1617340024', '123456789001', 'Hồ sơ #1617340024 ( ABC) tạo mới thành công', '1617340036', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1663', '1617340024', '123456789000', 'Hồ sơ #1617340024 ( ABC) tạo mới thành công', '1617340157', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1664', '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617352997', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1665', '1617340024', '', 'Hồ sơ #1617340024 cập nhật ngành thành công', '1617355215', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1666', '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617356119', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1667', '1617340024', '', 'Hồ sơ #1617340024 cập nhật ngành thành công', '1617357142', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1668', '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617357431', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1669', '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617357470', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1670', '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617357475', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1671', '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617357826', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1672', '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617357888', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1673', '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617357950', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1674', '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617357974', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1675', '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617359143', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1676', '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617359162', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1677', '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617360909', 'tranhiep');
 
 -- ----------------------------
 -- Table structure for tbl_dangky_tuyensinh
@@ -600,12 +617,12 @@ CREATE TABLE `tbl_dangky_tuyensinh` (
   KEY `idx_khoa_he_nganh` (`id_khoa`,`id_he`,`id_nganh`),
   KEY `idx_nhaphoc` (`nhaphoc`),
   KEY `idx_trungquyen` (`trungtuyen`)
-) ENGINE=InnoDB AUTO_INCREMENT=460 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=475 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_dangky_tuyensinh
 -- ----------------------------
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('271', '1599789024', '1617248902', '1', '2020', 'EEA', '114', '1599788697', null, null, '1', '', '20EEA114271', 'SBD21001', 'P1', null, null, null, '0', '1', '0', '1', '1617251342', 'el1_qtkd11', 'tranhiep', '1', 'HS1');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('271', '1599789024', '1617248902', '1', '2020', 'EEA', '114', '1599788697', null, null, '1', '', '20EEA114271', 'SBD21001', 'P1', null, null, null, '0', '1', '0', '1', '1617251342', 'el1_qtkd11', 'tranhiep', '1', 'HS4');
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('272', '1599793495', '1599795528', '1', '2020', 'EEA', '114', '159979300115', null, null, '1', '', '20EEA114272', null, null, null, null, null, '0', '1', '0', '1', '1600312346', 'el1_qtkd11', 'admindemo', '1', null);
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('273', '1599793584', '1599795540', '1', '2020', 'EEA', '114', '159979300114', null, null, '1', '', '20EEA114273', null, null, null, null, null, '0', '1', '0', '1', '1600312337', 'el1_qtkd11', 'admindemo', '1', null);
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('274', '1599793693', '1599795444', '1', '2020', 'EEA', '114', '15997930011', null, null, '1', '', '20EEA114274', null, null, null, null, null, '0', '1', '0', '1', '1600312237', 'el1_qtkd11', 'admindemo', '1', null);
@@ -615,7 +632,7 @@ INSERT INTO `tbl_dangky_tuyensinh` VALUES ('277', '1599794111', '1599795474', '1
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('278', '1599794222', '1599795459', '1', '2020', 'EEA', '114', '15997930013', null, null, '1', '', '20EEA114278', null, null, null, null, null, '0', '1', '0', '1', '1600312254', 'el1_qtkd11', 'admindemo', '1', null);
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('279', '1599794347', '1599795643', '1', '2020', 'EEA', '114', '15997930012', null, null, '1', '', '20EEA114279', null, null, null, null, null, '0', '1', '0', '1', '1600312247', 'el1_qtkd11', 'admindemo', '1', null);
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('280', '1599794451', '1599795532', '1', '2020', 'EEA', '114', '159979300111', null, null, '1', '', '20EEA114280', null, null, null, null, null, '0', '1', '0', '1', '1600312317', 'el1_qtkd11', 'admindemo', '1', null);
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('281', '1599794545', '1599795511', '1', '2020', 'EEA', '114', '159979300110', null, null, '1', '', '20EEA114281', null, null, null, null, null, '0', '1', '0', '1', '1600312309', 'el1_qtkd11', 'admindemo', '1', null);
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('281', '1599794545', '1599795511', '1', '2020', 'EEA', '114', '159979300110', null, null, '1', '', '20EEA114281', null, null, null, null, null, '0', '1', '0', '1', '1600312309', '', 'admindemo', '1', null);
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('282', '1599794702', '1599795506', '1', '2020', 'EEA', '114', '15997930019', null, null, '1', '', '20EEA114282', null, null, null, null, null, '0', '1', '0', '1', '1600312302', 'el1_qtkd11', 'admindemo', '1', null);
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('283', '1599794798', '1599795499', '1', '2020', 'EEA', '114', '15997930018', null, null, '1', '', '20EEA114283', null, null, null, null, null, '0', '1', '0', '1', '1600312294', 'el1_qtkd11', 'admindemo', '1', null);
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('284', '1599794892', '1599795493', '1', '2020', 'EEA', '114', '15997930017', null, null, '1', '', '20EEA114284', null, null, null, null, null, '0', '1', '0', '1', '1600312287', 'el1_qtkd11', 'admindemo', '1', null);
@@ -786,14 +803,17 @@ INSERT INTO `tbl_dangky_tuyensinh` VALUES ('448', '1610177807', '1610937478', '1
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('449', '1610177860', '1610937490', '1', '2020', 'EEA', '116', '1610177813', null, null, '1', '', '20EEA116449', null, null, null, null, null, '0', '1', '0', '1', '1610936717', 'el3_lkt11', 'admindemo', '1', null);
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('450', '1610177913', '1610937499', '1', '2020', 'EEA', '116', '1610177872', null, null, '1', '', '20EEA116450', null, null, null, null, null, '0', '1', '0', '1', '1610936723', 'el3_lkt11', 'admindemo', '1', null);
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('451', '1610177950', '1610937508', '1', '2020', 'EEA', '116', '1610177920', null, null, '1', '', '20EEA116451', null, null, null, null, null, '0', '1', '0', '1', '1610936729', 'el3_lkt11', 'admindemo', '1', null);
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('452', '1610178616', '1610937517', '1', '2020', 'EEA', '116', '1610178041', null, null, '1', '', '20EEA116452', null, null, null, null, null, '0', '1', '0', '1', '1610936735', 'el3_lkt11', 'admindemo', '1', null);
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('452', '1610178616', '1610937517', '1', '2020', 'EEA', '116', '1610178041', null, '1617340000', '1', '', '20EEA116452', null, null, null, null, null, '0', '1', '0', '1', '1610936735', 'el3_lkt11', 'admindemo', '1', null);
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('453', '1610178856', '1610937526', '1', '2020', 'EEA', '116', '1610178625', null, null, '1', '', '20EEA116453', null, null, null, null, null, '0', '1', '0', '1', '1610936741', 'el3_lkt11', 'admindemo', '1', null);
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('454', '1610178978', '1610937535', '1', '2020', 'EEA', '116', '1610178937', null, null, '1', '', '20EEA116454', null, null, null, null, null, '0', '1', '0', '1', '1610936748', 'el3_lkt11', 'admindemo', '1', null);
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('455', '1610940719', null, '1', '2020', 'EEA', '116', '1610940369', null, null, '1', '', null, null, null, null, null, null, '0', '1', '0', '0', null, null, 'admindemo', '1', 'TS4');
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('456', '1610940772', null, '1', '2020', 'EEA', '116', '1610940726', null, null, '0', '', null, 'SBD21002', 'P1', '9.0', null, null, '0', '1', '0', '0', null, null, 'admindemo', '1', 'TS4');
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('457', '1616469760', null, '1', '2020', 'EEA', '114', '1610940726', null, null, '1', '', null, 'SBD21002', 'P1', null, null, null, '0', '1', '0', '0', null, '', 'tranhiep', '1', 'TS4');
 INSERT INTO `tbl_dangky_tuyensinh` VALUES ('458', '1616488717', '1617250870', '1', '2020', 'EEA', '116', '1599788697', null, null, '0', '', '20EEA114271', 'SBD21001', 'P1', '8.0', '8.0', '9.0', '0', '1', '0', '1', '1617251342', 'el21_lkt11', 'tranhiep', '1', 'HS1');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('459', '1616488724', '1617248902', '1', '2020', 'EEA', '122', '1599788697', null, null, '1', '', '20EEA114271', 'SBD21001', 'P1', null, null, null, '0', '1', '0', '1', '1617251342', null, 'tranhiep', '1', 'HS1');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('459', '1616488724', '1617336522', '1', '2020', 'EEA', '122', '1599788697', null, null, '1', '', '20EEA114271', 'SBD21001', 'P1', null, null, null, '0', '1', '0', '1', '1617251342', 'el1_qlnn11', 'tranhiep', '1', 'HS1');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('472', '1617359143', '1617359171', '1', '2020', 'EEA', '114', '1617340024', null, null, '0', '', '20EEA114472', null, null, null, null, null, '0', '-1', '0', '1', null, 'el1_qtkd11', 'tranhiep', '1', 'HS1');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('473', '1617359162', '1617359513', '1', '2020', 'EEA', '122', '1617340024', null, null, '0', '', '20EEA122473', null, null, null, null, null, '0', '-1', '0', '1', null, 'el1_qlnn11', 'tranhiep', '1', 'HS1');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('474', '1617360909', null, '1', '2020', 'EEA', '116', '1617340024', null, null, '0', '', '20EEA116474', null, null, null, null, null, '0', '-1', '0', '1', null, '', 'tranhiep', '1', 'TS1');
 
 -- ----------------------------
 -- Table structure for tbl_dmhocphi
@@ -1069,7 +1089,7 @@ CREATE TABLE `tbl_hocphi` (
   `date_pay` int(11) DEFAULT NULL,
   `ispay` tinyint(4) DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6476 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6508 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_hocphi
@@ -2296,6 +2316,38 @@ INSERT INTO `tbl_hocphi` VALUES ('6449', '20EEA114286', '1', '780000', 'MC03', '
 INSERT INTO `tbl_hocphi` VALUES ('6473', '20EEA114271', '1', '300000', '218', 'Lệ phí xét tuyển, nhập học', 'khac', null, '0');
 INSERT INTO `tbl_hocphi` VALUES ('6474', '20EEA114271', '1', '1200000', '219', 'Đào tạo nhập môn E-learning', 'khac', null, '0');
 INSERT INTO `tbl_hocphi` VALUES ('6475', '20EEA114271', '1', '50000', '220', 'Thẻ sinh viên', 'khac', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6476', '20EEA114271', '1', '780000', 'MC01', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6477', '20EEA114271', '1', '520000', 'MC19', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6478', '20EEA114271', '1', '520000', 'QLNN22', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6479', '20EEA114271', '1', '520000', 'QLNN29', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6480', '20EEA114271', '1', '520000', 'QLNN30', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6481', '20EEA114271', '1', '780000', 'MC13', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6482', '20EEA122464', '1', '780000', 'MC01', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6483', '20EEA122464', '1', '520000', 'MC19', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6484', '20EEA122464', '1', '520000', 'QLNN22', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6485', '20EEA122464', '1', '520000', 'QLNN29', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6486', '20EEA122464', '1', '520000', 'QLNN30', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6487', '20EEA122464', '1', '780000', 'MC13', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6488', '20EEA116471', '1', '520000', 'MC11', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6489', '20EEA116471', '1', '520000', 'LKT04', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6490', '20EEA116471', '1', '520000', 'LKT05', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6491', '20EEA116471', '1', '520000', 'LKT10', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6492', '20EEA116471', '1', '520000', 'LKT13', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6493', '20EEA116471', '1', '780000', 'MC16', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6494', '20EEA116471', '1', '520000', 'MC19', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6495', '20EEA114472', '1', '520000', 'MC11', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6496', '20EEA114472', '1', '780000', 'MC15', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6497', '20EEA114472', '1', '520000', 'MC21', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6498', '20EEA114472', '1', '520000', 'MC16', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6499', '20EEA114472', '1', '520000', 'QTKD06', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6500', '20EEA114472', '1', '780000', 'MC02', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6501', '20EEA114472', '1', '780000', 'MC03', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6502', '20EEA122473', '1', '780000', 'MC01', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6503', '20EEA122473', '1', '520000', 'MC19', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6504', '20EEA122473', '1', '520000', 'QLNN22', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6505', '20EEA122473', '1', '520000', 'QLNN29', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6506', '20EEA122473', '1', '520000', 'QLNN30', 'hoc chinh', 'hoc_phan', null, '0');
+INSERT INTO `tbl_hocphi` VALUES ('6507', '20EEA122473', '1', '780000', 'MC13', 'hoc chinh', 'hoc_phan', null, '0');
 
 -- ----------------------------
 -- Table structure for tbl_hocphi_note
@@ -2423,7 +2475,7 @@ CREATE TABLE `tbl_hocsinh` (
   `xettuyen` tinyint(4) DEFAULT 0,
   `isactive` tinyint(4) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=545 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=548 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_hocsinh
@@ -2614,6 +2666,7 @@ INSERT INTO `tbl_hocsinh` VALUES ('541', '6', '1610178625', '', 'Nguyễn Thảo
 INSERT INTO `tbl_hocsinh` VALUES ('542', '6', '1610178937', '', 'Tạ Văn', 'Tuấn', '', '218221200', 'Lâm Đồng', '1', '', '1', '', '', '0', '', 'Việt Nam', 'Lâm Đồng', 'Đà Lạt, Lâm Đồng', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '[]', '', '', '', '', '', '6', '1610178963', '1610178978', 'admindemo', null, '0', '0', '0', '1');
 INSERT INTO `tbl_hocsinh` VALUES ('543', '6', '1610940369', '', 'Nguyễn Văn', 'Bình', '', '-62236800', 'Yên Bái', '1', '', '1', '', '', '0', '', 'Việt Nam', 'Yên Bái', 'Yên Bái', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '[]', '', '', '', '', '', '6', '1610940706', '1610940719', 'admindemo', null, '0', '0', '0', '1');
 INSERT INTO `tbl_hocsinh` VALUES ('544', '6', '1610940726', '', 'Sùng Thị', 'Công', '', '594061200', 'Yên Bái', '0', '', '1', '', '', '0', '', 'Việt Nam', 'Yên Bái', 'Yên Bái', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '[]', '', '', '', '', '', '6', '1610940758', '1610940772', 'admindemo', null, '0', '0', '0', '1');
+INSERT INTO `tbl_hocsinh` VALUES ('547', '0', '1617340024', '123456789000', '', 'ABC', 'A', '1002646800', 'Hải Dương', '0', '', '1', '', '', '0', '', 'Việt Nam', 'Chí Linh, Hải Dương', 'Chí Linh, Hải Dương', 'Kinh', 'Không', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', null, '', '', '', '', '', '0', '1617340157', '1617340157', 'tranhiep', null, '0', '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for tbl_hoctap
@@ -2632,7 +2685,7 @@ CREATE TABLE `tbl_hoctap` (
   `hoclai` tinyint(4) DEFAULT 0,
   `mdate` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3255 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3287 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_hoctap
@@ -3299,6 +3352,38 @@ INSERT INTO `tbl_hoctap` VALUES ('3235', '20EEA114283', 'MC03', '3', '0', '-1', 
 INSERT INTO `tbl_hoctap` VALUES ('3236', '20EEA114284', 'MC03', '3', '0', '-1', null, null, null, '0', null);
 INSERT INTO `tbl_hoctap` VALUES ('3237', '20EEA114285', 'MC03', '3', '0', '-1', null, null, null, '0', null);
 INSERT INTO `tbl_hoctap` VALUES ('3238', '20EEA114286', 'MC03', '3', '0', '-1', null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3255', '20EEA114271', 'MC01', '3', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3256', '20EEA114271', 'MC19', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3257', '20EEA114271', 'QLNN22', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3258', '20EEA114271', 'QLNN29', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3259', '20EEA114271', 'QLNN30', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3260', '20EEA114271', 'MC13', '3', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3261', '20EEA122464', 'MC01', '3', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3262', '20EEA122464', 'MC19', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3263', '20EEA122464', 'QLNN22', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3264', '20EEA122464', 'QLNN29', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3265', '20EEA122464', 'QLNN30', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3266', '20EEA122464', 'MC13', '3', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3267', '20EEA116471', 'MC11', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3268', '20EEA116471', 'LKT04', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3269', '20EEA116471', 'LKT05', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3270', '20EEA116471', 'LKT10', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3271', '20EEA116471', 'LKT13', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3272', '20EEA116471', 'MC16', '3', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3273', '20EEA116471', 'MC19', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3274', '20EEA114472', 'MC11', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3275', '20EEA114472', 'MC15', '3', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3276', '20EEA114472', 'MC21', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3277', '20EEA114472', 'MC16', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3278', '20EEA114472', 'QTKD06', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3279', '20EEA114472', 'MC02', '3', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3280', '20EEA114472', 'MC03', '3', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3281', '20EEA122473', 'MC01', '3', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3282', '20EEA122473', 'MC19', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3283', '20EEA122473', 'QLNN22', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3284', '20EEA122473', 'QLNN29', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3285', '20EEA122473', 'QLNN30', '2', '0', null, null, null, null, '0', null);
+INSERT INTO `tbl_hoctap` VALUES ('3286', '20EEA122473', 'MC13', '3', '0', null, null, null, null, '0', null);
 
 -- ----------------------------
 -- Table structure for tbl_hoctap_note
@@ -3592,7 +3677,7 @@ CREATE TABLE `tbl_notify` (
   `author` varchar(255) DEFAULT NULL,
   `isactive` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4225 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4251 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_notify
@@ -4770,6 +4855,32 @@ INSERT INTO `tbl_notify` VALUES ('4221', null, '1599788697', '', 'Hồ sơ #1599
 INSERT INTO `tbl_notify` VALUES ('4222', null, '1610940726', '', 'Hồ sơ #1610940726 đã trúng tuyển', '1617251133', 'tranhiep', '0');
 INSERT INTO `tbl_notify` VALUES ('4223', null, '1610940726', '', 'Hồ sơ #1610940726 đã trúng tuyển', '1617251133', 'tranhiep', '0');
 INSERT INTO `tbl_notify` VALUES ('4224', null, '1599788697', '20EEA114271', 'Hồ sơ #1599788697 đã nhập học', '1617251342', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4225', null, '1599788697', '', 'Hồ sơ #1599788697 cập nhật trạng thái thành công', '1617335023', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4226', null, '1599788697', '', 'Hồ sơ #1599788697 cập nhật trạng thái thành công', '1617335115', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4227', null, '1599788697', '', 'Hồ sơ #1599788697 cập nhật trạng thái thành công', '1617335141', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4228', null, '1599788697', '', 'Hồ sơ #1599788697 cập nhật trạng thái thành công', '1617335210', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4229', null, null, '20EEA114271', 'Mã SV #20EEA114271 đã được thêm vào lớp el1_qlnn11', '1617336522', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4230', null, '1617339465', '', 'Hồ sơ #1617339465 ( ABC) tạo mới thành công', '1617339545', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4231', null, '1617340024', '', 'Hồ sơ #1617340024 ( ABC) tạo mới thành công', '1617340036', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4232', null, '1617340024', '', 'Hồ sơ #1617340024 ( ABC) tạo mới thành công', '1617340157', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4233', null, '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617352997', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4234', null, '1617340024', '', 'Hồ sơ #1617340024 cập nhật ngành thành công', '1617355215', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4235', null, '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617356119', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4236', null, '1617340024', '', 'Hồ sơ #1617340024 cập nhật ngành thành công', '1617357142', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4237', null, '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617357431', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4238', null, '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617357470', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4239', null, '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617357475', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4240', null, '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617357826', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4241', null, '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617357888', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4242', null, '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617357950', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4243', null, '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617357974', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4244', null, null, '20EEA122464', 'Mã SV #20EEA122464 đã được thêm vào lớp el1_qlnn11', '1617358317', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4245', null, null, '20EEA116471', 'Mã SV #20EEA116471 đã được thêm vào lớp el22_lkt11', '1617358342', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4246', null, '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617359143', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4247', null, '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617359162', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4248', null, null, '20EEA114472', 'Mã SV #20EEA114472 đã được thêm vào lớp el1_qtkd11', '1617359171', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4249', null, null, '20EEA122473', 'Mã SV #20EEA122473 đã được thêm vào lớp el1_qlnn11', '1617359513', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4250', null, '1617340024', '', 'Hồ sơ #1617340024 đăng ký ngành thành công', '1617360909', 'tranhiep', '0');
 
 -- ----------------------------
 -- Table structure for tbl_partner
@@ -4827,7 +4938,7 @@ INSERT INTO `tbl_user` VALUES ('48', 'thaott_daotao', '00cd5ba0e25fd9ae5b8901974
 INSERT INTO `tbl_user` VALUES ('47', 'demodaotao', '453b885e6c7c3683041ab4bd8f717f46', 'Đào tạo', '', '0000-00-00', '', '', '012345678', '', '', null, null, null, null, '2020-02-27 11:11:55', '0000-00-00 00:00:00', '22', null, '1');
 INSERT INTO `tbl_user` VALUES ('45', 'hatn', '2220dc2d04ab4611f78cb4615dc0aa25', 'Trương Ngọc Hà', '', '0000-00-00', '', '', '0917796898', '', '', '', '', '', '', '2019-11-04 16:41:26', '0000-00-00 00:00:00', '9', '0', '1');
 INSERT INTO `tbl_user` VALUES ('50', 'hungtv_daotao', '9b40eccc3434b426c10abb927e80c098', 'Trần Văn Hưng', '', '0000-00-00', '', '', '0972848718', '', '', null, null, null, null, '2020-04-08 15:50:43', '0000-00-00 00:00:00', '22', null, '1');
-INSERT INTO `tbl_user` VALUES ('51', 'tranhiep', 'b8a1099b57fb53d28fba7d5717e317ea', 'Trần Viết Hiệp', '', '0000-00-00', '', '', '0969549903', '', 'tranviethiepdz@gmail.com', null, null, null, null, '2020-04-08 15:50:43', '2021-04-01 11:59:20', '9', null, '1');
+INSERT INTO `tbl_user` VALUES ('51', 'tranhiep', 'b8a1099b57fb53d28fba7d5717e317ea', 'Trần Viết Hiệp', '', '0000-00-00', '', '', '0969549903', '', 'tranviethiepdz@gmail.com', null, null, null, null, '2020-04-08 15:50:43', '2021-04-02 06:50:20', '9', null, '1');
 INSERT INTO `tbl_user` VALUES ('53', 'test', 'b8a1099b57fb53d28fba7d5717e317ea', 'test', '', '0000-00-00', '', '', '09695499991', '', '', null, null, null, null, '2021-03-22 10:49:14', '2021-03-22 10:50:12', '33', null, '1');
 
 -- ----------------------------

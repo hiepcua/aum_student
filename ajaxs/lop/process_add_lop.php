@@ -23,7 +23,7 @@ if(isset($_POST['lop'])){
 	
 	// update dữ liệu malop cho sinh viên
 	$cdate = time();
-	$sql="UPDATE tbl_dangky_tuyensinh SET malop='$lop',mdate='$cdate' WHERE id='$id'";
+	$sql="UPDATE tbl_dangky_tuyensinh SET malop='$lop',status='HS1',mdate='$cdate' WHERE id='$id'";
 	$obj = new CLS_MYSQL;
 	$result1 = $obj->Query($sql); //echo $sql.' \n';
 	

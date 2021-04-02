@@ -29,9 +29,9 @@ while($r=$obj->Fetch_Assoc()){
 }
 
 $sql = "SELECT a.*,b.ma,b.ho_dem,b.name,b.gioitinh,b.ngaysinh,b.diachi,b.city,b.dienthoai 
-		FROM tbl_dangky_tuyensinh AS a 
-		RIGHT JOIN tbl_hocsinh AS b ON a.id_hoso=b.ma 
-		WHERE b.isactive=1 and nhaphoc=1"; 
+FROM tbl_dangky_tuyensinh AS a 
+RIGHT JOIN tbl_hocsinh AS b ON a.id_hoso=b.ma 
+WHERE b.isactive=1 and nhaphoc=1"; 
 
 $khoa 	= isset($_SESSION['THIS_YEAR']) ? $_SESSION['THIS_YEAR'] : '';
 $he 	= isset($_SESSION['THIS_BAC']) ? $_SESSION['THIS_BAC'] : '';
@@ -96,65 +96,72 @@ $obj->Query($sql);
 				<div class="page-title"><?php echo $page_title;?></div>
 			</div>
 			<ul class="box-function pull-right">
-				<li><a href="<?php echo ROOTHOST;?>?com=student&task=qlhocphi<?php echo $params;?>" class="btn btn-primary btn-money" title="Quản lý học phí">
-					<i class="fa fa-money"></i> QL Học phí</a></li>
-				<li><a href="<?php echo ROOTHOST;?>?com=student&task=qlhoctap<?php echo $params;?>" class="btn btn-success btn-book" title="Quản lý học tập">
-					<i class="fa fa-book"></i> QL Học tập</a></li>
-				<li><a href="#" class="btn btn-info btn-excel" title="Xuất File Excel">
-					<i class="fa fa-excel"></i> Xuất File Excel</a></li>
-				<li><a href="#" class="btn btn-warning btn-print" title="In danh sách">
-					<i class="fa fa-print"></i> In</a></li>
+				<li>
+					<a href="<?php echo ROOTHOST;?>?com=student&task=qlhocphi<?php echo $params;?>" class="btn btn-primary btn-money" title="Quản lý học phí"><i class="fa fa-money"></i> QL Học phí</a>
+				</li>
+				<li>
+					<a href="<?php echo ROOTHOST;?>?com=student&task=qlhoctap<?php echo $params;?>" class="btn btn-success btn-book" title="Quản lý học tập"><i class="fa fa-book"></i> QL Học tập</a>
+				</li>
+				<li>
+					<a href="#" class="btn btn-info btn-excel" title="Xuất File Excel"><i class="fa fa-excel"></i> Xuất File Excel</a>
+				</li>
+				<li>
+					<a href="#" class="btn btn-warning btn-print" title="In danh sách"><i class="fa fa-print"></i> In</a>
+				</li>
 			</ul>
 		</div>
 	</div>
 	<div class="customer_list">
 		<?php $tk_nganh='';?>
-		<div class="search_box panel panel-warning"><div class="panel-body"><div class="media row">
-			<form name="frm_search" id="frm_search" method="get" action="#">
-			<div class="form-group">
-				<div class="col-md-2 col-xs-6">
-					<input type="hidden" name="com" value="student"/>
-					<input type="hidden" name="task" value="hsdaotao"/>
-					<input type="hidden" name="malop" value="<?php echo $malop;?>"/>
-					<input type="text" name="ma_hoso" id="tk_mahs" value="<?php echo $ma_hoso;?>" placeholder="Mã hồ sơ" class="form-control"/>
-				</div>
-				<div class="col-md-2 col-xs-6">
-					<input type="text" name="hodem" id="tk_hoten" value="<?php echo $hodem;?>" placeholder="Họ đệm" class="form-control"/> 
-				</div>
-				<div class="col-md-2 col-xs-6">
-					<input type="text" name="ten" id="tk_ten" value="<?php echo $ten;?>" placeholder="Tên" class="form-control"/> 
-				</div>
-				<div class="col-md-2 col-xs-6">
-					<input type="date" name="ns" id="tk_ns" value="<?php echo $_date_ns;?>" placeholder="Ngày sinh" class="form-control"/> 
-				</div>
-				<div class="col-md-2 col-xs-6">
-					<input type="text" name="dc" id="tk_dc" value="<?php echo $dc;?>" placeholder="Địa chỉ" class="form-control"/> 
-				</div>
-				<div class="col-md-2">
-					<button type="button" name="tk_btnsearch" id="tk_btnsearch" class="btn btn-primary form-control">
-					<i class="fa fa-search"></i> Lọc</button>
+		<div class="search_box panel panel-warning">
+			<div class="panel-body">
+				<div class="media row">
+					<form name="frm_search" id="frm_search" method="get" action="#">
+						<div class="form-group">
+							<div class="col-md-2 col-xs-6">
+								<input type="hidden" name="com" value="student"/>
+								<input type="hidden" name="task" value="hsdaotao"/>
+								<input type="hidden" name="malop" value="<?php echo $malop;?>"/>
+								<input type="text" name="ma_hoso" id="tk_mahs" value="<?php echo $ma_hoso;?>" placeholder="Mã hồ sơ" class="form-control"/>
+							</div>
+							<div class="col-md-2 col-xs-6">
+								<input type="text" name="hodem" id="tk_hoten" value="<?php echo $hodem;?>" placeholder="Họ đệm" class="form-control"/> 
+							</div>
+							<div class="col-md-2 col-xs-6">
+								<input type="text" name="ten" id="tk_ten" value="<?php echo $ten;?>" placeholder="Tên" class="form-control"/> 
+							</div>
+							<div class="col-md-2 col-xs-6">
+								<input type="date" name="ns" id="tk_ns" value="<?php echo $_date_ns;?>" placeholder="Ngày sinh" class="form-control"/> 
+							</div>
+							<div class="col-md-2 col-xs-6">
+								<input type="text" name="dc" id="tk_dc" value="<?php echo $dc;?>" placeholder="Địa chỉ" class="form-control"/> 
+							</div>
+							<div class="col-md-2">
+								<button type="button" name="tk_btnsearch" id="tk_btnsearch" class="btn btn-primary form-control"><i class="fa fa-search"></i> Lọc</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
-			</form>
-		</div></div></div>
-		
+		</div>
+
 		<?php $html.='<div class="page-bar">
-			<div class="page-title-breadcrumb">
-				<div class="page-title">DANH SÁCH SINH VIÊN</div>
-			</div>
+		<div class="page-title-breadcrumb">
+		<div class="page-title">DANH SÁCH SINH VIÊN</div>
+		</div>
 		</div>';
 		$html.='<table class="table table-striped table-bordered">
-				<thead><tr class="header">
-					<th class="text-center">STT</th>
-					<th class="text-center">Ngành</th>
-					<th class="text-center">Lớp</th>
-					<th>Mã SV</th>
-					<th>Họ đệm</th><th>Tên</th>
-					<th>Giới tính</th>
-					<th class="text-center">Ngày sinh</th>
-					<th class="text-center">Tỉnh/thành</th>
-				</tr></thead>
-				<tbody>';
+		<thead><tr class="header">
+		<th class="text-center">STT</th>
+		<th class="text-center">Ngành</th>
+		<th class="text-center">Lớp</th>
+		<th>Mã SV</th>
+		<th>Họ đệm</th><th>Tên</th>
+		<th>Giới tính</th>
+		<th class="text-center">Ngày sinh</th>
+		<th class="text-center">Tỉnh/thành</th>
+		</tr></thead>
+		<tbody>';
 		?>
 		<div id="list_profile" class="table-responsive">
 			<table class="list table table-striped table-bordered">
@@ -170,41 +177,49 @@ $obj->Query($sql);
 					<th></th>
 				</tr></thead>
 				<tbody>
-				<?php $i=$start;
-				$mon1 =$mon2=$mon3=''; 
-				while($r=$obj->Fetch_Assoc()) { 
-					$i++;
-					$id_hoso = $r['ma']; $masv=$r['masv']; $lop=$r['malop'];
-					$id_khoa = $r['id_khoa']; 
-					$id_he = $r['id_he']; 
-					$id_nganh = $r['id_nganh']; 
-					$objcity = new CLS_CITY();
-					$city_name = $objcity->getNameById($r['city']);
-					$dataids = $r['id'].'-'.$r['id_khoa'].'-'.$r['id_he'].'-'.$r['id_nganh'];
-					?>
-					<tr dataid="<?php echo $id_hoso;?>" dataids="<?php echo $dataids;?>">
-					<td align="center"><?php echo $i;?></td>
-					<td dataid="<?php echo $id_hoso;?>">
-						<?php if(isset($r['id_nganh'])) echo $_NGANH['N'.$r['id_nganh']].' - '.$_KHOA['K'.$r['id_khoa']].' - '.$_HE['H'.$r['id_he']];
-						else echo "<button class='dk_nganh btn btn-default' dataid='".$id_hoso."'><i class='fa fa-plus cgray'></i> Đăng ký</button>";?>
-					</td>
-					<td dataid="<?php echo $id_hoso;?>" class="text-center"><?php echo $r['malop'];?></td>
-					<td dataid="<?php echo $id_hoso;?>" class="text-center"><?php echo $r['id_hoso'];?></td>
-					<td dataid="<?php echo $id_hoso;?>"><?php echo stripslashes($r['ho_dem']).' '.stripslashes($r['name']);?></td>
-					<td dataid="<?php echo $id_hoso;?>" class="text-center"><?php echo $GLOBALS['ARR_GENDER'][$r['gioitinh']];?></td>
-					<td dataid="<?php echo $id_hoso;?>" class="text-center"><?php echo date("d/m/Y",$r['ngaysinh']);?></td>
-					<td dataid="<?php echo $id_hoso;?>" class="text-center"><?php echo $city_name;?></td>
-					<td dataid="<?php echo $id_hoso;?>" class="text-center"><a href="<?php echo ROOTHOST.'student/profile/'.$r['id_hoso'];?>" target="_blank" title="">HS chi tiết</a></td>
-					</tr><?php 
-					$html.='<tr><td align="center">'.$i.'</td>
+					<?php $i=$start;
+					$mon1 =$mon2=$mon3=''; 
+					while($r=$obj->Fetch_Assoc()) { 
+						$i++;
+						$id_hoso = $r['ma']; $masv=$r['masv']; $lop=$r['malop'];
+						$id_khoa = $r['id_khoa']; 
+						$id_he = $r['id_he']; 
+						$id_nganh = $r['id_nganh']; 
+						$objcity = new CLS_CITY();
+						$city_name = $objcity->getNameById($r['city']);
+						$dataids = $r['id'].'-'.$r['id_khoa'].'-'.$r['id_he'].'-'.$r['id_nganh'];
+						?>
+						<tr dataid="<?php echo $id_hoso;?>" dataids="<?php echo $dataids;?>">
+							<td align="center"><?php echo $i;?></td>
+							<td dataid="<?php echo $id_hoso;?>">
+								<?php if($r['id_nganh']!=='') echo $_NGANH['N'.$r['id_nganh']].' - '.$_KHOA['K'.$r['id_khoa']].' - '.$_HE['H'.$r['id_he']];
+								else echo "<button class='dk_nganh btn btn-default' dataid='".$id_hoso."'><i class='fa fa-plus cgray'></i> Đăng ký</button>";?>
+							</td>
+							<td dataid="<?php echo $id_hoso;?>" class="text-center">
+								<?php
+								if(strlen($r['malop'])>0) echo $r['malop'];
+								else{
+									echo '<a href="javascript:void(0)" class="btn btn-default btn_nhaplop" dataid="'.$r['id_hoso'].'" dataids="'.$r['id'].'-'.$r['id_khoa'].'-'.$r['id_he'].'-'.$r['id_nganh'].'">Nhập lớp</a>';
+								}
+								?>
+							</td>
+							<td dataid="<?php echo $id_hoso;?>" class="text-center"><?php echo $r['id_hoso'];?></td>
+							<td dataid="<?php echo $id_hoso;?>"><?php echo stripslashes($r['ho_dem']).' '.stripslashes($r['name']);?></td>
+							<td dataid="<?php echo $id_hoso;?>" class="text-center"><?php echo $GLOBALS['ARR_GENDER'][$r['gioitinh']];?></td>
+							<td dataid="<?php echo $id_hoso;?>" class="text-center"><?php echo date("d/m/Y",$r['ngaysinh']);?></td>
+							<td dataid="<?php echo $id_hoso;?>" class="text-center"><?php echo $city_name;?></td>
+							<td dataid="<?php echo $id_hoso;?>" class="text-center"><a href="<?php echo ROOTHOST.'student/profile/'.$r['id_hoso'];?>" target="_blank" title="">HS chi tiết</a></td>
+						</tr>
+						<?php 
+						$html.='<tr><td align="center">'.$i.'</td>
 						<td>';
 						if(isset($r['id_nganh'])) $html.= $r['id_nganh'];
 						$html.='</td><td>'.$r['malop'].'</td>
-							<td>'.$masv.'</td>
-							<td>'.stripslashes($r['ho_dem']).'</td>
-							<td>'.stripslashes($r['name']).'</td>
-							<td align="center">'.$GLOBALS['ARR_GENDER'][$r['gioitinh']].'</td>
-							<td align="center">';
+						<td>'.$masv.'</td>
+						<td>'.stripslashes($r['ho_dem']).'</td>
+						<td>'.stripslashes($r['name']).'</td>
+						<td align="center">'.$GLOBALS['ARR_GENDER'][$r['gioitinh']].'</td>
+						<td align="center">';
 						$html.=date("d/m/Y",$r['ngaysinh']);
 						$html.='<td>'.$city_name.'</td>';
 						$html.='</td>
@@ -214,8 +229,8 @@ $obj->Query($sql);
 				</tbody>
 			</table>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Footer_list">
-			  <tr><td align="center">
-				<?php  paging_index($total_rows,MAX_ROWS,$cur_page); ?>
+				<tr><td align="center">
+					<?php  paging_index($total_rows,MAX_ROWS,$cur_page); ?>
 				</td></tr>
 			</table>
 		</div>
@@ -223,56 +238,70 @@ $obj->Query($sql);
 </div>
 <div id="divToPrint" style="display:none;"><?php echo $html; ?></div>
 <script>
-$(document).ready(function(){
-	$("#tk_mahs").keypress(function(e){
-		if(e.which==13) $("#frm_search").submit();
-	})
-	$("#tk_malop").keypress(function(e){
-		if(e.which==13) $("#frm_search").submit();
-	})
-	$("#tk_hoten").keypress(function(e){
-		if(e.which==13) $("#frm_search").submit();
-	})
-	$("#tk_ten").keypress(function(e){
-		if(e.which==13) $("#frm_search").submit();
-	})
-	$("#tk_ns").keypress(function(e){
-		if(e.which==13) $("#frm_search").submit();
-	})
-	$("#tk_dc").keypress(function(e){
-		if(e.which==13) $("#frm_search").submit();
-	})
-	$("#tk_btnsearch").click(function(){
-		$("#frm_search").submit();
-	})
-	
-	$(".btn-excel").click(function(){
-		showLoading(); 
-		link="<?php echo ROOTHOST;?>excel/export_hsdaotao.php?<?php echo $params;?>";
-		$.get(link,function(req){
-			console.log(req);
-			hideLoading();
-			if(req=="E01") showMess('Vui lòng đăng nhập hệ thống.');
-			else if(req=="empty") showMess('Dữ liệu trống.');
-			else {
-				str='<a href="<?php echo ROOTHOST;?>excel/'+req+'">Download link tại đây</a>';
-				showMess(str);
-			}
+	$(document).ready(function(){
+		$("#tk_mahs").keypress(function(e){
+			if(e.which==13) $("#frm_search").submit();
 		})
+		$("#tk_malop").keypress(function(e){
+			if(e.which==13) $("#frm_search").submit();
+		})
+		$("#tk_hoten").keypress(function(e){
+			if(e.which==13) $("#frm_search").submit();
+		})
+		$("#tk_ten").keypress(function(e){
+			if(e.which==13) $("#frm_search").submit();
+		})
+		$("#tk_ns").keypress(function(e){
+			if(e.which==13) $("#frm_search").submit();
+		})
+		$("#tk_dc").keypress(function(e){
+			if(e.which==13) $("#frm_search").submit();
+		})
+		$("#tk_btnsearch").click(function(){
+			$("#frm_search").submit();
+		})
+
+		$(".btn-excel").click(function(){
+			showLoading(); 
+			link="<?php echo ROOTHOST;?>excel/export_hsdaotao.php?<?php echo $params;?>";
+			$.get(link,function(req){
+				console.log(req);
+				hideLoading();
+				if(req=="E01") showMess('Vui lòng đăng nhập hệ thống.');
+				else if(req=="empty") showMess('Dữ liệu trống.');
+				else {
+					str='<a href="<?php echo ROOTHOST;?>excel/'+req+'">Download link tại đây</a>';
+					showMess(str);
+				}
+			})
+		});
+
+		$(".btn-print").click(function(){
+			showLoading();
+			var screenW =screen.width;
+			var screenH =screen.height; console.log(screenW+' / '+screenH);
+			var divToPrint = document.getElementById('divToPrint');
+			var popupWin = window.open('', '_blank','toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,width='+screenW+',height='+screenH);
+			popupWin.document.open();
+			popupWin.document.write('<html><head><title>Danh sách SV</title>');
+			popupWin.document.write('</head><body onload="window.print();">');
+			popupWin.document.write(divToPrint.innerHTML);
+			popupWin.document.write('</body></html>');
+			popupWin.document.close();
+			hideLoading();
+		});
+
+		$(".btn_nhaplop").click(function(){
+			var hoso = $(this).attr('dataid');
+			var ids = $(this).attr('dataids');
+			var url = "<?php echo ROOTHOST;?>ajaxs/lop/frm_add_lop.php";
+			$.post(url,{'ma':hoso, 'ids': ids},function(req) {
+				$('#myModalPopup .modal-dialog').removeClass('modal-sm');
+				$('#myModalPopup .modal-dialog').removeClass('modal-lg');
+				$('#myModalPopup .modal-title').html('Phân lớp');
+				$('#myModalPopup .modal-body').html(req);
+				$('#myModalPopup').modal('show');
+			})
+		});
 	})
-	$(".btn-print").click(function(){
-		showLoading();
-		var screenW =screen.width;
-		var screenH =screen.height; console.log(screenW+' / '+screenH);
-		var divToPrint = document.getElementById('divToPrint');
-		var popupWin = window.open('', '_blank','toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,width='+screenW+',height='+screenH);
-		popupWin.document.open();
-		popupWin.document.write('<html><head><title>Danh sách SV</title>');
-		popupWin.document.write('</head><body onload="window.print();">');
-		popupWin.document.write(divToPrint.innerHTML);
-		popupWin.document.write('</body></html>');
-		popupWin.document.close();
-		hideLoading();
-	});
-})
 </script>

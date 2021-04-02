@@ -80,10 +80,8 @@ if(isset($_FILES["txtfile"]["type"]) && $_FILES["txtfile"]["type"]!=''){
 								$str.= "<span style='color:red'>$stt. $ho_dem $name (".date("d/m/Y",$ngaysinh).") - $city (Hồ sơ đã tồn tại)</span><br>";
 							else {
 								$success++;
-								$sql = "INSERT INTO tbl_hocsinh (`ma`,ho_dem,`name`,ngaysinh,noisinh,gioitinh,diachi,city,
-								dienthoai,cmt,email,cdate,author)
-								VALUES ('$ma','$ho_dem','$name','$ngaysinh','$noisinh','$gioitinh','$diachi','$city_id',
-								'$dienthoai','$cmt','$email',$cdate,'$author')";
+								$sql = "INSERT INTO tbl_hocsinh (`ma`,ho_dem,`name`,ngaysinh,noisinh,gioitinh,diachi,city,dienthoai,cmt,email,cdate,author,nhaphoc,status)
+								VALUES ('$ma','$ho_dem','$name','$ngaysinh','$noisinh','$gioitinh','$diachi','$city_id','$dienthoai','$cmt','$email',$cdate,'$author','1','TS1')";
 								$obj->Exec($sql);
 								$str.="$stt. $ho_dem $name (".date("d/m/Y",$ngaysinh).") - $city<br>";	
 							}

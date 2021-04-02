@@ -15,27 +15,24 @@ $com=isset($_GET['com'])?strip_tags(trim($_GET['com'])):'frontpage';
 					<li><span>Khóa</span></li>
 					<li>
 						<select class='form-control btn btn-fefault' id='cbo_year_menu'>
+							<option value="">Tất cả</option>
 							<?php
 							$res_khoa = SysGetList('tbl_khoa', array(), '');
 							if(count($res_khoa)>0){
 								$arr_year = array();
 								foreach ($res_khoa as $key => $value) {
-									$item = $value['id'];
-									$selec = $item == $_SESSION['THIS_YEAR']?'selected=true':'';
-									$arr_year[] = $item;
-
-									echo '<option '.$selec.' value="'.$item.'">'.$value['name'].'</option>';
+									$item = $value['id']; $selected = '';
+									if($_SESSION['THIS_YEAR']==$value['id']) $selected = 'selected';
+									echo '<option '.$selected.' value="'.$item.'">'.$value['name'].'</option>';
 								}
 							}
-
-							if(count($arr_year)==0) $arr_year[]=date('Y');
-							if(!isset($_SESSION['THIS_YEAR']) || empty($_SESSION['THIS_YEAR'])) $_SESSION['THIS_YEAR']=$arr_year[0];
 							?>
 						</select>
 					</li>
 					<li><span>Bậc</span></li>
 					<li>
 						<select class="form-control btn btn-fefault" id="cbo_bac_menu">
+							<option value="">Tất cả</option>
 							<?php
 							$res_bac = SysGetList('tbl_he', array(), '');
 							if(count($res_bac) > 0){
@@ -144,27 +141,6 @@ $com=isset($_GET['com'])?strip_tags(trim($_GET['com'])):'frontpage';
 							<?php } ?>
 						</ul>
 					</li>
-				<?php } if($UserLogin->Permission('sv_tuyensinh')==true || $UserLogin->Permission('sv_hsthi')==true || $UserLogin->Permission('sv_hsdathi')==true  || $UserLogin->Permission('sv_hstrungtuyen')==true || $UserLogin->Permission('sv_hsnhaphoc')==true ) { ?>
-					<li>
-						<a href='<?php echo ROOTHOST;?>student'><i class="fa fa-bar-chart"></i> Tuyển sinh</a>
-						<ul class="submenu">
-							<?php if($UserLogin->Permission('sv_tuyensinh')==true) { ?>
-								<li><a href="<?php echo ROOTHOST;?>student/tuyensinh">Hồ sơ tuyển sinh (mới)</a></li>
-								<li><a href="<?php echo ROOTHOST;?>?com=student&task=hsxettuyen">Hồ sơ xét tuyển (mới)</a></li>
-								<li class='divider'></li>
-							<?php } if($UserLogin->Permission('sv_hsthi')==true) { ?>
-								<li><a href="<?php echo ROOTHOST;?>student/hsthi">Hồ sơ thi</a></li>
-							<?php } if($UserLogin->Permission('sv_hsdathi')==true) { ?>
-								<li><a href="<?php echo ROOTHOST;?>student/hsdathi">Hồ sơ đã thi</a></li>
-							<?php } if($UserLogin->Permission('sv_hstrungtuyen')==true) { ?>
-								<li class='divider'></li>
-								<li><a href="<?php echo ROOTHOST;?>?com=student&task=hstruot">Hồ sơ không trúng tuyển</a></li>
-								<li><a href="<?php echo ROOTHOST;?>student/hstrungtuyen">Hồ sơ đã trúng tuyển</a></li>
-							<?php } if($UserLogin->Permission('sv_hsnhaphoc')==true) { ?>
-								<li><a href="<?php echo ROOTHOST;?>student/hsnhaphoc">Hồ sơ nhập học</a></li>
-							<?php } ?>
-						</ul>
-					</li>
 
 					<li><a href='<?php echo ROOTHOST;?>?com=student&task=hoso'><i class="fa fa-book" aria-hidden="true"></i> Hồ sơ</a></li>
 
@@ -174,7 +150,6 @@ $com=isset($_GET['com'])?strip_tags(trim($_GET['com'])):'frontpage';
 						<ul class="submenu">
 							<li><a href="<?php echo ROOTHOST;?>report/hoso/tonghop">Thống kê tổng hợp</a></li>
 							<li><a href="<?php echo ROOTHOST;?>report/hoso/tinhthanh">Thống kê theo tỉnh/thành</a></li>
-							<!-- <li><a href="<?php echo ROOTHOST;?>report/hoso/doitac">Thống kê theo đối tác</a></li> -->
 							<li><a href="<?php echo ROOTHOST;?>report/hocphi">Thống kê học phí</a></li>
 						</ul>
 					</li>

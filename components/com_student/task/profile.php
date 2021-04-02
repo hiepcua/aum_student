@@ -187,7 +187,6 @@ if($objts->Num_rows()>0) {
 									<th class="text-center">Ngành</th>
 									<th class="text-center">Mã SV</th>
 									<th class="text-center">Lớp</th>
-									<th class="text-center">Phương thức XT</th>
 									<th class="text-center">Trạng thái</th>
 									<th class="text-center"></th>
 									<th class="text-center"></th>
@@ -200,13 +199,7 @@ if($objts->Num_rows()>0) {
 								$res_nganhdk = SysGetList('tbl_dangky_tuyensinh',array(),'AND id_hoso="'.$ma.'"');
 								if(count($res_nganhdk)>0){
 									foreach ($res_nganhdk as $key => $value) {
-										$i = $key+1;
-										$id=$value['id'];
-										$trungtuyen=$value['trungtuyen'];
-										$nhaphoc=$value['nhaphoc'];
-										$phuongthuc_XT = $value['xettuyen']==1 ? '<label class="label label-primary">Xét tuyển</label>' : '<label class="label label-primary">Thi tuyển</label>';
-
-										$str='';
+										$i = $key+1; $id=$value['id']; $str='';
 										$status=$value['status'];
 										$dataid = $id;
 										$hoso = $value['id_hoso'];
@@ -234,14 +227,24 @@ if($objts->Num_rows()>0) {
 										echo '<tr dataid="'.$ma.'">';
 										echo '<td align="center">'.$i.'</td>';
 										echo '<td align="center"><a href="javascript:void(0)" data-hoso="'.$value['id_hoso'].'" data-nganh="'.$value['id_nganh'].'" class="xoa_nganh cred">Xóa</a></td>';
-										echo '<td align="center">'.$_KHOA['K'.$value['id_khoa']].'</td>';
-										echo '<td align="center">'.$_HE['H'.$value['id_he']].'</td>';
-										echo '<td align="center">'.$_NGANH['N'.$value['id_nganh']].'</td>';
-										echo '<td align="center">'.$value['masv'].'</td>';
-
 
 										echo '<td align="center">';
+										if(strlen($value['id_khoa'])>0) echo $_KHOA['K'.$value['id_khoa']];
+										echo '</td>';
 
+										echo '<td align="center">';
+										if(strlen($value['id_he'])>0) echo $_HE['H'.$value['id_he']];
+										echo '</td>';
+
+										echo '<td align="center">';
+										if(strlen($value['id_nganh'])>0) echo $_NGANH['N'.$value['id_nganh']];
+										else{
+											echo '<button class="dk_nganh btn btn-default" dataid="'.$value['id_hoso'].'" dataid-dkts="'.$value['id'].'"><i class="fa fa-plus cgray"></i> Đăng ký</button>';
+										}
+										echo '</td>';
+
+										echo '<td align="center">'.$value['masv'].'</td>';
+										echo '<td align="center">';
 										if($value['malop']!="") {
 											echo $value['malop'];
 										}else {
@@ -249,7 +252,6 @@ if($objts->Num_rows()>0) {
 										}
 										echo '</td>';
 
-										echo '<td align="center">'.$phuongthuc_XT.'</td>';
 										echo '<td align="center">'.$str.'</td>';
 
 										if(in_array($status, array('HS1','HS2','HS3'))){
@@ -267,6 +269,11 @@ if($objts->Num_rows()>0) {
 											echo '<td align="center"><a href="'.ROOTHOST.'student/diem/'.$value['id_hoso'].'" dataid="'.$value['id_hoso'].'" class="label label-primary">Kết quả học tập</a></td>';
 											echo '<td align="center"><a href="'.ROOTHOST.'student/hocphi/'.$value['id_hoso'].'" target="_blank" class="label label-primary">Ql học phí</a></td>';
 											echo '<td align="center"><a href="'.ROOTHOST.'?com=student&task=qlhoctap&manganh='.$value['id_nganh'].'&malop='.$value['malop'].'&masv='.$value['masv'].'" target="_blank" class="label label-primary">Ql học tập</a></td>';
+										}else{
+											echo '<td></td>';
+											echo '<td></td>';
+											echo '<td></td>';
+											echo '<td></td>';
 										}
 										echo '</tr>';
 									}
@@ -297,8 +304,14 @@ if($objts->Num_rows()>0) {
 
 		$('#dk_nganh').click(function(){
 			var id_hoso = $(this).attr('dataid');
-			frm_dangky(id_hoso);
+			frm_dangky_nganh_moi(id_hoso);
 		});
+
+		$(".dk_nganh").click(function(){
+			var id_dkts = $(this).attr('dataid-dkts');
+			var id_hoso = $(this).attr('dataid');
+			frm_dangky_nganh(id_hoso, id_dkts);
+		})
 
 		$('.xoa_nganh').click(function(){
 			var id_hoso = $(this).attr('data-hoso');
@@ -391,10 +404,25 @@ if($objts->Num_rows()>0) {
 		return true;
 	}
 
-	function frm_dangky(id_hoso){
+	function frm_dangky_nganh_moi(id_hoso){
 		if(id_hoso.length>0){
 			var url = "<?php echo ROOTHOST;?>ajaxs/tuyensinh/dangky.php";
 			$.post(url,{'ma':id_hoso},function(req){
+				$('#myModalPopup .modal-dialog').removeClass('modal-sm');
+				$('#myModalPopup .modal-dialog').addClass('modal-lg');
+				$('#myModalPopup .modal-title').html('Đăng ký ngành học');
+				$('#myModalPopup .modal-body').html(req);
+				$('#myModalPopup').modal('show');
+			});
+		}else{
+			showMess('Chưa chọn hồ sơ nào.', 'error');
+		}
+	}
+
+	function frm_dangky_nganh(id_hoso, id_dkts){
+		if(id_hoso.length>0){
+			var url = "<?php echo ROOTHOST;?>ajaxs/tuyensinh/dangky_nganh.php";
+			$.post(url,{'id_dkts':id_dkts, 'id_hoso': id_hoso},function(req){
 				$('#myModalPopup .modal-dialog').removeClass('modal-sm');
 				$('#myModalPopup .modal-dialog').addClass('modal-lg');
 				$('#myModalPopup .modal-title').html('Đăng ký ngành học');

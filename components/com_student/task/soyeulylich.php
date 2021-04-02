@@ -28,25 +28,11 @@ $_SESSION["SV$ma"]['TAB_KYLUAT'] = json_decode($r['kyluat'],true);
 
 $objts = new CLS_TUYENSINH;
 $objts->getList(" AND id_hoso='$ma' ");
-$id_khoa = $id_he = $id_nganh=''; $id_dky = 0;
-$masv = $ptxt = $diadiem = $sbd = '';
-$mon1 = $mon2 = $mon3 = '';$id_dky=$tongdiem=0;
-$readonly = "";
+$id_he = '';
+
 if($objts->Num_rows()>0) {
 	$row=$objts->Fetch_Assoc();
-	$masv = $row['masv'];
-	$id_khoa = $row['id_khoa'];
 	$id_he 	= $row['id_he'];
-	$id_nganh = $row['id_nganh'];
-	$ptxt = $row['xettuyen']; 
-	$diadiem = $row['diadiemhoc'];
-	$id_dky = $row['id'];
-	$sbd = $row['sbd'];
-	$mon1 = $row['mon1'];
-	$mon2 = $row['mon2'];
-	$mon3 = $row['mon3'];
-	$tongdiem=(float)($mon1+$mon2+$mon3);
-	if($row['trungtuyen']!=null) $readonly=" readonly";
 } ?>
 <div class='body profile_view'>
 	<div class="page-bar">
@@ -76,10 +62,6 @@ if($objts->Num_rows()>0) {
 				</div>
 				<div class="col-md-9 col-xs-12">
 					<div class="row form-group">
-						<div class="col-md-2 col-xs-4 text">Mã sinh viên</div>
-						<div class="col-md-4 col-xs-8">
-							<input type="number" name="masv" id="masv" class="form-control" value="<?php echo $masv;?>" required>
-						</div>
 						<div class="col-md-2 col-xs-4 text">ID</div>
 						<div class="col-md-4 col-xs-8">
 							<input type="number" name="ma" id="" class="form-control" value="<?php echo $r['ma'];?>" required>
