@@ -4,68 +4,7 @@ global $UserLogin;
 $username = $GLOBALS['username'];
 ?>
 <div class="dashboard_page">
-	<?php if($UserLogin->Permission('sv_tuyensinh')==true) { 
-	$url = ROOTHOST."student/tuyensinh";?>
-	<div class="box col-md-3 col-xs-12">
-		<div class="panel panel-warning">
-			<div class="panel-body">
-				<div class="media">
-					<div class="icon-category">
-						<a href="<?php echo $url;?>"><i class="media-object fa fa-users fa-3x"></i></a>
-					</div>
-					<div class="media-body padding-left-10">
-						<h4 class="media-heading"><a href="<?php echo $url;?>" title="Tuyển sinh">TUYỂN SINH</a></h4>
-						<small class="text-muted">Nhập hồ sơ tuyển sinh, Đánh SBD & phân phòng thi</small><br>
-						<a class="btn btn-primary btn-xs pull-right" href="<?php echo $url;?>" style="margin-top:5px;"><i class="fa fa-plus fa-fw"></i>Chi tiết</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<?php } if($UserLogin->Permission('sv_hsdathi')==true) { 
-	$url = ROOTHOST."student/hsdathi";?>
-	<div class="box col-md-3 col-xs-12">
-		<div class="panel panel-warning">
-			<div class="panel-body">
-				<div class="media">
-					<div class="icon-category">
-						<a href="<?php echo $url;?>">
-							<i class="media-object fa fa-list fa-3x"></i>
-						</a>
-					</div>
-					<div class="media-body padding-left-10">
-						<h4 class="media-heading"><a href="<?php echo $url;?>" title="">XÉT TUYỂN</a></h4>
-						<small class="text-muted">Hồ sơ đã thi, Xét tuyển đạt/không đạt</small><br>
-						<a class="btn btn-primary btn-xs pull-right" href="<?php echo $url;?>" style="margin-top:5px;"><i class="fa fa-plus fa-fw"></i>Chi tiết</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<?php } if($UserLogin->Permission('sv_hsnhaphoc')==true) { 
-	$url = ROOTHOST."student/hsnhaphoc";?>
-	<div class="box col-md-3 col-xs-12">
-		<div class="panel panel-warning">
-			<div class="panel-body">
-				<div class="media">
-					<div class="icon-category">
-						<a href="<?php echo $url;?>">
-							<i class="media-object fa fa-university fa-3x"></i>
-						</a>
-					</div>
-					<div class="media-body padding-left-10">
-						<h4 class="media-heading"><a href="<?php echo $url;?>" title="">NHẬP HỌC</a></h4>
-						<small class="text-muted">Đánh dấu thí sinh đã nhập học, Thu các khoản phí nhập học, Phân lớp</small><br>
-						<a class="btn btn-primary btn-xs pull-right" href="<?php echo $url;?>" style="margin-top:5px;"><i class="fa fa-plus fa-fw"></i>Chi tiết</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<?php } if($UserLogin->Permission('sv_hsdaotao')==true) { 
+	<?php if($UserLogin->Permission('sv_hsdaotao')==true) { 
 	$url = ROOTHOST."student/hsdaotao";?>
 	<div class="box col-md-3 col-xs-12">
 		<div class="panel panel-warning">

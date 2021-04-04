@@ -17,7 +17,7 @@ $arrHe=array();
 while($r=$obj->Fetch_Assoc()){
 	$arrHe[$r['id']]=$r;
 }
-$sohocky=$arrHe[$id_he]['sohocky'];
+$sohocky = $id_he!=='' ? $arrHe[$id_he]['sohocky'] : 0;
 
 $sql="SELECT * FROM tbl_nganh";
 $obj->Query($sql);
@@ -70,8 +70,8 @@ $siso = $r['total'];
 		<div class="form-group">
 			<div class='col-md-6'>Lớp: <label><?php echo $id_lop;?></label></div>
 			<div class='col-md-6'>Ngành: <label><?php echo $arrNganh[$id_nganh]['name'];?></label></div>
-			<div class='col-md-6'>Bậc: <label><?php echo $arrHe[$id_he]['name'];?></label></div>
-			<div class='col-md-6'>Khóa học: <label><?php echo $arrKhoa[$id_khoa]['name'];?></label></div>
+			<div class='col-md-6'>Bậc: <label><?php echo $id_he!=='' ? $arrHe[$id_he]['name'] : '';?></label></div>
+			<div class='col-md-6'>Khóa học: <label><?php echo $id_khoa!=='' ? $arrKhoa[$id_khoa]['name'] : '';?></label></div>
 			<div class='col-md-6'>Sĩ số: <label><?php echo number_format($siso);?></label></div>
 		</div>
 	</div></div></div>
@@ -131,20 +131,36 @@ $siso = $r['total'];
 	$("#btn_add_hp").click(function(){
 		if(confirm('Thêm học phần')){
 			showLoading();
+			var flag=true;
 			var mon = $('#cbo_add_monhoc option:selected').val();
 			var hk = $("#txthocky option:selected").val();
 			var tc = $("#txt_tinchi").val();
-			if(tc=="") {$("#txt_tinchi").focus(); alert('Nhập số tín chỉ'); return false;}
-			if(mon=="") {$("#cbo_add_monhoc").focus();alert('Chọn học phần!'); return false;}
-			if(hk=="") {$("#txthocky").focus(); alert('Nhập học kỳ'); return false;}
-			var url = "<?php echo ROOTHOST;?>ajaxs/lop/process_add_hp.php";
-			$.post(url,{'he':'<?php echo $id_he;?>','nganh':'<?php echo $id_nganh;?>','lop':'<?php echo $id_lop;?>','mon':mon,'hk':hk,'tc':tc},function(req){
-				hideLoading();
-				if(req=="nodata") alert("Vui lòng nhập dữ liệu");
-				else {
-					window.location.reload();
-				}
-			})
+			if(tc=="" || tc==undefined) {
+				$("#txt_tinchi").focus(); 
+				alert('Nhập số tín chỉ'); 
+				flag=false;
+			}
+			if(mon=="" || mon==undefined) {
+				$("#cbo_add_monhoc").focus();
+				alert('Chọn học phần!'); 
+				flag=false;
+			}
+			if(hk=="" || hk==undefined) {
+				$("#txthocky").focus(); 
+				alert('Nhập học kỳ'); 
+				flag=false;
+			}
+			if(flag==true){
+				var url = "<?php echo ROOTHOST;?>ajaxs/lop/process_add_hp.php";
+				$.post(url,{'he':'<?php echo $id_he;?>','nganh':'<?php echo $id_nganh;?>','lop':'<?php echo $id_lop;?>','mon':mon,'hk':hk,'tc':tc},function(req){
+					hideLoading();
+					if(req=="nodata") alert("Vui lòng nhập dữ liệu");
+					else {
+						window.location.reload();
+					}
+				})
+			}
+			hideLoading();
 		}
 	});
 	$(".cmd_del_hp").click(function(){

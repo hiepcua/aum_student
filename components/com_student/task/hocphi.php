@@ -1,7 +1,26 @@
 <?php
 defined('ISHOME') or die("You can't access this page!");
 if(!isset($_GET['id'])) die("<br>Vui lòng chọn hồ sơ cần xem");
-$ma = addslashes(strip_tags(htmlentities($_GET['id']))); // id_hoso
+$ma 	= addslashes(strip_tags(htmlentities($_GET['id']))); // id_hoso
+
+if(isset($_GET['khoa']) && $_GET['khoa']!=='') $_SESSION['THIS_YEAR'] = $_GET['khoa'];
+if(isset($_GET['he']) && $_GET['he']!=='') $_SESSION['THIS_BAC'] = $_GET['he'];
+if(isset($_GET['nganh']) && $_GET['nganh']!=='') $_SESSION['THIS_NGANH'] = $_GET['nganh'];
+echo '<script>loadMenu(this_year,this_bac,this_nganh);</script>';
+
+$_KHOA 	= $_SESSION['THIS_YEAR'];
+$_HE 	= $_SESSION['THIS_BAC'];
+$_NGANH = $_SESSION['THIS_NGANH'];
+//---------------------------------------
+$res_dkts = SysGetList('tbl_dangky_tuyensinh', array(), "AND id_hoso='".$ma."' AND id_khoa='".$_KHOA."' AND id_he='".$_HE."' AND id_nganh='".$_NGANH."'");
+if(count($res_dkts)<=0) die('Không có dữ liệu');
+$row = $res_dkts[0];
+$he = $row['id_he'];
+$nganh = $row['id_nganh'];
+$masv = $row['masv'];
+$malop = $row['malop'];
+
+//---------------------------------------
 $objhs = new CLS_HS;
 $objhs->getList(" AND ma='$ma'");
 $r=$objhs->Fetch_Assoc();
@@ -10,14 +29,7 @@ $gender = $GLOBALS['ARR_GENDER'][$r['gioitinh']];
 $ngaysinh = date("Y-m-d",$r['ngaysinh']);
 $hokhau = $r['hktt'];
 
-$objts = new CLS_TUYENSINH;
-$objts->getList(" AND id_hoso='$ma' ");
-$r_ts = $objts->Fetch_Assoc();
-$he = $r_ts['id_he'];
-$nganh = $r_ts['id_nganh'];
-$masv = $r_ts['masv'];
-$malop = $r_ts['malop'];
-
+//---------------------------------------
 $dm = isset($_GET['dm'])?addslashes(htmlentities(strip_tags($_GET['dm']))):"";
 $hocky = isset($_GET['hocky'])?(int)$_GET['hocky']:"";
 ?>
@@ -30,13 +42,7 @@ $hocky = isset($_GET['hocky'])?(int)$_GET['hocky']:"";
 			<div class="pull-left">
 				<div class="page-title">Quản lý Học phí</div>
 			</div>
-			<ul class="box-function pull-right">
-				<li><button type="button" class="btn btn-success btn-add"  title="Thêm học phí">
-					<i class="fa fa-plus"></i> Thêm học phí</button>
-				</li>
-				<li><button type="button" class="btn btn-warning btn-print" title="In hồ sơ">
-					<i class="fa fa-print"></i> In</button>
-				</li>
+			<ul class="pull-right">
 				<li><a href="<?php echo ROOTHOST;?>student/qlhocphi" class="btn btn-default btn-close" title="Thoát">
 					<i class="fa fa-reply"></i> Thoát</a>
 				</li>
@@ -178,7 +184,9 @@ $hocky = isset($_GET['hocky'])?(int)$_GET['hocky']:"";
 							}?>
 						</select>
 					</div>
-					<div class="pull-right">
+					<div class="box-function pull-right">
+						<button type="button" dataid="<?php echo $masv;?>" class="btn btn-success btn-add" title="Thêm học phí"><i class="fa fa-plus"></i> Thêm học phí</button>
+						<button type="button" dataid="<?php echo $masv;?>" class="btn btn-warning btn-print" title="In hồ sơ"><i class="fa fa-print"></i> In</button>
 						<button type="button" dataid="<?php echo $masv;?>" id="btn_donghocphi" class="btn btn-success">ĐÓNG HỌC PHÍ</button>
 						<button type="button" dataid="<?php echo $masv;?>" id="btn_donghocphivainbienlai" class="btn btn-warning"><i class="fa fa-print"></i> ĐÓNG & IN BIÊN LAI</button>
 					</div>
@@ -322,10 +330,11 @@ $hocky = isset($_GET['hocky'])?(int)$_GET['hocky']:"";
 		}
 	})
 	$(".box-function .btn-add").click(function(){
+		var masv = $(this).attr('dataid');
 		var _url='<?php echo ROOTHOST;?>ajaxs/hocphi/frm_add.php';
 		$('#myModalPopup .modal-body').html('Loading...');
 		$('#myModalPopup .modal-title').html('Thêm thông tin học phí');
-		$.post(_url,{'masv':'<?php  echo $masv;?>'},function(req){
+		$.post(_url,{'masv':masv},function(req){
 			$('#myModalPopup .modal-body').html(req);
 			$('#myModalPopup').modal('show');
 		});
@@ -333,7 +342,7 @@ $hocky = isset($_GET['hocky'])?(int)$_GET['hocky']:"";
 	$(".btn-print").click(function(){
 		showLoading();
 		var screenW =screen.width;
-		var screenH =screen.height; console.log(screenW+' / '+screenH);
+		var screenH =screen.height; //console.log(screenW+' / '+screenH);
 		var divToPrint = document.getElementById('divToPrint');
 		var popupWin = window.open('', '_blank','toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,width='+screenW+',height='+screenH);
 		popupWin.document.open();

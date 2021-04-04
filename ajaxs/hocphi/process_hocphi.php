@@ -15,10 +15,10 @@ if(isset($_POST['masv']) && $_POST['masv']!='') {
 	$masv = isset($_POST['masv']) ? addslashes(strip_tags($_POST['masv'])) : '';
 	$id_hoso = isset($_POST['id_hoso']) ? addslashes(strip_tags($_POST['id_hoso'])) : '';
 	$sotien = isset($_POST['sotien']) ? floatval($_POST['sotien']) : 0;
-	$noidung = isset($_POST['noidung']) ? addslashes($_POST['noidung']) : '';
+	$noidung = isset($_POST['noidung']) ? addslashes($_POST['noidung']) : 'Đóng học phí';
 	$cdate = time();
 
-	$sql = "INSERT INTO tbl_hocphi_pay (masv, sotien, noidung, date_pay) VALUES ('$masv', '$sotien', '$noidung', '$cdate')";
+	$sql = "INSERT INTO tbl_hocphi_pay (masv, sotien, noidung, date_pay, author) VALUES ('$masv', '$sotien', '$noidung', '$cdate', '$user')";
 	$obj->Exec("BEGIN");
 	$result1 = $obj->Exec($sql);
 	

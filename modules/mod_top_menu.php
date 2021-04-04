@@ -115,8 +115,6 @@ $com=isset($_GET['com'])?strip_tags(trim($_GET['com'])):'frontpage';
 								<li><a href="<?php echo ROOTHOST;?>?com=edu&task=nganh">Danh mục ngành</a></li>
 							<?php } if($UserLogin->Permission('edu_monhoc')==true) { ?>
 								<li><a href="<?php echo ROOTHOST;?>?com=edu&task=monhoc">Danh mục môn học</a></li>
-							<?php } if($UserLogin->Permission('edu_hocphi')==true) { ?>
-								<li><a href="<?php echo ROOTHOST;?>?com=edu&task=hocphi">Danh mục học phí</a></li>
 							<?php } if($UserLogin->Permission('edu_hoso')==true) { ?>
 								<li><a href="<?php echo ROOTHOST;?>?com=edu&task=hoso">Danh mục hồ sơ</a></li>
 							<?php } ?>

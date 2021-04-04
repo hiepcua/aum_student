@@ -26,18 +26,6 @@ define('ASSESS_TOKEN_SMS','eokvTGERlLRVudu8uFA1-jeNvEiTWVHw');
 $COM_TITLE=array('frontpage'=>'','customer'=>'CUSTOMERS','order'=>'ORDERS','config'=>'CONFIGS','store'=>'STORES','account'=>'ACCOUTS');
 
 $STATUS_DKTS = array(
-	"TS1" 	=> 'Hồ sơ mới',
-	"TS2" 	=> 'Đang thi',
-	"TS3" 	=> 'Đã thi',
-	"TS4" 	=> 'Trúng tuyển',
-	"TS5" 	=> 'Không trúng tuyển',
-	"HS1" 	=> 'Hồ sơ nhập học(đang học)',
-	"HS2" 	=> 'Hồ sơ hoàn thành',
-	"HS3" 	=> 'Hồ sơ bảo lưu',
-	"HS4" 	=> 'Hồ sơ hủy'
-);
-
-$STATUS_DKTS2 = array(
 	"L0" 	=> 'L0 - Sinh viên nhập học',
 	"L1" 	=> 'L1 - Không xác định',
 	"L2" 	=> 'L2 - Nhập học thành công',
@@ -48,3 +36,17 @@ $STATUS_DKTS2 = array(
 	"L9A" 	=> 'L9A - Bảo lưu',
 	"L9B" 	=> 'l9B - Bỏ học',
 );
+
+$STATUS_DKTS2 = array(
+	"TS1" 	=> 'Hồ sơ mới',
+	"TS2" 	=> 'Đang thi',
+	"TS3" 	=> 'Đã thi',
+	"TS4" 	=> 'Trúng tuyển',
+	"TS5" 	=> 'Không trúng tuyển',
+	"HS1" 	=> 'Hồ sơ nhập học(đang học)',
+	"HS2" 	=> 'Tốt nghiệp',
+	"HS3" 	=> 'Hồ sơ bảo lưu',
+	"HS4" 	=> 'Hồ sơ hủy'
+);
+
+

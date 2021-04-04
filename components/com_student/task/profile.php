@@ -203,8 +203,8 @@ if($objts->Num_rows()>0) {
 										$status=$value['status'];
 										$dataid = $id;
 										$hoso = $value['id_hoso'];
-										if($status=='' || $status==null || $status=='TS1') 
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-default change_status">'.$STATUS_DKTS['TS1'].'</label>';
+										if($status=='' || $status==null || $status=='L0') 
+											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-default change_status">'.$STATUS_DKTS['L0'].'</label>';
 										elseif($status=='TS2') 
 											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-warning change_status">'.$STATUS_DKTS[$status].'</label>';
 										elseif($status=='TS3') 
