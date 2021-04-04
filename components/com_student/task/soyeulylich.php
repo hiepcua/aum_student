@@ -25,15 +25,7 @@ $_SESSION["SV$ma"]['TAB_QTHT'] = json_decode($r['qthoctap'],true);
 $_SESSION["SV$ma"]['TAB_QHHOC'] = json_decode($r['qthoc'],true);
 $_SESSION["SV$ma"]['TAB_KHENTHUONG'] = json_decode($r['khenthuong'],true);
 $_SESSION["SV$ma"]['TAB_KYLUAT'] = json_decode($r['kyluat'],true);
-
-$objts = new CLS_TUYENSINH;
-$objts->getList(" AND id_hoso='$ma' ");
-$id_he = '';
-
-if($objts->Num_rows()>0) {
-	$row=$objts->Fetch_Assoc();
-	$id_he 	= $row['id_he'];
-} ?>
+?>
 <div class='body profile_view'>
 	<div class="page-bar">
 		<div class="page-title-breadcrumb">
@@ -433,11 +425,9 @@ if($objts->Num_rows()>0) {
 														</tr>
 														<?php $i++;
 													}
-												} elseif($id_he==null) {
-													echo '<tr><td colspan="4">Vui lòng đăng ký khóa, bậc, ngành đào tạo trước khi thêm danh mục hồ sơ</td></tr>';
-												}else { 
+												} else { 
 													$obj=new CLS_MYSQL;
-													$sql="SELECT * FROM tbl_dmhoso WHERE id_he='$id_he' OR `all`=1";
+													$sql="SELECT * FROM tbl_dmhoso WHERE `all`=1";
 													$obj->Query($sql); $i=1;
 													while($r_hs = $obj->Fetch_Assoc()) {?>
 														<tr>
@@ -506,12 +496,12 @@ if($objts->Num_rows()>0) {
 					data: $("#student_edit").serialize(),
 					success: function(req){
 						console.log(req); 
-						if(req=="success") {
-							showMess("Cập nhật thành công!",""); 
-							setTimeout(function(){window.location.reload(); }, 2000);
-						}else{
-							showMess("Lỗi trong quá trình lưu dữ liệu!","error");
-						}
+						// if(req=="success") {
+						// 	showMess("Cập nhật thành công!",""); 
+						// 	setTimeout(function(){window.location.reload(); }, 2000);
+						// }else{
+						// 	showMess("Lỗi trong quá trình lưu dữ liệu!","error");
+						// }
 					}
 				});
 			}

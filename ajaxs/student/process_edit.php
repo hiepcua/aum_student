@@ -11,14 +11,13 @@ $objuser=new CLS_USER;
 if(!$objuser->isLogin()) die("E01");
 $user = $objuser->getInfo('username');
 $obj=new CLS_MYSQL;
-if(isset($_POST['ma'])){	//print_r($_POST);
-	$partner 	= 0;
+if(isset($_POST['ma'])){
 	$ma 		= isset($_POST['ma'])?addslashes(strip_tags($_POST['ma'])):'';
 	$masv 		= isset($_POST['masv'])?addslashes(strip_tags($_POST['masv'])):'';
 	$hoten 		= isset($_POST['hoten'])?addslashes(strip_tags($_POST['hoten'])):'';
-	$name = explode(" ",$hoten);
-	$name = $name[count($name)-1];
-	$ho_dem = trim(str_replace($name,"",$hoten));
+	$name 		= explode(" ",$hoten);
+	$name 		= $name[count($name)-1];
+	$ho_dem 	= trim(str_replace($name,"",$hoten));
 	$tengoi 	= isset($_POST['tengoi'])?addslashes(strip_tags($_POST['tengoi'])):'';
 	$quoctich 	= isset($_POST['quoctich'])?addslashes(strip_tags($_POST['quoctich'])):'';
 	$ngaysinh	= isset($_POST['ngaysinh'])?addslashes(strip_tags($_POST['ngaysinh'])):'';
@@ -64,19 +63,12 @@ if(isset($_POST['ma'])){	//print_r($_POST);
 	if(isset($_SESSION["SV$ma"]['TAB_QHHOC'])) unset($_SESSION["SV$ma"]['TAB_QHHOC']);
 	if(isset($_SESSION["SV$ma"]['TAB_KHENTHUONG'])) unset($_SESSION["SV$ma"]['TAB_KHENTHUONG']);
 	if(isset($_SESSION["SV$ma"]['TAB_KYLUAT'])) unset($_SESSION["SV$ma"]['TAB_KYLUAT']);
-
-	$id_dky = isset($_POST['id_dky'])?(int)$_POST['id_dky']:0;
-	$ma_nganh = isset($_POST['ma_nganh'])?addslashes(strip_tags($_POST['ma_nganh'])):'';
-	$bac = isset($_POST['cbobac'])?addslashes(strip_tags($_POST['cbobac'])):'';
-	$khoa = isset($_POST['cbokhoa'])?addslashes(strip_tags($_POST['cbokhoa'])):'';
-	$xettuyen = isset($_POST['tk_xettuyen'])? (int)$_POST['tk_xettuyen']:1;
 	
 	$dmhoso=array();
-	$chk_hoso = isset($_POST['chk_hoso'])?$_POST['chk_hoso']:array();
 	$date_hoso = isset($_POST['date_hoso'])?$_POST['date_hoso']:array();
 	$dmhoso_ids = isset($_POST['dmhoso_ids'])?explode(",",$_POST['dmhoso_ids']):array();
 	
-	$sql="SELECT * FROM tbl_dmhoso WHERE id_he=$bac";
+	$sql="SELECT * FROM tbl_dmhoso WHERE `all`=1";
 	$obj->Query($sql);
 	while($r = $obj->Fetch_Assoc()){
 		$id=$r['id'];
@@ -95,7 +87,7 @@ if(isset($_POST['ma'])){	//print_r($_POST);
 	
 	$obj=new CLS_MYSQL;
 	$obj->Exec("BEGIN");
-	$sql = "UPDATE tbl_hocsinh SET `partner_id`='$partner',`masv`='$masv',
+	$sql = "UPDATE tbl_hocsinh SET `masv`='$masv',
 	ho_dem='$ho_dem',name='$name',nickname='$tengoi',
 	ngaysinh='$ngaysinh',noisinh='$noisinh',gioitinh='$gioitinh',
 	diachi='$diachi',dienthoai='$dienthoai',cmt='$cmnd',ngaycap_cmt='$ngaycap',
@@ -105,45 +97,14 @@ if(isset($_POST['ma'])){	//print_r($_POST);
 	doan='$doan',dang='$dang',ngayct='$ngayct',stk='$stk',email='$email',
 	note='$ghichu',dmhoso='$dmhoso',qhgiadinh='$qhgd',qthoctap='$qtht',qthoc='$qthoc',
 	khenthuong='$khenthuong',kyluat='$kyluat',author='$author',mdate='$cdate' WHERE ma='$ma'";
-	$result1=$obj->Exec($sql); //echo $sql.'<br> ';
-
-	$sbd 		= isset($_POST['sbd'])?addslashes(strip_tags($_POST['sbd'])):'';
-	//$diem_ut 	= isset($_POST['diem_ut'])?(float)$_POST['diem_ut']:0;
-	$mon1 		= isset($_POST['mon1'])?addslashes(strip_tags($_POST['mon1'])):'';
-	$mon2 		= isset($_POST['mon2'])?addslashes(strip_tags($_POST['mon2'])):'';
-	$mon3 		= isset($_POST['mon3'])?addslashes(strip_tags($_POST['mon3'])):'';
-	//$diem_thuong= isset($_POST['diem_thuong'])?(float)$_POST['diem_thuong']:0;
-	//$tong_diem	= isset($_POST['tong_diem'])?(float)$_POST['tong_diem']:0;
-	
-	if($id_dky>0){
-		$sql = "UPDATE tbl_dangky_tuyensinh SET mdate=$cdate,id_khoa='$khoa',id_he='$bac',id_nganh='$ma_nganh',xettuyen='$xettuyen'";
-		if($sbd!=='') $sql.=",sbd='$sbd'"; else $sql.=",sbd=null";
-		if($mon1!=='') $sql.=",mon1='$mon1'"; else $sql.=",mon1=null";
-		if($mon2!=='') $sql.=",mon2='$mon2'"; else $sql.=",mon2=null";
-		if($mon3!=='') $sql.=",mon3='$mon3'"; else $sql.=",mon3=null";
-		$sql.=",author='$user' WHERE id=$id_dky";
-	}else{
-		$sql = "INSERT INTO tbl_dangky_tuyensinh (cdate,id_khoa,id_he,id_nganh,id_hoso,xettuyen,diadiemhoc,sbd,mon1,mon2,mon3,author,status) 
-		VALUES($cdate,'$khoa','$bac','$ma_nganh','$ma','$xettuyen',''";
-		if($sbd!=='') $sql.=",'$sbd'"; else $sql.=",null";
-		if($mon1!=='') $sql.=",'$mon1'"; else $sql.=",null";
-		if($mon2!=='') $sql.=",'$mon2'"; else $sql.=",null";
-		if($mon3!=='') $sql.=",'$mon3'"; else $sql.=",null";
-		$sql.=",'$user','TS1')"; 
-	}
-	$result2 = $obj->Exec($sql); //echo $sql.'<br> ';
-	
-	// dang ky note
-	$sql = "INSERT INTO tbl_dangky_note (id_hoso,masv,notes,cdate,author) 
-	VALUES('$ma','$masv','Hồ sơ #$ma đã cập nhật thông tin',$cdate,'$user')";
-	$result3 = $obj->Exec($sql); //echo $sql;
+	$result1=$obj->Exec($sql); // echo $sql;
 	
 	// notify
 	$sql = "INSERT INTO tbl_notify (id_hoso,masv,notes,cdate,author) 
 	VALUES('$ma','','Hồ sơ #$ma đã cập nhật thông tin',$cdate,'$user')";
-	$result4 = $obj->Exec($sql); //echo $sql.'<br> ';
+	$result4 = $obj->Exec($sql); //echo $sql;
 	
-	if($result3 && $result4) {
+	if($result1 && $result4) {
 		$obj->Exec("COMMIT"); echo "success";
 	}else {
 		$obj->Exec("ROLLBACK"); echo "error";

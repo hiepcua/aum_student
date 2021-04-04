@@ -204,7 +204,8 @@ $obj->Query($sql);
 			$mon1 =$mon2=$mon3=''; 
 			while($r=$obj->Fetch_Assoc()) { 
 				$i++;
-				$id_hoso = $r['ma']; $masv=$r['masv']; 
+				$id_hoso = $r['ma']; 
+				$masv=$r['masv']; 
 				$total=0; $dadong=$chuadong=0;
 				$total = isset($arrHP[$masv]) ? $arrHP[$masv] : 0;
 				$dadong = isset($arrHP_dadong[$masv]) ? $arrHP_dadong[$masv] : 0;
@@ -232,7 +233,7 @@ $obj->Query($sql);
 					<td align="center"><b class="cred"><?php echo number_format($total);?></b></td>
 					<td align="center"><label class="label label-success"><big><?php echo number_format($dadong);?></big></label></td>
 					<td align="center"><label class="label label-danger"><big><?php echo number_format($chuadong);?></big></label></td>
-					<td align="center"><a href="<?php echo ROOTHOST;?>student/hocphi/<?php echo $id_hoso;?>?khoa=<?php echo $r['id_khoa'];?>&he=<?php echo $r['id_he'];?>&nganh=<?php echo $r['id_nganh'];?>">Chi tiết Học phí</a></td>
+					<td align="center"><a href="<?php echo ROOTHOST;?>student/hocphi/<?php echo $masv;?>">Chi tiết Học phí</a></td>
 				</tr>
 				<?php 
 				$html.='<tr><td align="center">'.$i.'</td>

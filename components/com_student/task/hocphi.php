@@ -1,28 +1,22 @@
 <?php
 defined('ISHOME') or die("You can't access this page!");
 if(!isset($_GET['id'])) die("<br>Vui lòng chọn hồ sơ cần xem");
-$ma 	= addslashes(strip_tags(htmlentities($_GET['id']))); // id_hoso
+$_masv 	= addslashes(strip_tags(htmlentities($_GET['id']))); // masv
+$_SESSION['THIS_YEAR'] = $_SESSION['THIS_BAC'] = $_SESSION['THIS_NGANH'] = '';
 
-if(isset($_GET['khoa']) && $_GET['khoa']!=='') $_SESSION['THIS_YEAR'] = $_GET['khoa'];
-if(isset($_GET['he']) && $_GET['he']!=='') $_SESSION['THIS_BAC'] = $_GET['he'];
-if(isset($_GET['nganh']) && $_GET['nganh']!=='') $_SESSION['THIS_NGANH'] = $_GET['nganh'];
-echo '<script>loadMenu(this_year,this_bac,this_nganh);</script>';
-
-$_KHOA 	= $_SESSION['THIS_YEAR'];
-$_HE 	= $_SESSION['THIS_BAC'];
-$_NGANH = $_SESSION['THIS_NGANH'];
 //---------------------------------------
-$res_dkts = SysGetList('tbl_dangky_tuyensinh', array(), "AND id_hoso='".$ma."' AND id_khoa='".$_KHOA."' AND id_he='".$_HE."' AND id_nganh='".$_NGANH."'");
+$res_dkts = SysGetList('tbl_dangky_tuyensinh', array(), "AND masv='".$_masv."'");
 if(count($res_dkts)<=0) die('Không có dữ liệu');
 $row = $res_dkts[0];
 $he = $row['id_he'];
 $nganh = $row['id_nganh'];
 $masv = $row['masv'];
 $malop = $row['malop'];
+$id_hoso = $row['id_hoso'];
 
 //---------------------------------------
 $objhs = new CLS_HS;
-$objhs->getList(" AND ma='$ma'");
+$objhs->getList(" AND ma='$id_hoso'");
 $r=$objhs->Fetch_Assoc();
 $fullname = $r['ho_dem'].' '.$r['name'];
 $gender = $GLOBALS['ARR_GENDER'][$r['gioitinh']];

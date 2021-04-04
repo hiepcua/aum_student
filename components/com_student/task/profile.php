@@ -165,7 +165,7 @@ if($objts->Num_rows()>0) {
 				<div class="page-title tab-title">
 					<ul>
 						<li class="active">Danh sách ngành đăng ký</li>
-						<a href="javascript:void(0)" id="dk_nganh" class="btn btn-primary" dataid="<?php echo $ma;?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Đăng ký thêm ngành học</a>
+						<a href="javascript:void(0)" id="dk_nganh" class="btn btn-primary" dataid="<?php echo $masv;?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Đăng ký thêm ngành học</a>
 					</ul>
 
 				</div>
@@ -339,71 +339,6 @@ if($objts->Num_rows()>0) {
 		});
 	})
 
-	$(".edit_qhgd").click(function(){
-		var ma = "<?php echo $ma;?>";
-		var row_id = $(this).attr('dataid'); 
-		var url = "<?php echo ROOTHOST;?>ajaxs/student/edit_qhgd.php";
-		$.post(url,{'ma':ma,'row_id':row_id},function(req){
-			$("#tab1").html(req);
-		})
-	})
-
-	function tongdiem() {
-		var mon1 = $("#mon1").val()!='' ? parseFloat($("#mon1").val()) : 0;
-		var mon2 = $("#mon2").val()!='' ? parseFloat($("#mon2").val()) : 0;
-		var mon3 = $("#mon3").val()!='' ? parseFloat($("#mon3").val()) : 0;
-		var tong = mon1 + mon2 + mon3;
-		$("#tong_diem").val(tong);
-	}
-	function checkinput(){
-		var ma_nganh = $("#ma_nganh").val();
-		var bac = $("#cbobac").val();
-		var khoa = $("#cbokhoa").val();
-
-		if($("#hoten").val()=="") {
-			$("#hoten").focus();
-			$("#hoten").addClass('novalid');
-			return false;
-		}else $("#hoten").removeClass('novalid');
-		if($("#ngaysinh").val()=="") {
-			$("#ngaysinh").focus();
-			$("#ngaysinh").addClass('novalid');
-			return false;
-		}else $("#ngaysinh").removeClass('novalid');
-		if($("#noisinh").val()=="") {
-			$("#noisinh").focus();
-			$("#noisinh").addClass('novalid');
-			return false;
-		}else $("#noisinh").removeClass('novalid');
-		if($("#nguyenquan").val()=="") {
-			$("#nguyenquan").focus();
-			$("#nguyenquan").addClass('novalid');
-			return false;
-		}else $("#nguyenquan").removeClass('novalid');
-		if($("#hokhau").val()=="") {
-			$("#hokhau").focus();
-			$("#hokhau").addClass('novalid');
-			return false;
-		}else $("#hokhau").removeClass('novalid');
-
-		if(khoa=="") {
-			$("#cbokhoa").focus();
-			$("#cbokhoa").addClass('novalid');
-			return false;
-		}else $("#cbokhoa").removeClass('novalid');
-		if(bac=="") {
-			$("#cbobac").focus();
-			$("#cbobac").addClass('novalid');
-			return false;
-		}else $("#cbobac").removeClass('novalid');
-		if(ma_nganh=="") {
-			$("#ma_nganh").focus();
-			$("#ma_nganh").addClass('novalid');
-			return false;
-		}else $("#ma_nganh").removeClass('novalid');
-		return true;
-	}
-
 	function frm_dangky_nganh_moi(id_hoso){
 		if(id_hoso.length>0){
 			var url = "<?php echo ROOTHOST;?>ajaxs/tuyensinh/dangky.php";
@@ -447,34 +382,6 @@ if($objts->Num_rows()>0) {
 		}else{
 			showMess('Chưa chọn hồ sơ nào.', 'error');
 		}
-	}
-
-	/* Checkbox dm ho so */
-	function HSCheckAll(status){
-		console.log('status='+status);
-		$(".chk_hoso").each(function(){
-			$(this).prop('checked',status);
-		})
-		HsoIDChecked();
-	}
-	function HSCheckOnce(){
-		var flag=true;
-		$(".chk_hoso").each(function(){
-			if($(this).prop("checked")!=true) {
-				flag=false;
-			}
-		})
-		$("#chkall_hoso").prop('checked',flag);
-		HsoIDChecked();
-	}
-	function HsoIDChecked(){
-		var strids='';
-		$(".chk_hoso").each(function(){
-			if($(this).prop("checked")==true){
-				strids+=$(this).attr('dataid')+",";
-			}
-		})
-		$("#dmhoso_ids").val(strids);
 	}
 
 	function xoa_nganh(id_hoso, id_nganh){

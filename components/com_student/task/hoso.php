@@ -3,14 +3,6 @@ defined('ISHOME') or die("You can't access this page!");
 $check_permission = $UserLogin->Permission('sv_hoso');
 if($check_permission==false) die($GLOBALS['MSG_PERMIS']);
 
-$obj = new CLS_MYSQL;
-$sql="SELECT * FROM tbl_dangky_tuyensinh";
-$obj->Query($sql);
-$_DANGKY=array();
-while($r=$obj->Fetch_Assoc()){
-	$_DANGKY[$r['id_hoso']][]=$r['id_nganh'];
-}
-
 $ma=isset($_GET['ma'])?addslashes(strip_tags($_GET['ma'])):'';
 $ten=isset($_GET['ten'])?addslashes(strip_tags($_GET['ten'])):'';
 $cmt=isset($_GET['cmt'])?addslashes(strip_tags($_GET['cmt'])):'';
@@ -27,7 +19,7 @@ if($ns!='') {
 }
 if($dc!='') $strWhere.=" AND diachi LIKE '%$dc%'";
 
-
+$obj = new CLS_MYSQL();
 $sql="SELECT count(*) as num FROM tbl_hocsinh WHERE 1=1 $strWhere";
 $obj->Query($sql);
 $r=$obj->Fetch_Assoc();
@@ -86,13 +78,7 @@ $sql="SELECT * FROM tbl_hocsinh WHERE 1=1 $strWhere	ORDER BY `cdate` DESC,id DES
 					$i=$start;
 					while($r=$obj->Fetch_Assoc()) { $i++;
 						$id_hoso = $r['ma'];
-						$nganh='';
-						if(isset($_DANGKY[$id_hoso])){
-							foreach($_DANGKY[$id_hoso] as $val){
-								$nganh.=$val.'<br/>';
-							}
-						}
-						$dataids = '---';
+						$dataids = '---'; /*Using for contextMenu*/
 						?>
 						<tr dataid="<?php echo $id_hoso;?>" dataids="<?php echo $dataids;?>">
 							<td align="center"><?php echo $i;?></td>
