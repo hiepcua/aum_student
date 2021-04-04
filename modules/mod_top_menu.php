@@ -129,18 +129,18 @@ $com=isset($_GET['com'])?strip_tags(trim($_GET['com'])):'frontpage';
 					<li><a href="javascript:void(0);"><i class="fa fa-file-text-o" aria-hidden="true"></i> Quản lý đào tạo</a>
 						<ul class="submenu">
 							<li>
-								<a href="<?php echo ROOTHOST;?>?com=student&task=hsdaotao">Hồ sơ đào tạo</a>
+								<a href="<?php echo ROOTHOST;?>hsdaotao">Hồ sơ đào tạo</a>
 							</li>
 							<li>
-								<a href="<?php echo ROOTHOST;?>?com=student&task=qllop">Quản lý lớp</a>
+								<a href="<?php echo ROOTHOST;?>lop">Quản lý lớp</a>
 							</li>
 							<?php if($UserLogin->Permission('sv_qlhocphi')==true) { ?>
-								<li><a href="<?php echo ROOTHOST;?>?com=student&task=qlhocphi">Quản lý học phí</a></li>
+								<li><a href="<?php echo ROOTHOST;?>qlhocphi">Quản lý học phí</a></li>
 							<?php } ?>
 						</ul>
 					</li>
 
-					<li><a href='<?php echo ROOTHOST;?>?com=student&task=hoso'><i class="fa fa-book" aria-hidden="true"></i> Hồ sơ</a></li>
+					<li><a href='<?php echo ROOTHOST;?>student/hoso'><i class="fa fa-book" aria-hidden="true"></i> Hồ sơ</a></li>
 
 				<?php } if($UserLogin->Permission('report')==true) { ?>
 					<li>

@@ -98,7 +98,7 @@ $obj->Query($sql);	//echo $sql;
 $MAX_ROWS=50;
 $total_rows = $obj->Num_rows();
 $max_pages = ceil($total_rows/$MAX_ROWS);
-$cur_page = postCurentPage($max_pages);
+$cur_page = getCurentPage($max_pages);
 $start = ($cur_page - 1) * $MAX_ROWS;
 $limit = ' LIMIT '.$start.','. $MAX_ROWS;
 $sql.= $limit;
@@ -220,7 +220,14 @@ $obj->Query($sql);
 					<td dataid="<?php echo $id_hoso;?>"><?php echo stripslashes($r['ho_dem']).' '.stripslashes($r['name']);?></td>
 					<td dataid="<?php echo $id_hoso;?>" class="text-center"><?php echo $GLOBALS['ARR_GENDER'][$r['gioitinh']];?></td>
 					<td dataid="<?php echo $id_hoso;?>" class="text-center"><?php echo date("d/m/y",$r['ngaysinh']);?></td>
-					<td align="center"><?php echo $r['malop'];?></td>
+					<td align="center">
+						<?php
+						if(strlen($r['malop'])>0) echo $r['malop'];
+						else{
+							echo '<a href="javascript:void(0)" class="btn btn-default btn_nhaplop" dataids="'.$r['id'].'-'.$r['id_khoa'].'-'.$r['id_he'].'-'.$r['id_nganh'].'">Nhập lớp</a>';
+						}
+						?>
+					</td>
 					<td dataid="<?php echo $id_hoso;?>" class="text-center"><?php echo $masv;?></td>
 					<td align="center"><b class="cred"><?php echo number_format($total);?></b></td>
 					<td align="center"><label class="label label-success"><big><?php echo number_format($dadong);?></big></label></td>
@@ -246,7 +253,7 @@ $obj->Query($sql);
 	</table>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Footer_list">
 		<tr><td align="center">
-			<?php  paging_index($total_rows,$MAX_ROWS,$cur_page); ?>
+			<?php paging($total_rows,$MAX_ROWS,$cur_page); ?>
 		</td></tr>
 	</table>
 </div>
@@ -280,6 +287,18 @@ $obj->Query($sql);
 			popupWin.document.write('</body></html>');
 			popupWin.document.close();
 			hideLoading();
+		});
+
+		$(".btn_nhaplop").click(function(){
+			var ids = $(this).attr('dataids');
+			var url = "<?php echo ROOTHOST;?>ajaxs/lop/frm_add_lop.php";
+			$.post(url,{'ids': ids},function(req) {
+				$('#myModalPopup .modal-dialog').removeClass('modal-sm');
+				$('#myModalPopup .modal-dialog').removeClass('modal-lg');
+				$('#myModalPopup .modal-title').html('Phân lớp');
+				$('#myModalPopup .modal-body').html(req);
+				$('#myModalPopup').modal('show');
+			})
 		});
 
 		$("#ma_lop").change(function(e){

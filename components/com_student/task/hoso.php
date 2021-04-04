@@ -33,7 +33,7 @@ $obj->Query($sql);
 $r=$obj->Fetch_Assoc();
 $total_rows=$r['num'];
 $max_pages = ceil($total_rows/MAX_ROWS);
-$cur_page = postCurentPage($max_pages);
+$cur_page = getCurentPage($max_pages);
 $start = ($cur_page - 1) * MAX_ROWS;
 $limit = ' LIMIT '.$start.','. MAX_ROWS;
 //--------------------------------------
@@ -121,7 +121,7 @@ $sql="SELECT * FROM tbl_hocsinh WHERE 1=1 $strWhere	ORDER BY `cdate` DESC,id DES
 			</table>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Footer_list">
 				<tr>
-					<td align="center"><?php paging_index($total_rows,MAX_ROWS,$cur_page); ?></td>
+					<td align="center"><?php paging($total_rows,MAX_ROWS,$cur_page); ?></td>
 				</tr>
 			</table>
 		</div>

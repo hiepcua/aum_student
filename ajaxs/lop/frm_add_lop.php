@@ -11,7 +11,6 @@ require_once('../../libs/cls.lop.php');
 $objuser=new CLS_USER;
 if(!$objuser->isLogin()) die("E01");
 $arr_id = array('id'=>'','khoa'=>'','he'=>'','nganh'=>'');
-$ma = isset($_POST['ma'])?addslashes(strip_tags($_POST['ma'])):'';
 $ids = isset($_POST['ids'])?addslashes(strip_tags($_POST['ids'])):'';
 
 if($ids!==''){
