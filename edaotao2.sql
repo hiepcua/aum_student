@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2021-04-05 01:26:34
+Date: 2021-04-05 06:27:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,7 @@ CREATE TABLE `tbl_chuongtrinhhoc` (
   `hocky` int(11) DEFAULT NULL,
   `tinchi` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_chuongtrinhhoc
@@ -2509,7 +2509,7 @@ INSERT INTO `tbl_hocsinh` VALUES ('365', '6', '15997930016', '', 'Nguyễn Văn'
 INSERT INTO `tbl_hocsinh` VALUES ('366', '6', '15997930017', '', 'Nguyễn Đăng', 'Thứ', '', '692730000', 'Bắc Ninh', '1', 'Hạp Lĩnh- Tp Bắc Ninh- Bắc Ninh', '68', '0965 221 361', '125434343', '0', '', '', 'Bắc Ninh', 'Hạp Lĩnh, TP Bắc Ninh, Bắc Ninh', '', '', '1', '', '', '', '', '', '', '', '0000-00-00', '', 'dangthunhatban@gmail.com', '', '[]', '', '', '', '', '', null, '1582995600', '1599794892', 'admindemo', null, '0', '0', '0', '1');
 INSERT INTO `tbl_hocsinh` VALUES ('367', '6', '15997930018', '', 'Nguyễn Ngọc', 'Quy', '', '527619600', 'Vĩnh Phúc', '1', 'Khu 5, Đình Xá, Nguyệt Đức, Yên Lạc, Vĩnh Phúc', '0', '0921.091.986', '026086005805', '0', '', 'Việt Nam', 'Vĩnh Phúc', 'Khu 5, Đình Xá, Nguyệt Đức, Yên Lạc, Vĩnh Phúc', '', '', '1', '', '', '', '', '', '', '', '0000-00-00', '', 'nguyenngocquy.rc@gmail.com', '', '[]', '', '', '', '', '', null, '1582995600', '1599794798', 'admindemo', null, '0', '0', '0', '1');
 INSERT INTO `tbl_hocsinh` VALUES ('368', '6', '15997930019', '', 'Bùi Trọng', 'Văn', '', '749235600', 'Hải Dương', '1', 'Toàn Thắng- Gia Lộc- Hải Dương', '66', '0396446333', '030093000876', '0', '', '', 'Hải Dương', 'Toàn Thắng, Gia Lộc, Hải Dương', '', '', '1', '', '', '', '', '', '', '', '0000-00-00', '', 'giacatcothien@gmail.com', '', '[]', '', '', '', '', '', null, '1582995600', '1599794702', 'admindemo', null, '0', '0', '0', '1');
-INSERT INTO `tbl_hocsinh` VALUES ('369', '6', '159979300110', '', 'Phùng Văn', 'Hảo', '', '491850000', 'Hà Nội', '1', 'Tân An- Ya Chim- TP Kon Tum- Tỉnh Kon Tum', '1', '0337 327 561', '001085018740', '0', '', 'Việt Nam', 'Kon Tum', 'Tân An, Ý Chim, Kon Tum', '', '', '1', '', '', '', '', '', '', '', '0000-00-00', '', 'haophungvan134@gmail.com', '', '[]', '', '', '', '', '', null, '1582995600', '1599794611', 'admindemo', null, '0', '0', '0', '1');
+INSERT INTO `tbl_hocsinh` VALUES ('369', '0', '159979300110', '', 'Phùng Văn', 'Hảo', '', '491850000', 'Hà Nội', '1', 'Tân An- Ya Chim- TP Kon Tum- Tỉnh Kon Tum', '1', '0337 327 561', '001085018740', '0', '', 'Việt Nam', 'Kon Tum', 'Tân An, Ý Chim, Kon Tum', '', '', '1', '', '', '', '', '', '', '', '0000-00-00', '', 'haophungvan134@gmail.com', '', '{\"78\":{\"id\":\"78\",\"name\":\"Phiếu xét tuyển\",\"status\":1,\"date\":\"10/3/2021\"},\"79\":{\"id\":\"79\",\"name\":\"Bằng tốt nghiệp\",\"status\":1,\"date\":\"10/3/2021\"},\"80\":{\"id\":\"80\",\"name\":\"Bảng điểm\",\"status\":1,\"date\":\"10/3/2021\"},\"81\":{\"id\":\"81\",\"name\":\"Chứng minh thư\",\"status\":1,\"date\":\"10/3/2021\"},\"82\":{\"id\":\"82\",\"name\":\"2 Ảnh 3x4\",\"status\":1,\"date\":\"10/3/2021\"}}', '', '', '', '', '', null, '1582995600', '1617577978', 'tranhiep', null, '0', '0', '0', '1');
 INSERT INTO `tbl_hocsinh` VALUES ('370', '6', '159979300111', '', 'Nguyễn Văn', 'Dũng', '', '499107600', 'Hà Nội', '1', 'Tích Giang- Phúc Thọ- Hà Nội', '1', '0974072586', '001085014644', '0', '', '', 'Hà Nội', 'Tích Giang, Phúc Thọ, Hà Nội', '', '', '1', '', '', '', '', '', '', '', '0000-00-00', '', 'nguyenvandung261085@icloud.com', '', '[]', '', '', '', '', '', null, '1582995600', '1599794451', 'admindemo', null, '0', '0', '0', '1');
 INSERT INTO `tbl_hocsinh` VALUES ('371', '6', '159979300112', '', 'Nguyễn Văn', 'Đảng', '', '559328400', 'Phú Thọ', '1', 'Khu 2- Phú Mỹ- Phù Ninh- Phú Thọ', '69', '0965 222 160', '131682373', '0', '', '', 'Phú Thọ', 'Khu 2, Phú Mỹ, Phù Ninh, Phú Thọ', '', '', '1', '', '', '', '', '', '', '', '0000-00-00', '', 'nguyenvandangpt1987@gmail.com', '', '[]', '', '', '', '', '', null, '1582995600', '1599795060', 'admindemo', null, '0', '0', '0', '1');
 INSERT INTO `tbl_hocsinh` VALUES ('372', '6', '159979300113', '', 'Đặng Văn', 'Thương', '', '473878800', 'Bắc Ninh', '1', 'Đại Bái- Gia Bình- Bắc Ninh', '68', '0986 629 759', '125132338', '0', '', 'Việt Nam', 'Bắc Ninh', 'Đại Bái, Gia Bình, Bắc Ninh', '', '', '1', '', '', '', '', '', '', '', '0000-00-00', '', 'thuonggokientrucviet@gmail.com', '', '[]', '', '', '', '', '', null, '1582995600', '1599794944', 'admindemo', null, '0', '0', '0', '1');
@@ -3710,7 +3710,7 @@ CREATE TABLE `tbl_notify` (
   `author` varchar(255) DEFAULT NULL,
   `isactive` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4257 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4259 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_notify
@@ -4920,6 +4920,8 @@ INSERT INTO `tbl_notify` VALUES ('4253', null, '1599788697', '', 'Hồ sơ #1599
 INSERT INTO `tbl_notify` VALUES ('4254', null, null, '20AUM114476', 'Mã SV #20AUM114476 đã được thêm vào lớp el1_qtkd11', '1617554462', 'tranhiep', '0');
 INSERT INTO `tbl_notify` VALUES ('4255', null, null, '20AUM116477', 'Mã SV #20AUM116477 đã được thêm vào lớp el1_lkt11', '1617554469', 'tranhiep', '0');
 INSERT INTO `tbl_notify` VALUES ('4256', null, '1599788697', '20AUM116477', 'Đã đóng 2,000,000 VNĐ', '1617554510', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4257', null, '159979300110', '', 'Hồ sơ #159979300110 đã cập nhật thông tin', '1617577966', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4258', null, '159979300110', '', 'Hồ sơ #159979300110 đã cập nhật thông tin', '1617577978', 'tranhiep', '0');
 
 -- ----------------------------
 -- Table structure for tbl_partner
@@ -4977,7 +4979,7 @@ INSERT INTO `tbl_user` VALUES ('48', 'thaott_daotao', '00cd5ba0e25fd9ae5b8901974
 INSERT INTO `tbl_user` VALUES ('47', 'demodaotao', '453b885e6c7c3683041ab4bd8f717f46', 'Đào tạo', '', '0000-00-00', '', '', '012345678', '', '', null, null, null, null, '2020-02-27 11:11:55', '0000-00-00 00:00:00', '22', null, '1');
 INSERT INTO `tbl_user` VALUES ('45', 'hatn', '2220dc2d04ab4611f78cb4615dc0aa25', 'Trương Ngọc Hà', '', '0000-00-00', '', '', '0917796898', '', '', '', '', '', '', '2019-11-04 16:41:26', '0000-00-00 00:00:00', '9', '0', '1');
 INSERT INTO `tbl_user` VALUES ('50', 'hungtv_daotao', '9b40eccc3434b426c10abb927e80c098', 'Trần Văn Hưng', '', '0000-00-00', '', '', '0972848718', '', '', null, null, null, null, '2020-04-08 15:50:43', '0000-00-00 00:00:00', '22', null, '1');
-INSERT INTO `tbl_user` VALUES ('51', 'tranhiep', 'b8a1099b57fb53d28fba7d5717e317ea', 'Trần Viết Hiệp', '', '0000-00-00', '', '', '0969549903', '', 'tranviethiepdz@gmail.com', null, null, null, null, '2020-04-08 15:50:43', '2021-04-05 01:26:17', '9', null, '1');
+INSERT INTO `tbl_user` VALUES ('51', 'tranhiep', 'b8a1099b57fb53d28fba7d5717e317ea', 'Trần Viết Hiệp', '', '0000-00-00', '', '', '0969549903', '', 'tranviethiepdz@gmail.com', null, null, null, null, '2020-04-08 15:50:43', '2021-04-05 06:25:19', '9', null, '1');
 INSERT INTO `tbl_user` VALUES ('53', 'test', 'b8a1099b57fb53d28fba7d5717e317ea', 'test', '', '0000-00-00', '', '', '09695499991', '', '', null, null, null, null, '2021-03-22 10:49:14', '2021-03-22 10:50:12', '33', null, '1');
 
 -- ----------------------------
