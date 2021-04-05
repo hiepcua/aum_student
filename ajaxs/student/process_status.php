@@ -38,11 +38,11 @@ if(isset($_POST['masv']) && $_POST['masv']!=='') {
 	$result3 = $obj->Exec($sql);
 
 	// Insert working_log
-	$sql = "INSERT INTO tbl_working_log (id_hoso, masv, `date`, noidung, ketqua, finish, author, cdate) VALUES ('$id_hoso','$masv','$date_done','Sinh viên #$masv cập nhật công việc','$ketqua_done','$chk_done','$user',$cdate)";
+	$sql = "INSERT INTO tbl_working_log (id_hoso, masv, `date`, noidung, ketqua, finish, author, cdate) VALUES ('$id_hoso','$masv','$date_done','Sinh viên #$masv cập nhật tương tác','$ketqua_done','$chk_done','$user',$cdate)";
 	$result4 = $obj->Exec($sql);
 
 	// Insert dang_ky_note
-	$sql = "INSERT INTO tbl_working_log (id_hoso, masv, `date`, noidung, ketqua, finish, author, cdate) VALUES ('$id_hoso','$masv','$date_kehoach','Sinh viên #$masv thêm kế hoạch công việc','$ketqua_kehoach','$chk_kehoach','$user',$cdate)";
+	$sql = "INSERT INTO tbl_working_log (id_hoso, masv, `date`, noidung, ketqua, finish, author, cdate) VALUES ('$id_hoso','$masv','$date_kehoach','Sinh viên #$masv thêm kế hoạch tương tác','$ketqua_kehoach','$chk_kehoach','$user',$cdate)";
 	$result5 = $obj->Exec($sql);
 	
 	// notify

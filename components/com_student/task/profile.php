@@ -286,6 +286,7 @@ if($objts->Num_rows()>0) {
 	</section>
 
 	<!-- Card lịch sử tương tác -->
+	<?php $sql=''; ?>
 	<div class="page-bar" style="margin-bottom: 10px;">
 		<div class="page-title-breadcrumb">
 			<div class="pull-left">
@@ -294,6 +295,29 @@ if($objts->Num_rows()>0) {
 						<li class="active">Lịch sử tương tác</li>
 					</ul>
 				</div>
+			</div>
+			<div class="col-md-2" style="margin-top: 12px;">
+				<form name="frm_search" id="frm_search" method="get" action="">
+					<select id="cbo_masv" name="cbo_masv" class="form-control">
+						<option value="">Tất cả</option>
+						<?php
+						$cbo_masv = isset($_GET['cbo_masv']) && $_GET['cbo_masv']!=='' ? antiData($_GET['cbo_masv']) : '';
+						if($cbo_masv!==''){
+							$sql.=' AND masv="'.$cbo_masv.'"';
+						}
+						if(count($res_nganhdk)>0){
+							foreach ($res_nganhdk as $key => $value) {
+								echo '<option value="'.$value['masv'].'">'.$value['masv'].'</option>';
+							}
+						}
+						?>
+					</select>
+					<script type="text/javascript">
+						$(document).ready(function(){
+							cbo_Selected('cbo_masv', '<?php echo $cbo_masv;?>');
+						});
+					</script>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -314,18 +338,21 @@ if($objts->Num_rows()>0) {
 									<th class="text-center">Kết quả</th>
 									<th class="text-center">Ngày cập nhật</th>
 									<th class="text-center">Hoàn thành</th>
+									<th class="text-center">Sửa</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php
+								$sql.=' AND id_hoso="'.$_id_hoso.'"';
 								$MAX_ROWS = 50;
-								$total_rows = SysCount('tbl_working_log', "AND id_hoso='".$_id_hoso."'");
+								$total_rows = SysCount('tbl_working_log', $sql);
 								$max_pages = ceil($total_rows/$MAX_ROWS);
 								$cur_page = getCurentPage($max_pages);
 								$start = ($cur_page - 1) * $MAX_ROWS;
 								$limit = ' LIMIT '.$start.','. $MAX_ROWS;
+								$sql.=' ORDER BY finish ASC, `date` DESC'.$limit;
 
-								$res_workinglog = SysGetList('tbl_working_log',array(),'AND id_hoso="'.$_id_hoso.'"'.$limit);
+								$res_workinglog = SysGetList('tbl_working_log',array(),$sql);
 								if(count($res_workinglog)>0){
 									foreach ($res_workinglog as $key => $value) {
 										$i = $key+1;
@@ -333,7 +360,13 @@ if($objts->Num_rows()>0) {
 										$id_hoso = $value['id_hoso'];
 										$date = date('d-m-Y', $value['date']);
 										$cdate = date('d-m-Y H:i', $value['cdate']);
-										$finish = $value['finish']==1 ? '<i class="fa fa-check cgreen" aria-hidden="true"></i>' : '<i class="fa fa-times cgray" aria-hidden="true"></i>';
+										if($value['finish']==1){
+											$edit = '';
+											$finish = '<i class="fa fa-check cgreen" aria-hidden="true"></i>';
+										}else{
+											$edit = '<i class="fa fa-pencil-square-o edit_workinglog" dataid="'.$value['id'].'" aria-hidden="true"></i>';
+											$finish = '<i class="fa fa-times cgray finish_workinglog" dataid="'.$value['id'].'" aria-hidden="true"></i>';
+										}
 										
 										echo '<tr>';
 										echo '<td align="center">'.$i.'</td>';
@@ -344,6 +377,7 @@ if($objts->Num_rows()>0) {
 										echo '<td align="center">'.$value['ketqua'].'</td>';
 										echo '<td align="center">'.$cdate.'</td>';
 										echo '<td align="center">'.$finish.'</td>';
+										echo '<td align="center">'.$edit.'</td>';
 										echo '</tr>';
 									}
 								}
@@ -400,6 +434,30 @@ if($objts->Num_rows()>0) {
 			frm_status(id, id_hoso);
 		});
 
+		$('.edit_workinglog').click(function(){
+			var id = $(this).attr('dataid');
+			frm_edit_workinglog(id);
+		});
+
+		$('#cbo_masv').change(function(){
+			$('#frm_search').submit();
+		});
+
+		$('.finish_workinglog').click(function(){
+			var id = $(this).attr('dataid');
+			var url = "<?php echo ROOTHOST;?>ajaxs/student/process_finish_workinglog.php";
+			$.post(url,{'id_working_log':id},function(req) {
+				if(req=="E01") showMess("Vui lòng đăng nhập hệ thống","error");
+				else if(req=="error") showMess("Lỗi trong quá trình lưu dữ liệu!","error");
+				else if(req==="success") {
+					showMess("Cập nhật thành công!",""); 
+					setTimeout(function(){ 
+						window.location.reload(); 
+					}, 1500);
+				}
+			})
+		});
+
 		$(".btn_nhaplop").click(function(){
 			var hoso = $(this).attr('dataid');
 			var ids = $(this).attr('dataids');
@@ -451,6 +509,21 @@ if($objts->Num_rows()>0) {
 				$('#myModalPopup .modal-dialog').removeClass('modal-sm');
 				$('#myModalPopup .modal-dialog').addClass('modal-lg');
 				$('#myModalPopup .modal-title').html('Cập nhật trạng thái');
+				$('#myModalPopup .modal-body').html(req);
+				$('#myModalPopup').modal('show');
+			});
+		}else{
+			showMess('Chưa chọn hồ sơ nào.', 'error');
+		}
+	}
+
+	function frm_edit_workinglog(id){
+		if(id.length>0){
+			var url = "<?php echo ROOTHOST;?>ajaxs/student/frm_edit_workinglog.php";
+			$.post(url,{'id':id},function(req){
+				$('#myModalPopup .modal-dialog').removeClass('modal-sm');
+				$('#myModalPopup .modal-dialog').addClass('modal-lg');
+				$('#myModalPopup .modal-title').html('Cập nhật báo cáo tương tác');
 				$('#myModalPopup .modal-body').html(req);
 				$('#myModalPopup').modal('show');
 			});

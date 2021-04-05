@@ -159,14 +159,14 @@ $row = $res_dkts[0];
 		</div>
 	</div>
 	<hr>
-	<label>Báo cáo công việc</label>
+	<label>Báo cáo tương tác</label>
 	<div class="form-group row row-status">
 		<input type="checkbox" name="chk_done" class="chk_done" id="chk_done">
 		<div class="col-md-3"><input type="date" name="date_done" id="date_done" class="form-control" value="<?php echo date("Y-m-d");?>"></div>
 		<div class="col-md-5"><input type="text" name="noidung_done" id="noidung_done" class="form-control" placeholder="Nội dung (Không để trống)"></div>
 		<div class="col-md-4"><input type="text" name="ketqua_done" id="ketqua_done" class="form-control" placeholder="Kết quả"></div>
 	</div>
-	<label>Kế hoạch công việc</label>
+	<label>Kế hoạch tương tác</label>
 	<div class="form-group row row-status">
 		<input type="checkbox" name="chk_kehoach" class="chk_done" id="chk_kehoach">
 		<div class="col-md-3"><input type="date" name="date_kehoach" id="date_kehoach" class="form-control"></div>
