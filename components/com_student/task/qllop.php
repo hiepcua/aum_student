@@ -115,7 +115,7 @@ if($str_lop!='') {
 					<td class="text-center"><i class='fa fa-check cgreen' aria-hidden='true'></i></td>
 					<td class="text-center"><?php echo date('d/m/Y',$r['cdate']);?></td>
 					<td class="text-center">
-						<a class="btn btn-success" href="<?php echo ROOTHOST;?>?com=student&task=hsdaotao&khoa=<?= $r['id_khoa']?>&he=<?= $r['id_he']?>&nganh=<?= $r['id_nganh']?>&malop=<?= $r['id']?>">
+						<a class="btn btn-success" href="<?php echo ROOTHOST;?>hsdaotao?khoa=<?= $r['id_khoa']?>&he=<?= $r['id_he']?>&nganh=<?= $r['id_nganh']?>&malop=<?= $r['id']?>">
 						Danh sách lớp</a>
 					</td>
 					<td class="text-center">

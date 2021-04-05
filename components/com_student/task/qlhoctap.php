@@ -15,7 +15,7 @@ $id_nganh 	= isset($_SESSION['THIS_NGANH']) ? $_SESSION['THIS_NGANH'] : '';
 $id_lop 	= isset($_GET['malop'])?addslashes(strip_tags($_GET['malop'])):'';
 $id_mon 	= isset($_GET['mamon'])?addslashes(strip_tags($_GET['mamon'])):'';
 $id_hoso 	= isset($_GET['mahoso'])?addslashes(strip_tags($_GET['mahoso'])):'';
-$masv 		= isset($_GET['masv'])?addslashes(strip_tags($_GET['masv'])):'';
+$masv 		= isset($_GET['masv']) && $_GET['masv'] !== 'undefined' ? addslashes(strip_tags($_GET['masv'])):'';
 
 $obj=new CLS_MYSQL;
 $sql="SELECT * FROM tbl_monhoc";
@@ -570,7 +570,7 @@ if(isset($_FILES["txtfile"]["type"]) && $_FILES["txtfile"]["type"]!=''){
 function SubmitSearch() {
 	var _mon = $("#ma_mon option:selected").val();
 	var _lop = $("#ma_lop option:selected").val();
-	var _masv = $("#tk_masv").val();
+	var _masv = $("#tk_masv").val()!==undefined ? $("#tk_masv").val() : '';
 	
 	var url = window.location.href;
 	var urlSplit = url.split( "?" );  
@@ -580,7 +580,7 @@ function SubmitSearch() {
 	searchParams.append("mamon",_mon);
 	if(searchParams.has("malop")===true){ searchParams.delete("malop");}
 	searchParams.append("malop",_lop);
-	if(searchParams.has("masv")===true){ searchParams.delete("masv");}
+	if(searchParams.has("masv")===true && _masv!==''){ searchParams.delete("masv");}
 	searchParams.append("masv",_masv);
 	
 	var obj = { Title : null, Url: urlSplit[0] + "?"+searchParams.toString()}; 

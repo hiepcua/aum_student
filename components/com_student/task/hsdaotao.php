@@ -97,10 +97,10 @@ $obj->Query($sql);
 			</div>
 			<ul class="box-function pull-right">
 				<li>
-					<a href="<?php echo ROOTHOST;?>?com=student&task=qlhocphi<?php echo $params;?>" class="btn btn-primary btn-money" title="Quản lý học phí"><i class="fa fa-money"></i> QL Học phí</a>
+					<a href="<?php echo ROOTHOST;?>qlhocphi<?php echo $params;?>" class="btn btn-primary btn-money" title="Quản lý học phí"><i class="fa fa-money"></i> QL Học phí</a>
 				</li>
 				<li>
-					<a href="<?php echo ROOTHOST;?>?com=student&task=qlhoctap<?php echo $params;?>" class="btn btn-success btn-book" title="Quản lý học tập"><i class="fa fa-book"></i> QL Học tập</a>
+					<a href="<?php echo ROOTHOST;?>qlhoctap<?php echo $params;?>" class="btn btn-success btn-book" title="Quản lý học tập"><i class="fa fa-book"></i> QL Học tập</a>
 				</li>
 				<li>
 					<a href="#" class="btn btn-info btn-excel" title="Xuất File Excel"><i class="fa fa-excel"></i> Xuất File Excel</a>

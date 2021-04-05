@@ -15,9 +15,9 @@ if(isset($_POST['ma'])){
 	$ma 		= isset($_POST['ma'])?addslashes(strip_tags($_POST['ma'])):'';
 	$masv 		= isset($_POST['masv'])?addslashes(strip_tags($_POST['masv'])):'';
 	$hoten 		= isset($_POST['hoten'])?addslashes(strip_tags($_POST['hoten'])):'';
-	$name = explode(" ",$hoten);
-	$name = $name[count($name)-1];
-	$ho_dem = trim(str_replace($name,"",$hoten));
+	$name 		= explode(" ",$hoten);
+	$name 		= $name[count($name)-1];
+	$ho_dem 	= trim(str_replace($name,"",$hoten));
 	$tengoi 	= isset($_POST['tengoi'])?addslashes(strip_tags($_POST['tengoi'])):'';
 	$quoctich 	= isset($_POST['quoctich'])?addslashes(strip_tags($_POST['quoctich'])):'';
 	$ngaysinh	= !empty($_POST['ngaysinh'])?strtotime($_POST['ngaysinh']):null;
@@ -86,7 +86,7 @@ if(isset($_POST['ma'])){
 	$result1=$obj->Exec($sql); //echo $sql;
 
 	$sql = "INSERT INTO tbl_dangky_tuyensinh (cdate,id_hoso,nhaphoc,author,status,isactive) 
-		VALUES($cdate,'$ma',1,'$user','TS1',1)"; 
+		VALUES($cdate,'$ma',1,'$user','L0',1)"; 
 	$result2 = $obj->Exec($sql); //echo $sql;
 	
 	// dang ky note

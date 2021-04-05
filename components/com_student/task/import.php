@@ -81,7 +81,7 @@ if(isset($_FILES["txtfile"]["type"]) && $_FILES["txtfile"]["type"]!=''){
 							else {
 								$success++;
 								$sql = "INSERT INTO tbl_hocsinh (`ma`,ho_dem,`name`,ngaysinh,noisinh,gioitinh,diachi,city,dienthoai,cmt,email,cdate,author,nhaphoc,status)
-								VALUES ('$ma','$ho_dem','$name','$ngaysinh','$noisinh','$gioitinh','$diachi','$city_id','$dienthoai','$cmt','$email',$cdate,'$author','1','TS1')";
+								VALUES ('$ma','$ho_dem','$name','$ngaysinh','$noisinh','$gioitinh','$diachi','$city_id','$dienthoai','$cmt','$email',$cdate,'$author','1','L0')";
 								$obj->Exec($sql);
 								$str.="$stt. $ho_dem $name (".date("d/m/Y",$ngaysinh).") - $city<br>";	
 							}
