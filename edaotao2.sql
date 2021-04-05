@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2021-04-05 06:27:10
+Date: 2021-04-05 18:57:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -70,8 +70,8 @@ DROP TABLE IF EXISTS `tbl_city`;
 CREATE TABLE `tbl_city` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `order` int(11) DEFAULT '0',
-  `isactive` tinyint(4) DEFAULT '1',
+  `order` int(11) DEFAULT 0,
+  `isactive` tinyint(4) DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -132,7 +132,7 @@ CREATE TABLE `tbl_dangky_note` (
   `cdate` int(11) DEFAULT NULL,
   `author` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1681 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1686 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_dangky_note
@@ -583,6 +583,11 @@ INSERT INTO `tbl_dangky_note` VALUES ('1677', '1617340024', '', 'Hồ sơ #16173
 INSERT INTO `tbl_dangky_note` VALUES ('1678', '1599788697', '', 'Hồ sơ #1599788697 đã cập nhật thông tin', '1617552804', 'tranhiep');
 INSERT INTO `tbl_dangky_note` VALUES ('1679', '1599788697', '', 'Hồ sơ #1599788697 đăng ký ngành thành công', '1617554371', 'tranhiep');
 INSERT INTO `tbl_dangky_note` VALUES ('1680', '1599788697', '', 'Hồ sơ #1599788697 đăng ký ngành thành công', '1617554381', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1681', '1617595316', '', 'Hồ sơ #1617595316 (Nguyễn Văn Bình) tạo mới thành công', '1617595395', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1682', '1599788697', '20AUM114476', 'Sinh viên #20AUM114476 cập nhật trạng thái thành công', '1617617267', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1683', '1599788697', '20AUM114476', 'Sinh viên #20AUM114476 cập nhật trạng thái thành công', '1617617379', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1684', '1599788697', '20AUM116477', 'Sinh viên #20AUM116477 cập nhật trạng thái thành công', '1617617505', 'tranhiep');
+INSERT INTO `tbl_dangky_note` VALUES ('1685', '1599788697', '20AUM116477', 'Sinh viên #20AUM116477 cập nhật trạng thái thành công', '1617617602', 'tranhiep');
 
 -- ----------------------------
 -- Table structure for tbl_dangky_tuyensinh
@@ -592,14 +597,14 @@ CREATE TABLE `tbl_dangky_tuyensinh` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cdate` int(11) DEFAULT NULL,
   `mdate` int(11) DEFAULT NULL,
-  `type` tinyint(4) DEFAULT '1' COMMENT '1: Chính quy 2:Chứng chỉ ngắn hạn',
+  `type` tinyint(4) DEFAULT 1 COMMENT '1: Chính quy 2:Chứng chỉ ngắn hạn',
   `id_khoa` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `id_he` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `id_nganh` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `id_hoso` bigint(20) DEFAULT NULL,
   `truong_thpt` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `diemtongket12` float DEFAULT NULL,
-  `xettuyen` tinyint(4) DEFAULT '1' COMMENT '0: thi ; 1: xét tuyển',
+  `xettuyen` tinyint(4) DEFAULT 1 COMMENT '0: thi ; 1: xét tuyển',
   `diadiemhoc` varchar(50) COLLATE utf8_unicode_ci DEFAULT '0' COMMENT '0: Cơ sở 1; 1: cơ sở 2',
   `masv` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sbd` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -607,216 +612,215 @@ CREATE TABLE `tbl_dangky_tuyensinh` (
   `mon1` decimal(10,1) DEFAULT NULL,
   `mon2` decimal(10,1) DEFAULT NULL,
   `mon3` decimal(10,1) DEFAULT NULL,
-  `dathi` tinyint(4) DEFAULT '0',
-  `trungtuyen` tinyint(4) DEFAULT '-1',
-  `baoluu` tinyint(4) DEFAULT '0',
-  `nhaphoc` tinyint(4) DEFAULT '0',
+  `dathi` tinyint(4) DEFAULT 0,
+  `trungtuyen` tinyint(4) DEFAULT -1,
+  `baoluu` tinyint(4) DEFAULT 0,
+  `nhaphoc` tinyint(4) DEFAULT 0,
   `date_nhaphoc` int(11) DEFAULT NULL,
   `malop` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `author` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `isactive` tinyint(4) DEFAULT '1',
+  `isactive` tinyint(4) DEFAULT 1,
   `status` varchar(4) COLLATE utf8_unicode_ci DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `idx_khoa_he_nganh` (`id_khoa`,`id_he`,`id_nganh`),
   KEY `idx_nhaphoc` (`nhaphoc`),
   KEY `idx_trungquyen` (`trungtuyen`)
-) ENGINE=InnoDB AUTO_INCREMENT=478 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=479 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_dangky_tuyensinh
 -- ----------------------------
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('272', '1599793495', '1599795528', '1', '2020', 'AUM', '114', '159979300115', null, null, '1', '', '20AUM114272', null, null, null, null, null, '0', '1', '0', '1', '1600312346', 'el1_qtkd11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('273', '1599793584', '1599795540', '1', '2020', 'AUM', '114', '159979300114', null, null, '1', '', '20AUM114273', null, null, null, null, null, '0', '1', '0', '1', '1600312337', 'el1_qtkd11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('274', '1599793693', '1599795444', '1', '2020', 'AUM', '114', '15997930011', null, null, '1', '', '20AUM114274', null, null, null, null, null, '0', '1', '0', '1', '1600312237', 'el1_qtkd11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('275', '1599793852', '1599795487', '1', '2020', 'AUM', '114', '15997930016', null, null, '1', '', '20AUM114275', null, null, null, null, null, '0', '1', '0', '1', '1600312279', 'el1_qtkd11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('276', '1599793943', '1599795481', '1', '2020', 'AUM', '114', '15997930015', null, null, '1', '', '20AUM114276', null, null, null, null, null, '0', '1', '0', '1', '1600312271', 'el1_qtkd11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('277', '1599794111', '1599795474', '1', '2020', 'AUM', '114', '15997930014', null, null, '1', '', '20AUM114277', null, null, null, null, null, '0', '1', '0', '1', '1600312262', 'el1_qtkd11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('278', '1599794222', '1599795459', '1', '2020', 'AUM', '114', '15997930013', null, null, '1', '', '20AUM114278', null, null, null, null, null, '0', '1', '0', '1', '1600312254', 'el1_qtkd11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('279', '1599794347', '1599795643', '1', '2020', 'AUM', '114', '15997930012', null, null, '1', '', '20AUM114279', null, null, null, null, null, '0', '1', '0', '1', '1600312247', 'el1_qtkd11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('280', '1599794451', '1599795532', '1', '2020', 'AUM', '114', '159979300111', null, null, '1', '', '20AUM114280', null, null, null, null, null, '0', '1', '0', '1', '1600312317', 'el1_qtkd11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('281', '1599794545', '1599795511', '1', '2020', 'AUM', '114', '159979300110', null, null, '1', '', '20AUM114281', null, null, null, null, null, '0', '1', '0', '1', '1600312309', '', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('282', '1599794702', '1599795506', '1', '2020', 'AUM', '114', '15997930019', null, null, '1', '', '20AUM114282', null, null, null, null, null, '0', '1', '0', '1', '1600312302', 'el1_qtkd11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('283', '1599794798', '1599795499', '1', '2020', 'AUM', '114', '15997930018', null, null, '1', '', '20AUM114283', null, null, null, null, null, '0', '1', '0', '1', '1600312294', 'el1_qtkd11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('284', '1599794892', '1599795493', '1', '2020', 'AUM', '114', '15997930017', null, null, '1', '', '20AUM114284', null, null, null, null, null, '0', '1', '0', '1', '1600312287', 'el1_qtkd11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('285', '1599794944', '1599795534', '1', '2020', 'AUM', '114', '159979300113', null, null, '1', '', '20AUM114285', null, null, null, null, null, '0', '1', '0', '1', '1600312333', 'el1_qtkd11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('286', '1599795060', '1599795523', '1', '2020', 'AUM', '114', '159979300112', null, null, '1', '', '20AUM114286', null, null, null, null, null, '0', '1', '0', '1', '1600312324', 'el1_qtkd11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('287', '1599810435', '1599813562', '1', '2020', 'AUM', '116', '15998092011', null, null, '1', '', '20AUM116287', null, null, null, null, null, '0', '1', '0', '1', '1600312542', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('288', '1599810491', '1599813568', '1', '2020', 'AUM', '116', '15998092012', null, null, '1', '', '20AUM116288', null, null, null, null, null, '0', '1', '0', '1', '1600312549', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('289', '1599810620', '1599813574', '1', '2020', 'AUM', '116', '15998092013', null, null, '1', '', '20AUM116289', null, null, null, null, null, '0', '1', '0', '1', '1600312563', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('290', '1599810759', '1599813579', '1', '2020', 'AUM', '116', '15998092014', null, null, '1', '', '20AUM116290', null, null, null, null, null, '0', '1', '0', '1', '1600312579', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('291', '1599810834', '1599813584', '1', '2020', 'AUM', '116', '15998092015', null, null, '1', '', '20AUM116291', null, null, null, null, null, '0', '1', '0', '1', '1600312586', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('292', '1599810898', '1599813590', '1', '2020', 'AUM', '116', '15998092016', null, null, '1', '', '20AUM116292', null, null, null, null, null, '0', '1', '0', '1', '1600312595', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('293', '1599811068', '1599813597', '1', '2020', 'AUM', '116', '15998092017', null, null, '1', '', '20AUM116293', null, null, null, null, null, '0', '1', '0', '1', '1600312600', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('294', '1599811194', '1599813603', '1', '2020', 'AUM', '116', '15998092018', null, null, '1', '', '20AUM116294', null, null, null, null, null, '0', '1', '0', '1', '1600312608', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('295', '1599811397', '1599813608', '1', '2020', 'AUM', '116', '15998092019', null, null, '1', '', '20AUM116295', null, null, null, null, null, '0', '1', '0', '1', '1600312616', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('296', '1599811881', '1599813619', '1', '2020', 'AUM', '116', '159980920111', null, null, '1', '', '20AUM116296', null, null, null, null, null, '0', '1', '0', '1', '1600312626', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('297', '1599812105', '1599813628', '1', '2020', 'AUM', '116', '159980920112', null, null, '1', '', '20AUM116297', null, null, null, null, null, '0', '1', '0', '1', '1600312631', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('298', '1599812229', '1599813634', '1', '2020', 'AUM', '116', '159980920113', null, null, '1', '', '20AUM116298', null, null, null, null, null, '0', '1', '0', '1', '1600312640', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('299', '1599812279', '1599813640', '1', '2020', 'AUM', '116', '159980920114', null, null, '1', '', '20AUM116299', null, null, null, null, null, '0', '1', '0', '1', '1600312647', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('300', '1599812424', '1599813648', '1', '2020', 'AUM', '116', '159980920115', null, null, '1', '', '20AUM116300', null, null, null, null, null, '0', '1', '0', '1', '1600312652', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('301', '1599812518', '1599813651', '1', '2020', 'AUM', '116', '159980920116', null, null, '1', '', '20AUM116301', null, null, null, null, null, '0', '1', '0', '1', '1600312657', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('302', '1599812647', '1599813657', '1', '2020', 'AUM', '116', '159980920117', null, null, '1', '', '20AUM116302', null, null, null, null, null, '0', '1', '0', '1', '1600312672', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('303', '1599812715', '1599813663', '1', '2020', 'AUM', '116', '159980920118', null, null, '1', '', '20AUM116303', null, null, null, null, null, '0', '1', '0', '1', '1600312678', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('304', '1599812802', '1599813666', '1', '2020', 'AUM', '116', '159980920119', null, null, '1', '', '20AUM116304', null, null, null, null, null, '0', '1', '0', '1', '1600312685', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('305', '1599812873', '1599813669', '1', '2020', 'AUM', '116', '159980920120', null, null, '1', '', '20AUM116305', null, null, null, null, null, '0', '1', '0', '1', '1600312692', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('306', '1599812969', '1599813675', '1', '2020', 'AUM', '116', '159980920121', null, null, '1', '', '20AUM116306', null, null, null, null, null, '0', '1', '0', '1', '1600312698', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('307', '1599813049', '1599813681', '1', '2020', 'AUM', '116', '159980920122', null, null, '1', '', '20AUM116307', null, null, null, null, null, '0', '1', '0', '1', '1600312702', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('308', '1599813127', '1599813687', '1', '2020', 'AUM', '116', '159980920123', null, null, '1', '', '20AUM116308', null, null, null, null, null, '0', '1', '0', '1', '1600312708', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('309', '1599813179', '1599813692', '1', '2020', 'AUM', '116', '159980920124', null, null, '1', '', '20AUM116309', null, null, null, null, null, '0', '1', '0', '1', '1600312712', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('310', '1599813267', '1599813613', '1', '2020', 'AUM', '116', '159980920110', null, null, '1', '', '20AUM116310', null, null, null, null, null, '0', '1', '0', '1', '1600312621', 'el1_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('311', '1600313375', '1600315962', '1', '2020', 'AUM', '122', '15998093191', null, null, '1', '', '20AUM122311', null, null, null, null, null, '0', '1', '0', '1', '1600315774', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('312', '1600313436', '1600315968', '1', '2020', 'AUM', '122', '15998093192', null, null, '1', '', '20AUM122312', null, null, null, null, null, '0', '1', '0', '1', '1600315786', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('313', '1600313488', '1600315974', '1', '2020', 'AUM', '122', '15998093193', null, null, '1', '', '20AUM122313', null, null, null, null, null, '0', '1', '0', '1', '1600315791', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('314', '1600313536', '1600315980', '1', '2020', 'AUM', '122', '15998093194', null, null, '1', '', '20AUM122314', null, null, null, null, null, '0', '1', '0', '1', '1600315803', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('315', '1600313608', '1600315987', '1', '2020', 'AUM', '122', '15998093195', null, null, '1', '', '20AUM122315', null, null, null, null, null, '0', '1', '0', '1', '1600315808', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('316', '1600313722', '1600315994', '1', '2020', 'AUM', '122', '15998093196', null, null, '1', '', '20AUM122316', null, null, null, null, null, '0', '1', '0', '1', '1600315813', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('317', '1600313832', '1600316057', '1', '2020', 'AUM', '122', '159980931917', null, null, '1', '', '20AUM122317', null, null, null, null, null, '0', '1', '0', '1', '1600315868', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('318', '1600313891', '1600316006', '1', '2020', 'AUM', '122', '15998093198', null, null, '1', '', '20AUM122318', null, null, null, null, null, '0', '1', '0', '1', '1600315824', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('319', '1600313949', '1600316000', '1', '2020', 'AUM', '122', '15998093197', null, null, '1', '', '20AUM122319', null, null, null, null, null, '0', '1', '0', '1', '1600315818', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('320', '1600314002', '1600316051', '1', '2020', 'AUM', '122', '159980931916', null, null, '1', '', '20AUM122320', null, null, null, null, null, '0', '1', '0', '1', '1600315864', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('321', '1600314053', '1600316045', '1', '2020', 'AUM', '122', '159980931915', null, null, '1', '', '20AUM122321', null, null, null, null, null, '0', '1', '0', '1', '1600315859', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('322', '1600314191', '1600316040', '1', '2020', 'AUM', '122', '159980931914', null, null, '1', '', '20AUM122322', null, null, null, null, null, '0', '1', '0', '1', '1600315853', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('323', '1600314271', '1600316101', '1', '2020', 'AUM', '122', '159980931925', null, null, '1', '', '20AUM122323', null, null, null, null, null, '0', '1', '0', '1', '1600315913', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('324', '1600314325', '1600316028', '1', '2020', 'AUM', '122', '159980931912', null, null, '1', '', '20AUM122324', null, null, null, null, null, '0', '1', '0', '1', '1600315845', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('325', '1600314407', '1600316022', '1', '2020', 'AUM', '122', '159980931911', null, null, '1', '', '20AUM122325', null, null, null, null, null, '0', '1', '0', '1', '1600315840', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('326', '1600314472', '1600316017', '1', '2020', 'AUM', '122', '159980931910', null, null, '1', '', '20AUM122326', null, null, null, null, null, '0', '1', '0', '1', '1600315835', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('327', '1600314523', '1600316094', '1', '2020', 'AUM', '122', '159980931924', null, null, '1', '', '20AUM122327', null, null, null, null, null, '0', '1', '0', '1', '1600315909', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('328', '1600314685', '1600316089', '1', '2020', 'AUM', '122', '159980931923', null, null, '1', '', '20AUM122328', null, null, null, null, null, '0', '1', '0', '1', '1600315904', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('329', '1600314738', '1600316083', '1', '2020', 'AUM', '122', '159980931922', null, null, '1', '', '20AUM122329', null, null, null, null, null, '0', '1', '0', '1', '1600315900', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('330', '1600314850', '1600316077', '1', '2020', 'AUM', '122', '159980931921', null, null, '1', '', '20AUM122330', null, null, null, null, null, '0', '1', '0', '1', '1600315895', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('331', '1600314885', '1600316074', '1', '2020', 'AUM', '122', '159980931920', null, null, '1', '', '20AUM122331', null, null, null, null, null, '0', '1', '0', '1', '1600315891', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('332', '1600314928', '1600316072', '1', '2020', 'AUM', '122', '159980931919', null, null, '1', '', '20AUM122332', null, null, null, null, null, '0', '1', '0', '1', '1600315886', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('333', '1600315037', '1600316064', '1', '2020', 'AUM', '122', '159980931918', null, null, '1', '', '20AUM122333', null, null, null, null, null, '0', '1', '0', '1', '1600315880', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('334', '1600315096', '1600316033', '1', '2020', 'AUM', '122', '159980931913', null, null, '1', '', '20AUM122334', null, null, null, null, null, '0', '1', '0', '1', '1600315849', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('335', '1600315135', '1600316012', '1', '2020', 'AUM', '122', '15998093199', null, null, '1', '', '20AUM122335', null, null, null, null, null, '0', '1', '0', '1', '1600315830', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('336', '1600315174', '1600316128', '1', '2020', 'AUM', '122', '159980931930', null, null, '1', '', '20AUM122336', null, null, null, null, null, '0', '1', '0', '1', '1600315937', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('337', '1600315225', '1600316122', '1', '2020', 'AUM', '122', '159980931929', null, null, '1', '', '20AUM122337', null, null, null, null, null, '0', '1', '0', '1', '1600315932', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('338', '1600315276', '1600316117', '1', '2020', 'AUM', '122', '159980931928', null, null, '1', '', '20AUM122338', null, null, null, null, null, '0', '1', '0', '1', '1600315927', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('339', '1600315325', '1600316112', '1', '2020', 'AUM', '122', '159980931927', null, null, '1', '', '20AUM122339', null, null, null, null, null, '0', '1', '0', '1', '1600315923', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('340', '1600315390', '1600316106', '1', '2020', 'AUM', '122', '159980931926', null, null, '1', '', '20AUM122340', null, null, null, null, null, '0', '1', '0', '1', '1600315918', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('341', '1600315452', '1600316140', '1', '2020', 'AUM', '122', '159980931932', null, null, '1', '', '20AUM122341', null, null, null, null, null, '0', '1', '0', '1', '1600315876', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('342', '1600315511', '1600316134', '1', '2020', 'AUM', '122', '159980931931', null, null, '1', '', '20AUM122342', null, null, null, null, null, '0', '1', '0', '1', '1600315941', 'el1_qlnn11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('343', '1609744762', '1609746470', '1', '2020', 'AUM', '116', '1609743738', null, null, '1', '', '20AUM116343', null, null, null, null, null, '0', '1', '0', '1', '1609746286', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('344', '1609744870', '1609746674', '1', '2020', 'AUM', '116', '1609744773', null, null, '1', '', '20AUM116344', null, null, null, null, null, '0', '1', '0', '1', '1609746901', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('345', '1609744990', '1609746492', '1', '2020', 'AUM', '116', '1609744877', null, null, '1', '', '20AUM116345', null, null, null, null, null, '0', '1', '0', '1', '1609746342', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('346', '1609745080', '1609746506', '1', '2020', 'AUM', '116', '1609744999', null, null, '1', '', '20AUM116346', null, null, null, null, null, '0', '1', '0', '1', '1609746348', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('347', '1609745170', '1609746518', '1', '2020', 'AUM', '116', '1609745086', null, null, '1', '', '20AUM116347', null, null, null, null, null, '0', '1', '0', '1', '1609746353', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('348', '1609745275', '1609746530', '1', '2020', 'AUM', '116', '1609745185', null, null, '1', '', '20AUM116348', null, null, null, null, null, '0', '1', '0', '1', '1609746360', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('349', '1609745368', '1609746538', '1', '2020', 'AUM', '116', '1609745284', null, null, '1', '', '20AUM116349', null, null, null, null, null, '0', '1', '0', '1', '1609746317', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('350', '1609745444', '1609746551', '1', '2020', 'AUM', '116', '1609745387', null, null, '1', '', '20AUM116350', null, null, null, null, null, '0', '1', '0', '1', '1609746377', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('351', '1609745512', '1609746560', '1', '2020', 'AUM', '116', '1609745452', null, null, '1', '', '20AUM116351', null, null, null, null, null, '0', '1', '0', '1', '1609746384', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('352', '1609745583', '1609746567', '1', '2020', 'AUM', '116', '1609745524', null, null, '1', '', '20AUM116352', null, null, null, null, null, '0', '1', '0', '1', '1609746389', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('353', '1609745654', '1609746573', '1', '2020', 'AUM', '116', '1609745588', null, null, '1', '', '20AUM116353', null, null, null, null, null, '0', '1', '0', '1', '1609746394', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('354', '1609745721', '1609746580', '1', '2020', 'AUM', '116', '1609745661', null, null, '1', '', '20AUM116354', null, null, null, null, null, '0', '1', '0', '1', '1609746400', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('355', '1609745793', '1609746590', '1', '2020', 'AUM', '116', '1609745729', null, null, '1', '', '20AUM116355', null, null, null, null, null, '0', '1', '0', '1', '1609746405', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('356', '1609745859', '1609746597', '1', '2020', 'AUM', '116', '1609745799', null, null, '1', '', '20AUM116356', null, null, null, null, null, '0', '1', '0', '1', '1609746412', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('357', '1609745897', '1609746604', '1', '2020', 'AUM', '116', '1609745865', null, null, '1', '', '20AUM116357', null, null, null, null, null, '0', '1', '0', '1', '1609746419', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('358', '1609745983', '1609746611', '1', '2020', 'AUM', '116', '1609745903', null, null, '1', '', '20AUM116358', null, null, null, null, null, '0', '1', '0', '1', '1609746423', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('359', '1609746029', '1609746618', '1', '2020', 'AUM', '116', '1609745992', null, null, '1', '', '20AUM116359', null, null, null, null, null, '0', '1', '0', '1', '1609746428', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('360', '1609746072', '1609746625', '1', '2020', 'AUM', '116', '1609746037', null, null, '1', '', '20AUM116360', null, null, null, null, null, '0', '1', '0', '1', '1609746432', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('361', '1609746113', '1609746632', '1', '2020', 'AUM', '116', '1609746078', null, null, '1', '', '20AUM116361', null, null, null, null, null, '0', '1', '0', '1', '1609746437', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('362', '1609746187', '1609746638', '1', '2020', 'AUM', '116', '1609746125', null, null, '1', '', '20AUM116362', null, null, null, null, null, '0', '1', '0', '1', '1609746370', 'el22_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('363', '1609987476', '1610006637', '1', '2020', 'AUM', '116', '16099217421', null, null, '1', '', '20AUM116363', null, null, null, null, null, '0', '1', '0', '1', '1609990862', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('364', '1609987571', '1610006647', '1', '2020', 'AUM', '116', '16099217422', null, null, '1', '', '20AUM116364', null, null, null, null, null, '0', '1', '0', '1', '1609990872', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('365', '1609987617', '1610007302', '1', '2020', 'AUM', '116', '1609922828', null, null, '1', '', '20AUM116365', null, null, null, null, null, '0', '1', '0', '1', '1610006437', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('366', '1609987666', '1610006656', '1', '2020', 'AUM', '116', '16099217423', null, null, '1', '', '20AUM116366', null, null, null, null, null, '0', '1', '0', '1', '1609990882', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('367', '1609987993', '1610007309', '1', '2020', 'AUM', '116', '1609922884', null, null, '1', '', '20AUM116367', null, null, null, null, null, '0', '1', '0', '1', '1610006442', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('368', '1609988014', '1610007316', '1', '2020', 'AUM', '116', '1609923051', null, null, '1', '', '20AUM116368', null, null, null, null, null, '0', '1', '0', '1', '1610006446', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('369', '1609988097', '1610006667', '1', '2020', 'AUM', '116', '16099217424', null, null, '1', '', '20AUM116369', null, null, null, null, null, '0', '1', '0', '1', '1610006035', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('370', '1609988161', '1610007323', '1', '2020', 'AUM', '116', '1609923179', null, null, '1', '', '20AUM116370', null, null, null, null, null, '0', '1', '0', '1', '1610006451', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('371', '1609988176', '1610007329', '1', '2020', 'AUM', '116', '1609923219', null, null, '1', '', '20AUM116371', null, null, null, null, null, '0', '1', '0', '1', '1610006455', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('372', '1609988211', '1610006674', '1', '2020', 'AUM', '116', '16099217425', null, null, '1', '', '20AUM116372', null, null, null, null, null, '0', '1', '0', '1', '1610006040', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('373', '1609988778', '1610006799', '1', '2020', 'AUM', '116', '16099217426', null, null, '1', '', '20AUM116373', null, null, null, null, null, '0', '1', '0', '1', '1610006046', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('374', '1609988816', '1610006807', '1', '2020', 'AUM', '116', '16099217427', null, null, '1', '', '20AUM116374', null, null, null, null, null, '0', '1', '0', '1', '1610006051', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('375', '1609988864', '1610006816', '1', '2020', 'AUM', '116', '16099217428', null, null, '1', '', '20AUM116375', null, null, null, null, null, '0', '1', '0', '1', '1610006057', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('376', '1609988905', '1610006824', '1', '2020', 'AUM', '116', '16099217429', null, null, '1', '', '20AUM116376', null, null, null, null, null, '0', '1', '0', '1', '1610006062', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('377', '1609988948', '1610006831', '1', '2020', 'AUM', '116', '160992174210', null, null, '1', '', '20AUM116377', null, null, null, null, null, '0', '1', '0', '1', '1610006067', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('378', '1609988975', '1610006861', '1', '2020', 'AUM', '116', '160992174211', null, null, '1', '', '20AUM116378', null, null, null, null, null, '0', '1', '0', '1', '1610006074', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('379', '1609989008', '1610006868', '1', '2020', 'AUM', '116', '160992174212', null, null, '1', '', '20AUM116379', null, null, null, null, null, '0', '1', '0', '1', '1610006079', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('380', '1609989080', '1610006876', '1', '2020', 'AUM', '116', '160992174213', null, null, '1', '', '20AUM116380', null, null, null, null, null, '0', '1', '0', '1', '1610006084', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('381', '1609989112', '1610006984', '1', '2020', 'AUM', '116', '160992174214', null, null, '1', '', '20AUM116381', null, null, null, null, null, '0', '1', '0', '1', '1610006089', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('382', '1609989177', '1610006993', '1', '2020', 'AUM', '116', '160992174215', null, null, '1', '', '20AUM116382', null, null, null, null, null, '0', '1', '0', '1', '1610006094', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('383', '1609989215', '1610007000', '1', '2020', 'AUM', '116', '160992174216', null, null, '1', '', '20AUM116383', null, null, null, null, null, '0', '1', '0', '1', '1610006098', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('384', '1609989245', '1610007008', '1', '2020', 'AUM', '116', '160992174217', null, null, '1', '', '20AUM116384', null, null, null, null, null, '0', '1', '0', '1', '1610006104', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('385', '1609989275', '1610007015', '1', '2020', 'AUM', '116', '160992174218', null, null, '1', '', '20AUM116385', null, null, null, null, null, '0', '1', '0', '1', '1610006134', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('386', '1609989310', '1610007336', '1', '2020', 'AUM', '116', '1609923259', null, null, '1', '', '20AUM116386', null, null, null, null, null, '0', '1', '0', '1', '1610006459', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('387', '1609989342', '1610007025', '1', '2020', 'AUM', '116', '160992174219', null, null, '1', '', '20AUM116387', null, null, null, null, null, '0', '1', '0', '1', '1610006141', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('388', '1609989376', '1610007034', '1', '2020', 'AUM', '116', '160992174220', null, null, '1', '', '20AUM116388', null, null, null, null, null, '0', '1', '0', '1', '1610006147', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('389', '1609989410', '1610007041', '1', '2020', 'AUM', '116', '160992174221', null, null, '1', '', '20AUM116389', null, null, null, null, null, '0', '1', '0', '1', '1610006259', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('390', '1609989434', '1610007344', '1', '2020', 'AUM', '116', '1609923317', null, null, '1', '', '20AUM116390', null, null, null, null, null, '0', '1', '0', '1', '1610006463', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('391', '1609989451', '1610007353', '1', '2020', 'AUM', '116', '1609923371', null, null, '1', '', '20AUM116391', null, null, null, null, null, '0', '1', '0', '1', '1610006467', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('392', '1609989513', '1610007048', '1', '2020', 'AUM', '116', '160992174222', null, null, '1', '', '20AUM116392', null, null, null, null, null, '0', '1', '0', '1', '1610006265', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('393', '1609989559', '1610007056', '1', '2020', 'AUM', '116', '160992174223', null, null, '1', '', '20AUM116393', null, null, null, null, null, '0', '1', '0', '1', '1610006270', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('394', '1609989586', '1610007360', '1', '2020', 'AUM', '116', '1609923411', null, null, '1', '', '20AUM116394', null, null, null, null, null, '0', '1', '0', '1', '1610006471', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('395', '1609989616', '1610007064', '1', '2020', 'AUM', '116', '160992174224', null, null, '1', '', '20AUM116395', null, null, null, null, null, '0', '1', '0', '1', '1610006274', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('396', '1609989643', '1610007083', '1', '2020', 'AUM', '116', '160992174225', null, null, '1', '', '20AUM116396', null, null, null, null, null, '0', '1', '0', '1', '1610006279', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('397', '1609989707', '1610007090', '1', '2020', 'AUM', '116', '160992174226', null, null, '1', '', '20AUM116397', null, null, null, null, null, '0', '1', '0', '1', '1610006284', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('398', '1609989751', '1610007097', '1', '2020', 'AUM', '116', '160992174227', null, null, '1', '', '20AUM116398', null, null, null, null, null, '0', '1', '0', '1', '1610006289', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('399', '1609989798', '1610007104', '1', '2020', 'AUM', '116', '160992174228', null, null, '1', '', '20AUM116399', null, null, null, null, null, '0', '1', '0', '1', '1610006295', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('400', '1609989871', '1610007111', '1', '2020', 'AUM', '116', '160992174229', null, null, '1', '', '20AUM116400', null, null, null, null, null, '0', '1', '0', '1', '1610006300', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('401', '1609989906', '1610007118', '1', '2020', 'AUM', '116', '160992174230', null, null, '1', '', '20AUM116401', null, null, null, null, null, '0', '1', '0', '1', '1610006310', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('402', '1609989933', '1610007125', '1', '2020', 'AUM', '116', '160992174231', null, null, '1', '', '20AUM116402', null, null, null, null, null, '0', '1', '0', '1', '1610006314', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('403', '1609989963', '1610007132', '1', '2020', 'AUM', '116', '160992174232', null, null, '1', '', '20AUM116403', null, null, null, null, null, '0', '1', '0', '1', '1610006319', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('404', '1609990005', '1610007144', '1', '2020', 'AUM', '116', '160992174233', null, null, '1', '', '20AUM116404', null, null, null, null, null, '0', '1', '0', '1', '1610006324', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('405', '1609990028', '1610007290', '1', '2020', 'AUM', '116', '1609922428', null, null, '1', '', '20AUM116405', null, null, null, null, null, '0', '1', '0', '1', '1610006433', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('406', '1609990065', '1610007164', '1', '2020', 'AUM', '116', '160992174235', null, null, '1', '', '20AUM116406', null, null, null, null, null, '0', '1', '0', '1', '1610006328', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('407', '1609990095', '1610007171', '1', '2020', 'AUM', '116', '160992174236', null, null, '1', '', '20AUM116407', null, null, null, null, null, '0', '1', '0', '1', '1610006333', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('408', '1609990125', '1610007178', '1', '2020', 'AUM', '116', '160992174237', null, null, '1', '', '20AUM116408', null, null, null, null, null, '0', '1', '0', '1', '1610006342', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('409', '1609990167', '1610007184', '1', '2020', 'AUM', '116', '160992174238', null, null, '1', '', '20AUM116409', null, null, null, null, null, '0', '1', '0', '1', '1610006348', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('410', '1609990216', '1610007191', '1', '2020', 'AUM', '116', '160992174239', null, null, '1', '', '20AUM116410', null, null, null, null, null, '0', '1', '0', '1', '1610006356', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('411', '1609990249', '1610007197', '1', '2020', 'AUM', '116', '160992174240', null, null, '1', '', '20AUM116411', null, null, null, null, null, '0', '1', '0', '1', '1610006361', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('412', '1609990284', '1610007204', '1', '2020', 'AUM', '116', '160992174241', null, null, '1', '', '20AUM116412', null, null, null, null, null, '0', '1', '0', '1', '1610006375', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('413', '1609990299', '1610007367', '1', '2020', 'AUM', '116', '1609923461', null, null, '1', '', '20AUM116413', null, null, null, null, null, '0', '1', '0', '1', '1610006475', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('414', '1609990330', '1610007211', '1', '2020', 'AUM', '116', '160992174242', null, null, '1', '', '20AUM116414', null, null, null, null, null, '0', '1', '0', '1', '1610006382', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('415', '1609990354', '1610007218', '1', '2020', 'AUM', '116', '160992174243', null, null, '1', '', '20AUM116415', null, null, null, null, null, '0', '1', '0', '1', '1610006387', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('416', '1609990367', '1610007373', '1', '2020', 'AUM', '116', '1609923505', null, null, '1', '', '20AUM116416', null, null, null, null, null, '0', '1', '0', '1', '1610006479', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('417', '1609990396', '1610007224', '1', '2020', 'AUM', '116', '160992174244', null, null, '1', '', '20AUM116417', null, null, null, null, null, '0', '1', '0', '1', '1610006392', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('418', '1609990423', '1610007234', '1', '2020', 'AUM', '116', '160992174245', null, null, '1', '', '20AUM116418', null, null, null, null, null, '0', '1', '0', '1', '1610006397', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('419', '1609990455', '1610007241', '1', '2020', 'AUM', '116', '160992174246', null, null, '1', '', '20AUM116419', null, null, null, null, null, '0', '1', '0', '1', '1610006402', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('420', '1609990467', '1610007380', '1', '2020', 'AUM', '116', '1609923557', null, null, '1', '', '20AUM116420', null, null, null, null, null, '0', '1', '0', '1', '1610006484', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('421', '1609990509', '1610007248', '1', '2020', 'AUM', '116', '160992174347', null, null, '1', '', '20AUM116421', null, null, null, null, null, '0', '1', '0', '1', '1610006407', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('422', '1609990531', '1610007387', '1', '2020', 'AUM', '116', '1609923592', null, null, '1', '', '20AUM116422', null, null, null, null, null, '0', '1', '0', '1', '1610006488', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('423', '1609990556', '1610007255', '1', '2020', 'AUM', '116', '160992174348', null, null, '1', '', '20AUM116423', null, null, null, null, null, '0', '1', '0', '1', '1610006411', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('424', '1609990585', '1610007262', '1', '2020', 'AUM', '116', '160992174349', null, null, '1', '', '20AUM116424', null, null, null, null, null, '0', '1', '0', '1', '1610006415', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('425', '1609990628', '1610007269', '1', '2020', 'AUM', '116', '160992174350', null, null, '1', '', '20AUM116425', null, null, null, null, null, '0', '1', '0', '1', '1610006420', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('426', '1609990662', '1610007276', '1', '2020', 'AUM', '116', '160992174351', null, null, '1', '', '20AUM116426', null, null, null, null, null, '0', '1', '0', '1', '1610006424', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('427', '1609990694', '1610007283', '1', '2020', 'AUM', '116', '160992174352', null, null, '1', '', '20AUM116427', null, null, null, null, null, '0', '1', '0', '1', '1610006429', 'el21_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('428', '1610175465', '1610936875', '1', '2020', 'AUM', '116', '1610175409', null, null, '1', '', '20AUM116428', null, null, null, null, null, '0', '1', '0', '1', '1610936527', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('429', '1610175501', '1610937158', '1', '2020', 'AUM', '116', '1610175471', null, null, '1', '', '20AUM116429', null, null, null, null, null, '0', '1', '0', '1', '1610936537', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('430', '1610175549', '1610937170', '1', '2020', 'AUM', '116', '1610175509', null, null, '1', '', '20AUM116430', null, null, null, null, null, '0', '1', '0', '1', '1610936547', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('431', '1610175597', '1610937179', '1', '2020', 'AUM', '116', '1610175554', null, null, '1', '', '20AUM116431', null, null, null, null, null, '0', '1', '0', '1', '1610936555', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('432', '1610175641', '1610937249', '1', '2020', 'AUM', '116', '1610175602', null, null, '1', '', '20AUM116432', null, null, null, null, null, '0', '1', '0', '1', '1610936561', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('433', '1610175683', '1610937273', '1', '2020', 'AUM', '116', '1610175647', null, null, '1', '', '20AUM116433', null, null, null, null, null, '0', '1', '0', '1', '1610936567', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('434', '1610175724', '1610937283', '1', '2020', 'AUM', '116', '1610175688', null, null, '1', '', '20AUM116434', null, null, null, null, null, '0', '1', '0', '1', '1610936573', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('435', '1610175818', '1610937293', '1', '2020', 'AUM', '116', '1610175782', null, null, '1', '', '20AUM116435', null, null, null, null, null, '0', '1', '0', '1', '1610936580', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('436', '1610176210', '1610937303', '1', '2020', 'AUM', '116', '1610175847', null, null, '1', '', '20AUM116436', null, null, null, null, null, '0', '1', '0', '1', '1610936585', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('437', '1610176254', '1610937327', '1', '2020', 'AUM', '116', '1610176218', null, null, '1', '', '20AUM116437', null, null, null, null, null, '0', '1', '0', '1', '1610936591', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('438', '1610176304', '1610937336', '1', '2020', 'AUM', '116', '1610176263', null, null, '1', '', '20AUM116438', null, null, null, null, null, '0', '1', '0', '1', '1610936598', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('439', '1610176376', '1610937351', '1', '2020', 'AUM', '116', '1610176310', null, null, '1', '', '20AUM116439', null, null, null, null, null, '0', '1', '0', '1', '1610936604', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('440', '1610176418', '1610937360', '1', '2020', 'AUM', '116', '1610176382', null, null, '1', '', '20AUM116440', null, null, null, null, null, '0', '1', '0', '1', '1610936609', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('441', '1610176493', '1610937373', '1', '2020', 'AUM', '116', '1610176460', null, null, '1', '', '20AUM116441', null, null, null, null, null, '0', '1', '0', '1', '1610936616', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('442', '1610176532', '1610937383', '1', '2020', 'AUM', '116', '1610176498', null, null, '1', '', '20AUM116442', null, null, null, null, null, '0', '1', '0', '1', '1610936623', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('443', '1610176590', '1610937392', '1', '2020', 'AUM', '116', '1610176544', null, null, '1', '', '20AUM116443', null, null, null, null, null, '0', '1', '0', '1', '1610936631', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('444', '1610176886', '1610937440', '1', '2020', 'AUM', '116', '1610176624', null, null, '1', '', '20AUM116444', null, null, null, null, null, '0', '1', '0', '1', '1610936643', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('445', '1610177500', '1610937449', '1', '2020', 'AUM', '116', '1610176892', null, null, '1', '', '20AUM116445', null, null, null, null, null, '0', '1', '0', '1', '1610936690', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('446', '1610177550', '1610937459', '1', '2020', 'AUM', '116', '1610177507', null, null, '1', '', '20AUM116446', null, null, null, null, null, '0', '1', '0', '1', '1610936697', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('447', '1610177607', '1610937467', '1', '2020', 'AUM', '116', '1610177575', null, null, '1', '', '20AUM116447', null, null, null, null, null, '0', '1', '0', '1', '1610936705', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('448', '1610177807', '1610937478', '1', '2020', 'AUM', '116', '1610177775', null, null, '1', '', '20AUM116448', null, null, null, null, null, '0', '1', '0', '1', '1610936711', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('449', '1610177860', '1610937490', '1', '2020', 'AUM', '116', '1610177813', null, null, '1', '', '20AUM116449', null, null, null, null, null, '0', '1', '0', '1', '1610936717', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('450', '1610177913', '1610937499', '1', '2020', 'AUM', '116', '1610177872', null, null, '1', '', '20AUM116450', null, null, null, null, null, '0', '1', '0', '1', '1610936723', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('451', '1610177950', '1610937508', '1', '2020', 'AUM', '116', '1610177920', null, null, '1', '', '20AUM116451', null, null, null, null, null, '0', '1', '0', '1', '1610936729', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('452', '1610178616', '1610937517', '1', '2020', 'AUM', '116', '1610178041', null, '1617340000', '1', '', '20AUM116452', null, null, null, null, null, '0', '1', '0', '1', '1610936735', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('453', '1610178856', '1610937526', '1', '2020', 'AUM', '116', '1610178625', null, null, '1', '', '20AUM116453', null, null, null, null, null, '0', '1', '0', '1', '1610936741', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('454', '1610178978', '1610937535', '1', '2020', 'AUM', '116', '1610178937', null, null, '1', '', '20AUM116454', null, null, null, null, null, '0', '1', '0', '1', '1610936748', 'el3_lkt11', 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('455', '1610940719', null, '1', '2020', 'AUM', '116', '1610940369', null, null, '1', '', null, null, null, null, null, null, '0', '1', '0', '0', null, null, 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('456', '1610940772', null, '1', '2020', 'AUM', '116', '1610940726', null, null, '0', '', null, 'SBD21002', 'P1', '9.0', null, null, '0', '1', '0', '0', null, null, 'admindemo', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('457', '1616469760', null, '1', '2020', 'AUM', '114', '1610940726', null, null, '1', '', null, 'SBD21002', 'P1', null, null, null, '0', '1', '0', '0', null, '', 'tranhiep', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('472', '1617359143', '1617359171', '1', '2020', 'AUM', '114', '1617340024', null, null, '0', '', '20AUM114472', null, null, null, null, null, '0', '-1', '0', '1', null, 'el1_qtkd11', 'tranhiep', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('473', '1617359162', '1617359513', '1', '2020', 'AUM', '122', '1617340024', null, null, '0', '', '20AUM122473', null, null, null, null, null, '0', '-1', '0', '1', null, 'el1_qlnn11', 'tranhiep', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('474', '1617360909', null, '1', '2020', 'AUM', '116', '1617340024', null, null, '0', '', '20AUM116474', null, null, null, null, null, '0', '-1', '0', '1', null, '', 'tranhiep', '1', '');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('475', '1617552804', null, '1', '', '', '', '1599788697', null, null, '1', '', null, null, null, null, null, null, '0', '-1', '0', '0', null, '', 'tranhiep', '1', 'TS1');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('476', '1617554371', '1617554462', '1', '2020', 'AUM', '114', '1599788697', null, null, '0', '', '20AUM114476', null, null, null, null, null, '0', '-1', '0', '1', null, 'el1_qtkd11', 'tranhiep', '1', 'HS1');
-INSERT INTO `tbl_dangky_tuyensinh` VALUES ('477', '1617554381', '1617554469', '1', '2020', 'AUM', '116', '1599788697', null, null, '0', '', '20AUM116477', null, null, null, null, null, '0', '-1', '0', '1', null, 'el1_lkt11', 'tranhiep', '1', 'HS1');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('272', '1599793495', '1599795528', '1', '2020', 'AUM', '114', '159979300115', null, null, '1', '', '20AUM114272', null, null, null, null, null, '0', '1', '0', '1', '1600312346', 'el1_qtkd11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('273', '1599793584', '1599795540', '1', '2020', 'AUM', '114', '159979300114', null, null, '1', '', '20AUM114273', null, null, null, null, null, '0', '1', '0', '1', '1600312337', 'el1_qtkd11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('274', '1599793693', '1599795444', '1', '2020', 'AUM', '114', '15997930011', null, null, '1', '', '20AUM114274', null, null, null, null, null, '0', '1', '0', '1', '1600312237', 'el1_qtkd11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('275', '1599793852', '1599795487', '1', '2020', 'AUM', '114', '15997930016', null, null, '1', '', '20AUM114275', null, null, null, null, null, '0', '1', '0', '1', '1600312279', 'el1_qtkd11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('276', '1599793943', '1599795481', '1', '2020', 'AUM', '114', '15997930015', null, null, '1', '', '20AUM114276', null, null, null, null, null, '0', '1', '0', '1', '1600312271', 'el1_qtkd11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('277', '1599794111', '1599795474', '1', '2020', 'AUM', '114', '15997930014', null, null, '1', '', '20AUM114277', null, null, null, null, null, '0', '1', '0', '1', '1600312262', 'el1_qtkd11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('278', '1599794222', '1599795459', '1', '2020', 'AUM', '114', '15997930013', null, null, '1', '', '20AUM114278', null, null, null, null, null, '0', '1', '0', '1', '1600312254', 'el1_qtkd11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('279', '1599794347', '1599795643', '1', '2020', 'AUM', '114', '15997930012', null, null, '1', '', '20AUM114279', null, null, null, null, null, '0', '1', '0', '1', '1600312247', 'el1_qtkd11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('280', '1599794451', '1599795532', '1', '2020', 'AUM', '114', '159979300111', null, null, '1', '', '20AUM114280', null, null, null, null, null, '0', '1', '0', '1', '1600312317', 'el1_qtkd11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('281', '1599794545', '1599795511', '1', '2020', 'AUM', '114', '159979300110', null, null, '1', '', '20AUM114281', null, null, null, null, null, '0', '1', '0', '1', '1600312309', '', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('282', '1599794702', '1599795506', '1', '2020', 'AUM', '114', '15997930019', null, null, '1', '', '20AUM114282', null, null, null, null, null, '0', '1', '0', '1', '1600312302', 'el1_qtkd11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('283', '1599794798', '1599795499', '1', '2020', 'AUM', '114', '15997930018', null, null, '1', '', '20AUM114283', null, null, null, null, null, '0', '1', '0', '1', '1600312294', 'el1_qtkd11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('284', '1599794892', '1599795493', '1', '2020', 'AUM', '114', '15997930017', null, null, '1', '', '20AUM114284', null, null, null, null, null, '0', '1', '0', '1', '1600312287', 'el1_qtkd11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('285', '1599794944', '1599795534', '1', '2020', 'AUM', '114', '159979300113', null, null, '1', '', '20AUM114285', null, null, null, null, null, '0', '1', '0', '1', '1600312333', 'el1_qtkd11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('286', '1599795060', '1599795523', '1', '2020', 'AUM', '114', '159979300112', null, null, '1', '', '20AUM114286', null, null, null, null, null, '0', '1', '0', '1', '1600312324', 'el1_qtkd11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('287', '1599810435', '1599813562', '1', '2020', 'AUM', '116', '15998092011', null, null, '1', '', '20AUM116287', null, null, null, null, null, '0', '1', '0', '1', '1600312542', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('288', '1599810491', '1599813568', '1', '2020', 'AUM', '116', '15998092012', null, null, '1', '', '20AUM116288', null, null, null, null, null, '0', '1', '0', '1', '1600312549', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('289', '1599810620', '1599813574', '1', '2020', 'AUM', '116', '15998092013', null, null, '1', '', '20AUM116289', null, null, null, null, null, '0', '1', '0', '1', '1600312563', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('290', '1599810759', '1599813579', '1', '2020', 'AUM', '116', '15998092014', null, null, '1', '', '20AUM116290', null, null, null, null, null, '0', '1', '0', '1', '1600312579', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('291', '1599810834', '1599813584', '1', '2020', 'AUM', '116', '15998092015', null, null, '1', '', '20AUM116291', null, null, null, null, null, '0', '1', '0', '1', '1600312586', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('292', '1599810898', '1599813590', '1', '2020', 'AUM', '116', '15998092016', null, null, '1', '', '20AUM116292', null, null, null, null, null, '0', '1', '0', '1', '1600312595', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('293', '1599811068', '1599813597', '1', '2020', 'AUM', '116', '15998092017', null, null, '1', '', '20AUM116293', null, null, null, null, null, '0', '1', '0', '1', '1600312600', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('294', '1599811194', '1599813603', '1', '2020', 'AUM', '116', '15998092018', null, null, '1', '', '20AUM116294', null, null, null, null, null, '0', '1', '0', '1', '1600312608', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('295', '1599811397', '1599813608', '1', '2020', 'AUM', '116', '15998092019', null, null, '1', '', '20AUM116295', null, null, null, null, null, '0', '1', '0', '1', '1600312616', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('296', '1599811881', '1599813619', '1', '2020', 'AUM', '116', '159980920111', null, null, '1', '', '20AUM116296', null, null, null, null, null, '0', '1', '0', '1', '1600312626', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('297', '1599812105', '1599813628', '1', '2020', 'AUM', '116', '159980920112', null, null, '1', '', '20AUM116297', null, null, null, null, null, '0', '1', '0', '1', '1600312631', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('298', '1599812229', '1599813634', '1', '2020', 'AUM', '116', '159980920113', null, null, '1', '', '20AUM116298', null, null, null, null, null, '0', '1', '0', '1', '1600312640', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('299', '1599812279', '1599813640', '1', '2020', 'AUM', '116', '159980920114', null, null, '1', '', '20AUM116299', null, null, null, null, null, '0', '1', '0', '1', '1600312647', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('300', '1599812424', '1599813648', '1', '2020', 'AUM', '116', '159980920115', null, null, '1', '', '20AUM116300', null, null, null, null, null, '0', '1', '0', '1', '1600312652', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('301', '1599812518', '1599813651', '1', '2020', 'AUM', '116', '159980920116', null, null, '1', '', '20AUM116301', null, null, null, null, null, '0', '1', '0', '1', '1600312657', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('302', '1599812647', '1599813657', '1', '2020', 'AUM', '116', '159980920117', null, null, '1', '', '20AUM116302', null, null, null, null, null, '0', '1', '0', '1', '1600312672', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('303', '1599812715', '1599813663', '1', '2020', 'AUM', '116', '159980920118', null, null, '1', '', '20AUM116303', null, null, null, null, null, '0', '1', '0', '1', '1600312678', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('304', '1599812802', '1599813666', '1', '2020', 'AUM', '116', '159980920119', null, null, '1', '', '20AUM116304', null, null, null, null, null, '0', '1', '0', '1', '1600312685', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('305', '1599812873', '1599813669', '1', '2020', 'AUM', '116', '159980920120', null, null, '1', '', '20AUM116305', null, null, null, null, null, '0', '1', '0', '1', '1600312692', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('306', '1599812969', '1599813675', '1', '2020', 'AUM', '116', '159980920121', null, null, '1', '', '20AUM116306', null, null, null, null, null, '0', '1', '0', '1', '1600312698', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('307', '1599813049', '1599813681', '1', '2020', 'AUM', '116', '159980920122', null, null, '1', '', '20AUM116307', null, null, null, null, null, '0', '1', '0', '1', '1600312702', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('308', '1599813127', '1599813687', '1', '2020', 'AUM', '116', '159980920123', null, null, '1', '', '20AUM116308', null, null, null, null, null, '0', '1', '0', '1', '1600312708', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('309', '1599813179', '1599813692', '1', '2020', 'AUM', '116', '159980920124', null, null, '1', '', '20AUM116309', null, null, null, null, null, '0', '1', '0', '1', '1600312712', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('310', '1599813267', '1599813613', '1', '2020', 'AUM', '116', '159980920110', null, null, '1', '', '20AUM116310', null, null, null, null, null, '0', '1', '0', '1', '1600312621', 'el1_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('311', '1600313375', '1600315962', '1', '2020', 'AUM', '122', '15998093191', null, null, '1', '', '20AUM122311', null, null, null, null, null, '0', '1', '0', '1', '1600315774', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('312', '1600313436', '1600315968', '1', '2020', 'AUM', '122', '15998093192', null, null, '1', '', '20AUM122312', null, null, null, null, null, '0', '1', '0', '1', '1600315786', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('313', '1600313488', '1600315974', '1', '2020', 'AUM', '122', '15998093193', null, null, '1', '', '20AUM122313', null, null, null, null, null, '0', '1', '0', '1', '1600315791', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('314', '1600313536', '1600315980', '1', '2020', 'AUM', '122', '15998093194', null, null, '1', '', '20AUM122314', null, null, null, null, null, '0', '1', '0', '1', '1600315803', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('315', '1600313608', '1600315987', '1', '2020', 'AUM', '122', '15998093195', null, null, '1', '', '20AUM122315', null, null, null, null, null, '0', '1', '0', '1', '1600315808', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('316', '1600313722', '1600315994', '1', '2020', 'AUM', '122', '15998093196', null, null, '1', '', '20AUM122316', null, null, null, null, null, '0', '1', '0', '1', '1600315813', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('317', '1600313832', '1600316057', '1', '2020', 'AUM', '122', '159980931917', null, null, '1', '', '20AUM122317', null, null, null, null, null, '0', '1', '0', '1', '1600315868', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('318', '1600313891', '1600316006', '1', '2020', 'AUM', '122', '15998093198', null, null, '1', '', '20AUM122318', null, null, null, null, null, '0', '1', '0', '1', '1600315824', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('319', '1600313949', '1600316000', '1', '2020', 'AUM', '122', '15998093197', null, null, '1', '', '20AUM122319', null, null, null, null, null, '0', '1', '0', '1', '1600315818', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('320', '1600314002', '1600316051', '1', '2020', 'AUM', '122', '159980931916', null, null, '1', '', '20AUM122320', null, null, null, null, null, '0', '1', '0', '1', '1600315864', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('321', '1600314053', '1600316045', '1', '2020', 'AUM', '122', '159980931915', null, null, '1', '', '20AUM122321', null, null, null, null, null, '0', '1', '0', '1', '1600315859', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('322', '1600314191', '1600316040', '1', '2020', 'AUM', '122', '159980931914', null, null, '1', '', '20AUM122322', null, null, null, null, null, '0', '1', '0', '1', '1600315853', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('323', '1600314271', '1600316101', '1', '2020', 'AUM', '122', '159980931925', null, null, '1', '', '20AUM122323', null, null, null, null, null, '0', '1', '0', '1', '1600315913', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('324', '1600314325', '1600316028', '1', '2020', 'AUM', '122', '159980931912', null, null, '1', '', '20AUM122324', null, null, null, null, null, '0', '1', '0', '1', '1600315845', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('325', '1600314407', '1600316022', '1', '2020', 'AUM', '122', '159980931911', null, null, '1', '', '20AUM122325', null, null, null, null, null, '0', '1', '0', '1', '1600315840', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('326', '1600314472', '1600316017', '1', '2020', 'AUM', '122', '159980931910', null, null, '1', '', '20AUM122326', null, null, null, null, null, '0', '1', '0', '1', '1600315835', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('327', '1600314523', '1600316094', '1', '2020', 'AUM', '122', '159980931924', null, null, '1', '', '20AUM122327', null, null, null, null, null, '0', '1', '0', '1', '1600315909', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('328', '1600314685', '1600316089', '1', '2020', 'AUM', '122', '159980931923', null, null, '1', '', '20AUM122328', null, null, null, null, null, '0', '1', '0', '1', '1600315904', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('329', '1600314738', '1600316083', '1', '2020', 'AUM', '122', '159980931922', null, null, '1', '', '20AUM122329', null, null, null, null, null, '0', '1', '0', '1', '1600315900', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('330', '1600314850', '1600316077', '1', '2020', 'AUM', '122', '159980931921', null, null, '1', '', '20AUM122330', null, null, null, null, null, '0', '1', '0', '1', '1600315895', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('331', '1600314885', '1600316074', '1', '2020', 'AUM', '122', '159980931920', null, null, '1', '', '20AUM122331', null, null, null, null, null, '0', '1', '0', '1', '1600315891', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('332', '1600314928', '1600316072', '1', '2020', 'AUM', '122', '159980931919', null, null, '1', '', '20AUM122332', null, null, null, null, null, '0', '1', '0', '1', '1600315886', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('333', '1600315037', '1600316064', '1', '2020', 'AUM', '122', '159980931918', null, null, '1', '', '20AUM122333', null, null, null, null, null, '0', '1', '0', '1', '1600315880', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('334', '1600315096', '1600316033', '1', '2020', 'AUM', '122', '159980931913', null, null, '1', '', '20AUM122334', null, null, null, null, null, '0', '1', '0', '1', '1600315849', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('335', '1600315135', '1600316012', '1', '2020', 'AUM', '122', '15998093199', null, null, '1', '', '20AUM122335', null, null, null, null, null, '0', '1', '0', '1', '1600315830', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('336', '1600315174', '1600316128', '1', '2020', 'AUM', '122', '159980931930', null, null, '1', '', '20AUM122336', null, null, null, null, null, '0', '1', '0', '1', '1600315937', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('337', '1600315225', '1600316122', '1', '2020', 'AUM', '122', '159980931929', null, null, '1', '', '20AUM122337', null, null, null, null, null, '0', '1', '0', '1', '1600315932', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('338', '1600315276', '1600316117', '1', '2020', 'AUM', '122', '159980931928', null, null, '1', '', '20AUM122338', null, null, null, null, null, '0', '1', '0', '1', '1600315927', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('339', '1600315325', '1600316112', '1', '2020', 'AUM', '122', '159980931927', null, null, '1', '', '20AUM122339', null, null, null, null, null, '0', '1', '0', '1', '1600315923', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('340', '1600315390', '1600316106', '1', '2020', 'AUM', '122', '159980931926', null, null, '1', '', '20AUM122340', null, null, null, null, null, '0', '1', '0', '1', '1600315918', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('341', '1600315452', '1600316140', '1', '2020', 'AUM', '122', '159980931932', null, null, '1', '', '20AUM122341', null, null, null, null, null, '0', '1', '0', '1', '1600315876', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('342', '1600315511', '1600316134', '1', '2020', 'AUM', '122', '159980931931', null, null, '1', '', '20AUM122342', null, null, null, null, null, '0', '1', '0', '1', '1600315941', 'el1_qlnn11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('343', '1609744762', '1609746470', '1', '2020', 'AUM', '116', '1609743738', null, null, '1', '', '20AUM116343', null, null, null, null, null, '0', '1', '0', '1', '1609746286', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('344', '1609744870', '1609746674', '1', '2020', 'AUM', '116', '1609744773', null, null, '1', '', '20AUM116344', null, null, null, null, null, '0', '1', '0', '1', '1609746901', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('345', '1609744990', '1609746492', '1', '2020', 'AUM', '116', '1609744877', null, null, '1', '', '20AUM116345', null, null, null, null, null, '0', '1', '0', '1', '1609746342', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('346', '1609745080', '1609746506', '1', '2020', 'AUM', '116', '1609744999', null, null, '1', '', '20AUM116346', null, null, null, null, null, '0', '1', '0', '1', '1609746348', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('347', '1609745170', '1609746518', '1', '2020', 'AUM', '116', '1609745086', null, null, '1', '', '20AUM116347', null, null, null, null, null, '0', '1', '0', '1', '1609746353', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('348', '1609745275', '1609746530', '1', '2020', 'AUM', '116', '1609745185', null, null, '1', '', '20AUM116348', null, null, null, null, null, '0', '1', '0', '1', '1609746360', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('349', '1609745368', '1609746538', '1', '2020', 'AUM', '116', '1609745284', null, null, '1', '', '20AUM116349', null, null, null, null, null, '0', '1', '0', '1', '1609746317', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('350', '1609745444', '1609746551', '1', '2020', 'AUM', '116', '1609745387', null, null, '1', '', '20AUM116350', null, null, null, null, null, '0', '1', '0', '1', '1609746377', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('351', '1609745512', '1609746560', '1', '2020', 'AUM', '116', '1609745452', null, null, '1', '', '20AUM116351', null, null, null, null, null, '0', '1', '0', '1', '1609746384', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('352', '1609745583', '1609746567', '1', '2020', 'AUM', '116', '1609745524', null, null, '1', '', '20AUM116352', null, null, null, null, null, '0', '1', '0', '1', '1609746389', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('353', '1609745654', '1609746573', '1', '2020', 'AUM', '116', '1609745588', null, null, '1', '', '20AUM116353', null, null, null, null, null, '0', '1', '0', '1', '1609746394', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('354', '1609745721', '1609746580', '1', '2020', 'AUM', '116', '1609745661', null, null, '1', '', '20AUM116354', null, null, null, null, null, '0', '1', '0', '1', '1609746400', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('355', '1609745793', '1609746590', '1', '2020', 'AUM', '116', '1609745729', null, null, '1', '', '20AUM116355', null, null, null, null, null, '0', '1', '0', '1', '1609746405', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('356', '1609745859', '1609746597', '1', '2020', 'AUM', '116', '1609745799', null, null, '1', '', '20AUM116356', null, null, null, null, null, '0', '1', '0', '1', '1609746412', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('357', '1609745897', '1609746604', '1', '2020', 'AUM', '116', '1609745865', null, null, '1', '', '20AUM116357', null, null, null, null, null, '0', '1', '0', '1', '1609746419', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('358', '1609745983', '1609746611', '1', '2020', 'AUM', '116', '1609745903', null, null, '1', '', '20AUM116358', null, null, null, null, null, '0', '1', '0', '1', '1609746423', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('359', '1609746029', '1609746618', '1', '2020', 'AUM', '116', '1609745992', null, null, '1', '', '20AUM116359', null, null, null, null, null, '0', '1', '0', '1', '1609746428', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('360', '1609746072', '1609746625', '1', '2020', 'AUM', '116', '1609746037', null, null, '1', '', '20AUM116360', null, null, null, null, null, '0', '1', '0', '1', '1609746432', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('361', '1609746113', '1609746632', '1', '2020', 'AUM', '116', '1609746078', null, null, '1', '', '20AUM116361', null, null, null, null, null, '0', '1', '0', '1', '1609746437', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('362', '1609746187', '1609746638', '1', '2020', 'AUM', '116', '1609746125', null, null, '1', '', '20AUM116362', null, null, null, null, null, '0', '1', '0', '1', '1609746370', 'el22_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('363', '1609987476', '1610006637', '1', '2020', 'AUM', '116', '16099217421', null, null, '1', '', '20AUM116363', null, null, null, null, null, '0', '1', '0', '1', '1609990862', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('364', '1609987571', '1610006647', '1', '2020', 'AUM', '116', '16099217422', null, null, '1', '', '20AUM116364', null, null, null, null, null, '0', '1', '0', '1', '1609990872', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('365', '1609987617', '1610007302', '1', '2020', 'AUM', '116', '1609922828', null, null, '1', '', '20AUM116365', null, null, null, null, null, '0', '1', '0', '1', '1610006437', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('366', '1609987666', '1610006656', '1', '2020', 'AUM', '116', '16099217423', null, null, '1', '', '20AUM116366', null, null, null, null, null, '0', '1', '0', '1', '1609990882', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('367', '1609987993', '1610007309', '1', '2020', 'AUM', '116', '1609922884', null, null, '1', '', '20AUM116367', null, null, null, null, null, '0', '1', '0', '1', '1610006442', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('368', '1609988014', '1610007316', '1', '2020', 'AUM', '116', '1609923051', null, null, '1', '', '20AUM116368', null, null, null, null, null, '0', '1', '0', '1', '1610006446', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('369', '1609988097', '1610006667', '1', '2020', 'AUM', '116', '16099217424', null, null, '1', '', '20AUM116369', null, null, null, null, null, '0', '1', '0', '1', '1610006035', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('370', '1609988161', '1610007323', '1', '2020', 'AUM', '116', '1609923179', null, null, '1', '', '20AUM116370', null, null, null, null, null, '0', '1', '0', '1', '1610006451', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('371', '1609988176', '1610007329', '1', '2020', 'AUM', '116', '1609923219', null, null, '1', '', '20AUM116371', null, null, null, null, null, '0', '1', '0', '1', '1610006455', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('372', '1609988211', '1610006674', '1', '2020', 'AUM', '116', '16099217425', null, null, '1', '', '20AUM116372', null, null, null, null, null, '0', '1', '0', '1', '1610006040', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('373', '1609988778', '1610006799', '1', '2020', 'AUM', '116', '16099217426', null, null, '1', '', '20AUM116373', null, null, null, null, null, '0', '1', '0', '1', '1610006046', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('374', '1609988816', '1610006807', '1', '2020', 'AUM', '116', '16099217427', null, null, '1', '', '20AUM116374', null, null, null, null, null, '0', '1', '0', '1', '1610006051', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('375', '1609988864', '1610006816', '1', '2020', 'AUM', '116', '16099217428', null, null, '1', '', '20AUM116375', null, null, null, null, null, '0', '1', '0', '1', '1610006057', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('376', '1609988905', '1610006824', '1', '2020', 'AUM', '116', '16099217429', null, null, '1', '', '20AUM116376', null, null, null, null, null, '0', '1', '0', '1', '1610006062', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('377', '1609988948', '1610006831', '1', '2020', 'AUM', '116', '160992174210', null, null, '1', '', '20AUM116377', null, null, null, null, null, '0', '1', '0', '1', '1610006067', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('378', '1609988975', '1610006861', '1', '2020', 'AUM', '116', '160992174211', null, null, '1', '', '20AUM116378', null, null, null, null, null, '0', '1', '0', '1', '1610006074', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('379', '1609989008', '1610006868', '1', '2020', 'AUM', '116', '160992174212', null, null, '1', '', '20AUM116379', null, null, null, null, null, '0', '1', '0', '1', '1610006079', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('380', '1609989080', '1610006876', '1', '2020', 'AUM', '116', '160992174213', null, null, '1', '', '20AUM116380', null, null, null, null, null, '0', '1', '0', '1', '1610006084', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('381', '1609989112', '1610006984', '1', '2020', 'AUM', '116', '160992174214', null, null, '1', '', '20AUM116381', null, null, null, null, null, '0', '1', '0', '1', '1610006089', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('382', '1609989177', '1610006993', '1', '2020', 'AUM', '116', '160992174215', null, null, '1', '', '20AUM116382', null, null, null, null, null, '0', '1', '0', '1', '1610006094', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('383', '1609989215', '1610007000', '1', '2020', 'AUM', '116', '160992174216', null, null, '1', '', '20AUM116383', null, null, null, null, null, '0', '1', '0', '1', '1610006098', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('384', '1609989245', '1610007008', '1', '2020', 'AUM', '116', '160992174217', null, null, '1', '', '20AUM116384', null, null, null, null, null, '0', '1', '0', '1', '1610006104', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('385', '1609989275', '1610007015', '1', '2020', 'AUM', '116', '160992174218', null, null, '1', '', '20AUM116385', null, null, null, null, null, '0', '1', '0', '1', '1610006134', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('386', '1609989310', '1610007336', '1', '2020', 'AUM', '116', '1609923259', null, null, '1', '', '20AUM116386', null, null, null, null, null, '0', '1', '0', '1', '1610006459', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('387', '1609989342', '1610007025', '1', '2020', 'AUM', '116', '160992174219', null, null, '1', '', '20AUM116387', null, null, null, null, null, '0', '1', '0', '1', '1610006141', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('388', '1609989376', '1610007034', '1', '2020', 'AUM', '116', '160992174220', null, null, '1', '', '20AUM116388', null, null, null, null, null, '0', '1', '0', '1', '1610006147', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('389', '1609989410', '1610007041', '1', '2020', 'AUM', '116', '160992174221', null, null, '1', '', '20AUM116389', null, null, null, null, null, '0', '1', '0', '1', '1610006259', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('390', '1609989434', '1610007344', '1', '2020', 'AUM', '116', '1609923317', null, null, '1', '', '20AUM116390', null, null, null, null, null, '0', '1', '0', '1', '1610006463', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('391', '1609989451', '1610007353', '1', '2020', 'AUM', '116', '1609923371', null, null, '1', '', '20AUM116391', null, null, null, null, null, '0', '1', '0', '1', '1610006467', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('392', '1609989513', '1610007048', '1', '2020', 'AUM', '116', '160992174222', null, null, '1', '', '20AUM116392', null, null, null, null, null, '0', '1', '0', '1', '1610006265', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('393', '1609989559', '1610007056', '1', '2020', 'AUM', '116', '160992174223', null, null, '1', '', '20AUM116393', null, null, null, null, null, '0', '1', '0', '1', '1610006270', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('394', '1609989586', '1610007360', '1', '2020', 'AUM', '116', '1609923411', null, null, '1', '', '20AUM116394', null, null, null, null, null, '0', '1', '0', '1', '1610006471', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('395', '1609989616', '1610007064', '1', '2020', 'AUM', '116', '160992174224', null, null, '1', '', '20AUM116395', null, null, null, null, null, '0', '1', '0', '1', '1610006274', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('396', '1609989643', '1610007083', '1', '2020', 'AUM', '116', '160992174225', null, null, '1', '', '20AUM116396', null, null, null, null, null, '0', '1', '0', '1', '1610006279', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('397', '1609989707', '1610007090', '1', '2020', 'AUM', '116', '160992174226', null, null, '1', '', '20AUM116397', null, null, null, null, null, '0', '1', '0', '1', '1610006284', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('398', '1609989751', '1610007097', '1', '2020', 'AUM', '116', '160992174227', null, null, '1', '', '20AUM116398', null, null, null, null, null, '0', '1', '0', '1', '1610006289', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('399', '1609989798', '1610007104', '1', '2020', 'AUM', '116', '160992174228', null, null, '1', '', '20AUM116399', null, null, null, null, null, '0', '1', '0', '1', '1610006295', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('400', '1609989871', '1610007111', '1', '2020', 'AUM', '116', '160992174229', null, null, '1', '', '20AUM116400', null, null, null, null, null, '0', '1', '0', '1', '1610006300', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('401', '1609989906', '1610007118', '1', '2020', 'AUM', '116', '160992174230', null, null, '1', '', '20AUM116401', null, null, null, null, null, '0', '1', '0', '1', '1610006310', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('402', '1609989933', '1610007125', '1', '2020', 'AUM', '116', '160992174231', null, null, '1', '', '20AUM116402', null, null, null, null, null, '0', '1', '0', '1', '1610006314', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('403', '1609989963', '1610007132', '1', '2020', 'AUM', '116', '160992174232', null, null, '1', '', '20AUM116403', null, null, null, null, null, '0', '1', '0', '1', '1610006319', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('404', '1609990005', '1610007144', '1', '2020', 'AUM', '116', '160992174233', null, null, '1', '', '20AUM116404', null, null, null, null, null, '0', '1', '0', '1', '1610006324', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('405', '1609990028', '1610007290', '1', '2020', 'AUM', '116', '1609922428', null, null, '1', '', '20AUM116405', null, null, null, null, null, '0', '1', '0', '1', '1610006433', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('406', '1609990065', '1610007164', '1', '2020', 'AUM', '116', '160992174235', null, null, '1', '', '20AUM116406', null, null, null, null, null, '0', '1', '0', '1', '1610006328', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('407', '1609990095', '1610007171', '1', '2020', 'AUM', '116', '160992174236', null, null, '1', '', '20AUM116407', null, null, null, null, null, '0', '1', '0', '1', '1610006333', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('408', '1609990125', '1610007178', '1', '2020', 'AUM', '116', '160992174237', null, null, '1', '', '20AUM116408', null, null, null, null, null, '0', '1', '0', '1', '1610006342', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('409', '1609990167', '1610007184', '1', '2020', 'AUM', '116', '160992174238', null, null, '1', '', '20AUM116409', null, null, null, null, null, '0', '1', '0', '1', '1610006348', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('410', '1609990216', '1610007191', '1', '2020', 'AUM', '116', '160992174239', null, null, '1', '', '20AUM116410', null, null, null, null, null, '0', '1', '0', '1', '1610006356', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('411', '1609990249', '1610007197', '1', '2020', 'AUM', '116', '160992174240', null, null, '1', '', '20AUM116411', null, null, null, null, null, '0', '1', '0', '1', '1610006361', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('412', '1609990284', '1610007204', '1', '2020', 'AUM', '116', '160992174241', null, null, '1', '', '20AUM116412', null, null, null, null, null, '0', '1', '0', '1', '1610006375', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('413', '1609990299', '1610007367', '1', '2020', 'AUM', '116', '1609923461', null, null, '1', '', '20AUM116413', null, null, null, null, null, '0', '1', '0', '1', '1610006475', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('414', '1609990330', '1610007211', '1', '2020', 'AUM', '116', '160992174242', null, null, '1', '', '20AUM116414', null, null, null, null, null, '0', '1', '0', '1', '1610006382', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('415', '1609990354', '1610007218', '1', '2020', 'AUM', '116', '160992174243', null, null, '1', '', '20AUM116415', null, null, null, null, null, '0', '1', '0', '1', '1610006387', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('416', '1609990367', '1610007373', '1', '2020', 'AUM', '116', '1609923505', null, null, '1', '', '20AUM116416', null, null, null, null, null, '0', '1', '0', '1', '1610006479', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('417', '1609990396', '1610007224', '1', '2020', 'AUM', '116', '160992174244', null, null, '1', '', '20AUM116417', null, null, null, null, null, '0', '1', '0', '1', '1610006392', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('418', '1609990423', '1610007234', '1', '2020', 'AUM', '116', '160992174245', null, null, '1', '', '20AUM116418', null, null, null, null, null, '0', '1', '0', '1', '1610006397', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('419', '1609990455', '1610007241', '1', '2020', 'AUM', '116', '160992174246', null, null, '1', '', '20AUM116419', null, null, null, null, null, '0', '1', '0', '1', '1610006402', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('420', '1609990467', '1610007380', '1', '2020', 'AUM', '116', '1609923557', null, null, '1', '', '20AUM116420', null, null, null, null, null, '0', '1', '0', '1', '1610006484', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('421', '1609990509', '1610007248', '1', '2020', 'AUM', '116', '160992174347', null, null, '1', '', '20AUM116421', null, null, null, null, null, '0', '1', '0', '1', '1610006407', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('422', '1609990531', '1610007387', '1', '2020', 'AUM', '116', '1609923592', null, null, '1', '', '20AUM116422', null, null, null, null, null, '0', '1', '0', '1', '1610006488', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('423', '1609990556', '1610007255', '1', '2020', 'AUM', '116', '160992174348', null, null, '1', '', '20AUM116423', null, null, null, null, null, '0', '1', '0', '1', '1610006411', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('424', '1609990585', '1610007262', '1', '2020', 'AUM', '116', '160992174349', null, null, '1', '', '20AUM116424', null, null, null, null, null, '0', '1', '0', '1', '1610006415', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('425', '1609990628', '1610007269', '1', '2020', 'AUM', '116', '160992174350', null, null, '1', '', '20AUM116425', null, null, null, null, null, '0', '1', '0', '1', '1610006420', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('426', '1609990662', '1610007276', '1', '2020', 'AUM', '116', '160992174351', null, null, '1', '', '20AUM116426', null, null, null, null, null, '0', '1', '0', '1', '1610006424', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('427', '1609990694', '1610007283', '1', '2020', 'AUM', '116', '160992174352', null, null, '1', '', '20AUM116427', null, null, null, null, null, '0', '1', '0', '1', '1610006429', 'el21_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('428', '1610175465', '1610936875', '1', '2020', 'AUM', '116', '1610175409', null, null, '1', '', '20AUM116428', null, null, null, null, null, '0', '1', '0', '1', '1610936527', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('429', '1610175501', '1610937158', '1', '2020', 'AUM', '116', '1610175471', null, null, '1', '', '20AUM116429', null, null, null, null, null, '0', '1', '0', '1', '1610936537', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('430', '1610175549', '1610937170', '1', '2020', 'AUM', '116', '1610175509', null, null, '1', '', '20AUM116430', null, null, null, null, null, '0', '1', '0', '1', '1610936547', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('431', '1610175597', '1610937179', '1', '2020', 'AUM', '116', '1610175554', null, null, '1', '', '20AUM116431', null, null, null, null, null, '0', '1', '0', '1', '1610936555', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('432', '1610175641', '1610937249', '1', '2020', 'AUM', '116', '1610175602', null, null, '1', '', '20AUM116432', null, null, null, null, null, '0', '1', '0', '1', '1610936561', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('433', '1610175683', '1610937273', '1', '2020', 'AUM', '116', '1610175647', null, null, '1', '', '20AUM116433', null, null, null, null, null, '0', '1', '0', '1', '1610936567', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('434', '1610175724', '1610937283', '1', '2020', 'AUM', '116', '1610175688', null, null, '1', '', '20AUM116434', null, null, null, null, null, '0', '1', '0', '1', '1610936573', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('435', '1610175818', '1610937293', '1', '2020', 'AUM', '116', '1610175782', null, null, '1', '', '20AUM116435', null, null, null, null, null, '0', '1', '0', '1', '1610936580', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('436', '1610176210', '1610937303', '1', '2020', 'AUM', '116', '1610175847', null, null, '1', '', '20AUM116436', null, null, null, null, null, '0', '1', '0', '1', '1610936585', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('437', '1610176254', '1610937327', '1', '2020', 'AUM', '116', '1610176218', null, null, '1', '', '20AUM116437', null, null, null, null, null, '0', '1', '0', '1', '1610936591', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('438', '1610176304', '1610937336', '1', '2020', 'AUM', '116', '1610176263', null, null, '1', '', '20AUM116438', null, null, null, null, null, '0', '1', '0', '1', '1610936598', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('439', '1610176376', '1610937351', '1', '2020', 'AUM', '116', '1610176310', null, null, '1', '', '20AUM116439', null, null, null, null, null, '0', '1', '0', '1', '1610936604', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('440', '1610176418', '1610937360', '1', '2020', 'AUM', '116', '1610176382', null, null, '1', '', '20AUM116440', null, null, null, null, null, '0', '1', '0', '1', '1610936609', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('441', '1610176493', '1610937373', '1', '2020', 'AUM', '116', '1610176460', null, null, '1', '', '20AUM116441', null, null, null, null, null, '0', '1', '0', '1', '1610936616', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('442', '1610176532', '1610937383', '1', '2020', 'AUM', '116', '1610176498', null, null, '1', '', '20AUM116442', null, null, null, null, null, '0', '1', '0', '1', '1610936623', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('443', '1610176590', '1610937392', '1', '2020', 'AUM', '116', '1610176544', null, null, '1', '', '20AUM116443', null, null, null, null, null, '0', '1', '0', '1', '1610936631', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('444', '1610176886', '1610937440', '1', '2020', 'AUM', '116', '1610176624', null, null, '1', '', '20AUM116444', null, null, null, null, null, '0', '1', '0', '1', '1610936643', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('445', '1610177500', '1610937449', '1', '2020', 'AUM', '116', '1610176892', null, null, '1', '', '20AUM116445', null, null, null, null, null, '0', '1', '0', '1', '1610936690', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('446', '1610177550', '1610937459', '1', '2020', 'AUM', '116', '1610177507', null, null, '1', '', '20AUM116446', null, null, null, null, null, '0', '1', '0', '1', '1610936697', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('447', '1610177607', '1610937467', '1', '2020', 'AUM', '116', '1610177575', null, null, '1', '', '20AUM116447', null, null, null, null, null, '0', '1', '0', '1', '1610936705', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('448', '1610177807', '1610937478', '1', '2020', 'AUM', '116', '1610177775', null, null, '1', '', '20AUM116448', null, null, null, null, null, '0', '1', '0', '1', '1610936711', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('449', '1610177860', '1610937490', '1', '2020', 'AUM', '116', '1610177813', null, null, '1', '', '20AUM116449', null, null, null, null, null, '0', '1', '0', '1', '1610936717', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('450', '1610177913', '1610937499', '1', '2020', 'AUM', '116', '1610177872', null, null, '1', '', '20AUM116450', null, null, null, null, null, '0', '1', '0', '1', '1610936723', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('451', '1610177950', '1610937508', '1', '2020', 'AUM', '116', '1610177920', null, null, '1', '', '20AUM116451', null, null, null, null, null, '0', '1', '0', '1', '1610936729', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('452', '1610178616', '1610937517', '1', '2020', 'AUM', '116', '1610178041', null, '1617340000', '1', '', '20AUM116452', null, null, null, null, null, '0', '1', '0', '1', '1610936735', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('453', '1610178856', '1610937526', '1', '2020', 'AUM', '116', '1610178625', null, null, '1', '', '20AUM116453', null, null, null, null, null, '0', '1', '0', '1', '1610936741', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('454', '1610178978', '1610937535', '1', '2020', 'AUM', '116', '1610178937', null, null, '1', '', '20AUM116454', null, null, null, null, null, '0', '1', '0', '1', '1610936748', 'el3_lkt11', 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('455', '1610940719', null, '1', '2020', 'AUM', '116', '1610940369', null, null, '1', '', null, null, null, null, null, null, '0', '1', '0', '0', null, null, 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('456', '1610940772', null, '1', '2020', 'AUM', '116', '1610940726', null, null, '0', '', null, 'SBD21002', 'P1', '9.0', null, null, '0', '1', '0', '0', null, null, 'admindemo', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('457', '1616469760', null, '1', '2020', 'AUM', '114', '1610940726', null, null, '1', '', null, 'SBD21002', 'P1', null, null, null, '0', '1', '0', '0', null, '', 'tranhiep', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('472', '1617359143', '1617359171', '1', '2020', 'AUM', '114', '1617340024', null, null, '0', '', '20AUM114472', null, null, null, null, null, '0', '-1', '0', '1', null, 'el1_qtkd11', 'tranhiep', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('473', '1617359162', '1617359513', '1', '2020', 'AUM', '122', '1617340024', null, null, '0', '', '20AUM122473', null, null, null, null, null, '0', '-1', '0', '1', null, 'el1_qlnn11', 'tranhiep', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('474', '1617360909', null, '1', '2020', 'AUM', '116', '1617340024', null, null, '0', '', '20AUM116474', null, null, null, null, null, '0', '-1', '0', '1', null, '', 'tranhiep', '1', 'L0');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('476', '1617554371', '1617554462', '1', '2020', 'AUM', '114', '1599788697', null, null, '0', '', '20AUM114476', null, null, null, null, null, '0', '-1', '0', '1', null, 'el1_qtkd11', 'tranhiep', '1', 'L2');
+INSERT INTO `tbl_dangky_tuyensinh` VALUES ('477', '1617554381', '1617554469', '1', '2020', 'AUM', '116', '1599788697', null, null, '0', '', '20AUM116477', null, null, null, null, null, '0', '-1', '0', '1', null, 'el1_lkt11', 'tranhiep', '1', 'L1');
 
 -- ----------------------------
 -- Table structure for tbl_dmhocphi
@@ -829,7 +833,7 @@ CREATE TABLE `tbl_dmhocphi` (
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `hocphi` int(11) DEFAULT NULL,
   `intro` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `all` int(11) DEFAULT '0',
+  `all` int(11) DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `idx_he_nganh` (`id_he`,`id_nganh`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=221 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -850,7 +854,7 @@ CREATE TABLE `tbl_dmhoso` (
   `id_he` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `intro` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `all` int(11) DEFAULT '0',
+  `all` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -885,7 +889,7 @@ CREATE TABLE `tbl_giaovien` (
 DROP TABLE IF EXISTS `tbl_he`;
 CREATE TABLE `tbl_he` (
   `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `par_id` int(10) DEFAULT '1',
+  `par_id` int(10) DEFAULT 1,
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `hocphi` int(11) DEFAULT NULL,
   `hocphi_thilai` int(11) DEFAULT NULL,
@@ -893,7 +897,7 @@ CREATE TABLE `tbl_he` (
   `hocphi_hoclai` int(11) DEFAULT NULL,
   `hocphi_hocct` int(11) DEFAULT NULL,
   `sohocky` int(11) DEFAULT NULL,
-  `isactive` tinyint(4) DEFAULT '1',
+  `isactive` tinyint(4) DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1090,7 +1094,7 @@ CREATE TABLE `tbl_hocphi` (
   `ten_hp` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `type_hp` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
   `date_pay` int(11) DEFAULT NULL,
-  `ispay` tinyint(4) DEFAULT '0',
+  `ispay` tinyint(4) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6523 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -2374,7 +2378,7 @@ DROP TABLE IF EXISTS `tbl_hocphi_note`;
 CREATE TABLE `tbl_hocphi_note` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `masv` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `hocphi_ids` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `hocphi_ids` text CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `money` int(11) DEFAULT NULL,
   `notes` varchar(255) DEFAULT NULL,
   `cdate` int(11) DEFAULT NULL,
@@ -2446,7 +2450,7 @@ INSERT INTO `tbl_hocphi_pay` VALUES ('37', '20AUM116477', '2000000', 'Đóng ti�
 DROP TABLE IF EXISTS `tbl_hocsinh`;
 CREATE TABLE `tbl_hocsinh` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `partner_id` int(11) DEFAULT '0',
+  `partner_id` int(11) DEFAULT 0,
   `ma` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `masv` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ho_dem` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -2454,7 +2458,7 @@ CREATE TABLE `tbl_hocsinh` (
   `nickname` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ngaysinh` int(11) DEFAULT NULL,
   `noisinh` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `gioitinh` tinyint(4) DEFAULT '1' COMMENT '0:nữ, 1:nam',
+  `gioitinh` tinyint(4) DEFAULT 1 COMMENT '0:nữ, 1:nam',
   `diachi` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `city` int(11) DEFAULT NULL,
   `dienthoai` varchar(12) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -2477,24 +2481,24 @@ CREATE TABLE `tbl_hocsinh` (
   `ngayct` date DEFAULT NULL,
   `stk` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `note` text COLLATE utf8_unicode_ci,
-  `dmhoso` text COLLATE utf8_unicode_ci,
-  `qhgiadinh` text COLLATE utf8_unicode_ci,
-  `qthoctap` text COLLATE utf8_unicode_ci,
-  `qthoc` text COLLATE utf8_unicode_ci,
-  `khenthuong` text COLLATE utf8_unicode_ci,
-  `kyluat` text COLLATE utf8_unicode_ci,
+  `note` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dmhoso` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `qhgiadinh` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `qthoctap` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `qthoc` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `khenthuong` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `kyluat` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `partner` int(11) DEFAULT NULL,
   `cdate` int(11) DEFAULT NULL,
   `mdate` int(11) DEFAULT NULL,
   `author` varchar(255) COLLATE utf8_unicode_ci DEFAULT '50',
-  `brief` text COLLATE utf8_unicode_ci,
-  `brief_full` tinyint(4) DEFAULT '0' COMMENT '0: Chưa check hồ sơ, 1: Check đủ hồ sơ, -1: Hồ sơ thiếu',
-  `status` tinyint(4) DEFAULT '0',
-  `xettuyen` tinyint(4) DEFAULT '0',
-  `isactive` tinyint(4) DEFAULT '1',
+  `brief` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `brief_full` tinyint(4) DEFAULT 0 COMMENT '0: Chưa check hồ sơ, 1: Check đủ hồ sơ, -1: Hồ sơ thiếu',
+  `status` tinyint(4) DEFAULT 0,
+  `xettuyen` tinyint(4) DEFAULT 0,
+  `isactive` tinyint(4) DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=548 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=549 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_hocsinh
@@ -2686,6 +2690,7 @@ INSERT INTO `tbl_hocsinh` VALUES ('542', '6', '1610178937', '', 'Tạ Văn', 'Tu
 INSERT INTO `tbl_hocsinh` VALUES ('543', '6', '1610940369', '', 'Nguyễn Văn', 'Bình', '', '-62236800', 'Yên Bái', '1', '', '1', '', '', '0', '', 'Việt Nam', 'Yên Bái', 'Yên Bái', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '[]', '', '', '', '', '', '6', '1610940706', '1610940719', 'admindemo', null, '0', '0', '0', '1');
 INSERT INTO `tbl_hocsinh` VALUES ('544', '6', '1610940726', '', 'Sùng Thị', 'Công', '', '594061200', 'Yên Bái', '0', '', '1', '', '', '0', '', 'Việt Nam', 'Yên Bái', 'Yên Bái', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '[]', '', '', '', '', '', '6', '1610940758', '1610940772', 'admindemo', null, '0', '0', '0', '1');
 INSERT INTO `tbl_hocsinh` VALUES ('547', '0', '1617340024', '123456789000', '', 'ABC', 'A', '1002646800', 'Hải Dương', '0', '', '1', '', '', '0', '', 'Việt Nam', 'Chí Linh, Hải Dương', 'Chí Linh, Hải Dương', 'Kinh', 'Không', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', null, '', '', '', '', '', '0', '1617340157', '1617340157', 'tranhiep', null, '0', '0', '0', '1');
+INSERT INTO `tbl_hocsinh` VALUES ('548', '0', '1617595316', '', 'Nguyễn Văn', 'Bình', 'Bình Lọ', '828723600', 'Thường Tín', '0', '', '1', '', '', '0', '', 'Việt Nam', 'Văn Bình, Thường Tín, Hà Nội', 'Văn Bình, Thường Tín, Hà Nội', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', null, '', '', '', '', '', '0', '1617595395', '1617595395', 'tranhiep', null, '0', '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for tbl_hoctap
@@ -2696,12 +2701,12 @@ CREATE TABLE `tbl_hoctap` (
   `masv` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_monhoc` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `tinchi` int(11) DEFAULT NULL,
-  `type` tinyint(4) DEFAULT '0',
-  `status` int(11) DEFAULT '-1' COMMENT 'chưa xét, 0:không đạt, 1:đạt, 2:thi lại, 3:thi cải thiện, 4:học lại, 5:học cải thiện',
-  `diem` text,
+  `type` tinyint(4) DEFAULT 0,
+  `status` int(11) DEFAULT -1 COMMENT 'chưa xét, 0:không đạt, 1:đạt, 2:thi lại, 3:thi cải thiện, 4:học lại, 5:học cải thiện',
+  `diem` text DEFAULT NULL,
   `ketqua` float DEFAULT NULL,
   `ketqua2` float DEFAULT NULL,
-  `hoclai` tinyint(4) DEFAULT '0',
+  `hoclai` tinyint(4) DEFAULT 0,
   `mdate` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3302 DEFAULT CHARSET=utf8;
@@ -3432,7 +3437,7 @@ CREATE TABLE `tbl_hoctap_note` (
   `cdate` int(11) DEFAULT NULL,
   `author` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=268 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=269 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_hoctap_note
@@ -3448,6 +3453,7 @@ INSERT INTO `tbl_hoctap_note` VALUES ('264', null, '20AUM114271', 'MC03', 'Cập
 INSERT INTO `tbl_hoctap_note` VALUES ('265', null, '20AUM114271', 'MC03', 'Cập nhật điểm: chuyên cần (10) điểm kiểm tra (9) điểm thi (7)', '1616672627', 'tranhiep');
 INSERT INTO `tbl_hoctap_note` VALUES ('266', null, '20AUM114271', 'MC01', 'Cập nhật điểm: chuyên cần (9) điểm kiểm tra (10) điểm thi (8)', '1616731417', 'tranhiep');
 INSERT INTO `tbl_hoctap_note` VALUES ('267', null, '20AUM114271', 'MC02', 'Cập nhật điểm: chuyên cần (10) điểm kiểm tra (9) điểm thi (7)', '1616731450', 'tranhiep');
+INSERT INTO `tbl_hoctap_note` VALUES ('268', '3292', null, null, 'Note', '1617619689', 'tranhiep');
 
 -- ----------------------------
 -- Table structure for tbl_hoctap_warning
@@ -3470,9 +3476,9 @@ CREATE TABLE `tbl_hoctap_warning` (
 DROP TABLE IF EXISTS `tbl_khoa`;
 CREATE TABLE `tbl_khoa` (
   `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `type` tinyint(4) DEFAULT '1',
+  `type` tinyint(4) DEFAULT 1,
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `startDay` int(11) DEFAULT '1',
+  `startDay` int(11) DEFAULT 1,
   `quan` int(11) DEFAULT NULL,
   `hocphi` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -3494,7 +3500,7 @@ CREATE TABLE `tbl_khoa_nganh` (
   `id_khoa` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `id_nganh` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `id_he` varchar(50) COLLATE utf8_unicode_ci DEFAULT '1',
-  `note` text COLLATE utf8_unicode_ci,
+  `note` text COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -3509,7 +3515,7 @@ DROP TABLE IF EXISTS `tbl_logs`;
 CREATE TABLE `tbl_logs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(255) DEFAULT NULL,
-  `config` text,
+  `config` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -3528,9 +3534,9 @@ CREATE TABLE `tbl_lop` (
   `id_khoa` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `gvcn` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `permission` text COLLATE utf8_unicode_ci,
+  `permission` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `cdate` int(11) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT '0',
+  `status` tinyint(4) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -3553,7 +3559,7 @@ CREATE TABLE `tbl_monhoc` (
   `id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ttn` tinyint(4) DEFAULT NULL,
-  `intro` text COLLATE utf8_unicode_ci,
+  `intro` text COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -3708,9 +3714,9 @@ CREATE TABLE `tbl_notify` (
   `notes` varchar(255) DEFAULT NULL,
   `cdate` int(11) DEFAULT NULL,
   `author` varchar(255) DEFAULT NULL,
-  `isactive` int(11) DEFAULT '0',
+  `isactive` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4259 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4265 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tbl_notify
@@ -4922,6 +4928,12 @@ INSERT INTO `tbl_notify` VALUES ('4255', null, null, '20AUM116477', 'Mã SV #20A
 INSERT INTO `tbl_notify` VALUES ('4256', null, '1599788697', '20AUM116477', 'Đã đóng 2,000,000 VNĐ', '1617554510', 'tranhiep', '0');
 INSERT INTO `tbl_notify` VALUES ('4257', null, '159979300110', '', 'Hồ sơ #159979300110 đã cập nhật thông tin', '1617577966', 'tranhiep', '0');
 INSERT INTO `tbl_notify` VALUES ('4258', null, '159979300110', '', 'Hồ sơ #159979300110 đã cập nhật thông tin', '1617577978', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4259', null, '1617595316', '', 'Hồ sơ #1617595316 (Nguyễn Văn Bình) tạo mới thành công', '1617595395', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4260', null, '1599788697', '', 'Hồ sơ #1599788697 cập nhật trạng thái thành công', '1617617036', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4261', null, '1599788697', '', 'Hồ sơ #1599788697 cập nhật trạng thái thành công', '1617617267', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4262', null, '1599788697', '', 'Hồ sơ #1599788697 cập nhật trạng thái thành công', '1617617379', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4263', null, '1599788697', '', 'Hồ sơ #1599788697 cập nhật trạng thái thành công', '1617617505', 'tranhiep', '0');
+INSERT INTO `tbl_notify` VALUES ('4264', null, '1599788697', '', 'Hồ sơ #1599788697 cập nhật trạng thái thành công', '1617617602', 'tranhiep', '0');
 
 -- ----------------------------
 -- Table structure for tbl_partner
@@ -4932,7 +4944,7 @@ CREATE TABLE `tbl_partner` (
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `diachi` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `note` text COLLATE utf8_unicode_ci,
+  `note` text COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -4965,7 +4977,7 @@ CREATE TABLE `tbl_user` (
   `lastlogin` datetime NOT NULL,
   `gid` int(11) NOT NULL,
   `isroot` tinyint(4) DEFAULT NULL,
-  `isactive` int(11) NOT NULL DEFAULT '1',
+  `isactive` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -4979,7 +4991,7 @@ INSERT INTO `tbl_user` VALUES ('48', 'thaott_daotao', '00cd5ba0e25fd9ae5b8901974
 INSERT INTO `tbl_user` VALUES ('47', 'demodaotao', '453b885e6c7c3683041ab4bd8f717f46', 'Đào tạo', '', '0000-00-00', '', '', '012345678', '', '', null, null, null, null, '2020-02-27 11:11:55', '0000-00-00 00:00:00', '22', null, '1');
 INSERT INTO `tbl_user` VALUES ('45', 'hatn', '2220dc2d04ab4611f78cb4615dc0aa25', 'Trương Ngọc Hà', '', '0000-00-00', '', '', '0917796898', '', '', '', '', '', '', '2019-11-04 16:41:26', '0000-00-00 00:00:00', '9', '0', '1');
 INSERT INTO `tbl_user` VALUES ('50', 'hungtv_daotao', '9b40eccc3434b426c10abb927e80c098', 'Trần Văn Hưng', '', '0000-00-00', '', '', '0972848718', '', '', null, null, null, null, '2020-04-08 15:50:43', '0000-00-00 00:00:00', '22', null, '1');
-INSERT INTO `tbl_user` VALUES ('51', 'tranhiep', 'b8a1099b57fb53d28fba7d5717e317ea', 'Trần Viết Hiệp', '', '0000-00-00', '', '', '0969549903', '', 'tranviethiepdz@gmail.com', null, null, null, null, '2020-04-08 15:50:43', '2021-04-05 06:25:19', '9', null, '1');
+INSERT INTO `tbl_user` VALUES ('51', 'tranhiep', 'b8a1099b57fb53d28fba7d5717e317ea', 'Trần Viết Hiệp', '', '0000-00-00', '', '', '0969549903', '', 'tranviethiepdz@gmail.com', null, null, null, null, '2020-04-08 15:50:43', '2021-04-05 06:12:32', '9', null, '1');
 INSERT INTO `tbl_user` VALUES ('53', 'test', 'b8a1099b57fb53d28fba7d5717e317ea', 'test', '', '0000-00-00', '', '', '09695499991', '', '', null, null, null, null, '2021-03-22 10:49:14', '2021-03-22 10:50:12', '33', null, '1');
 
 -- ----------------------------
@@ -4988,17 +5000,17 @@ INSERT INTO `tbl_user` VALUES ('53', 'test', 'b8a1099b57fb53d28fba7d5717e317ea',
 DROP TABLE IF EXISTS `tbl_user_group`;
 CREATE TABLE `tbl_user_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `par_id` int(11) DEFAULT '0',
+  `par_id` int(11) DEFAULT 0,
   `path` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `intro` text COLLATE utf8_unicode_ci,
-  `permission` int(11) NOT NULL DEFAULT '0',
-  `config` text COLLATE utf8_unicode_ci,
+  `intro` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `permission` int(11) NOT NULL DEFAULT 0,
+  `config` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `isroot` tinyint(4) DEFAULT NULL,
-  `isadmin` int(11) NOT NULL DEFAULT '0',
-  `issale` tinyint(4) DEFAULT '0',
-  `isstore` tinyint(4) DEFAULT '0',
-  `isactive` int(11) DEFAULT '1',
+  `isadmin` int(11) NOT NULL DEFAULT 0,
+  `issale` tinyint(4) DEFAULT 0,
+  `isstore` tinyint(4) DEFAULT 0,
+  `isactive` int(11) DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -5011,3 +5023,34 @@ INSERT INTO `tbl_user_group` VALUES ('18', '9', '9_18', 'Admin', 'Admin', '41938
 INSERT INTO `tbl_user_group` VALUES ('21', '18', '9_18_21', 'Phòng kế toán', 'Phòng kế toán', '2147328', '', '0', '0', '0', '0', '1');
 INSERT INTO `tbl_user_group` VALUES ('23', '18', '9_18_23', 'Phòng công tác HSSV', 'Phòng công tác HSSV', '3', '', '0', '0', '0', '0', '1');
 INSERT INTO `tbl_user_group` VALUES ('24', '21', '9_18_21_24', 'Trưởng phòng kế toán', 'Trưởng phòng kế toán', '2122752', '', '0', '0', '0', '0', '1');
+
+-- ----------------------------
+-- Table structure for tbl_working_log
+-- ----------------------------
+DROP TABLE IF EXISTS `tbl_working_log`;
+CREATE TABLE `tbl_working_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_hoso` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
+  `masv` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
+  `date` int(11) DEFAULT NULL,
+  `noidung` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
+  `ketqua` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
+  `finish` tinyint(1) DEFAULT NULL,
+  `author` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT '',
+  `cdate` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of tbl_working_log
+-- ----------------------------
+INSERT INTO `tbl_working_log` VALUES ('1', '1599788697', '20AUM114476', '1617555600', 'Sinh viên #20AUM114476 cập nhật công việc', 'Hoàn thành', '1', 'tranhiep', '1617617036');
+INSERT INTO `tbl_working_log` VALUES ('2', '1599788697', '20AUM114476', '1617642000', 'Sinh viên #20AUM114476 thêm kế hoạch công việc', '', '0', 'tranhiep', '1617617036');
+INSERT INTO `tbl_working_log` VALUES ('3', '1599788697', '20AUM114476', '1617555600', 'Sinh viên #20AUM114476 cập nhật công việc', 'Hoàn thành', '1', 'tranhiep', '1617617267');
+INSERT INTO `tbl_working_log` VALUES ('4', '1599788697', '20AUM114476', '1617642000', 'Sinh viên #20AUM114476 thêm kế hoạch công việc', '', '0', 'tranhiep', '1617617267');
+INSERT INTO `tbl_working_log` VALUES ('5', '1599788697', '20AUM114476', '1617555600', 'Sinh viên #20AUM114476 cập nhật công việc', 'Hoàn thành', '1', 'tranhiep', '1617617379');
+INSERT INTO `tbl_working_log` VALUES ('6', '1599788697', '20AUM114476', '1617642000', 'Sinh viên #20AUM114476 thêm kế hoạch công việc', '', '0', 'tranhiep', '1617617379');
+INSERT INTO `tbl_working_log` VALUES ('7', '1599788697', '20AUM116477', '1617555600', 'Sinh viên #20AUM116477 cập nhật công việc', 'Chưa liên lạc được', '0', 'tranhiep', '1617617505');
+INSERT INTO `tbl_working_log` VALUES ('8', '1599788697', '20AUM116477', '0', 'Sinh viên #20AUM116477 thêm kế hoạch công việc', '', '0', 'tranhiep', '1617617505');
+INSERT INTO `tbl_working_log` VALUES ('9', '1599788697', '20AUM116477', '1617555600', 'Sinh viên #20AUM116477 cập nhật công việc', 'Không liên lạc được', '0', 'tranhiep', '1617617602');
+INSERT INTO `tbl_working_log` VALUES ('10', '1599788697', '20AUM116477', '0', 'Sinh viên #20AUM116477 thêm kế hoạch công việc', '', '0', 'tranhiep', '1617617602');

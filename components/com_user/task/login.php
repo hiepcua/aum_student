@@ -6,7 +6,7 @@ if(isset($_POST['txtuser'])){
 	$pass=addslashes($_POST['txtpass']);
 	global $UserLogin;
 	if($UserLogin->LOGIN($user,$pass)==true)
-		echo '<script language="javascript">window.location.href="'.ROOTHOST.'/index.php"</script>';
+		echo '<script language="javascript">window.location.href="'.ROOTHOST.'index.php"</script>';
 	else
 		$err='<font color="red">Đăng nhập không thành công.</font>';
 }

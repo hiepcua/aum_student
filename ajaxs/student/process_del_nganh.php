@@ -9,11 +9,9 @@ require_once('../../libs/cls.users.php');
 $objuser=new CLS_USER;
 if(!$objuser->isLogin()) die("E01");
 
-$id_hoso = isset($_POST['hoso']) && $_POST['hoso']!='' ? antiData($_POST['hoso']) : '';
-$nganh = isset($_POST['nganh']) && $_POST['nganh']!='' ? antiData($_POST['nganh']) : '';
-
-if($id_hoso !== '' && $nganh !== ''){
-	SysDel('tbl_dangky_tuyensinh', "id_hoso='".$id_hoso."' AND id_nganh='".$nganh."'");
+$id_dkts = isset($_POST['id_dkts']) && $_POST['id_dkts']!='' ? antiData($_POST['id_dkts']) : '';
+if($id_dkts !== ''){
+	SysDel('tbl_dangky_tuyensinh', "id='".$id_dkts."'");
 	die('success');
 }
 ?>

@@ -51,7 +51,7 @@ $_SESSION["SV$ma"]['TAB_KYLUAT'] = json_decode($r['kyluat'],true);
 
 $objts = new CLS_TUYENSINH;
 $objts->getList(" AND id_hoso='$ma' ");
-$id_khoa = $id_he = $id_nganh=''; $id_dky = 0;
+$id_khoa = $id_he = $id_nganh=''; $id_dky = 0;$_id_hoso = $ma;
 $masv = $ptxt = $diadiem = $sbd = '';
 $mon1 = $mon2 = $mon3 = '';$id_dky=$tongdiem=0;
 $readonly = "";
@@ -205,28 +205,26 @@ if($objts->Num_rows()>0) {
 										$hoso = $value['id_hoso'];
 										if($status=='' || $status==null || $status=='L0') 
 											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-default change_status">'.$STATUS_DKTS['L0'].'</label>';
-										elseif($status=='TS2') 
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-warning change_status">'.$STATUS_DKTS[$status].'</label>';
-										elseif($status=='TS3') 
+										elseif($status=='L1') 
 											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-info change_status">'.$STATUS_DKTS[$status].'</label>';
-										elseif($status=='TS4')
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-primary change_status">'.$STATUS_DKTS[$status].'</label>';
-										elseif($status=='TS5')
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-danger change_status">'.$STATUS_DKTS[$status].'</label>'; 
-										elseif($status=='HS1')
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-success change_status">'.$STATUS_DKTS[$status].'</label>';
-										elseif($status=='HS2')
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-success change_status">'.$STATUS_DKTS[$status].'</label>';
-										elseif($status=='HS3')
+										elseif($status=='L2') 
+											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-info change_status">'.$STATUS_DKTS[$status].'</label>';
+										elseif($status=='L3')
+											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-info change_status">'.$STATUS_DKTS[$status].'</label>';
+										elseif($status=='L4')
+											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-warning change_status">'.$STATUS_DKTS[$status].'</label>'; 
+										elseif($status=='L5')
 											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-warning change_status">'.$STATUS_DKTS[$status].'</label>';
-										elseif($status=='HS4')
+										elseif($status=='L8')
+											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-success change_status">'.$STATUS_DKTS[$status].'</label>';
+										elseif($status=='L9A')
+											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-warning change_status">'.$STATUS_DKTS[$status].'</label>';
+										elseif($status=='L9B')
 											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-danger change_status">'.$STATUS_DKTS[$status].'</label>';
-										if($id==null) 
-											$str='<label class="label label-default">Hồ sơ chưa ĐK ngành</label>';
 
 										echo '<tr dataid="'.$ma.'">';
 										echo '<td align="center">'.$i.'</td>';
-										echo '<td align="center"><a href="javascript:void(0)" data-hoso="'.$value['id_hoso'].'" data-nganh="'.$value['id_nganh'].'" class="xoa_nganh cred">Xóa</a></td>';
+										echo '<td align="center"><a href="javascript:void(0)" data-id_dkts="'.$value['id'].'" class="xoa_nganh cred">Xóa</a></td>';
 
 										echo '<td align="center">';
 										if(strlen($value['id_khoa'])>0) echo $_KHOA['K'.$value['id_khoa']];
@@ -254,20 +252,20 @@ if($objts->Num_rows()>0) {
 
 										echo '<td align="center">'.$str.'</td>';
 
-										if(in_array($status, array('HS1','HS2','HS3'))){
-											echo '<td align="center"><a href="javascript:void(0)" dataid="'.$value['id_hoso'].'" class="chuyen_lop label label-primary">Chuyển lớp</a></td>';
-											echo '<td align="center"><a href="'.ROOTHOST.'student/diem/'.$value['id_hoso'].'" dataid="'.$value['id_hoso'].'" class="label label-primary">Kết quả học tập</a></td>';
-											echo '<td align="center"><a href="'.ROOTHOST.'student/hocphi/'.$value['id_hoso'].'" target="_blank" class="label label-primary">Ql học phí</a></td>';
+										if(in_array($status, array('L2','L3','L4','L5'))){
+											echo '<td align="center"><a href="javascript:void(0)" dataids="'.$value['id'].'-'.$value['id_khoa'].'-'.$value['id_he'].'-'.$value['id_nganh'].'" class="chuyen_lop label label-primary">Chuyển lớp</a></td>';
+											echo '<td align="center"><a href="'.ROOTHOST.'student/diem/'.$value['masv'].'" class="label label-primary">Kết quả học tập</a></td>';
+											echo '<td align="center"><a href="'.ROOTHOST.'student/hocphi/'.$value['masv'].'" target="_blank" class="label label-primary">Ql học phí</a></td>';
 											echo '<td align="center"><a href="'.ROOTHOST.'?com=student&task=qlhoctap&manganh='.$value['id_nganh'].'&malop='.$value['malop'].'&masv='.$value['masv'].'" target="_blank" class="label label-primary">Ql học tập</a></td>';
-										}elseif(in_array($status, array('TS1','TS2','TS3','TS4','TS5'))){
+										}elseif(in_array($status, array('L0','L1'))){
 											echo '<td></td>';
 											echo '<td></td>';
 											echo '<td></td>';
 											echo '<td></td>';
-										}elseif(in_array($status, array('HS4'))){
+										}elseif(in_array($status, array('L8','L9A','L9B'))){
 											echo '<td></td>';
-											echo '<td align="center"><a href="'.ROOTHOST.'student/diem/'.$value['id_hoso'].'" dataid="'.$value['id_hoso'].'" class="label label-primary">Kết quả học tập</a></td>';
-											echo '<td align="center"><a href="'.ROOTHOST.'student/hocphi/'.$value['id_hoso'].'" target="_blank" class="label label-primary">Ql học phí</a></td>';
+											echo '<td align="center"><a href="'.ROOTHOST.'student/diem/'.$value['id_hoso'].'" dataid="'.$value['masv'].'" class="label label-primary">Kết quả học tập</a></td>';
+											echo '<td align="center"><a href="'.ROOTHOST.'student/hocphi/'.$value['masv'].'" target="_blank" class="label label-primary">Ql học phí</a></td>';
 											echo '<td align="center"><a href="'.ROOTHOST.'?com=student&task=qlhoctap&manganh='.$value['id_nganh'].'&malop='.$value['malop'].'&masv='.$value['masv'].'" target="_blank" class="label label-primary">Ql học tập</a></td>';
 										}else{
 											echo '<td></td>';
@@ -286,16 +284,94 @@ if($objts->Num_rows()>0) {
 			</div>
 		</div>
 	</section>
+
+	<!-- Card lịch sử tương tác -->
+	<div class="page-bar" style="margin-bottom: 10px;">
+		<div class="page-title-breadcrumb">
+			<div class="pull-left">
+				<div class="page-title tab-title">
+					<ul>
+						<li class="active">Lịch sử tương tác</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<section class="card" style="position: unset;">
+		<div class="card-body">
+			<div class="card-block">
+				<div class="media">
+					<div class="table-responsive">
+						<table class="list table table-striped table-bordered">
+							<thead>
+								<tr class="header">
+									<th class="text-center">STT</th>
+									<th class="text-center">Mã HS</th>
+									<th class="text-center">Mã SV</th>
+									<th class="text-center">Ngày</th>
+									<th>Nội dung tương tác</th>
+									<th class="text-center">Kết quả</th>
+									<th class="text-center">Ngày cập nhật</th>
+									<th class="text-center">Hoàn thành</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								$MAX_ROWS = 50;
+								$total_rows = SysCount('tbl_working_log', "AND id_hoso='".$_id_hoso."'");
+								$max_pages = ceil($total_rows/$MAX_ROWS);
+								$cur_page = getCurentPage($max_pages);
+								$start = ($cur_page - 1) * $MAX_ROWS;
+								$limit = ' LIMIT '.$start.','. $MAX_ROWS;
+
+								$res_workinglog = SysGetList('tbl_working_log',array(),'AND id_hoso="'.$_id_hoso.'"'.$limit);
+								if(count($res_workinglog)>0){
+									foreach ($res_workinglog as $key => $value) {
+										$i = $key+1;
+										$masv = $value['masv'];
+										$id_hoso = $value['id_hoso'];
+										$date = date('d-m-Y', $value['date']);
+										$cdate = date('d-m-Y H:i', $value['cdate']);
+										$finish = $value['finish']==1 ? '<i class="fa fa-check cgreen" aria-hidden="true"></i>' : '<i class="fa fa-times cgray" aria-hidden="true"></i>';
+										
+										echo '<tr>';
+										echo '<td align="center">'.$i.'</td>';
+										echo '<td align="center">'.$id_hoso.'</td>';
+										echo '<td align="center">'.$masv.'</td>';
+										echo '<td align="center">'.$date.'</td>';
+										echo '<td>'.$value['noidung'].'</td>';
+										echo '<td align="center">'.$value['ketqua'].'</td>';
+										echo '<td align="center">'.$cdate.'</td>';
+										echo '<td align="center">'.$finish.'</td>';
+										echo '</tr>';
+									}
+								}
+								?>
+							</tbody>
+						</table>
+
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Footer_list">
+							<tr><td align="center">
+								<?php paging($total_rows,$MAX_ROWS,$cur_page); ?>
+							</td></tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- /.End Card lịch sử tương tác -->
 </div>
 
 <script>
 	$(document).ready(function(){
 		$(".chuyen_lop").click(function(){
-			var id_hoso = $(this).attr('dataid');
+			var ids = $(this).attr('dataids');
 			var url = "<?php echo ROOTHOST;?>ajaxs/lop/frm_chuyen_lop.php";
-			$.post(url,{'ma':id_hoso},function(req){
-				$('#myModalPopup .modal-dialog').removeClass('modal-lg');
-				$('#myModalPopup .modal-dialog').addClass('modal-sm');
+			$.post(url,{'ids':ids},function(req){
+				$('#myModalPopup .modal-dialog').removeClass('modal-lg, modal-sm');
+				$('#myModalPopup .modal-dialog').addClass('modal-md');
 				$('#myModalPopup .modal-title').html('Thông tin chuyển lớp');
 				$('#myModalPopup .modal-body').html(req);
 				$('#myModalPopup').modal('show');
@@ -314,9 +390,8 @@ if($objts->Num_rows()>0) {
 		})
 
 		$('.xoa_nganh').click(function(){
-			var id_hoso = $(this).attr('data-hoso');
-			var id_nganh = $(this).attr('data-nganh');
-			xoa_nganh(id_hoso, id_nganh);
+			var id_dkts = $(this).attr('data-id_dkts');
+			xoa_nganh(id_dkts);
 		});
 
 		$('.change_status').click(function(){
@@ -384,15 +459,14 @@ if($objts->Num_rows()>0) {
 		}
 	}
 
-	function xoa_nganh(id_hoso, id_nganh){
+	function xoa_nganh(id_dkts){
 		var _url = '<?php echo ROOTHOST;?>ajaxs/student/process_del_nganh.php',
 		_data = {
-			'hoso': id_hoso,
-			'nganh': id_nganh,
+			'id_dkts': id_dkts,
 		};
 
-		if(id_hoso.length == 0 ||id_nganh.length == 0){
-			showMess('Không xóa được, do thiếu dữ liệu', 'error');
+		if(id_dkts.length == 0){
+			showMess('Bạn chưa chọn ngành nào', 'error');
 		}else{
 			if(confirm('Bạn có chắc muốn xóa ngành đã đăng ký này?')){
 				$.post(_url, _data, function(req){

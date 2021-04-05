@@ -34,7 +34,7 @@ $STATUS_DKTS = array(
 	"L5" 	=> 'L5 - Hoãn thi',
 	"L8" 	=> 'L8 - Tốt nghiệp',
 	"L9A" 	=> 'L9A - Bảo lưu',
-	"L9B" 	=> 'l9B - Bỏ học',
+	"L9B" 	=> 'L9B - Bỏ học',
 );
 
 $STATUS_DKTS2 = array(
