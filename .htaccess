@@ -51,7 +51,7 @@ RewriteRule ^student/add/?$ 					index.php?com=student&task=add
 RewriteRule ^student/hoso/?$ 					index.php?com=student&task=hoso   [QSA]
 RewriteRule ^student/import/?$ 					index.php?com=student&task=import
 RewriteRule ^student/qlhocphi/?$  				index.php?com=student&task=qlhocphi   [QSA]
-RewriteRule ^student/qlhoctap/?$  				index.php?com=student&task=qlhoctap
+RewriteRule ^student/qlhoctap/?$  				index.php?com=student&task=qlhoctap   [QSA]
 RewriteRule ^student/edit/([0-9A-Za-z]+)?$ 		index.php?com=student&task=edit&id=$1  [QSA]
 RewriteRule ^student/delete/([0-9A-Za-z]+)?$ 	index.php?com=student&task=delete&id=$1  [QSA]
 RewriteRule ^student/profile/([0-9A-Za-z]+)?$  	index.php?com=student&task=profile&id=$1  [QSA]
