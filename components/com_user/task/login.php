@@ -18,7 +18,7 @@ if(isset($_POST['txtuser'])){
 		<div class="body">
 			<div class="form-group"><br><br></div>
 			<div class="form-group text-center">
-				<img src="<?php echo ROOTHOST;?>images/logo/logo-eea.png" height="100" style="margin:auto"/>
+				<img src="<?php echo ROOTHOST;?>images/logo/logo3.png" height="100" style="margin:auto"/>
 			</div>
 			<div class="clearfix"><hr style="margin:0 0 10px; padding:0"></div>
 			<?php if($err!="") { ?>
