@@ -146,25 +146,23 @@ $html ='<style>
 <?php
 if(!$UserLogin->isLogin()){
 	include_once(COM_PATH."com_user/task/login.php");
-}else{ 
-	echo '<h1 style="text-center">Hệ thống đang cập nhật</h1>';
-	echo '<a href="javascript:void(0)" id="logout">Đăng xuất</a>';
+}else{
 	?>
-	<?php //include('modules/mod_top_menu.php');?>
-	<!-- <div id='site_body'>
+	<?php include('modules/mod_top_menu.php');?>
+	<div id='site_body'>
 		<div id='site_main' style="margin-left:0px!important">
-			<div id='main_inner'> -->
+			<div id='main_inner'>
 			<?php
-			// $path_com="components/com_$COM/layout.php";
-			// if(is_file($path_com)) include($path_com);
+			$path_com="components/com_$COM/layout.php";
+			if(is_file($path_com)) include($path_com);
 			?>
-			<!-- </div>
+			</div>
 		</div>
 	</div>
 	<div id="myModalPopup" class="modal fade" role="dialog">
-		<div class="modal-dialog"> -->
+		<div class="modal-dialog">
 			<!-- Modal content-->
-			<!-- <div class="modal-content">
+			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title"></h4>
@@ -173,7 +171,7 @@ if(!$UserLogin->isLogin()){
 			</div>
 		</div>
 	</div>
-	<div class="loading"></div> -->
+	<div class="loading"></div>
 <?php } ?>
 <script>
 $(document).ready(function(){
