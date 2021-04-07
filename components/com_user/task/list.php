@@ -205,8 +205,9 @@ $_phone = isset($_GET['phone']) ? antiData($_GET['phone']) : '';
 						var url='<?php echo ROOTHOST_ADMIN;?>ajaxs/user/del_group.php'; 
 						$.get(url,{'id':_gid},function(req){
 							if(req=='E01'){showMess('Bạn chưa đăng nhập, xin vui lòng đăng nhập!','error');}
-							if(req=='E02'){showMess('Không có quyền xóa nhóm này!','error');}
-							$('.user_group_list').html(req);
+							else if(req=='E02'){showMess('Không có quyền xóa nhóm này!','error');}
+							else if(req=='E03'){showMess('Không được xóa nhóm có người dùng!','error');}
+							else{$('.user_group_list').html(req);}
 						});
 						return false;
 					} 

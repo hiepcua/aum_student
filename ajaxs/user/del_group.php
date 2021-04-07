@@ -15,6 +15,10 @@ $check_permis_group = $objuser->Permission('gusers');
 if($check_permission==false || $check_permis_group==false) die('E02');
 
 $id=isset($_GET['id'])?(int)$_GET['id']:0;
+
+$res_user = SysGetList('tbl_user', array(), 'AND gid='.$id);
+if(count($res_user)>0) die('E03');
+
 $objuser->getListGroup(" AND id=$id");
 $r=$objuser->Fetch_Assoc();
 
