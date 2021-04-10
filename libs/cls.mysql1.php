@@ -73,7 +73,7 @@ class CLS_MYSQL{
 			@mysql_query('SET character_set_results=utf8');
 			@mysql_query('SET collation_connection=utf8_unicode_ci');
 			$result=mysql_query($sql,$this->conn);
-			$this->lastid=mysql_insert_id();
+			$this->lastid=mysql_insert_id($this->conn);
 			$this->disconnect();
 			return $result;
 		}
