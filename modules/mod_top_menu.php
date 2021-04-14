@@ -6,7 +6,7 @@ $com=isset($_GET['com'])?strip_tags(trim($_GET['com'])):'frontpage';
 ?>
 <div class='bgColor' id='site_header'>
 	<div class='logo pull-left'><a href="<?php echo ROOTHOST;?>">
-		<img src="<?php echo ROOTHOST;?>images/logo/logo-eea-small-white.png" class="img-responsive">
+		<img src="<?php echo ROOTHOST;?>images/logo/logo22.png" class="img-responsive">
 	</a></div>
 	<div class='header_content'>
 		<div class="navbar-container container-fluid">

@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : localhost
 Source Server Version : 50505
 Source Host           : localhost:3306
-Source Database       : edaotao2
+Source Database       : aum_student
 
 Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2021-04-06 15:40:06
+Date: 2021-04-14 11:12:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -118,7 +118,7 @@ CREATE TABLE `tbl_configsite` (
 -- ----------------------------
 -- Records of tbl_configsite
 -- ----------------------------
-INSERT INTO `tbl_configsite` VALUES ('1', '0', 'AUM - EDU - HỆ THỐNG QUẢN TRỊ ĐÀO TẠO', 'Hà Nội', '100000', '100000', '260000', '260000', '0', '0', '1000000', '800000', '500000');
+INSERT INTO `tbl_configsite` VALUES ('1', '0', 'AUM - STUDENT - HỆ THỐNG QUẢN LÝ HỌC VIÊN', 'Hà Nội', '100000', '100000', '260000', '260000', '0', '0', '1000000', '800000', '500000');
 
 -- ----------------------------
 -- Table structure for tbl_dangky_note
@@ -4991,7 +4991,7 @@ INSERT INTO `tbl_user` VALUES ('48', 'thaott_daotao', '00cd5ba0e25fd9ae5b8901974
 INSERT INTO `tbl_user` VALUES ('47', 'demodaotao', '453b885e6c7c3683041ab4bd8f717f46', 'Đào tạo', '', null, '', '', '012345678', '', '', null, null, null, null, '2020-02-27 11:11:55', null, '22', null, '1');
 INSERT INTO `tbl_user` VALUES ('45', 'hatn', '2220dc2d04ab4611f78cb4615dc0aa25', 'Trương Ngọc Hà', '', null, '', '', '0917796898', '', '', '', '', '', '', '2019-11-04 16:41:26', null, '9', '0', '1');
 INSERT INTO `tbl_user` VALUES ('50', 'hungtv_daotao', '9b40eccc3434b426c10abb927e80c098', 'Trần Văn Hưng', '', null, '', '', '0972848718', '', '', null, null, null, null, '2020-04-08 15:50:43', null, '22', null, '1');
-INSERT INTO `tbl_user` VALUES ('51', 'tranhiep', 'b8a1099b57fb53d28fba7d5717e317ea', 'Trần Viết Hiệp', '', null, '', '', '0969549903', '', 'tranviethiepdz@gmail.com', null, null, null, null, '2020-04-08 15:50:43', '2021-04-06 03:00:49', '9', null, '1');
+INSERT INTO `tbl_user` VALUES ('51', 'tranhiep', 'b8a1099b57fb53d28fba7d5717e317ea', 'Trần Viết Hiệp', '', null, '', '', '0969549903', '', 'tranviethiepdz@gmail.com', null, null, null, null, '2020-04-08 15:50:43', '2021-04-14 11:12:20', '9', null, '1');
 INSERT INTO `tbl_user` VALUES ('53', 'test', 'b8a1099b57fb53d28fba7d5717e317ea', 'test', '', null, '', '', '09695499991', '', '', null, null, null, null, '2021-03-22 10:49:14', '2021-03-22 10:50:12', '33', null, '1');
 
 -- ----------------------------
