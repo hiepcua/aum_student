@@ -10,16 +10,16 @@ require_once('../../libs/cls.users.php');
 $objuser=new CLS_USER;
 if(!$objuser->isLogin()) die("E01");
 $user = $objuser->getInfo('username');
-if(isset($_POST['ma'])) {
-	$ma = isset($_POST['ma'])?addslashes(strip_tags($_POST['ma'])):'';
+if(isset($_POST['masv'])) {
+	$masv = isset($_POST['masv'])?addslashes(strip_tags($_POST['masv'])):'';
 	$phongthi = isset($_POST['phongthi'])?addslashes(strip_tags($_POST['phongthi'])):'';
 	
 	$obj = new CLS_MYSQL; $obj->Exec("BEGIN");
-	$sql = "UPDATE tbl_dangky_tuyensinh SET mdate=".time().",phongthi='$phongthi',author='$user' WHERE id_hoso='$ma'";
+	$sql = "UPDATE tbl_dangky_tuyensinh SET mdate=".time().",phongthi='$phongthi',author='$user' WHERE masv='$masv'";
 	$result1 = $obj->Exec($sql);//echo $sql;
 	
 	$sql = "INSERT INTO tbl_notify (id_hoso,masv,notes,cdate,author) 
-	VALUES('$ma','','Hồ sơ #$ma thiết lập phòng thi: $sbd',".time().",'$user')";
+	VALUES('','$masv','Hồ sơ #$masv thiết lập phòng thi: $sbd',".time().",'$user')";
 	$result2 = $obj->Exec($sql);
 	if($result1 && $result2) {
 		$obj->Exec("COMMIT"); echo "success";

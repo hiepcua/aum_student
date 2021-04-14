@@ -107,6 +107,7 @@ ORDER BY a.id DESC, a.id_nganh ASC LIMIT $start,".MAX_ROWS;
 					$obj->Query($sql);
 					while($r=$obj->Fetch_Assoc()) { 
 						$i++;
+						$masv = $r['masv'];
 						$id_dky = $r['ma'];
 						$id_hoso = $r['ma'];
 						$dataids = $r['id'].'-'.$r['id_khoa'].'-'.$r['id_he'].'-'.$r['id_nganh'];
@@ -124,10 +125,10 @@ ORDER BY a.id DESC, a.id_nganh ASC LIMIT $start,".MAX_ROWS;
 							<td dataid="<?php echo $id_hoso;?>"><?php if(isset($_KHOA['K'.$r['id_khoa']])) echo $_KHOA['K'.$r['id_khoa']];?></td>
 							<td dataid="<?php echo $id_hoso;?>"><?php if(isset($_HE['H'.$r['id_he']])) echo $_HE['H'.$r['id_he']];?></td>
 							<td dataid="<?php echo $id_hoso;?>" align="center">
-								<input type="text" name="nhap_sbd" value='<?php echo $r['sbd'];?>' class="nhap_sbd form-control" dataid="<?php echo $id_hoso;?>" style="width:100px"/>
+								<input type="text" name="nhap_sbd" value='<?php echo $r['sbd'];?>' class="nhap_sbd form-control" dataid="<?php echo $masv;?>" style="width:100px"/>
 							</td>
 							<td dataid="<?php echo $id_hoso;?>" align="center">
-								<input type="text" name="phongthi" value='<?php echo $r['phongthi'];?>' class="phong_thi form-control" style="width:100px" dataid="<?php echo $id_hoso;?>" datadk="<?php echo $id_dky;?>"/>
+								<input type="text" name="phongthi" value='<?php echo $r['phongthi'];?>' class="phong_thi form-control" style="width:100px" dataid="<?php echo $masv;?>"/>
 							</td>
 						</tr>
 					<?php } ?>
@@ -149,11 +150,11 @@ ORDER BY a.id DESC, a.id_nganh ASC LIMIT $start,".MAX_ROWS;
 			}else {
 				$(this).removeClass('novalid');
 				var sbd=$(this).val();
-				var ma=$(this).attr('dataid');
+				var masv=$(this).attr('dataid');
 				var url = "<?php echo ROOTHOST;?>ajaxs/tuyensinh/process_sbd.php";
-				$.post(url,{'sbd':sbd,'ma':ma},function(req){
-				window.location.reload();
-			})
+				$.post(url,{'sbd':sbd,'masv':masv},function(req){
+					window.location.reload();
+				})
 			}
 		}
 	})
@@ -164,12 +165,11 @@ ORDER BY a.id DESC, a.id_nganh ASC LIMIT $start,".MAX_ROWS;
 			}else {
 				$(this).removeClass('novalid');
 				var phongthi=$(this).val();
-				var ma=$(this).attr('dataid');
+				var masv=$(this).attr('dataid');
 				var url = "<?php echo ROOTHOST;?>ajaxs/tuyensinh/process_phongthi.php";
-				$.post(url,{'phongthi':phongthi,'ma':ma},function(req){
-				//console.log(req);
-				window.location.reload();
-			})
+				$.post(url,{'phongthi':phongthi,'masv':masv},function(req){
+					window.location.reload();
+				})
 			}
 		}
 	})

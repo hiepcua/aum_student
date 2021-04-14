@@ -13,15 +13,22 @@ require_once('../../libs/cls.tuyensinh.php');
 
 $objuser=new CLS_USER;
 if(!$objuser->isLogin()) die("E01");
-$ma = isset($_POST['ma']) ? htmlentities(strip_tags($_POST['ma'])) : '';
-if($ma == '') die('Chưa lựa chọn hồ sơ nào');
 
-$objhs = new CLS_HS;
-$name = $objhs->getFullNameByInfo('ma',$ma);
+$id_dkts = isset($_POST['id_dkts']) ? htmlentities(strip_tags($_POST['id_dkts'])) : '';
+$id_hoso = isset($_POST['id_hoso']) ? htmlentities(strip_tags($_POST['id_hoso'])) : '';
+
+
+// Get ho_dem and ten of hocsinh
+$name='';
+$res_hocsinh = SysGetList('tbl_hocsinh', array(), 'AND ma='.$id_hoso);
+if(count($res_hocsinh)>0){
+	$res_hocsinh = $res_hocsinh[0];
+	$name = $res_hocsinh['ho_dem'].' '.$res_hocsinh['name'];
+}
 
 // Get ngành đã đăng ký
 $arr_nganh_registed = array();
-$res_nganh_registed = SysGetList('tbl_dangky_tuyensinh', array(), 'AND id_hoso="'.$ma.'"');
+$res_nganh_registed = SysGetList('tbl_dangky_tuyensinh', array(), 'AND id_hoso="'.$id_hoso.'"');
 if(count($res_nganh_registed)>0){
 	foreach ($res_nganh_registed as $key => $value) {
 		$arr_nganh_registed[] = $value['id_nganh'];
@@ -32,7 +39,7 @@ if(count($res_nganh_registed)>0){
 	<div class="col-md-6 col-xs-12">
 		<label class="col-md-4">ID Hồ sơ</label>
 		<div class="col-md-8">
-			<input type="text" id="id_hoso" value="<?php echo $ma;?>" readonly class="form-control" />
+			<input type="text" id="id_hoso" value="<?php echo $id_hoso;?>" readonly class="form-control" />
 		</div>
 	</div>
 	<div class="col-md-6 col-xs-12">
@@ -121,7 +128,6 @@ if(count($res_nganh_registed)>0){
 				showLoading();
 				$.post(url,{'id_hoso':id_hoso,'ma_nganh':ma_nganh,'bac':bac,'khoa':khoa,
 					'ptxt':_ptxt,'diadiem':_diadiem},function(req){
-						// console.log(req);
 						hideLoading();
 						if(req=="E01") showMess("Vui lòng đăng nhập hệ thống","error");
 						else if(req=="success"){
