@@ -4,4 +4,4 @@ define('HOSTNAME','localhost');
 define('DB_USERNAME','root');
 define('DB_PASSWORD','');
 define('DB_PORT','');
-define('DB_DATANAME','edaotao2');
+define('DB_DATANAME','aum_student');

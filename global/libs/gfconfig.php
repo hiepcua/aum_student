@@ -8,7 +8,7 @@ elseif (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED
 }
 $REQUEST_PROTOCOL = $isSecure ? 'https://' : 'http://';
 
-define('ROOTHOST','http://localhost/edaotao2/');
+define('ROOTHOST','http://localhost/aum_student/');
 // define('ROOTHOST',$REQUEST_PROTOCOL.$_SERVER['HTTP_HOST'].'/');
 define('WEBSITE',$REQUEST_PROTOCOL.$_SERVER['HTTP_HOST'].'/');
 define('ROOTHOST_ADMIN',ROOTHOST);
