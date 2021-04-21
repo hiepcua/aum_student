@@ -36,9 +36,9 @@ if(isset($_POST['ma'])){
 	$thanhphan	= isset($_POST['thanhphan'])?addslashes(strip_tags($_POST['thanhphan'])):'';
 	$doan		= isset($_POST['doan'])?addslashes(strip_tags($_POST['doan'])):'';
 	$dang		= isset($_POST['dang'])?addslashes(strip_tags($_POST['dang'])):'';
-	$ngayct		= !empty($_POST['ngayct'])?strtotime($_POST['ngayct']):null;
+	$ngayct		= isset($_POST['ngayct']) && $_POST['ngayct']!=='' ? strtotime($_POST['ngayct']):0;
 	$cmnd		= isset($_POST['cmnd'])?addslashes(strip_tags($_POST['cmnd'])):'';
-	$ngaycap	= !empty($_POST['ngaycap'])?strtotime($_POST['ngaycap']):null;
+	$ngaycap	= isset($_POST['ngaycap']) && $_POST['ngaycap']!=='' ? strtotime($_POST['ngaycap']):0;
 	$noicap		= isset($_POST['noicap'])?addslashes(strip_tags($_POST['noicap'])):'';
 	$stk		= isset($_POST['stk'])?addslashes(strip_tags($_POST['stk'])):'';
 	$email		= isset($_POST['email'])?addslashes(strip_tags($_POST['email'])):'';
@@ -83,21 +83,25 @@ if(isset($_POST['ma'])){
 	'$doan','$dang','$ngayct','$stk','$email','$ghichu',
 	'$qhgd','$qtht','$qthoc','$khenthuong','$kyluat',
 	'$partner','$author',$cdate,$cdate,1)";
-	$result1=$obj->Exec($sql); //echo $sql;
+	// echo $sql;
+	$result1=$obj->Exec($sql); 
 
 	$sql = "INSERT INTO tbl_dangky_tuyensinh (cdate,id_hoso,nhaphoc,author,status,isactive) 
-		VALUES($cdate,'$ma',1,'$user','L0',1)"; 
-	$result2 = $obj->Exec($sql); //echo $sql;
+	VALUES($cdate,'$ma',1,'$user','L0',1)"; 
+	// echo $sql;
+	$result2 = $obj->Exec($sql); 
 	
 	// dang ky note
 	$sql = "INSERT INTO tbl_dangky_note (id_hoso,masv,notes,cdate,author) 
 	VALUES('$ma','$masv','Hồ sơ #$ma ($ho_dem $name) tạo mới thành công',$cdate,'$user')";
-	$result4 = $obj->Exec($sql); //echo $sql;
+	// echo $sql;
+	$result4 = $obj->Exec($sql); 
 	
 	// notify
 	$sql = "INSERT INTO tbl_notify (id_hoso,masv,notes,cdate,author) 
 	VALUES('$ma','','Hồ sơ #$ma ($ho_dem $name) tạo mới thành công',$cdate,'$user')";
-	$result3 = $obj->Exec($sql); //echo $sql;
+	// echo $sql;
+	$result3 = $obj->Exec($sql);
 	
 	if($result1 && $result2 && $result3 && $result4) {
 		$obj->Exec("COMMIT"); echo $ma;

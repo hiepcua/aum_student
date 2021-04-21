@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50505
+Source Server         : student.aumsys.net
+Source Server Version : 50733
 Source Host           : localhost:3306
-Source Database       : aum_student
+Source Database       : admin_dbstudent
 
 Target Server Type    : MYSQL
-Target Server Version : 50505
+Target Server Version : 50733
 File Encoding         : 65001
 
-Date: 2021-04-14 11:12:43
+Date: 2021-04-15 00:42:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -70,8 +70,8 @@ DROP TABLE IF EXISTS `tbl_city`;
 CREATE TABLE `tbl_city` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `order` int(11) DEFAULT 0,
-  `isactive` tinyint(4) DEFAULT 1,
+  `order` int(11) DEFAULT '0',
+  `isactive` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -597,14 +597,14 @@ CREATE TABLE `tbl_dangky_tuyensinh` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cdate` int(11) DEFAULT NULL,
   `mdate` int(11) DEFAULT NULL,
-  `type` tinyint(4) DEFAULT 1 COMMENT '1: Chính quy 2:Chứng chỉ ngắn hạn',
+  `type` tinyint(4) DEFAULT '1' COMMENT '1: Chính quy 2:Chứng chỉ ngắn hạn',
   `id_khoa` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `id_he` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `id_nganh` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `id_hoso` bigint(20) DEFAULT NULL,
   `truong_thpt` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `diemtongket12` float DEFAULT NULL,
-  `xettuyen` tinyint(4) DEFAULT 1 COMMENT '0: thi ; 1: xét tuyển',
+  `xettuyen` tinyint(4) DEFAULT '1' COMMENT '0: thi ; 1: xét tuyển',
   `diadiemhoc` varchar(50) COLLATE utf8_unicode_ci DEFAULT '0' COMMENT '0: Cơ sở 1; 1: cơ sở 2',
   `masv` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sbd` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -612,14 +612,14 @@ CREATE TABLE `tbl_dangky_tuyensinh` (
   `mon1` decimal(10,1) DEFAULT NULL,
   `mon2` decimal(10,1) DEFAULT NULL,
   `mon3` decimal(10,1) DEFAULT NULL,
-  `dathi` tinyint(4) DEFAULT 0,
-  `trungtuyen` tinyint(4) DEFAULT -1,
-  `baoluu` tinyint(4) DEFAULT 0,
-  `nhaphoc` tinyint(4) DEFAULT 0,
+  `dathi` tinyint(4) DEFAULT '0',
+  `trungtuyen` tinyint(4) DEFAULT '-1',
+  `baoluu` tinyint(4) DEFAULT '0',
+  `nhaphoc` tinyint(4) DEFAULT '0',
   `date_nhaphoc` int(11) DEFAULT NULL,
   `malop` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `author` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `isactive` tinyint(4) DEFAULT 1,
+  `isactive` tinyint(4) DEFAULT '1',
   `status` varchar(4) COLLATE utf8_unicode_ci DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `idx_khoa_he_nganh` (`id_khoa`,`id_he`,`id_nganh`),
@@ -833,7 +833,7 @@ CREATE TABLE `tbl_dmhocphi` (
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `hocphi` int(11) DEFAULT NULL,
   `intro` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `all` int(11) DEFAULT 0,
+  `all` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `idx_he_nganh` (`id_he`,`id_nganh`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=221 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -854,7 +854,7 @@ CREATE TABLE `tbl_dmhoso` (
   `id_he` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `intro` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `all` int(11) DEFAULT 0,
+  `all` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -889,7 +889,7 @@ CREATE TABLE `tbl_giaovien` (
 DROP TABLE IF EXISTS `tbl_he`;
 CREATE TABLE `tbl_he` (
   `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `par_id` int(10) DEFAULT 1,
+  `par_id` int(10) DEFAULT '1',
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `hocphi` int(11) DEFAULT NULL,
   `hocphi_thilai` int(11) DEFAULT NULL,
@@ -897,7 +897,7 @@ CREATE TABLE `tbl_he` (
   `hocphi_hoclai` int(11) DEFAULT NULL,
   `hocphi_hocct` int(11) DEFAULT NULL,
   `sohocky` int(11) DEFAULT NULL,
-  `isactive` tinyint(4) DEFAULT 1,
+  `isactive` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1094,7 +1094,7 @@ CREATE TABLE `tbl_hocphi` (
   `ten_hp` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `type_hp` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
   `date_pay` int(11) DEFAULT NULL,
-  `ispay` tinyint(4) DEFAULT 0,
+  `ispay` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6523 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -2378,7 +2378,7 @@ DROP TABLE IF EXISTS `tbl_hocphi_note`;
 CREATE TABLE `tbl_hocphi_note` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `masv` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `hocphi_ids` text CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `hocphi_ids` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `money` int(11) DEFAULT NULL,
   `notes` varchar(255) DEFAULT NULL,
   `cdate` int(11) DEFAULT NULL,
@@ -2450,7 +2450,7 @@ INSERT INTO `tbl_hocphi_pay` VALUES ('37', '20AUM116477', '2000000', 'Đóng ti�
 DROP TABLE IF EXISTS `tbl_hocsinh`;
 CREATE TABLE `tbl_hocsinh` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `partner_id` int(11) DEFAULT 0,
+  `partner_id` int(11) DEFAULT '0',
   `ma` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `masv` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ho_dem` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -2458,7 +2458,7 @@ CREATE TABLE `tbl_hocsinh` (
   `nickname` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ngaysinh` int(11) DEFAULT NULL,
   `noisinh` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `gioitinh` tinyint(4) DEFAULT 1 COMMENT '0:nữ, 1:nam',
+  `gioitinh` tinyint(4) DEFAULT '1' COMMENT '0:nữ, 1:nam',
   `diachi` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `city` int(11) DEFAULT NULL,
   `dienthoai` varchar(12) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -2478,25 +2478,25 @@ CREATE TABLE `tbl_hocsinh` (
   `thanhphan` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `doan` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dang` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `ngayct` date DEFAULT NULL,
+  `ngayct` int(11) DEFAULT NULL,
   `stk` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `note` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dmhoso` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `qhgiadinh` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `qthoctap` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `qthoc` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `khenthuong` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `kyluat` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `note` text COLLATE utf8_unicode_ci,
+  `dmhoso` text COLLATE utf8_unicode_ci,
+  `qhgiadinh` text COLLATE utf8_unicode_ci,
+  `qthoctap` text COLLATE utf8_unicode_ci,
+  `qthoc` text COLLATE utf8_unicode_ci,
+  `khenthuong` text COLLATE utf8_unicode_ci,
+  `kyluat` text COLLATE utf8_unicode_ci,
   `partner` int(11) DEFAULT NULL,
   `cdate` int(11) DEFAULT NULL,
   `mdate` int(11) DEFAULT NULL,
   `author` varchar(255) COLLATE utf8_unicode_ci DEFAULT '50',
-  `brief` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `brief_full` tinyint(4) DEFAULT 0 COMMENT '0: Chưa check hồ sơ, 1: Check đủ hồ sơ, -1: Hồ sơ thiếu',
-  `status` tinyint(4) DEFAULT 0,
-  `xettuyen` tinyint(4) DEFAULT 0,
-  `isactive` tinyint(4) DEFAULT 1,
+  `brief` text COLLATE utf8_unicode_ci,
+  `brief_full` tinyint(4) DEFAULT '0' COMMENT '0: Chưa check hồ sơ, 1: Check đủ hồ sơ, -1: Hồ sơ thiếu',
+  `status` tinyint(4) DEFAULT '0',
+  `xettuyen` tinyint(4) DEFAULT '0',
+  `isactive` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=549 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -2701,12 +2701,12 @@ CREATE TABLE `tbl_hoctap` (
   `masv` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_monhoc` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `tinchi` int(11) DEFAULT NULL,
-  `type` tinyint(4) DEFAULT 0,
-  `status` int(11) DEFAULT -1 COMMENT 'chưa xét, 0:không đạt, 1:đạt, 2:thi lại, 3:thi cải thiện, 4:học lại, 5:học cải thiện',
-  `diem` text DEFAULT NULL,
+  `type` tinyint(4) DEFAULT '0',
+  `status` int(11) DEFAULT '-1' COMMENT 'chưa xét, 0:không đạt, 1:đạt, 2:thi lại, 3:thi cải thiện, 4:học lại, 5:học cải thiện',
+  `diem` text,
   `ketqua` float DEFAULT NULL,
   `ketqua2` float DEFAULT NULL,
-  `hoclai` tinyint(4) DEFAULT 0,
+  `hoclai` tinyint(4) DEFAULT '0',
   `mdate` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3302 DEFAULT CHARSET=utf8;
@@ -3476,9 +3476,9 @@ CREATE TABLE `tbl_hoctap_warning` (
 DROP TABLE IF EXISTS `tbl_khoa`;
 CREATE TABLE `tbl_khoa` (
   `id` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `type` tinyint(4) DEFAULT 1,
+  `type` tinyint(4) DEFAULT '1',
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `startDay` int(11) DEFAULT 1,
+  `startDay` int(11) DEFAULT '1',
   `quan` int(11) DEFAULT NULL,
   `hocphi` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -3500,7 +3500,7 @@ CREATE TABLE `tbl_khoa_nganh` (
   `id_khoa` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `id_nganh` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `id_he` varchar(50) COLLATE utf8_unicode_ci DEFAULT '1',
-  `note` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `note` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -3515,7 +3515,7 @@ DROP TABLE IF EXISTS `tbl_logs`;
 CREATE TABLE `tbl_logs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(255) DEFAULT NULL,
-  `config` text DEFAULT NULL,
+  `config` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -3534,9 +3534,9 @@ CREATE TABLE `tbl_lop` (
   `id_khoa` varchar(50) COLLATE utf8_unicode_ci DEFAULT '',
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `gvcn` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `permission` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `permission` text COLLATE utf8_unicode_ci,
   `cdate` int(11) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT 0,
+  `status` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -3559,7 +3559,7 @@ CREATE TABLE `tbl_monhoc` (
   `id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ttn` tinyint(4) DEFAULT NULL,
-  `intro` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `intro` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -3714,7 +3714,7 @@ CREATE TABLE `tbl_notify` (
   `notes` varchar(255) DEFAULT NULL,
   `cdate` int(11) DEFAULT NULL,
   `author` varchar(255) DEFAULT NULL,
-  `isactive` int(11) DEFAULT 0,
+  `isactive` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4265 DEFAULT CHARSET=utf8;
 
@@ -4944,7 +4944,7 @@ CREATE TABLE `tbl_partner` (
   `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `diachi` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `note` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `note` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -4977,7 +4977,7 @@ CREATE TABLE `tbl_user` (
   `lastlogin` datetime DEFAULT NULL,
   `gid` int(11) NOT NULL,
   `isroot` tinyint(4) DEFAULT NULL,
-  `isactive` int(11) NOT NULL DEFAULT 1,
+  `isactive` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`) USING BTREE
 ) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -4991,7 +4991,7 @@ INSERT INTO `tbl_user` VALUES ('48', 'thaott_daotao', '00cd5ba0e25fd9ae5b8901974
 INSERT INTO `tbl_user` VALUES ('47', 'demodaotao', '453b885e6c7c3683041ab4bd8f717f46', 'Đào tạo', '', null, '', '', '012345678', '', '', null, null, null, null, '2020-02-27 11:11:55', null, '22', null, '1');
 INSERT INTO `tbl_user` VALUES ('45', 'hatn', '2220dc2d04ab4611f78cb4615dc0aa25', 'Trương Ngọc Hà', '', null, '', '', '0917796898', '', '', '', '', '', '', '2019-11-04 16:41:26', null, '9', '0', '1');
 INSERT INTO `tbl_user` VALUES ('50', 'hungtv_daotao', '9b40eccc3434b426c10abb927e80c098', 'Trần Văn Hưng', '', null, '', '', '0972848718', '', '', null, null, null, null, '2020-04-08 15:50:43', null, '22', null, '1');
-INSERT INTO `tbl_user` VALUES ('51', 'tranhiep', 'b8a1099b57fb53d28fba7d5717e317ea', 'Trần Viết Hiệp', '', null, '', '', '0969549903', '', 'tranviethiepdz@gmail.com', null, null, null, null, '2020-04-08 15:50:43', '2021-04-14 11:12:20', '9', null, '1');
+INSERT INTO `tbl_user` VALUES ('51', 'tranhiep', 'b8a1099b57fb53d28fba7d5717e317ea', 'Trần Viết Hiệp', '', null, '', '', '0969549903', '', 'tranviethiepdz@gmail.com', null, null, null, null, '2020-04-08 15:50:43', '2021-04-14 11:07:11', '9', null, '1');
 INSERT INTO `tbl_user` VALUES ('53', 'test', 'b8a1099b57fb53d28fba7d5717e317ea', 'test', '', null, '', '', '09695499991', '', '', null, null, null, null, '2021-03-22 10:49:14', '2021-03-22 10:50:12', '33', null, '1');
 
 -- ----------------------------
@@ -5000,17 +5000,17 @@ INSERT INTO `tbl_user` VALUES ('53', 'test', 'b8a1099b57fb53d28fba7d5717e317ea',
 DROP TABLE IF EXISTS `tbl_user_group`;
 CREATE TABLE `tbl_user_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `par_id` int(11) DEFAULT 0,
+  `par_id` int(11) DEFAULT '0',
   `path` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `intro` text COLLATE utf8_unicode_ci DEFAULT NULL,
-  `permission` int(11) NOT NULL DEFAULT 0,
-  `config` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `intro` text COLLATE utf8_unicode_ci,
+  `permission` int(11) NOT NULL DEFAULT '0',
+  `config` text COLLATE utf8_unicode_ci,
   `isroot` tinyint(4) DEFAULT NULL,
-  `isadmin` int(11) NOT NULL DEFAULT 0,
-  `issale` tinyint(4) DEFAULT 0,
-  `isstore` tinyint(4) DEFAULT 0,
-  `isactive` int(11) DEFAULT 1,
+  `isadmin` int(11) NOT NULL DEFAULT '0',
+  `issale` tinyint(4) DEFAULT '0',
+  `isstore` tinyint(4) DEFAULT '0',
+  `isactive` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

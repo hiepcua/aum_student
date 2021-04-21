@@ -24,7 +24,7 @@ if(isset($_POST['id_hoso'])) {
 	
 	$obj->Exec("BEGIN"); $cdate =time();
 	$sql = "INSERT INTO tbl_dangky_tuyensinh (cdate,id_khoa,id_he,id_nganh,id_hoso,xettuyen,diadiemhoc,author,status,nhaphoc) 
-	VALUES($cdate,'$khoa','$bac','$ma_nganh','$id_hoso','$ptxt','$diadiem','$user','TS1','1')"; 
+	VALUES($cdate,'$khoa','$bac','$ma_nganh','$id_hoso','$ptxt','$diadiem','$user','L0','1')"; 
 	$result1 = $obj->Exec($sql);
 	$last_insert_id = $obj->LastInsertID();
 

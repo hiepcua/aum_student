@@ -165,7 +165,7 @@ if($objts->Num_rows()>0) {
 				<div class="page-title tab-title">
 					<ul>
 						<li class="active">Danh sách ngành đăng ký</li>
-						<a href="javascript:void(0)" id="dk_nganh" class="btn btn-primary" dataid="<?php echo $masv;?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Đăng ký thêm ngành học</a>
+						<a href="javascript:void(0)" id="dk_nganh" class="btn btn-primary" dataid="<?php echo $row['id_hoso'];?>" dataid-dkts="<?php echo $row['id'];?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Đăng ký thêm ngành học</a>
 					</ul>
 
 				</div>
@@ -411,8 +411,9 @@ if($objts->Num_rows()>0) {
 		});
 
 		$('#dk_nganh').click(function(){
+			var id_dkts = $(this).attr('dataid-dkts');
 			var id_hoso = $(this).attr('dataid');
-			frm_dangky_nganh_moi(id_hoso);
+			frm_dangky_nganh_moi(id_hoso, id_dkts);
 		});
 
 		$(".dk_nganh").click(function(){
@@ -470,13 +471,13 @@ if($objts->Num_rows()>0) {
 		});
 	})
 
-	function frm_dangky_nganh_moi(id_hoso){
+	function frm_dangky_nganh_moi(id_hoso, id_dkts){
 		if(id_hoso.length>0){
 			var url = "<?php echo ROOTHOST;?>ajaxs/tuyensinh/dangky.php";
-			$.post(url,{'ma':id_hoso},function(req){
+			$.post(url,{'id_dkts':id_dkts, 'id_hoso': id_hoso},function(req){
 				$('#myModalPopup .modal-dialog').removeClass('modal-sm');
 				$('#myModalPopup .modal-dialog').addClass('modal-lg');
-				$('#myModalPopup .modal-title').html('Đăng ký ngành học');
+				$('#myModalPopup .modal-title').html('Đăng ký thêm ngành học');
 				$('#myModalPopup .modal-body').html(req);
 				$('#myModalPopup').modal('show');
 			});

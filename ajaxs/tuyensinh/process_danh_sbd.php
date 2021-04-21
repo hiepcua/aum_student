@@ -42,24 +42,25 @@ if(isset($_POST['sophong'])) {
 	$sql.=" ORDER BY a.id DESC, a.id_nganh ASC";
 	$obj->Query($sql);
 	$count_hoso = $obj->Num_rows();
-	$arr_hoso=array();
-	while($r=$obj->Fetch_Assoc()) $arr_hoso[]=$r['id_hoso'];
-	//print_r($arr_hoso);
+	$arr_masv=array();
+	while($r=$obj->Fetch_Assoc()) $arr_masv[]=$r['masv'];
 	
 	for($i=1;$i<=$sophong;$i++) {
 		$phong = "P".$i;
+
 		// Update sbd+phòng thi cho danh sách hồ sơ
 		$from =($i-1)*$sots; $to = $i*$sots-1;
 		if($to>$count_hoso) $to=$count_hoso-1;
 		for($k=$from;$k<=$to;$k++){
-			$item = $arr_hoso[$k];
+			$item = $arr_masv[$k];
 			$stt = create_sbd($start,$num_char);
 			$sbd = $tiento.$stt;
 			
-			$sql2 = "UPDATE tbl_dangky_tuyensinh SET sbd='$sbd',phongthi='$phong',`status`='TS2' WHERE id_hoso='$item'";
-			$result = $obj->Exec($sql2); //echo $sql2.' || ';
+			$sql2 = "UPDATE tbl_dangky_tuyensinh SET sbd='$sbd',phongthi='$phong',`status`='TS2' WHERE masv='$item'";
+			$result = $obj->Exec($sql2);
 			$start++;
 		}
+		
 		// notify
 		$sql = "INSERT INTO tbl_notify (id_hoso,masv,notes,cdate,author) 
 		VALUES('','','$count_hoso Hồ sơ đã cập nhật sbd & phòng thi',".time().",'$user')";

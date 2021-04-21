@@ -24,15 +24,16 @@ if($gid>0){
 	$intro=$row['intro'];
 	$par_id=$row['par_id'];
 	$permission=$row['permission'];
-}
 
-$arr_childs = array();
-$res_children = SysGetList('tbl_user_group', array('id'), " AND `path` LIKE '".$row['path']."%'");
-if(count($res_children) >0){
-	foreach ($res_children as $key => $value) {
-		$arr_childs[] = $value['id'];
+	$arr_childs = array();
+	$res_children = SysGetList('tbl_user_group', array('id'), " AND `path` LIKE '".$row['path']."%'");
+	if(count($res_children) >0){
+		foreach ($res_children as $key => $value) {
+			$arr_childs[] = $value['id'];
+		}
 	}
 }
+
 function getListCombobox($selectedid=null, $parid=0, $level=0, $childs=array()){
 	$sql="SELECT * FROM tbl_user_group WHERE `par_id`='$parid' AND `isactive`='1'";
 	$objdata=new CLS_MYSQL();
@@ -113,9 +114,12 @@ function getListCombobox($selectedid=null, $parid=0, $level=0, $childs=array()){
 						$com=explode("_",$key);
 						$com=$com[0];
 						$chk='';
-						if($permission & $value) {
-							$chk='checked="checked"';
+						if($permission!=''){
+							if($permission & $value) {
+								$chk='checked="checked"';
+							}
 						}
+						
 						echo '<tr><td>'.$GLOBALS['ARR_COM_NAME'][$key].'</td>';
 						echo '<td><input type="checkbox" name="permission[]" value="'.$value.'" onclick="'."checkonce('permission[]','permis_all')".'" '.$chk.'/></td>';
 						// foreach($GLOBALS['ARR_ACTION'] as $k=>$v) {

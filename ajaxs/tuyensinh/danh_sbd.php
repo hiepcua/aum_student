@@ -122,7 +122,6 @@ $(document).ready(function(){
 				var url = "<?php echo ROOTHOST;?>ajaxs/tuyensinh/process_danh_sbd.php";
 				showLoading();
 				$.post(url,{'khoa':'<?php echo $khoa;?>','he':'<?php echo $he;?>','nganh':'<?php echo $nganh;?>','total':total,'tiento':tiento,'start':start,'sophong':sophong,'sots':sots},function(req){
-					// console.log(req);
 					hideLoading();
 					if(req=="E01") showMess("Vui lòng đăng nhập hệ thống","error");
 					else if(req=="success"){
