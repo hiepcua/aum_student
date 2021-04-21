@@ -449,7 +449,7 @@ function SysAdd($table,$arr){
         $values.="'$val',";
     }
     $sql="INSERT INTO ".$table."(".substr($fields,0,-1).") VALUES(".substr($values,0,-1).")";
-    echo $sql;
+    // echo $sql;
     $obj=new CLS_MYSQL;
     $obj->Exec($sql);
     $id=$obj->LastInsertID();
