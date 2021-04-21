@@ -93,7 +93,7 @@ if($objts->Num_rows()>0) {
 				<div class="media">
 					<div class="row">
 						<div class="col-md-3 col-xs-12">
-							<div class="col-md-12 col-xs-4 text-center">
+							<div class="col-md-12 text-center">
 								<div class="avatar"></div>
 								<input type="file" id="FileUpload" style="display: none" accept="image/*"/>
 							</div>
@@ -148,11 +148,11 @@ if($objts->Num_rows()>0) {
 									<input type="text" name="hokhau" id="hokhau" class="form-control" value="<?php echo $r['hktt'];?>" readonly>
 								</div>
 							</div><br>
-							<div class="form-group text-center">
-								<a href="<?php echo ROOTHOST.'student/soyeulylich/'.$r['ma'];?>" class="btn btn-primary">Xem chi tiết sơ yếu lý lịch >></a>
-							</div>
 						</div>
 						<div class="clearfix"></div>
+					</div>
+					<div class="form-group text-center">
+						<a href="<?php echo ROOTHOST.'student/soyeulylich/'.$r['ma'];?>" class="btn btn-primary">Xem chi tiết sơ yếu lý lịch >></a>
 					</div>
 				</div>
 			</div>
@@ -181,17 +181,17 @@ if($objts->Num_rows()>0) {
 							<thead>
 								<tr class="header">
 									<th class="text-center">STT</th>
-									<th class="text-center"></th>
+									<th class="text-center">Xóa</th>
 									<th class="text-center">Khóa</th>
 									<th class="text-center">Bậc</th>
 									<th class="text-center">Ngành</th>
 									<th class="text-center">Mã SV</th>
 									<th class="text-center">Lớp</th>
 									<th class="text-center">Trạng thái</th>
-									<th class="text-center"></th>
-									<th class="text-center"></th>
-									<th class="text-center"></th>
-									<th class="text-center"></th>
+									<th class="text-center">Chuyển lớp</th>
+									<th class="text-center">KQ học tập</th>
+									<th class="text-center">QL học phí</th>
+									<th class="text-center">Điểm</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -224,7 +224,7 @@ if($objts->Num_rows()>0) {
 
 										echo '<tr dataid="'.$ma.'">';
 										echo '<td align="center">'.$i.'</td>';
-										echo '<td align="center"><a href="javascript:void(0)" data-id_dkts="'.$value['id'].'" class="xoa_nganh cred">Xóa</a></td>';
+										echo '<td align="center"><a href="javascript:void(0)" data-id_dkts="'.$value['id'].'" class="xoa_nganh cred"><i class="fa fa-trash btn_xoa" aria-hidden="true" title="Xóa"></i></a></td>';
 
 										echo '<td align="center">';
 										if(strlen($value['id_khoa'])>0) echo $_KHOA['K'.$value['id_khoa']];
@@ -290,34 +290,32 @@ if($objts->Num_rows()>0) {
 	<div class="page-bar" style="margin-bottom: 10px;">
 		<div class="page-title-breadcrumb">
 			<div class="pull-left">
-				<div class="page-title tab-title">
+				<div class="page-title tab-title" style="display: flex; align-items: center;">
 					<ul>
 						<li class="active">Lịch sử tương tác</li>
 					</ul>
-				</div>
-			</div>
-			<div class="col-md-2" style="margin-top: 12px;">
-				<form name="frm_search" id="frm_search" method="get" action="">
-					<select id="cbo_masv" name="cbo_masv" class="form-control">
-						<option value="">Tất cả</option>
-						<?php
-						$cbo_masv = isset($_GET['cbo_masv']) && $_GET['cbo_masv']!=='' ? antiData($_GET['cbo_masv']) : '';
-						if($cbo_masv!==''){
-							$sql.=' AND masv="'.$cbo_masv.'"';
-						}
-						if(count($res_nganhdk)>0){
-							foreach ($res_nganhdk as $key => $value) {
-								echo '<option value="'.$value['masv'].'">'.$value['masv'].'</option>';
+					<form name="frm_search" id="frm_search" method="get" action="" style="margin-left: 15px;">
+						<select id="cbo_masv" name="cbo_masv" class="form-control">
+							<option value="">Tất cả</option>
+							<?php
+							$cbo_masv = isset($_GET['cbo_masv']) && $_GET['cbo_masv']!=='' ? antiData($_GET['cbo_masv']) : '';
+							if($cbo_masv!==''){
+								$sql.=' AND masv="'.$cbo_masv.'"';
 							}
-						}
-						?>
-					</select>
-					<script type="text/javascript">
-						$(document).ready(function(){
-							cbo_Selected('cbo_masv', '<?php echo $cbo_masv;?>');
-						});
-					</script>
-				</form>
+							if(count($res_nganhdk)>0){
+								foreach ($res_nganhdk as $key => $value) {
+									echo '<option value="'.$value['masv'].'">'.$value['masv'].'</option>';
+								}
+							}
+							?>
+						</select>
+						<script type="text/javascript">
+							$(document).ready(function(){
+								cbo_Selected('cbo_masv', '<?php echo $cbo_masv;?>');
+							});
+						</script>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

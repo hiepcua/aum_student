@@ -4,29 +4,9 @@ global $UserLogin;
 $username = $GLOBALS['username'];
 ?>
 <div class="dashboard_page">
-	<?php if($UserLogin->Permission('sv_hsdaotao')==true) { 
-	$url = ROOTHOST."student/hsdaotao";?>
-	<div class="box col-md-3 col-xs-12">
-		<div class="panel panel-warning">
-			<div class="panel-body">
-				<div class="media">
-					<div class="icon-category">
-						<a href="<?php echo $url;?>">
-						<i class="media-object fa fa-graduation-cap fa-3x"></i></a>
-					</div>
-					<div class="media-body padding-left-10">
-						<h4 class="media-heading"><a href="<?php echo $url;?>" title="">QL SINH VIÊN</a></h4>
-						<small class="text-muted">Quản lý sinh viên theo lớp, khóa, ngành học. QL điểm, khen thưởng, kỷ luật</small><br>
-						<a class="btn btn-primary btn-xs pull-right" href="<?php echo $url;?>" style="margin-top:5px;"><i class="fa fa-plus fa-fw"></i>Chi tiết</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<?php } if($UserLogin->Permission('edu_khungdt')==true) { 
+	<?php if($UserLogin->Permission('edu_khungdt')==true) { 
 	$url = ROOTHOST."?com=edu&task=khungdaotao";?>
-	<div class="box col-md-3 col-xs-12">
+	<div class="box col-md-4 col-xs-12">
 		<div class="panel panel-warning">
 			<div class="panel-body">
 				<div class="media">
@@ -44,9 +24,94 @@ $username = $GLOBALS['username'];
 			</div>
 		</div>
 	</div>
+
+	<?php } if($UserLogin->Permission('sv_hsdaotao')==true) { 
+	$url = ROOTHOST."student/hsdaotao";?>
+	<div class="box col-md-4 col-xs-12">
+		<div class="panel panel-warning">
+			<div class="panel-body">
+				<div class="media">
+					<div class="icon-category">
+						<a href="<?php echo $url;?>">
+						<i class="media-object fa fa-graduation-cap fa-3x"></i></a>
+					</div>
+					<div class="media-body padding-left-10">
+						<h4 class="media-heading"><a href="<?php echo $url;?>" title="">QL HỒ SƠ ĐÀO TẠO</a></h4>
+						<small class="text-muted">Quản lý sinh viên theo lớp, khóa, ngành học. QL điểm, khen thưởng, kỷ luật</small><br>
+						<a class="btn btn-primary btn-xs pull-right" href="<?php echo $url;?>" style="margin-top:5px;"><i class="fa fa-plus fa-fw"></i>Chi tiết</a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<?php } if($UserLogin->Permission('sv_qllop')==true) { 
+	$url = ROOTHOST."lop";?>
+	<div class="box col-md-4 col-xs-12">
+		<div class="panel panel-warning">
+			<div class="panel-body">
+				<div class="media">
+					<div class="icon-category">
+						<a href="<?php echo $url;?>">
+						<i class="media-object fa fa-graduation-cap fa-3x"></i></a>
+					</div>
+					<div class="media-body padding-left-10">
+						<h4 class="media-heading"><a href="<?php echo $url;?>" title="">QL LỚP</a></h4>
+						<small class="text-muted">Quản lý sinh viên theo lớp</small><br>
+						<a class="btn btn-primary btn-xs pull-right" href="<?php echo $url;?>" style="margin-top:5px;"><i class="fa fa-plus fa-fw"></i>Chi tiết</a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+
+	<?php $url = ROOTHOST."student/hoso";?>
+	<div class="box col-md-4 col-xs-12">
+		<div class="panel panel-warning">
+			<div class="panel-body">
+				<div class="media">
+					<div class="icon-category">
+						<a href="<?php echo $url;?>">
+						<i class="media-object fa fa-book fa-3x"></i></a>
+					</div>
+					<div class="media-body padding-left-10">
+						<h4 class="media-heading"><a href="<?php echo $url;?>" title="">QL HỒ SƠ</a></h4>
+						<small class="text-muted">Quản lý hồ sơ sinh viên, thông tin cá nhân từng sinh viên</small><br>
+						<a class="btn btn-primary btn-xs pull-right" href="<?php echo $url;?>" style="margin-top:5px;"><i class="fa fa-plus fa-fw"></i>Chi tiết</a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<?php } if($UserLogin->Permission('sv_qlhocphi')==true) { 
+	$url = ROOTHOST."qlhocphi";?>
+	<div class="box col-md-4 col-xs-12">
+		<div class="panel panel-warning">
+			<div class="panel-body">
+				<div class="media">
+					<div class="icon-category">
+						<a href="<?php echo $url;?>">
+						<i class="media-object fa fa-graduation-cap fa-3x"></i></a>
+					</div>
+					<div class="media-body padding-left-10">
+						<h4 class="media-heading"><a href="<?php echo $url;?>" title="">QL HỌC PHÍ</a></h4>
+						<small class="text-muted">Quản lý học phí của sinh viên theo từng ngành học</small><br>
+						<a class="btn btn-primary btn-xs pull-right" href="<?php echo $url;?>" style="margin-top:5px;"><i class="fa fa-plus fa-fw"></i>Chi tiết</a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<?php } if($UserLogin->Permission('sv_qlhoctap')==true) { 
 	$url = ROOTHOST."student/qlhoctap";?>
-	<div class="box col-md-3 col-xs-12">
+	<div class="box col-md-4 col-xs-12">
 		<div class="panel panel-warning">
 			<div class="panel-body">
 				<div class="media">
@@ -64,29 +129,11 @@ $username = $GLOBALS['username'];
 			</div>
 		</div>
 	</div>
-	<?php } if($UserLogin->Permission('sv_qlhocphi')==true) { 
-	$url = ROOTHOST."student/qlhocphi";?>
-	<div class="box col-md-3 col-xs-12">
-		<div class="panel panel-warning">
-			<div class="panel-body">
-				<div class="media">
-					<div class="icon-category">
-						<a href="<?php echo $url;?>">
-						<i class="media-object fa fa-money fa-3x"></i></a>
-					</div>
-					<div class="media-body padding-left-10">
-						<h4 class="media-heading"><a href="<?php echo $url;?>" title="">QL HỌC PHÍ</a></h4>
-						<small class="text-muted">Thu học phí theo tín chỉ đã đăng ký hoặc theo học kỳ, In biên lai</small><br>
-						<a class="btn btn-primary btn-xs pull-right" href="<?php echo $url;?>" style="margin-top:5px;"><i class="fa fa-plus fa-fw"></i>Chi tiết</a>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div class="clearfix"></div>
+
 	<?php } if($UserLogin->Permission('report')==true) { 
 	$url = ROOTHOST."report/hoso";?>
-	<div class="box col-md-3 col-xs-12">
+	<div class="box col-md-4 col-xs-12">
 		<div class="panel panel-warning">
 			<div class="panel-body">
 				<div class="media">
@@ -97,6 +144,27 @@ $username = $GLOBALS['username'];
 					<div class="media-body padding-left-10">
 						<h4 class="media-heading"><a href="<?php echo $url;?>" title="">THỐNG KÊ</a></h4>
 						<small class="text-muted">Thống kê tổng hợp, theo khu vực, đối tác, học phí</small><br>
+						<a class="btn btn-primary btn-xs pull-right" href="<?php echo $url;?>" style="margin-top:5px;"><i class="fa fa-plus fa-fw"></i>Chi tiết</a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<?php } if($UserLogin->Permission('notify')==true) { 
+	$url = ROOTHOST."notify";?>
+	<div class="box col-md-4 col-xs-12">
+		<div class="panel panel-warning">
+			<div class="panel-body">
+				<div class="media">
+					<div class="icon-category">
+						<a href="<?php echo $url;?>">
+						<i class="media-object fa fa-bar-chart fa-3x"></i></a>
+					</div>
+					<div class="media-body padding-left-10">
+						<h4 class="media-heading"><a href="<?php echo $url;?>" title="">THÔNG BÁO</a></h4>
+						<small class="text-muted">Thống kê các hành động được thực hiện trong hệ thống</small><br>
 						<a class="btn btn-primary btn-xs pull-right" href="<?php echo $url;?>" style="margin-top:5px;"><i class="fa fa-plus fa-fw"></i>Chi tiết</a>
 					</div>
 					<div class="clearfix"></div>
