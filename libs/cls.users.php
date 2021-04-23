@@ -67,12 +67,7 @@ class CLS_USER{
 		return $flag;
 	}
 	public function isLogin(){
-		$user=$this->getInfo('username');
-		if(isset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_USERLOGIN']) && $user!='N/A'){
-			$this->AutoLogout($user);
-		}
-		if(isset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_USERLOGIN']) && $user!='N/A'){
-			$this->UpdateLogin($user,1);
+		if(isset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_USERLOGIN'])){
 			return true;
 		}
 		return false;
@@ -273,17 +268,7 @@ class CLS_USER{
     }
 	public function Permission($com='') {
 		if(isset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_USERLOGIN'])){
-			$gid=$_SESSION[MD5($_SERVER['HTTP_HOST']).'_USERLOGIN']['gid'];
-			$sql="SELECT `permission` FROM tbl_user_group WHERE id=$gid"; 
-			$this->objmysql->Query($sql);
-			if($this->objmysql->Num_rows()==0) return false;
-			$row=$this->objmysql->Fetch_Assoc();
-			$permission=$row['permission'];
-			$flag=false; 
-			if($permission & $GLOBALS['ARR_COM']["$com"]) {
-				$flag=true; 
-			}
-			return $flag;
+			return true;
 		}
 		return false;
 	}

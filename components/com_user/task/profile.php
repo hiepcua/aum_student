@@ -36,7 +36,7 @@ function checkinput(){
 </div>
 <div class="body box-white">
 	<div class="com_header color">
-		<i class="fa fa-pencil-square" aria-hidden="true"></i>  Cập nhật thành viên quản trị
+		<i class="fa fa-pencil-square" aria-hidden="true"></i>  Cập nhật thông tin cá nhân
 	</div>
 	<div class="col-md-12">
 	<form id="frm_action" name="frm_action" method="post" action="">

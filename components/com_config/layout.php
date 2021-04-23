@@ -1,9 +1,5 @@
 <?php
 define('COMS','config');
-
-$check_permission = $UserLogin->Permission(COMS);
-if($check_permission==false) die($GLOBALS['MSG_PERMIS']);
-
 $title=$company=''; $thilai=$thict=$hoclai=$hocct=0;
 $hoccd=$bvluanvan=$chuanth=$chuanta=$thilaitn=0;
 include_once('libs/cls.configsite.php');

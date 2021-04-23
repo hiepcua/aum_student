@@ -713,6 +713,24 @@ $str="26/02/2021 00:00	KH255489	L2	Trần Thanh Tuyền	963456895	TNU-HN,GV-TNU-
 29/03/2021 00:00	KH176477	L3	Bế Văn Tuấn	963457597	TNU-HN,GV-TNU-HN	tuancb91@gmail.com	Cao Bằng	Vũ Thị Thu Hà	18/11/2019	05/09/2020	Hồng Quang, Quảng Uyên, Cao Bằng	21/03/1991	Công nghệ thông tin	Cao Đẳng Nghề Khác Ngành	Nam	01/10/2020	Đã Bàn Giao		Đủ		2	4				2		2		AUM0520HN	1	2020	2	AUM0520HNCNBK	20-2-7480201-1646	0	2114		Đang học ( Đã có QĐTT)	Không Nghe Máy	
 14/04/2021 00:00	KH121908	L3	Nguyễn Văn Tài	963457598	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	nguyenvantai.29.09.85@gmail.com	Tây Ninh	Vũ Thị Thu Hà	22/03/2018	19/05/2020	Khu phố 6, Thị trấn Tân Biên, Huyện Tân Biên,Tỉnh Tây Ninh	01/01/1986	Công nghệ thông tin	Trung Cấp Cùng Ngành	Nam	26/05/2020	Đã Bàn Giao		Đủ	1	2	2				2		2		AUM0220HC	1	2020	1	AUM0220HCCNCX	20-2-7480201-0445		1135		Đang học ( Đã có QĐTT)	Có hẹn nộp HP đúng hạn";
 
+// Get all khoa đã có
+$arr_khoa = array();
+$res_khoa = SysGetList('tbl_khoa', array('id'), '');
+if(count($res_khoa)>0){
+	foreach ($res_khoa as $key => $value) {
+		$arr_khoa[] = $value;
+	}
+}
+
+// Get all lop đã có
+$arr_lop = array();
+$res_lop = SysGetList('tbl_lop', array('id'), '');
+if(count($res_lop)>0){
+	foreach ($res_lop as $key => $value) {
+		$arr_lop[] = $value;
+	}
+}
+
 // Get all mã hồ sơ đã có
 $arr_mahoso = array();
 $res_hocsinh = SysGetList('tbl_hocsinh', array('ma'), '');
@@ -746,16 +764,17 @@ foreach($rows as $r){
 	$ma_hoso 	= isset($cols[1]) && $cols[1]!='' ? antiData($cols[1]) : '';
 	$fullname 	= isset($cols[3]) && $cols[3]!='' ? antiData($cols[3]) : '';
 	if($fullname!=''){
-		$arr_name = explode($fullname, ' ');
+		$arr_name = explode(' ', $fullname);
 		$name = end($arr_name);
 		$num = count($arr_name);
 		foreach ($arr_name as $key => $value) {
 			if($key < $num - 1){
-				$hodem.= $value.' ';
+				$hodem.= $value.'  ';
 			}
 			$hodem = substr($hodem, 0, strlen($hodem) - 1);
 		}
 	}
+
 	$dienthoai 	= isset($cols[4]) && $cols[4]!='' ? antiData($cols[4]) : '';
 	$email 		= isset($cols[5]) && $cols[6]!='' ? antiData($cols[6]) : '';
 	$noisinh 	= isset($cols[7]) && $cols[7]!='' ? antiData($cols[7]) : '';
@@ -798,9 +817,10 @@ foreach($rows as $r){
 	/*Hiện đang là text, cần nhập với mã ngành*/
 	$nganhdangky = '114';
 	$cdate = time();
+	$nhaphoc = 1; /* Bắt buộc */
 
 	if(!in_array($masv, $arr_masv)){
-		$sql="INSERT INTO tbl_dangky_tuyensinh (`id_khoa`,`id_he`,`id_nganh`,`malop`,`masv`,`status`,`id_hoso`,`cdate`) VALUES ('$khoa','','$nganhdangky','$malop','$masv','$status','$ma_hoso','$cdate')";
+		$sql="INSERT INTO tbl_dangky_tuyensinh (`id_khoa`,`id_he`,`id_nganh`,`malop`,`masv`,`status`,`id_hoso`,`cdate`,`nhaphoc`) VALUES ('$khoa','','$nganhdangky','$malop','$masv','$status','$ma_hoso','$cdate',1)";
 		$result2 = $objmysql->Exec($sql);
 		if(!$result2) $flag2 = false;
 	}

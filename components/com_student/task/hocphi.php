@@ -194,89 +194,115 @@ $hocky = isset($_GET['hocky'])?(int)$_GET['hocky']:"";
 
 	<?php $html.="<h3 align='center'>CHI TIẾT HỌC PHÍ</h3>
 	<table class='table' style='width:100%'>
-	<tr><td width='100'>Mã sinh viên:</td><td>$masv</td>
-	<td width='100'>Lớp:</td><td>$malop</td>
+	<tr>
+	<td width='100'>Mã sinh viên:</td>
+	<td>$masv</td>
+	<td width='100'>Lớp:</td>
+	<td>$malop</td>
 	</tr>
-	<tr><td>Họ và tên:</td><td>$fullname</td>
-	<td>Ngày sinh:</td><td>$ngaysinh</td>
+	<tr>
+	<td>Họ và tên:</td>
+	<td>$fullname</td>
+	<td>Ngày sinh:</td>
+	<td>$ngaysinh</td>
 	</tr>
 	</table>";
 	?>
 
-	<div class="container-fluid"><div class="row">
-		<div class="col-md-12 col-xs-12">
-			<table class="table table-bordered">
-				<thead><tr>
-					<th width='30'>STT</th>
-					<th width='30'>Xóa</th>
-					<th>Tên danh mục</th>
-					<th class='text-right'>Học phí</th>
-					<th class='text-center'>Học kỳ</th>
-				</tr></thead>
-				<tbody>
-					<?php 
-					$html.='<table class="table table-bordered">
-					<thead><tr>
-					<th width="30">STT</th>
-					<th class="text-left">Tên danh mục</th>
-					<th class="text-right">Học phí</th>
-					<th class="text-center">Học kỳ</th>
-					</tr></thead>
-					<tbody>';
-					$obj=new CLS_MYSQL;
-					$sql="SELECT * FROM tbl_monhoc";
-					$obj->Query($sql);
-					$arrMon=array();
-					while($r=$obj->Fetch_Assoc()){
-						$arrMon[$r['id']]=$r;
-					}
-					$strwhere = "";
-					if($dm!=="") $strwhere.=" AND ten_hp LIKE '%$dm%' ";
-					if($hocky!=="" && $hocky!==0) $strwhere.=" AND hocky=$hocky ";
-
-					$sql="SELECT * FROM tbl_hocphi WHERE masv='$masv' $strwhere";
-					$obj->Query($sql);
-					$stt=0; $tong_hp=0;
-					if($obj->Num_rows()>0){
-						while($hp=$obj->Fetch_Assoc()) {
-							$id_hp=$hp['id'];
-							$hocphi=$hp['hocphi']; 
-							$type_hocphi=$hp['type_hp'];
-							$ten_hp = stripslashes($hp['ten_hp']);
-							if($type_hocphi=="hoc_phan" && isset($arrMon[$hp['ma_hp']]['name'])) $ten_hp = $arrMon[$hp['ma_hp']]['name'];
-							$stt++; $tong_hp+=$hocphi;
-
-							$html.='<tr><td class="text-center">'.$stt.'</td>
-							<td>'.$ten_hp.'</td>
-							<td class="text-right">'.number_format($hocphi).'</td>
-							<td class="text-center">'.$hp['hocky'].'</td>';
-							$html.='</tr>';
-							?>
-							<tr class="hp_row">
-								<td class='text-center'><?php echo $stt;?></td>
-								<td>
-									<i class="fa fa-trash btn_xoa" aria-hidden="true" title="Xóa" dataid="<?php echo $id_hp;?>" dataname="<?php echo $ten_hp;?>"></i>
-								</td>
-								<td><?php echo $ten_hp;?></td>
-								<td class='text-right'><?php echo number_format($hocphi);?></td>
-								<td class='text-center'><?php echo $hp['hocky'];?></td>
-							</tr>
-						<?php } ?>
-						<tr style="background:#ccc;font-weight:bold"><td></td>
-							<td></td><td class='text-right'>TỔNG</td>
-							<td class='text-right'><?php echo number_format($tong_hp);?></td>
-							<td></td>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<?php
+				$html.='
+				<table class="table table-bordered">
+				<thead>
+				<tr>
+				<th width="30">STT</th>
+				<th width="30">Xóa</th>
+				<th>Tên danh mục</th>
+				<th class="text-right">Học phí</th>
+				<th class="text-center">Học kỳ</th>
+				</tr>
+				</thead>
+				<tbody>';
+				?>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th width='30'>STT</th>
+							<th width='30'>Xóa</th>
+							<th>Tên danh mục</th>
+							<th class='text-right'>Học phí</th>
+							<th class='text-center'>Học kỳ</th>
 						</tr>
-						<?php $html.='<tr style="background:#ccc;font-weight:bold"><td></td>
-						<td class="text-right">TỔNG</td>
-						<td class="text-right">'.number_format($tong_hp).'</td>
-						<td></td>
-						</tr></tbody></table>';
-					} ?>
+					</thead>
+					<tbody>
+						<?php 
+						$obj=new CLS_MYSQL;
+						$sql="SELECT * FROM tbl_monhoc";
+						$obj->Query($sql);
+						$arrMon=array();
+						while($r=$obj->Fetch_Assoc()){
+							$arrMon[$r['id']]=$r;
+						}
+						$strwhere = "";
+						if($dm!=="") $strwhere.=" AND ten_hp LIKE '%$dm%' ";
+						if($hocky!=="" && $hocky!==0) $strwhere.=" AND hocky=$hocky ";
+
+						$sql="SELECT * FROM tbl_hocphi WHERE masv='$masv' $strwhere";
+						$obj->Query($sql);
+						$stt=0; $tong_hp=0;
+						if($obj->Num_rows()>0){
+							while($hp=$obj->Fetch_Assoc()) {
+								$id_hp=$hp['id'];
+								$hocphi=$hp['hocphi']; 
+								$type_hocphi=$hp['type_hp'];
+								$ten_hp = stripslashes($hp['ten_hp']);
+								if($type_hocphi=="hoc_phan" && isset($arrMon[$hp['ma_hp']]['name'])) $ten_hp = $arrMon[$hp['ma_hp']]['name'];
+								$stt++; $tong_hp+=$hocphi;
+
+								$html.='
+								<tr>
+								<td class="text-center">'.$stt.'</td>
+								<td>'.$ten_hp.'</td>
+								<td class="text-right">'.number_format($hocphi).'</td>
+								<td class="text-center">'.$hp['hocky'].'</td>
+								</tr>';
+								?>
+								<tr class="hp_row">
+									<td class='text-center'><?php echo $stt;?></td>
+									<td>
+										<i class="fa fa-trash btn_xoa" aria-hidden="true" title="Xóa" dataid="<?php echo $id_hp;?>" dataname="<?php echo $ten_hp;?>"></i>
+									</td>
+									<td><?php echo $ten_hp;?></td>
+									<td class='text-right'><?php echo number_format($hocphi);?></td>
+									<td class='text-center'><?php echo $hp['hocky'];?></td>
+								</tr>
+							<?php } ?>
+							<tr style="background:#ccc;font-weight:bold"><td></td>
+								<td></td><td class='text-right'>TỔNG</td>
+								<td class='text-right'><?php echo number_format($tong_hp);?></td>
+								<td></td>
+							</tr>
+							<?php 
+							$html.='
+							<tr style="background:#ccc;font-weight:bold">
+							<td></td>
+							<td class="text-right">TỔNG</td>
+							<td class="text-right">'.number_format($tong_hp).'</td>
+							<td></td>
+							</tr>';
+						} ?>
+					</tbody>
+				</table>
+				<?php
+				$html.='
 				</tbody>
-			</table>
+				</table>';
+				?>
+			</div>
 		</div>
-	</div></div>
+	</div>
 	<div id="divToPrint" style="display:none;"><?php echo $html; ?></div>
 </div>
 <script>

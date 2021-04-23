@@ -22,6 +22,8 @@ define('URLEDITOR',ROOTHOST.'');
 define('BASEVIRTUAL0',ROOTHOST.'images/');
 define('MAX_ROWS',25);
 define('ASSESS_TOKEN_SMS','eokvTGERlLRVudu8uFA1-jeNvEiTWVHw');
+define('APP_SECRET','dd0b6d3fb803ca2a51601145a74fd9a8');
+$_HOST_LIST=array('loichoi.com','wallet.aumsys.net','uid.aumsys.net','student.aumsys.net','edu.aumsys.net');
 
 $COM_TITLE=array('frontpage'=>'','customer'=>'CUSTOMERS','order'=>'ORDERS','config'=>'CONFIGS','store'=>'STORES','account'=>'ACCOUTS');
 

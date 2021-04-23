@@ -1,11 +1,7 @@
 <?php
 defined("ISHOME") or die("Can not acess this page, please come back!");
-global $UserLogin;
-$username = $GLOBALS['username'];
 ?>
 <div class="dashboard_page">
-	<?php if($UserLogin->Permission('edu_khungdt')==true) { 
-	$url = ROOTHOST."?com=edu&task=khungdaotao";?>
 	<div class="box col-md-4 col-xs-12">
 		<div class="panel panel-warning">
 			<div class="panel-body">
@@ -25,8 +21,6 @@ $username = $GLOBALS['username'];
 		</div>
 	</div>
 
-	<?php } if($UserLogin->Permission('sv_hsdaotao')==true) { 
-	$url = ROOTHOST."student/hsdaotao";?>
 	<div class="box col-md-4 col-xs-12">
 		<div class="panel panel-warning">
 			<div class="panel-body">
@@ -46,8 +40,6 @@ $username = $GLOBALS['username'];
 		</div>
 	</div>
 
-	<?php } if($UserLogin->Permission('sv_qllop')==true) { 
-	$url = ROOTHOST."lop";?>
 	<div class="box col-md-4 col-xs-12">
 		<div class="panel panel-warning">
 			<div class="panel-body">
@@ -68,7 +60,6 @@ $username = $GLOBALS['username'];
 	</div>
 	<div class="clearfix"></div>
 
-	<?php $url = ROOTHOST."student/hoso";?>
 	<div class="box col-md-4 col-xs-12">
 		<div class="panel panel-warning">
 			<div class="panel-body">
@@ -88,8 +79,6 @@ $username = $GLOBALS['username'];
 		</div>
 	</div>
 
-	<?php } if($UserLogin->Permission('sv_qlhocphi')==true) { 
-	$url = ROOTHOST."qlhocphi";?>
 	<div class="box col-md-4 col-xs-12">
 		<div class="panel panel-warning">
 			<div class="panel-body">
@@ -108,9 +97,7 @@ $username = $GLOBALS['username'];
 			</div>
 		</div>
 	</div>
-	
-	<?php } if($UserLogin->Permission('sv_qlhoctap')==true) { 
-	$url = ROOTHOST."student/qlhoctap";?>
+
 	<div class="box col-md-4 col-xs-12">
 		<div class="panel panel-warning">
 			<div class="panel-body">
@@ -131,8 +118,6 @@ $username = $GLOBALS['username'];
 	</div>
 	<div class="clearfix"></div>
 
-	<?php } if($UserLogin->Permission('report')==true) { 
-	$url = ROOTHOST."report/hoso";?>
 	<div class="box col-md-4 col-xs-12">
 		<div class="panel panel-warning">
 			<div class="panel-body">
@@ -152,8 +137,6 @@ $username = $GLOBALS['username'];
 		</div>
 	</div>
 
-	<?php } if($UserLogin->Permission('notify')==true) { 
-	$url = ROOTHOST."notify";?>
 	<div class="box col-md-4 col-xs-12">
 		<div class="panel panel-warning">
 			<div class="panel-body">
@@ -172,6 +155,5 @@ $username = $GLOBALS['username'];
 			</div>
 		</div>
 	</div>
-	<?php } ?>
 </div>
 <div class="clearfix"></div>
