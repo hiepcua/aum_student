@@ -128,6 +128,7 @@ if(count($res_nganh_registed)>0){
 				showLoading();
 				$.post(url,{'id_hoso':id_hoso,'ma_nganh':ma_nganh,'bac':bac,'khoa':khoa,
 					'ptxt':_ptxt,'diadiem':_diadiem},function(req){
+						// console.log(req);
 						hideLoading();
 						if(req=="E01") showMess("Vui lòng đăng nhập hệ thống","error");
 						else if(req=="success"){

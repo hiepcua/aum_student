@@ -5,10 +5,9 @@ require_once('global/libs/gfconfig.php');
 require_once('global/libs/gfinit.php');
 require_once('global/libs/gffunc.php');
 require_once('global/libs/gffunc_edu.php');
+require_once('global/libs/gffunc_member.php');
 require_once('includes/gfconfig.php');
 require_once('libs/cls.mysql.php');
-require_once('libs/cls.users.php');
-require_once('libs/cls.guser.php');
 require_once('libs/cls.configsite.php');
 require_once('libs/cls.hocsinh.php');
 require_once('libs/cls.he.php');
@@ -20,6 +19,7 @@ require_once('libs/cls.tuyensinh.php');
 require_once('libs/cls.hocphi.php');
 require_once('libs/cls.partner.php');
 require_once('libs/cls.wallet.php');
+require_once('libs/cls.users.php');
 
 define('ISHOME',true);
 //-------------- FULL URL --------------
@@ -29,9 +29,6 @@ $COM = isset($_GET['com'])?strip_tags(htmlentities($_GET['com'])):'frontpage';
 $task= isset($_GET['task'])?strip_tags(htmlentities($_GET['task'])):'';
 global $UserLogin;
 $UserLogin=new CLS_USER;
-// danh sach khach hang cua saler
-$gid = $UserLogin->getInfo('gid');
-$username = $UserLogin->getInfo('username');
 $objdata=new CLS_MYSQL;
 // config site
 $config=new CLS_CONFIG; $config->getList();
@@ -144,7 +141,7 @@ $html ='<style>
 </head>
 <body>
 <?php
-if(!$UserLogin->isLogin()){
+if(!isLogin()){
 	include_once(COM_PATH."com_user/task/login.php");
 }else{
 	?>

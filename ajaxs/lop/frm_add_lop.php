@@ -73,7 +73,7 @@ $(document).ready(function(){
 			console.log(req);
 			if(req=="E01") showMess("Vui lòng đăng nhập hệ thống","error");
 			else if(req=="success"){
-				showMess("Phân lớp thành công.");
+				showMess("Đã chuyển lớp thành công.");
 				setTimeout(function(){window.location.reload();},3000);
 			}
 		});
