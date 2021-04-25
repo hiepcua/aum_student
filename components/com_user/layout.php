@@ -6,7 +6,7 @@ define('THIS_COM_PATH',COM_PATH.'com_'.COMS.'/');
 $obj = new CLS_USER();
 
 // End toolbar
-if($UserLogin->isLogin()) {
+if(isLogin()) {
 	$task=isset($_GET['task'])?$_GET['task']:'list';
 	if(is_file(THIS_COM_PATH.'task/'.$task.'.php')){
 		include_once(THIS_COM_PATH.'task/'.$task.'.php');

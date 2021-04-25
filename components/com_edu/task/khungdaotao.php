@@ -1,7 +1,5 @@
 <?php
 defined('ISHOME') or die('Can not acess this page, please come back!');
-$check_permission = $UserLogin->Permission('edu_khungdt');
-if($check_permission==false) die($GLOBALS['MSG_PERMIS']);
 $obj=new CLS_MYSQL;
 
 $_NGANH = isset($_SESSION['THIS_NGANH']) ? $_SESSION['THIS_NGANH'] : '';

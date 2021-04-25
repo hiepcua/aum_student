@@ -1,8 +1,5 @@
 <?php
 defined('ISHOME') or die("You can't access this page!");
-$check_permission = $UserLogin->Permission('sv_hstrungtuyen');
-if($check_permission==false) die($GLOBALS['MSG_PERMIS']);
-
 $obj = new CLS_MYSQL;
 //---------------------------------------
 $sql="SELECT * FROM tbl_he";

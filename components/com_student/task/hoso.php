@@ -1,8 +1,5 @@
 <?php
 defined('ISHOME') or die("You can't access this page!");
-$check_permission = $UserLogin->Permission('sv_hoso');
-if($check_permission==false) die($GLOBALS['MSG_PERMIS']);
-
 $ma=isset($_GET['ma'])?addslashes(strip_tags($_GET['ma'])):'';
 $ten=isset($_GET['ten'])?addslashes(strip_tags($_GET['ten'])):'';
 $cmt=isset($_GET['cmt'])?addslashes(strip_tags($_GET['cmt'])):'';

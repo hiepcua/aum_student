@@ -1,8 +1,5 @@
 <?php
 defined('ISHOME') or die("You can't access this page!");
-$check_permission = $UserLogin->Permission('sv_qlhoctap');
-if($check_permission==false) die($GLOBALS['MSG_PERMIS']);
-
 $id_he=$id_nganh=$id_khoa=$id_lop=$id_partner=$id_mon=$diem='';
 //print_r($_GET);
 

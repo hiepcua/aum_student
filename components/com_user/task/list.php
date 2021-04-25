@@ -1,8 +1,5 @@
 <?php
 $strwhere='';
-$check_permission = $UserLogin->Permission('user');
-if($check_permission==false) die($GLOBALS['MSG_PERMIS']);
-
 $_name = isset($_GET['name']) ? antiData($_GET['name']) : '';
 $_phone = isset($_GET['phone']) ? antiData($_GET['phone']) : '';
 ?>

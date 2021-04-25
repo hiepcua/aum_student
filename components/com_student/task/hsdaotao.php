@@ -1,7 +1,5 @@
 <?php
 defined('ISHOME') or die("You can't access this page!");
-$check_permission = $UserLogin->Permission('sv_hsdaotao');
-if($check_permission==false) die($GLOBALS['MSG_PERMIS']);
 
 $params=''; 
 $page_title = "Quản lý đào tạo";
@@ -188,11 +186,14 @@ $obj->Query($sql);
 						$objcity = new CLS_CITY();
 						$city_name = $objcity->getNameById($r['city']);
 						$dataids = $r['id'].'-'.$r['id_khoa'].'-'.$r['id_he'].'-'.$r['id_nganh'];
+						$name_khoa = $r['id_khoa']!='' ? $_KHOA['K'.$r['id_khoa']] : '';
+						$name_he = $r['id_he']!='' ? $_HE['H'.$r['id_he']] : '';
+						$name_nganh = $r['id_nganh']!='' ? $_NGANH['N'.$r['id_nganh']] : '';
 						?>
 						<tr dataid="<?php echo $id_hoso;?>" dataids="<?php echo $dataids;?>">
 							<td align="center"><?php echo $i;?></td>
 							<td dataid="<?php echo $id_hoso;?>">
-								<?php if($r['id_nganh']!=='') echo $_NGANH['N'.$r['id_nganh']].' - '.$_KHOA['K'.$r['id_khoa']].' - '.$_HE['H'.$r['id_he']];
+								<?php if($r['id_nganh']!=='') echo $name_nganh.' - '.$name_khoa.' - '.$name_he;
 								else echo "<button class='dk_nganh btn btn-default' dataid='".$id_hoso."'><i class='fa fa-plus cgray'></i> Đăng ký</button>";?>
 							</td>
 							<td dataid="<?php echo $id_hoso;?>" class="text-center">

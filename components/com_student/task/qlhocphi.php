@@ -1,8 +1,5 @@
 <?php
 defined('ISHOME') or die("You can't access this page!");
-$check_permission = $UserLogin->Permission('sv_qlhocphi');
-if($check_permission==false) die($GLOBALS['MSG_PERMIS']);
-
 $id_he=$id_nganh=$id_khoa=$id_lop=$id_partner='';
 $hocky=3; $id_hocky=''; $params='';
 //print_r($_GET);

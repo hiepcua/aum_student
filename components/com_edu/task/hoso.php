@@ -1,7 +1,5 @@
 <?php
 defined('ISHOME') or die('Can not acess this page, please come back!');
-$check_permission = $UserLogin->Permission('edu_hoso');
-if($check_permission==false) die($GLOBALS['MSG_PERMIS']);
 ?>
 <div class="container-fluid list_new"><br/>
 	<div class="form-group">

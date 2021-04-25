@@ -1,7 +1,5 @@
 <?php
 defined('ISHOME') or die('Can not acess this page, please come back!');
-$check_permission = $UserLogin->Permission('edu_hocphi');
-if($check_permission==false) die($GLOBALS['MSG_PERMIS']);
 ?>
 <div class='page-title'>DANH MỤC HỌC PHÍ</div>
 <div class="">

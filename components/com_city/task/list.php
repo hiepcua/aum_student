@@ -1,8 +1,5 @@
 <?php
 defined('ISHOME') or die('Can not acess this page, please come back!');
-$check_permission = $UserLogin->Permission('city');
-if($check_permission==false) die($GLOBALS['MSG_PERMIS']);
-
 $key=isset($_GET['q'])?addslashes(strip_tags($_GET['q'])):'';
 $strwhere="";
 if($key!="") $strwhere=" AND (name LIKE '%$key%' OR phone LIKE '%$key%') ";

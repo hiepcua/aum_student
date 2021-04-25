@@ -1,7 +1,4 @@
 <?php 
-$check_permission = $UserLogin->Permission('notify');
-if($check_permission==false) die($GLOBALS['MSG_PERMIS']);
-
 include_once("libs/cls.notify.php"); 
 $objnoti = new CLS_NOTIFY;
 $objnoti->getList(" ","");
