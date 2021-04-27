@@ -446,7 +446,7 @@ $str="26/02/2021 00:00	KH255489	L2	Trần Thanh Tuyền	963456895	TNU-HN,GV-TNU-
 21/01/2021 00:00	KH192613	L9A	Lê Ngọc Trí	963457330	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	triln@viettel.com.vn	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	29/04/2020	Tịnh Thới, Cao Lãnh, Đồng Tháp	01/11/1985	Công nghệ thông tin	Trung Học Phổ thông	Nam	21/05/2020	Đã Bàn Giao		Đủ	1	2	2		1		2	2			AUM0220HC	1	2020	1	AUM0220HCCNDX	20-2-7480201-0310		988		Ngưng học do bận, học khó , không có tài chính, tính chất cv	Ngưng học chưa có QĐ	21/01/2021
 24/02/2021 00:00	KH192612	L9A	Lê Trường Xuân	963457331	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	xuanlt13@viettel.com.vn	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	29/04/2020	Tân Thạnh, Thanh Bình, Đồng Tháp	14/10/1984	Công nghệ thông tin	Trung Học Phổ thông	Nam	21/05/2020	Đã Bàn Giao		Đủ	1	2	2				2	2	1		AUM0220HC	1	2020	1	AUM0220HCCNDX	20-2-7480201-0314		988		Ngưng học do bận, học khó , không có tài chính, tính chất cv	Ngưng học chưa có QĐ	24/02/2021
 21/01/2021 00:00	KH192611	L9A	Đặng Hữu Nhân	963457332	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	nhandh1@viettel.com.vn	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	27/04/2020	Cao Lãnh, Đồng Tháp	21/09/1987	Công nghệ thông tin	Trung Học Phổ thông	Nam	21/05/2020	Đã Bàn Giao		Đủ	1	2	2		2		2	2			AUM0220HC	1	2020	1	AUM0220HCCNDX	20-2-7480201-0295		988		Ngưng học do bận, học khó , không có tài chính, tính chất cv	Ngưng học chưa có QĐ	21/01/2021
-14/04/2021 00:00	KH192610	L3	Nguyễn Cao Xuân	963457333	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	xuannc@viettel.com.vn	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	05/05/2020	Thị xã Cao Lãnh, Đồng Tháp	02/01/1985	Công nghệ thông tin	Trung Cấp Cùng Ngành	Nam	14/05/2020	Đã Bàn Giao		Đủ	1	2	2				2		2		AUM0220HC	1	2020	3	AUM0220HCCNCX	20-2-7480201-0210		987		Đang học ( Đã có QĐTT)	Có hẹn nộp HP đúng hạn	
+14/04/2021 00:00	KH192610	L3	Nguyễn Cao Xuân	963457333	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	xuannc@viettel.com.vn,xuannc7@gmail.com	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	05/05/2020	Thị xã Cao Lãnh, Đồng Tháp	02/01/1985	Công nghệ thông tin	Trung Cấp Cùng Ngành	Nam	14/05/2020	Đã Bàn Giao		Đủ	1	2	2				2		2		AUM0220HC	1	2020	3	AUM0220HCCNCX	20-2-7480201-0210		987		Đang học ( Đã có QĐTT)	Có hẹn nộp HP đúng hạn	
 16/04/2021 00:00	KH192609	L3	Đoàn Duy Tùng	963457334	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	tungdd99999@gmail.com	Kiên Giang	Vũ Thị Thu Hà	22/04/2020	27/04/2020	Thạnh Đông, Tân Hiệp, Kiên Giang	01/01/1989	Công nghệ thông tin	Trung Cấp Nghề Cùng Ngành	Nam	21/05/2020	Đã Bàn Giao		Đủ	1	2	4		2		2		2		AUM0220HC	1	2020	3	AUM0220HCCNCX	20-2-7480201-0320		988		Đang học ( Đã có QĐTT)	Hẹn nộp thứ 6	
 14/04/2021 00:00	KH192608	L3	Trương Trần Nguyễn	963457335	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	nguyentt5@viettel.com.vn	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	28/04/2020	Xã Mỹ Tho, Huyện Cao Lãnh, Đồng Tháp	11/05/1993	Công nghệ thông tin	Trung Cấp Nghề Khác Ngành	Nam	21/05/2020	Đã Bàn Giao		Đủ	1	2	2		2		2		2		AUM0220HC	1	2020	3	AUM0220HCCNDX	20-2-7480201-0293		988		Đang học ( Đã có QĐTT)	Đã nộp tại AUM	
 14/04/2021 00:00	KH192607	L3	Thái Hữu Nghĩa	963457336	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	nghiath@viettel.com.vn	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	27/04/2020	Tân Thuận Tây, Cao Lãnh, Đồng Tháp	01/04/1984	Công nghệ thông tin	Trung Cấp Cùng Ngành	Nam	14/05/2020	Đã Bàn Giao		Đủ	1	2	2				2		2		AUM0220HC	1	2020	2	AUM0220HCCNCX	20-2-7480201-0209		987		Đang học ( Đã có QĐTT)	Đã nộp tại AUM	
@@ -711,14 +711,15 @@ $str="26/02/2021 00:00	KH255489	L2	Trần Thanh Tuyền	963456895	TNU-HN,GV-TNU-
 30/07/2020 00:00	KH180577	L9A	Vũ Đình Khánh	963457595	MKT-TNU-CHAT,TNU-HN,GV-TNU-HN	vudinhkhanhbtq@gmail.com	Tuyên Quang	Lục Thanh Loan	06/01/2020	20/05/2020		20/08/1980	Công nghệ thông tin	Đại Học		10/06/2020	Đã Bàn Giao		Đủ	1	2	2				2		2		AUM0320HN	1	2020	1	AUM0320HNCNAK	20-2-7480201-0500		1310		Ngưng học do bận, học khó , không có tài chính, tính chất cv	Ngưng học chưa có QĐ	01/08/2020
 05/03/2021 00:00	KH178066	L2	Lê Thanh Việt	963457596	MKT-ENEU-HOT,TNU-HCM,GV-TNU-HCM	lethanhviet986@gmail.com	Bình Thuận	Lục Thanh Loan	06/12/2019	21/11/2020	Đức Tín, Đức Linh, Bình Thuận	04/11/1990	Công nghệ thông tin	Trung Học Phổ thông		03/12/2020	Đã Bàn Giao		Đủ		2	2				2		2		AUM0620HC	1	2020	1	AUM0620HCCNDX	20-2-7480201-2739		2571		Đang học ( Đã có QĐTT)		
 29/03/2021 00:00	KH176477	L3	Bế Văn Tuấn	963457597	TNU-HN,GV-TNU-HN	tuancb91@gmail.com	Cao Bằng	Vũ Thị Thu Hà	18/11/2019	05/09/2020	Hồng Quang, Quảng Uyên, Cao Bằng	21/03/1991	Công nghệ thông tin	Cao Đẳng Nghề Khác Ngành	Nam	01/10/2020	Đã Bàn Giao		Đủ		2	4				2		2		AUM0520HN	1	2020	2	AUM0520HNCNBK	20-2-7480201-1646	0	2114		Đang học ( Đã có QĐTT)	Không Nghe Máy	
-14/04/2021 00:00	KH121908	L3	Nguyễn Văn Tài	963457598	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	nguyenvantai.29.09.85@gmail.com	Tây Ninh	Vũ Thị Thu Hà	22/03/2018	19/05/2020	Khu phố 6, Thị trấn Tân Biên, Huyện Tân Biên,Tỉnh Tây Ninh	01/01/1986	Công nghệ thông tin	Trung Cấp Cùng Ngành	Nam	26/05/2020	Đã Bàn Giao		Đủ	1	2	2				2		2		AUM0220HC	1	2020	1	AUM0220HCCNCX	20-2-7480201-0445		1135		Đang học ( Đã có QĐTT)	Có hẹn nộp HP đúng hạn";
+14/04/2021 00:00	KH121908	L3	Nguyễn Văn Tài	963457598	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	nguyenvantai.29.09.85@gmail.com	Tây Ninh	Vũ Thị Thu Hà	22/03/2018	19/05/2020	Khu phố 6, Thị trấn Tân Biên, Huyện Tân Biên,Tỉnh Tây Ninh	01/01/1986	Công nghệ thông tin	Trung Cấp Cùng Ngành	Nam	26/05/2020	Đã Bàn Giao		Đủ	1	2	2				2		2		AUM0220HC	1	2020	1	AUM0220HCCNCX	20-2-7480201-0445		1135		Đang học ( Đã có QĐTT)	Có hẹn nộp HP đúng hạn	
+";
 
 // Get all khoa đã có
 $arr_khoa = array();
 $res_khoa = SysGetList('tbl_khoa', array('id'), '');
 if(count($res_khoa)>0){
 	foreach ($res_khoa as $key => $value) {
-		$arr_khoa[] = $value;
+		$arr_khoa[] = $value['id'];
 	}
 }
 
@@ -727,7 +728,7 @@ $arr_lop = array();
 $res_lop = SysGetList('tbl_lop', array('id'), '');
 if(count($res_lop)>0){
 	foreach ($res_lop as $key => $value) {
-		$arr_lop[] = $value;
+		$arr_lop[] = $value['id'];
 	}
 }
 
@@ -736,7 +737,7 @@ $arr_mahoso = array();
 $res_hocsinh = SysGetList('tbl_hocsinh', array('ma'), '');
 if(count($res_hocsinh)>0){
 	foreach ($res_hocsinh as $key => $value) {
-		$arr_mahoso[] = $value;
+		$arr_mahoso[] = $value['ma'];
 	}
 }
 
@@ -745,14 +746,14 @@ $arr_masv = array();
 $res_dkts = SysGetList('tbl_dangky_tuyensinh', array('masv'), '');
 if(count($res_dkts)>0){
 	foreach ($res_dkts as $key => $value) {
-		$arr_masv[] = $value;
+		$arr_masv[] = $value['masv'];
 	}
 }
 
 /* ----------------------------------------------- */
 $objmysql=new CLS_MYSQL;
 $objmysql->Exec("BEGIN");
-$flag1 = $flag2 = $flag3 = true;
+$flag1 = $flag2 = $flag3 = $flag4 = true;
 
 $rows=explode("\n",$str);
 foreach($rows as $r){
@@ -776,18 +777,36 @@ foreach($rows as $r){
 	}
 
 	$dienthoai 	= isset($cols[4]) && $cols[4]!='' ? antiData($cols[4]) : '';
-	$email 		= isset($cols[5]) && $cols[6]!='' ? antiData($cols[6]) : '';
+	$email 		= isset($cols[6]) && $cols[6]!='' ? antiData($cols[6]) : '';
 	$noisinh 	= isset($cols[7]) && $cols[7]!='' ? antiData($cols[7]) : '';
 	$ngaytao 	= isset($cols[9]) && $cols[9]!='' ? strtotime($cols[9]) : '';
 	$hktt 		= isset($cols[11]) && $cols[11]!='' ? antiData($cols[11]) : '';
 	$ngaysinh 	= isset($cols[12]) && $cols[12]!='' ? strtotime($cols[12]) : '';
-	$gioitinh 	= isset($cols[15]) && $cols[15]!='' && antiData($cols[15])=='Nam' ? '1' : '0';
+	$gioitinh 	= isset($cols[15]) && $cols[15]!='' && antiData($cols[15])=='Nam' ? 'nam' : 'nu';
+	$hetotnghiep 	= isset($cols[14]) && $cols[14]!='' ? antiData($cols[14]) : '';
+	$ngayBG 		= isset($cols[16]) && $cols[16]!='' ? strtotime($cols[16]) : '';
+	$tinhtrangBG 	= isset($cols[17]) && $cols[17]!='' ? antiData($cols[17]) : '';
+	$lydoBG 		= isset($cols[18]) && $cols[18]!='' ? antiData($cols[18]) : '';
 
 	/* Kiểm tra nếu đã tồn tại mã hồ sơ hay chưa nếu chưa thì thêm mới */
 	if(!in_array($ma_hoso, $arr_mahoso)){
-		$sql="INSERT INTO tbl_hocsinh (`ma`,`ho_dem`,`name`,`ngaysinh`,`noisinh`,`gioitinh`,`diachi`,`dienthoai`,`nguyenquan`,`hktt`,`email`,`cdate`) VALUES ('$ma_hoso','$hodem','$name','$ngaysinh','$noisinh','$gioitinh','$hktt','$dienthoai','$noisinh','$hktt','$email','$ngaytao')";
+		$sql="INSERT INTO tbl_hocsinh (
+		`ma`,`ho_dem`,`name`,`ngaysinh`,`noisinh`,
+		`gioitinh`,`diachi`,`dienthoai`,`nguyenquan`,`hktt`,`email`,`cdate`,
+		`hetotnghiep`,`ngayBG`,`tinhtrangBG`,`lydoBG`
+		) VALUES (
+		'$ma_hoso','$hodem','$name','$ngaysinh','$noisinh',
+		'$gioitinh','$hktt','$dienthoai','$noisinh','$hktt','$email','$ngaytao',
+		'$hetotnghiep','$ngayBG','$tinhtrangBG','$lydoBG')";
+
 		$result1 = $objmysql->Exec($sql);
-		if(!$result1) $flag1 = false;
+		if(!$result1) {
+			$flag1 = false;
+			echo $sql;
+		}
+	}else{
+		echo 'Mã hồ sơ '.$ma_hoso.' đã tồn tại</br>';
+		$flag1 = false;
 	}
 	
 	/*Bảng đăng ký tuyen sinh*/
@@ -797,44 +816,82 @@ foreach($rows as $r){
 	$masv				= isset($cols[35]) && $cols[35]!='' ? antiData($cols[35]) : '';
 	$status 			= isset($cols[2]) && $cols[2]!='' ? antiData($cols[2]) : 'L0';
 	
+	$nhomkhachhang 		= isset($cols[5]) && $cols[5]!='' ? antiData($cols[5]) : '';
+	$id_staff 			= isset($cols[8]) && $cols[8]!='' ? antiData($cols[8]) : '';
+	$date_level_up 		= isset($cols[10]) && $cols[10]!='' ? strtotime($cols[10]) : '';
 	$namnhaphoc 		= isset($cols[32]) && $cols[32]!='' ? antiData($cols[32]) : '';
 	$kyhoc 				= isset($cols[33]) && $cols[33]!='' ? antiData($cols[33]) : '';
-	$hetotnghiep 		= isset($cols[14]) && $cols[14]!='' ? antiData($cols[14]) : '';
-	$ngaybangiaotruong 	= isset($cols[16]) && $cols[16]!='' ? strtotime($cols[16]) : '';
-	$tinhtrangbangiao 	= isset($cols[17]) && $cols[17]!='' ? antiData($cols[17]) : '';
-	$hoso_tinhtrang 	= isset($cols[19]) && $cols[19]!='' ? antiData($cols[19]) : '';
-	$hoso_vo 			= isset($cols[20]) && $cols[20]!='' ? antiData($cols[20]) : '';
-	$hoso_anh 			= isset($cols[21]) && $cols[21]!='' ? antiData($cols[21]) : '';
-	$hoso_bang 			= isset($cols[22]) && $cols[22]!='' ? antiData($cols[22]) : '';
-	$hoso_cntotnghiep 	= isset($cols[23]) && $cols[23]!='' ? antiData($cols[23]) : '';
-	$hoso_bangdiem 		= isset($cols[24]) && $cols[24]!='' ? antiData($cols[24]) : '';
-	$hoso_hocba 		= isset($cols[25]) && $cols[25]!='' ? antiData($cols[25]) : '';
-	$hoso_pdk 			= isset($cols[26]) && $cols[26]!='' ? antiData($cols[26]) : '';
-	$hoso_giayks 		= isset($cols[27]) && $cols[27]!='' ? antiData($cols[27]) : '';
-	$hoso_cmtnd 		= isset($cols[28]) && $cols[28]!='' ? antiData($cols[28]) : '';
+
+	$hs_tinhtrang 		= isset($cols[19]) && $cols[19]!='' ? antiData($cols[19]) : '';
+	$hs_vo 				= isset($cols[20]) && $cols[20]!='' ? antiData($cols[20]) : '';
+	$hs_anh 			= isset($cols[21]) && $cols[21]!='' ? antiData($cols[21]) : '';
+	$hs_bang 			= isset($cols[22]) && $cols[22]!='' ? antiData($cols[22]) : '';
+	
+	$hs_cn_totnghiep 	= isset($cols[23]) && $cols[23]!='' ? antiData($cols[23]) : '';
+	$hs_bangdiem 		= isset($cols[24]) && $cols[24]!='' ? antiData($cols[24]) : '';
+	$hs_hocba 			= isset($cols[25]) && $cols[25]!='' ? antiData($cols[25]) : '';
+	$hs_pdk 			= isset($cols[26]) && $cols[26]!='' ? antiData($cols[26]) : '';
+	
+	$hs_giay_ks 		= isset($cols[27]) && $cols[27]!='' ? antiData($cols[27]) : '';
+	$hs_cmt 			= isset($cols[28]) && $cols[28]!='' ? antiData($cols[28]) : '';
+	$hs_mota 			= isset($cols[29]) && $cols[29]!='' ? antiData($cols[29]) : '';
 	$dotnhaphoc 		= isset($cols[31]) && $cols[31]!='' ? antiData($cols[31]) : '';
 
-	/*Hiện đang là text, cần nhập với mã ngành*/
-	$nganhdangky = '114';
+	$qd_trungtuyen 		= isset($cols[37]) && $cols[37]!='' ? antiData($cols[37],'int') : '';
+	$qd_congnhansv 		= isset($cols[38]) && $cols[38]!='' ? antiData($cols[38]) : '';
+	$tinhtrang_sv 		= isset($cols[39]) && $cols[39]!='' ? antiData($cols[39]) : '';
+	$tinhtrang_hocphi 	= isset($cols[40]) && $cols[40]!='' ? antiData($cols[40]) : '';
+	$last_contact 		= isset($cols[0]) && $cols[0]!='' ? strtotime($cols[0]) : 0;
+
+	/* Fix dữ liệu demo */
+	$nganhdangky = '111';
+	$he = 'AUM'; 
+	$nguoiphutrach = 'NV001';
 	$cdate = time();
 	$nhaphoc = 1; /* Bắt buộc */
 
 	if(!in_array($masv, $arr_masv)){
-		$sql="INSERT INTO tbl_dangky_tuyensinh (`id_khoa`,`id_he`,`id_nganh`,`malop`,`masv`,`status`,`id_hoso`,`cdate`,`nhaphoc`) VALUES ('$khoa','','$nganhdangky','$malop','$masv','$status','$ma_hoso','$cdate',1)";
-		$result2 = $objmysql->Exec($sql);
-		if(!$result2) $flag2 = false;
+		$sql2="INSERT INTO tbl_dangky_tuyensinh (
+		`id_khoa`,`id_he`,`id_nganh`,`malop`,`masv`,`status`,
+		`id_hoso`,`cdate`,`nhaphoc`,`nhomkhachhang`,`id_staff`,
+		`date_level_up`,`namnhaphoc`,`kyhoc`,
+		`hs_tinhtrang`,`hs_vo`,`hs_anh`,`hs_bang`,
+		`hs_cn_totnghiep`,`hs_bangdiem`,`hs_hocba`,`hs_pdk`,
+		`hs_giay_ks`,`hs_cmt`,`hs_mota`,`dotnhaphoc`,
+		`qd_trungtuyen`,`qd_congnhansv`,`tinhtrang_sv`,`tinhtrang_hocphi`,`last_contact`
+		) VALUES (
+		'$khoa','$he','$nganhdangky','$malop','$masv','$status',
+		'$ma_hoso','$cdate','$nhaphoc','$nhomkhachhang','$id_staff',
+		'$date_level_up','$namnhaphoc','$kyhoc',
+		'$hs_tinhtrang','$hs_vo','$hs_anh','$hs_bang',
+		'$hs_cn_totnghiep','$hs_bangdiem','$hs_hocba','$hs_pdk',
+		'$hs_giay_ks','$hs_cmt','$hs_mota','$dotnhaphoc',
+		'$qd_trungtuyen','$qd_congnhansv','$tinhtrang_sv','$tinhtrang_hocphi','$last_contact')";
+
+		$result2 = $objmysql->Exec($sql2);
+		if(!$result2) {
+			$flag2 = false;
+			echo $sql2;
+		}
+	}else{
+		echo 'Mã sinh viên '.$masv.' đã tồn tại</br>';
+		$flag2 = false;
 	}
 
-	/*Bảng lịch sử tương tác*/
-	$last_date_working_log 	= isset($cols[0]) && $cols[0]!='' ? strtotime($cols[0]) : 0;
-	$tinhtrangsv 			= isset($cols[39]) && $cols[39]!='' ? antiData($cols[39]) : '';
-	$ngaychuyenlevel 		= isset($cols[41]) && $cols[41]!='' ? antiData($cols[41]) : '';
+	/* Bảng khóa */
+	if(!in_array($khoa, $arr_khoa)){
+		$sql3="INSERT INTO tbl_khoa (`id`,`name`) VALUES ('$khoa','$khoa')";
+		$result3 = $objmysql->Exec($sql3);
+	}
 
-	$sql="INSERT INTO tbl_working_log (`id_hoso`,`masv`,`date`,`noidung`,`ketqua`,`cdate`) VALUES ('$ma_hoso','$masv','$last_date_working_log','','$tinhtrangsv','')";
-	$result3 = $objmysql->Exec($sql);
-	if(!$result3) $flag3 = false;
+	/* Bảng lớp */
+	if(!in_array($malop, $arr_lop)){
+		$sql4="INSERT INTO tbl_lop (`id`,`id_nganh`,`id_he`,`id_khoa`,`name`,`cdate`) VALUES 
+		('$malop','$nganhdangky','$he','$khoa','$malop','$cdate')";
+		$result4 = $objmysql->Exec($sql4);
+	}
 }
-if($flag1 && $flag2 && $flag3) {
+if($flag1 && $flag2) {
 	$objmysql->Exec("COMMIT"); echo "success";
 }else { 
 	$objmysql->Exec("ROLLBACK"); echo "error";
