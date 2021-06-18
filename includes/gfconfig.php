@@ -1,9 +1,34 @@
 <?php
 define("DIR_UPLOAD_FILE","uploads/");
 define("partner_CODE","EEA");
-$GLOBALS['ARR_SOURCE'] = array(
-	//'1'=>"Viện đào tạo trực tuyến",
-	//'2'=>"Chứng chỉ ngắn hạn"
+$GLOBALS['ARR_HETOTNGHIEP'] = array(
+	"Trung học phổ thông", 
+	"Trung cấp khác ngành", 
+	"Trung cấp cùng ngành", 
+	"Cao đẳng khác ngành", 
+	"Cao đẳng cùng ngành", 
+	"Đại học", "Thạc sĩ", "Tiến sĩ", 
+	"Chứng chỉ chuyển đổi", 
+	"Không xác định", 
+	"Bổ túc phổ thông", 
+	"Trung cấp nghề cùng ngành", 
+	"Trung cấp nghề khác ngành", 
+	"Cao đẳng nghề cùng ngành", 
+	"Cao đẳng nghề khác ngành"
+);
+$GLOBALS['ARR_TINHTRANG_BG'] = array(
+	"Đã bàn giao", 
+	"Chưa bàn giao", 
+	"Bảo lưu (Chưa bàn giao)", 
+	"Bỏ (Chưa bàn giao)", 
+	"Bảo lưu (Đã bàn giao)", 
+	"Bỏ (Đã bàn giao)", 
+	"Chờ bàn giao", 
+	"Hồ sơ khó thu", 
+	"Rút học phí (Chưa BG HS)"
+);
+$GLOBALS['ARR_HS_TINHTRANG'] = array(
+	"Chưa nhập", "Thiếu", "Đủ", "Quá hạn"
 );
 $GLOBALS['ARR_GENDER'] = array(
 	'0'=>"Nữ",

@@ -19,8 +19,8 @@ $err=$username=$password='';
 					<label>Mật khẩu</label>
 				</div>
 				<div class="col-md-8 col-sm-6">
-					<input type='text' name='txtuser' id='txtuser' class='form-control' placeholder='Tên đăng nhập' value='<?php echo $username;?>' required autocomplete="off"/>
-					<input type='password' name='txtpass' id='txtpass' class='form-control' placeholder='Mật khẩu' value='<?php echo $password;?>' required autocomplete="off"/>
+					<input type='text' name='username' id='txtuser' class='form-control' placeholder='Tên đăng nhập' value='<?php echo $username;?>' required autocomplete="off"/>
+					<input type='password' name='password' id='txtpass' class='form-control' placeholder='Mật khẩu' value='<?php echo $password;?>' required autocomplete="off"/>
 				</div>
 			</div>
 			<div class="form-group clearfix">

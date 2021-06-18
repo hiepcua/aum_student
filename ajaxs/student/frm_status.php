@@ -105,53 +105,17 @@ $row = $res_dkts[0];
 			<label class="col-md-4">Trạng thái</label>
 			<div class="col-md-8">
 				<select name="cbo_status" id="cbo_status" class="form-control" required>
-					<?php 
-					$arr_status=array();
-					$current_status = $row['status'];
-					switch ($current_status) {
-						case 'L0':
-						$arr_status = array('L0','L1','L2','L3','L4','L5','L8','L9A','L9B');
-						break;
-
-						case 'L1':
-						$arr_status = array('L1','L2','L3','L4','L5','L8','L9A','L9B');
-						break;
-
-						case 'L2':
-						$arr_status = array('L2','L3','L4','L5','L8','L9A','L9B');
-						break;
-
-						case 'L3':
-						$arr_status = array('L3','L4','L5','L8','L9A','L9B');
-						break;
-
-						case 'L4':
-						$arr_status = array('L4','L5','L8','L9A','L9B');
-						break;
-
-						case 'L5':
-						$arr_status = array('L5','L8','L9A','L9B');
-						break;
-
-						case 'L8':
-						$arr_status = array('L8');
-						break;
-
-						case 'L9A':
-						$arr_status = array('L9A','L9B');
-						break;
-
-						case 'L9B':
-						$arr_status = array('L9B');
-						break;
-
-						default:
-						$arr_status = array('L0','L1','L2','L3','L4','L5','L8','L9A','L9B');
-						break;
-					}
-					foreach ($arr_status as $key => $value) {
-						$checked = $key==0 ? 'checked' : '';
-						echo '<option value="'.$value.'" '.$checked.'>'.$STATUS_DKTS[$value].'</option>';
+					<?php
+					$current_level = $row['status'];
+					foreach ($LEVEL_STUDENT as $key => $value) {
+						$checked = '';
+						if($key == $current_level){
+							$flag = "yes";
+							$checked = 'selected';
+						}
+						if($flag=='yes'){
+							echo '<option value="'.$key.'" '.$checked.'>'.$value.'</option>';
+						}
 					}
 					?>
 				</select>

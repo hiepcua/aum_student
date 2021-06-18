@@ -19,7 +19,7 @@ if(isset($_POST['id_hoso'])) {
 	$ptxt = isset($_POST['ptxt'])?(int)$_POST['ptxt']:'';
 	$diadiem = isset($_POST['diadiem'])?addslashes(strip_tags($_POST['diadiem'])):'';
 
-	$exist = SysCount('tbl_dangky_tuyensinh', "AND id_khoa='".$khoa."' AND id_he='".$bac."' AND id_nganh='".$ma_nganh."' AND id_hoso='".$id_hoso."'");
+	$exist = SysCount('tbl_dangky_tuyensinh', "AND id_he='".$bac."' AND id_nganh='".$ma_nganh."' AND id_hoso='".$id_hoso."'");
 	if($exist>0) die('error');
 	
 	$obj->Exec("BEGIN"); $cdate =time();
@@ -29,7 +29,7 @@ if(isset($_POST['id_hoso'])) {
 	$last_insert_id = $obj->LastInsertID();
 
 	// Tạo mã sinh viên
-	$masv = create_masv($khoa,$bac,$ma_nganh,$last_insert_id);
+	$masv = create_masv($bac,$ma_nganh,$last_insert_id);
 	$sql="UPDATE tbl_dangky_tuyensinh SET `masv`='".$masv."' WHERE id=".$last_insert_id;
 	$result4 = $obj->Exec($sql);
 	

@@ -10,29 +10,19 @@ require_once('../../libs/cls.lop.php');
 
 $objuser=new CLS_USER;
 if(!$objuser->isLogin()) die("E01");
-$arr_id = array('id'=>'','khoa'=>'','he'=>'','nganh'=>'');
-$ids = isset($_POST['ids'])?addslashes(strip_tags($_POST['ids'])):'';
+$_masv = isset($_POST['masv']) ? antiData($_POST['masv']) : '';
+if($_masv == "") die("Chưa chọn mã sinh viên.");
 
-if($ids!==''){
-	$tml_arr = explode('-', $ids);
-	$arr_id['id'] = $tml_arr[0];
-	$arr_id['id_khoa'] = $tml_arr[1];
-	$arr_id['id_he'] = $tml_arr[2];
-	$arr_id['id_nganh'] = $tml_arr[3];
-}
-if($arr_id['id']=="" || $arr_id['id_khoa']=="" || $arr_id['id_he']=="" || $arr_id['id_nganh']=="")die("Thông tin sinh viên chưa đủ.");
+$res_dkts = SysGetList('tbl_dangky_tuyensinh', array(), "AND masv='".$_masv."'");
+if(count($res_dkts) <= 0) die("Không tồn tại sinh viên.");
 
-$id = $arr_id['id'];
-$sql = "SELECT * FROM tbl_dangky_tuyensinh WHERE id='$id'";
-$obj=new CLS_MYSQL;
-$obj->Query($sql);
-$r = $obj->Fetch_Assoc();
+$r = $res_dkts[0];
 $id = $r['id'];
 $masv = $r['masv'];
 $malop = $r['malop']; 
-$id_khoa=$r['id_khoa'];
-$id_he=$r['id_he']; 
-$id_nganh=$r['id_nganh'];
+$id_he = $r['id_he'];
+$id_khoa = $r['id_khoa'];
+$id_nganh = $r['id_nganh'];
 ?>
 <div class="row form-group">
 	<div class="col-md-4 col-xs-4 text">Mã SV</div>

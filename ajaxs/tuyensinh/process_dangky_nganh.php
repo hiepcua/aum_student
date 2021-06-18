@@ -21,7 +21,7 @@ if(isset($_POST['id_hoso'])) {
 	$diadiem = isset($_POST['diadiem'])?addslashes(strip_tags($_POST['diadiem'])):'';
 
 	// Tạo mã sinh viên
-	$masv = create_masv($khoa,$bac,$ma_nganh,$id_dkts);
+	$masv = create_masv($bac,$ma_nganh,$id_dkts);
 	
 	$obj->Exec("BEGIN"); $cdate =time();
 	$sql = "UPDATE tbl_dangky_tuyensinh SET mdate=$cdate,id_khoa='$khoa',id_he='$bac',id_nganh='$ma_nganh',diadiemhoc='$diadiem',nhaphoc='1',masv='$masv' WHERE id=$id_dkts";

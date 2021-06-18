@@ -16,6 +16,23 @@ if(isset($_POST['id'])) {
 	if($obj->Num_rows()<=0){
 		$sql="DELETE FROM tbl_nganh WHERE id='$id'";
 		$obj->Exec($sql);
+
+		// Import data to json file
+		$url_file = DOCUMENT_ROOT.'jsons/nganh.json';
+		$json = file_get_contents($url_file);
+		$arr_json = json_decode($json, true);
+
+		$arr_new = array();
+		if(count($arr_json)>0){
+			foreach ($arr_json as $key => $value) {
+				if($value['id'] !== $id){
+					$arr_new[] = $value;
+				}
+			}
+			$arr_json = $arr_new;
+		}
+		file_put_contents($url_file, json_encode($arr_json));
+
 		die('success');
 	}else{
 		die('Vẫn còn lớp học!');

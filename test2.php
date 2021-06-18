@@ -1,5 +1,13 @@
 <?php
-$str1="26/02/2021 00:00	KH255489	L2	Trần Thanh Tuyền	963456895	TNU-HN,GV-TNU-HN,MKT-ĐL-TN-TNU	963456895@gmail.com	Sơn La	Vũ Thị Thu Hà	25/02/2021	25/02/2021	Tiểu khu 6, thị trấn Hát Lót, huyện Mai Sơn, Sơn La	10/09/1988	Công nghệ thông tin	Trung Học Phổ thông	Nam	11/03/2021	Đã Bàn Giao	Nộp tại trường	Đủ											AUM0121HN	1	2021	1	AUM0121HNCNDX	21-2-7480201-0098		271		Đang học ( Đã có QĐTT)		
+session_start();
+ini_set("display_errors",1);
+require_once('global/libs/gfconfig.php');
+require_once('global/libs/gfinit.php');
+require_once('global/libs/gffunc.php');
+require_once('includes/gfconfig.php');
+require_once('libs/cls.mysql.php');
+
+$str="26/02/2021 00:00	KH255489	L2	Trần Thanh Tuyền	963456895	TNU-HN,GV-TNU-HN,MKT-ĐL-TN-TNU	963456895@gmail.com	Sơn La	Vũ Thị Thu Hà	25/02/2021	25/02/2021	Tiểu khu 6, thị trấn Hát Lót, huyện Mai Sơn, Sơn La	10/09/1988	Công nghệ thông tin	Trung Học Phổ thông	Nam	11/03/2021	Đã Bàn Giao	Nộp tại trường	Đủ											AUM0121HN	1	2021	1	AUM0121HNCNDX	21-2-7480201-0098		271		Đang học ( Đã có QĐTT)		
 27/01/2021 00:00	KH249320	L2	Lê Long Phú	963456896	TNU-HN,GV-TNU-HN,MKT-TNUHN	963456896@gmail.com	Hà Nội	Vũ Thị Thu Hà	22/01/2021	27/01/2021	Ku tập thể Nam Phong, Nam Tiến, Phú Xuyên, Hà Nội	30/08/1983	Công nghệ thông tin	Đại Học	Nam	29/01/2021	Đã Bàn Giao		Đủ	2	2	2				2		2		AUM0121HN	1	2021	1	AUM0121HNCNAC	21-2-7480201-0104		271		Đang học ( Đã có QĐTT)		
 06/04/2021 00:00	KH249312	L2	Vũ Qúy Anh	963456897	TNU-HN,GV-TNU-HN,CONTACT-ĐL-LẺ	963456897@gmail.com	Hà Nội	Vũ Thị Thu Hà	22/01/2021	25/02/2021		14/04/1995	Công nghệ thông tin	Đại Học	Nữ	19/02/2021	Đã Bàn Giao		Đủ	2	4	2				2	2	2		AUM0121HN	1	2021	1	AUM0121HNCNAK	21-2-7480201-0106		271		Không nghe máy		
 22/03/2021 00:00	KH247240	L2	Lê Đình Tiện	963456898	TNU-HN,CT-ĐL-TNU-AUTO,GV-TNU-HN	963456898@gmail.com	Hà Nội	Vũ Thị Thu Hà	12/01/2021	28/01/2021	TDP Hòa Bình, Thị trấn Phong Thổ, Phong Thổ, Lai Châu	30/01/1989	Công nghệ thông tin	Đại Học	Nam	19/02/2021	Đã Bàn Giao		Đủ		2	2				2	2			AUM0121HN	1	2021	1	AUM0121HNCNAK	21-2-7480201-0108		271		Không nghe máy		
@@ -437,8 +445,7 @@ $str1="26/02/2021 00:00	KH255489	L2	Trần Thanh Tuyền	963456895	TNU-HN,GV-TNU
 21/01/2021 00:00	KH192613	L9A	Lê Ngọc Trí	963457330	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	triln@viettel.com.vn	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	29/04/2020	Tịnh Thới, Cao Lãnh, Đồng Tháp	01/11/1985	Công nghệ thông tin	Trung Học Phổ thông	Nam	21/05/2020	Đã Bàn Giao		Đủ	1	2	2		1		2	2			AUM0220HC	1	2020	1	AUM0220HCCNDX	20-2-7480201-0310		988		Ngưng học do bận, học khó , không có tài chính, tính chất cv	Ngưng học chưa có QĐ	21/01/2021
 24/02/2021 00:00	KH192612	L9A	Lê Trường Xuân	963457331	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	xuanlt13@viettel.com.vn	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	29/04/2020	Tân Thạnh, Thanh Bình, Đồng Tháp	14/10/1984	Công nghệ thông tin	Trung Học Phổ thông	Nam	21/05/2020	Đã Bàn Giao		Đủ	1	2	2				2	2	1		AUM0220HC	1	2020	1	AUM0220HCCNDX	20-2-7480201-0314		988		Ngưng học do bận, học khó , không có tài chính, tính chất cv	Ngưng học chưa có QĐ	24/02/2021
 21/01/2021 00:00	KH192611	L9A	Đặng Hữu Nhân	963457332	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	nhandh1@viettel.com.vn	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	27/04/2020	Cao Lãnh, Đồng Tháp	21/09/1987	Công nghệ thông tin	Trung Học Phổ thông	Nam	21/05/2020	Đã Bàn Giao		Đủ	1	2	2		2		2	2			AUM0220HC	1	2020	1	AUM0220HCCNDX	20-2-7480201-0295		988		Ngưng học do bận, học khó , không có tài chính, tính chất cv	Ngưng học chưa có QĐ	21/01/2021
-14/04/2021 00:00	KH192610	L3	Nguyễn Cao Xuân	963457333	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	"xuannc@viettel.com.vn
-xuannc7@gmail.com"	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	05/05/2020	Thị xã Cao Lãnh, Đồng Tháp	02/01/1985	Công nghệ thông tin	Trung Cấp Cùng Ngành	Nam	14/05/2020	Đã Bàn Giao		Đủ	1	2	2				2		2		AUM0220HC	1	2020	3	AUM0220HCCNCX	20-2-7480201-0210		987		Đang học ( Đã có QĐTT)	Có hẹn nộp HP đúng hạn	
+14/04/2021 00:00	KH192610	L3	Nguyễn Cao Xuân	963457333	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	xuannc@viettel.com.vn	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	05/05/2020	Thị xã Cao Lãnh, Đồng Tháp	02/01/1985	Công nghệ thông tin	Trung Cấp Cùng Ngành	Nam	14/05/2020	Đã Bàn Giao		Đủ	1	2	2				2		2		AUM0220HC	1	2020	3	AUM0220HCCNCX	20-2-7480201-0210		987		Đang học ( Đã có QĐTT)	Có hẹn nộp HP đúng hạn	
 16/04/2021 00:00	KH192609	L3	Đoàn Duy Tùng	963457334	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	tungdd99999@gmail.com	Kiên Giang	Vũ Thị Thu Hà	22/04/2020	27/04/2020	Thạnh Đông, Tân Hiệp, Kiên Giang	01/01/1989	Công nghệ thông tin	Trung Cấp Nghề Cùng Ngành	Nam	21/05/2020	Đã Bàn Giao		Đủ	1	2	4		2		2		2		AUM0220HC	1	2020	3	AUM0220HCCNCX	20-2-7480201-0320		988		Đang học ( Đã có QĐTT)	Hẹn nộp thứ 6	
 14/04/2021 00:00	KH192608	L3	Trương Trần Nguyễn	963457335	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	nguyentt5@viettel.com.vn	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	28/04/2020	Xã Mỹ Tho, Huyện Cao Lãnh, Đồng Tháp	11/05/1993	Công nghệ thông tin	Trung Cấp Nghề Khác Ngành	Nam	21/05/2020	Đã Bàn Giao		Đủ	1	2	2		2		2		2		AUM0220HC	1	2020	3	AUM0220HCCNDX	20-2-7480201-0293		988		Đang học ( Đã có QĐTT)	Đã nộp tại AUM	
 14/04/2021 00:00	KH192607	L3	Thái Hữu Nghĩa	963457336	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	nghiath@viettel.com.vn	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	27/04/2020	Tân Thuận Tây, Cao Lãnh, Đồng Tháp	01/04/1984	Công nghệ thông tin	Trung Cấp Cùng Ngành	Nam	14/05/2020	Đã Bàn Giao		Đủ	1	2	2				2		2		AUM0220HC	1	2020	2	AUM0220HCCNCX	20-2-7480201-0209		987		Đang học ( Đã có QĐTT)	Đã nộp tại AUM	
@@ -469,8 +476,7 @@ xuannc7@gmail.com"	Đồng Tháp	Vũ Thị Thu Hà	22/04/2020	05/05/2020	Thị x
 29/03/2021 00:00	KH192358	L3	Hoàng Huy Toàn	963457361	TNU-HN,GV-TNU-HN,MKT-ĐL-CO-TNU	toanhh@viettel.com.vn	Nam Định	Vũ Thị Thu Hà	21/04/2020	27/10/2020	Đội 12, Nhân Nghĩa, Yên Nghĩa, Ý Yên, Nam Định	27/05/1989	Công nghệ thông tin	Cao Đẳng Khác Ngành	Nam	27/10/2020	Đã Bàn Giao		Đủ		4	2				2		2		AUM0520HN	1	2020	2	AUM0520HNCNBK	20-2-7480201-2035	0	2279		Đang học ( Đã có QĐTT)	Không Nghe Máy	
 29/03/2021 00:00	KH192356	L3	Nguyễn Thanh Tùng	963457362	TNU-HN,GV-TNU-HN,MKT-ĐL-CO-TNU	ngantran9171@gmail.com	Nam Định	Vũ Thị Thu Hà	21/04/2020	27/10/2020	Xóm 12, Yên Đồng- Ý Yên- Nam Định	17/01/1991	Công nghệ thông tin	Cao Đẳng Khác Ngành	Nam	27/10/2020	Đã Bàn Giao		Đủ		2	2				2		2		AUM0520HN	1	2020	2	AUM0520HNCNBK	20-2-7480201-2036	0	2279		Đang học ( Đã có QĐTT)	Không Nghe Máy	
 14/04/2021 00:00	KH192355	L9B	Nguyễn Mạnh Hùng	963457363	CONTACT-ĐL,TNU-HN,GV-TNU-HN	hungnm33@viettel.com.vn	Nam Định	Lục Thanh Loan	21/04/2020	05/08/2020	428, Đặng Xuân Bảng, TP Nam Định, tỉnh Nam Định	09/11/1991	Công nghệ thông tin	Cao Đẳng Khác Ngành	Nam	20/08/2020	Đã Bàn Giao		Đủ	1	2	2				2		2		AUM0420HN	1	2020	1	AUM0420HNCNBK	0		1715		Ngưng học bảo lưu không có đơn	Ngưng học chưa có QĐ	22/03/2021
-22/03/2021 00:00	KH192354	L3	Lê Đức Quyền	963457364	CONTACT-ĐL,TNU-HN,GV-TNU-HN	"quyenld@viettel.com.vn1
-quyenld3789@gmail.com"	Nam Định	Lục Thanh Loan	21/04/2020	07/05/2020	Nam Định	31/05/1981	Công nghệ thông tin	Trung Học Phổ thông	Nam	16/07/2020	Đã Bàn Giao	Trungpt 23/06 : Đang làm. ĐL thu tiếp	Đủ	1	2	2				2		2		AUM0420HN	1	2020	1	AUM0420HNCNDX	20-2-7480201-0853		1436		Đang học ( Đã có QĐTT)	Đã nộp tại AUM	
+22/03/2021 00:00	KH192354	L3	Lê Đức Quyền	963457364	CONTACT-ĐL,TNU-HN,GV-TNU-HN	quyenld@viettel.com.vn1	Nam Định	Lục Thanh Loan	21/04/2020	07/05/2020	Nam Định	31/05/1981	Công nghệ thông tin	Trung Học Phổ thông	Nam	16/07/2020	Đã Bàn Giao	Trungpt 23/06 : Đang làm. ĐL thu tiếp	Đủ	1	2	2				2		2		AUM0420HN	1	2020	1	AUM0420HNCNDX	20-2-7480201-0853		1436		Đang học ( Đã có QĐTT)	Đã nộp tại AUM	
 05/04/2021 00:00	KH192352	L9A	Trần Duy Khánh	963457365	CONTACT-ĐL,TNU-HN,GV-TNU-HN	khanhtd15@viettel.com.vn	Nam Định	Lục Thanh Loan	21/04/2020	01/07/2020	Xóm 13, Hải Nam, Hải Hậu, Nam Định	01/10/1990	Công nghệ thông tin	Cao Đẳng Khác Ngành		07/07/2020	Đã Bàn Giao		Đủ	1	2	4				2		2		AUM0320HN	1	2020	1	AUM0320HNCNBK			1410		Ngưng học không rõ nguyên nhân	Ngưng học ( đã có cảnh báo Thôi học)	05/04/2021
 12/04/2021 00:00	KH192351	L2	Trần Mạnh Thắng	963457366	CONTACT-ĐL,TNU-HN,GV-TNU-HN	manhthang131090@gmail.com	Nam Định	Vũ Thị Thu Hà	21/04/2020	26/01/2021	23/22 Đông An, TP Nam Định, Nam Định	13/10/1990	Công nghệ thông tin	Cao Đẳng Nghề Khác Ngành	Nam	19/02/2021	Đã Bàn Giao		Đủ		2	4				2		2		AUM0121HN	1	2021	1	AUM0121HNCNBK	21-2-7480201-0103		271				
 12/04/2021 00:00	KH192349	L3	Trần Trung Kiên	963457367	CONTACT-ĐL,TNU-HN,GV-TNU-HN	trantrungkienexit@gmail.com	Nam Định	Vũ Thị Thu Hà	21/04/2020	10/10/2020	An Lễ, Liên Minh, Vụ Bản, Nam Định	30/11/1990	Công nghệ thông tin	Cao Đẳng Nghề Khác Ngành	Nam	15/10/2020	Đã Bàn Giao		Đủ		2	4				2		2		AUM0520HN	1	2020	2	AUM0520HNCNBK	20-2-7480201-2168	0	2232		Đang học ( Đã có QĐTT)	Đã nộp tại AUM	
@@ -629,8 +635,7 @@ quyenld3789@gmail.com"	Nam Định	Lục Thanh Loan	21/04/2020	07/05/2020	Nam Đ
 24/02/2021 00:00	KH191049	L9A	Đỗ Trường Giang	963457520	CHƯA XĐ,TNU-HN,GV-TNU-HN	giangdt10@viettel.com.vn	Lạng Sơn	Lục Thanh Loan	16/04/2020	03/07/2020	Thôn Minh Khai, Xã Chi Lăng, Huyện Chi Lăng, Tp. Lạng Sơn	14/12/1985	Công nghệ thông tin	Trung Cấp Cùng Ngành		07/07/2020	Đã Bàn Giao		Đủ	1	2	2				2		2		AUM0320HN	1	2020	1	AUM0320HNCNCX			1410		Ngưng học do hệ thống học tập, Thi cử, miễn môn, TB học phí	Ngưng học chưa có QĐ	22/03/2021
 08/04/2021 00:00	KH191037	L9A	Phạm Thanh Nhật	963457521	CHƯA XĐ,TNU-HCM,GV-TNU-HCM	nhatpt1@viettel.com.vn	Phú Yên	Lục Thanh Loan	16/04/2020	21/05/2020	Phú Mỹ, An Thọ, Tuy An, Phú Yên	25/08/1983	Công nghệ thông tin	Trung Học Phổ thông	Nam	10/06/2020	Đã Bàn Giao		Đủ	1	2	2				2		2		AUM0320HC	1	2020	1	AUM0320HCCNDX	20-2-7480201-0506		1310		Ngưng học không rõ nguyên nhân	Ngưng học ( đã có cảnh báo Thôi học)	08/04/2021
 06/04/2021 00:00	KH190961	L9B	Phan Đức Luân	963457522	TNU-HN,MKT-ĐL-HC-TNU,GV-TNU-HN	ducluanbk@gmail.com	Bắc Kạn	Vũ Thị Thu Hà	16/04/2020	06/05/2020	xã Lãng Ngân, Ngân Sơn, Bắc Kạn	14/09/1990	Công nghệ thông tin	Trung Học Phổ thông	Nam	14/05/2020	Đã Bàn Giao		Đủ	1	2	2				2		2	0	AUM0220HN	1	2020	1	AUM0220HNCNDX	20-2-7480201-0157		987		Ngưng học do bận, học khó , không có tài chính, tính chất cv	CS Sau BL vào tháng 04	13/01/2021
-13/04/2021 00:00	KH190946	L3	Mai Viết Trường	963457523	TNU-HN,MKT-ĐL-HC-TNU,GV-TNU-HN	"hikaru6780@gmail.com
-truongmv@viettel.com.vn"	Thái Nguyên	Vũ Thị Thu Hà	16/04/2020	21/04/2020	Đông Đạt, Phú Lương, Thái Nguyên	26/08/1987	Công nghệ thông tin	Cao Đẳng Khác Ngành	Nam	14/05/2020	Đã Bàn Giao		Đủ	1	2	2				2	2		13/05 :đã nắm đc cách học trên htht	AUM0220HN	1	2020	1	AUM0220HNCNBK	20-2-7480201-0192		987		Đang học ( Đã có QĐTT)	Có hẹn nộp trong tuần	
+13/04/2021 00:00	KH190946	L3	Mai Viết Trường	963457523	TNU-HN,MKT-ĐL-HC-TNU,GV-TNU-HN	hikaru6780@gmail.com	Thái Nguyên	Vũ Thị Thu Hà	16/04/2020	21/04/2020	Đông Đạt, Phú Lương, Thái Nguyên	26/08/1987	Công nghệ thông tin	Cao Đẳng Khác Ngành	Nam	14/05/2020	Đã Bàn Giao		Đủ	1	2	2				2	2		13/05 :đã nắm đc cách học trên htht	AUM0220HN	1	2020	1	AUM0220HNCNBK	20-2-7480201-0192		987		Đang học ( Đã có QĐTT)	Có hẹn nộp trong tuần	
 13/04/2021 00:00	KH190945	L3	Đặng Văn Diện	963457524	TNU-HN,MKT-ĐL-HC-TNU,GV-TNU-HN	diendv1@viettel.com.vn	Bắc Kạn	Vũ Thị Thu Hà	16/04/2020	21/04/2020	Tổ 5, Phường Nguyễn Thị Minh Khai, Tp. Bắc Cạn, Tỉnh Bắc Cạn	07/12/1984	Công nghệ thông tin	Cao Đẳng Cùng Ngành		14/05/2020	Đã Bàn Giao		Đủ	1	2	2				2		2	13/05 :KNM	AUM0220HN	1	2020	1	AUM0220HNCNBC	20-2-7480201-0172		987		Đang học ( Đã có QĐTT)	Có hẹn nộp HP đúng hạn	
 13/04/2021 00:00	KH190943	L3	Triệu Trung Kiên	963457525	TNU-HN,MKT-ĐL-HC-TNU,GV-TNU-HN	trieukien@viettel.com.vn	Bắc Kạn	Vũ Thị Thu Hà	16/04/2020	21/04/2020	Số 6, Tổ 10B, Phường Đức Xuân, Tp. Bắc Cạn, Tỉnh Bắc Cạn	17/08/1980	Công nghệ thông tin	Cao Đẳng Khác Ngành		14/05/2020	Đã Bàn Giao		Đủ	1	2	3				2		2	13/05 :KNM	AUM0220HN	1	2020	1	AUM0220HNCNBK	20-2-7480201-0186		987		Đang học ( Đã có QĐTT)	Có hẹn nộp trong tuần	
 15/04/2021 00:00	KH190941	L3	Nông Văn Hợp	963457526	TNU-HN,MKT-ĐL-HC-TNU,GV-TNU-HN	hopnv3@gmail.com	Bắc Kạn	Vũ Thị Thu Hà	16/04/2020	20/04/2020	Tổ 17, Phường Nguyễn Thị Minh Khai, Tp.Bắc Cạn, Tỉnh Bắc Cạn	21/03/1985	Công nghệ thông tin	Trung Học Phổ thông	Nam	07/05/2020	Đã Bàn Giao		Đủ	1	2	2				2		2	13/05 :đã nắm đc cách học trên htht	AUM0220HN	1	2020	1	AUM0220HNCNDX	20-2-7480201-0155		987		Đang học ( Đã có QĐTT)	Có hẹn nộp HP đúng hạn	
@@ -707,4 +712,78 @@ truongmv@viettel.com.vn"	Thái Nguyên	Vũ Thị Thu Hà	16/04/2020	21/04/2020	�
 29/03/2021 00:00	KH176477	L3	Bế Văn Tuấn	963457597	TNU-HN,GV-TNU-HN	tuancb91@gmail.com	Cao Bằng	Vũ Thị Thu Hà	18/11/2019	05/09/2020	Hồng Quang, Quảng Uyên, Cao Bằng	21/03/1991	Công nghệ thông tin	Cao Đẳng Nghề Khác Ngành	Nam	01/10/2020	Đã Bàn Giao		Đủ		2	4				2		2		AUM0520HN	1	2020	2	AUM0520HNCNBK	20-2-7480201-1646	0	2114		Đang học ( Đã có QĐTT)	Không Nghe Máy	
 14/04/2021 00:00	KH121908	L3	Nguyễn Văn Tài	963457598	CONTACT-ĐL,TNU-HCM,GV-TNU-HCM	nguyenvantai.29.09.85@gmail.com	Tây Ninh	Vũ Thị Thu Hà	22/03/2018	19/05/2020	Khu phố 6, Thị trấn Tân Biên, Huyện Tân Biên,Tỉnh Tây Ninh	01/01/1986	Công nghệ thông tin	Trung Cấp Cùng Ngành	Nam	26/05/2020	Đã Bàn Giao		Đủ	1	2	2				2		2		AUM0220HC	1	2020	1	AUM0220HCCNCX	20-2-7480201-0445		1135		Đang học ( Đã có QĐTT)	Có hẹn nộp HP đúng hạn	
 ";
+/* array(
+ma_hoso, hovaten, dienthoai, email, level, nơi sinh, ngày sinh, giới tính, ngành muốn học, hệ đào tạo
+nguồn, nhóm KH, ghi chú nguồn contact, trường chăm sóc, mô tả, ngành đã học,
+BGHS ngày bàn giao trường, BGHS tình trạng bàn giao, BGHS lý do, Tình trạng hồ sơ, hs vỏ
+hs ảnh, hs bằng, hs chứng nhận tốt nghiệp, hs chứng minh thư, hs sơ yếu lý lịch, 
+hs khác,
+)*/
+$arr = array();
+$rows=explode("\n",$str);
+foreach($rows as $r){
+	if($r=='') continue;
+	$cols=explode("\t",$r);
+
+	/*Bảng học sinh*/
+	$hodem = $name = '';
+	$ma_hoso 	= isset($cols[1]) && $cols[1]!='' ? antiData($cols[1]) : '';
+	$fullname 	= isset($cols[3]) && $cols[3]!='' ? antiData($cols[3]) : '';
+	if($fullname!=''){
+		$arr_name = explode(' ', $fullname);
+		$name = end($arr_name);
+		$num = count($arr_name);
+		foreach ($arr_name as $key => $value) {
+			if($key < $num - 1){
+				$hodem.= $value.'  ';
+			}
+			$hodem = substr($hodem, 0, strlen($hodem) - 1);
+		}
+	}
+
+	$dienthoai 	= isset($cols[4]) && $cols[4]!='' ? antiData($cols[4]) : '';
+	$email 		= isset($cols[6]) && $cols[6]!='' ? antiData($cols[6]) : '';
+	$level 		= 'L8';
+	$noisinh 	= isset($cols[7]) && $cols[7]!='' ? antiData($cols[7]) : '';
+	$ngaysinh 	= isset($cols[12]) && $cols[12]!='' ? strtotime($cols[12]) : '';
+	$gioitinh 	= isset($cols[15]) && $cols[15]!='' && antiData($cols[15])=='Nam' ? 'nam' : 'nu';
+	$nganhdangky= isset($cols[13]) && $cols[13]!='' ? antiData($cols[13]) : '';
+	$hedaotao 	= 'AUM';
+
+	$nguon 		= '';
+	$ghichu_nguon_contact = '';
+	$truongchamsoc 	= '';
+	$nganhdahoc 	= '';
+
+	$nhomkhachhang = isset($cols[5]) && $cols[5]!='' ? antiData($cols[5]) : '';
+	$ngayBG 		= isset($cols[16]) && $cols[16]!='' ? strtotime($cols[16]) : '';
+	$tinhtrangBG 	= isset($cols[17]) && $cols[17]!='' ? antiData($cols[17]) : '';
+	$lydoBG 		= isset($cols[18]) && $cols[18]!='' ? antiData($cols[18]) : '';
+
+	$hs_tinhtrang 		= isset($cols[19]) && $cols[19]!='' ? antiData($cols[19]) : '';
+	$hs_vo 				= isset($cols[20]) && $cols[20]!='' ? antiData($cols[20]) : '';
+	$hs_anh 			= isset($cols[21]) && $cols[21]!='' ? antiData($cols[21]) : '';
+	$hs_bang 			= isset($cols[22]) && $cols[22]!='' ? antiData($cols[22]) : '';
+	$hs_cn_totnghiep 	= isset($cols[23]) && $cols[23]!='' ? antiData($cols[23]) : '';
+	$hs_cmt 			= isset($cols[28]) && $cols[28]!='' ? antiData($cols[28]) : '';
+	$hs_mota 			= isset($cols[29]) && $cols[29]!='' ? antiData($cols[29]) : '';
+	$hs_syll 			= '';
+	$hs_khac 			= '';
+
+	// $hs_bangdiem 	= isset($cols[24]) && $cols[24]!='' ? antiData($cols[24]) : '';
+	// $hs_hocba 		= isset($cols[25]) && $cols[25]!='' ? antiData($cols[25]) : '';
+	// $hs_pdk 			= isset($cols[26]) && $cols[26]!='' ? antiData($cols[26]) : '';
+	// $hs_giay_ks 		= isset($cols[27]) && $cols[27]!='' ? antiData($cols[27]) : '';
+
+	$tmp_arr = array(
+		'ma_hoso'=>$ma_hoso, 'hovaten'=>$fullname, 'dienthoai'=>$dienthoai, 'email'=>$email,
+		'level'=>'L8', 'noisinh'=>$noisinh, 'ngaysinh'=>$ngaysinh, 'gioitinh'=>$gioitinh,
+		'nganhdangky'=>$nganhdangky, 'hedaotao'=>$hedaotao,
+		'nguon'=>$nguon, 'ghichu_nguon_contact'=>$ghichu_nguon_contact, 'truongchamsoc'=>$truongchamsoc, 'nganhdahoc'=>$nganhdahoc,
+		'nhomkhachhang'=>$nhomkhachhang, 'ngayBG'=>$ngayBG, 'tinhtrangBG'=>$tinhtrangBG, 'lydoBG'=>$lydoBG,
+		'hs_tinhtrang'=>$hs_tinhtrang, 'hs_vo'=>$hs_vo, 'hs_anh'=>$hs_anh, 'hs_bang'=>$hs_bang, 'hs_cn_totnghiep'=>$hs_cn_totnghiep,'hs_cmt'=>$hs_cmt, 'hs_mota'=>$hs_mota, 'hs_syll'=>$hs_syll, 'hs_khac'=>$hs_khac
+	);
+	array_push($arr, $tmp_arr);
+}
+echo json_encode($arr,JSON_UNESCAPED_UNICODE);
 ?>

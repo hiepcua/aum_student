@@ -58,7 +58,7 @@ $_SESSION["SV$ma"]['TAB_KYLUAT'] = json_decode($r['kyluat'],true);
 								<div class="row form-group">
 									<div class="col-md-2 col-xs-4 text">ID</div>
 									<div class="col-md-4 col-xs-8">
-										<input type="number" name="ma" id="" class="form-control" value="<?php echo $r['ma'];?>" required>
+										<input type="number" name="ma" id="" class="form-control" value="<?php echo $r['ma'];?>" required readonly>
 									</div>
 								</div>
 								<div class="row form-group">
@@ -220,7 +220,7 @@ $_SESSION["SV$ma"]['TAB_KYLUAT'] = json_decode($r['kyluat'],true);
 								</div>
 							</div>
 							<div class="clearfix"></div>
-							<div class="box-tabs box-add">
+							<!--<div class="box-tabs box-add">
 								<ul class="tabs-function">
 									<li>
 										<button type="button" class="btn btn-default add-row" title="Thêm hàng"><i class="fa fa-folder-open"></i></button>
@@ -444,7 +444,7 @@ $_SESSION["SV$ma"]['TAB_KYLUAT'] = json_decode($r['kyluat'],true);
 										<input type="hidden" name="dmhoso_ids" id="dmhoso_ids" value="<?php echo $dmhoso_ids;?>"/>
 									</div>
 								</div>
-							</div>
+							</div>-->
 						</form>
 					</div>
 				</div>

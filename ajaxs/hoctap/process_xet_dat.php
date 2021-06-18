@@ -9,30 +9,28 @@ require_once('../../libs/cls.users.php');
 $obj = new CLS_MYSQL; 
 $objuser=new CLS_USER;
 if(!$objuser->isLogin()) die("E01");
-$user = $objuser->getInfo('username');
+$user = $objuser->getInfo('user');
 if(isset($_POST['ht_id'])) {
-	$masv = isset($_POST['masv'])?addslashes(strip_tags($_POST['masv'])):'';
-	$ht_id = isset($_POST['ht_id'])?(int)$_POST['ht_id']:-1;
-	$id_mon = isset($_POST['id_mon'])?addslashes(strip_tags($_POST['id_mon'])):'';
-	$id_he = isset($_POST['id_he'])?addslashes(strip_tags($_POST['id_he'])):'';
-	$id_nganh = isset($_POST['id_nganh'])?addslashes(strip_tags($_POST['id_nganh'])):'';
+	$masv = isset($_POST['masv']) ? antiData($_POST['masv']) : '';
+	$ht_id = isset($_POST['ht_id']) ? antiData($_POST['ht_id'], 'int') : -1;
+	$id_mon = isset($_POST['id_mon']) ? antiData($_POST['id_mon']) : '';
+	$id_he = isset($_POST['id_he']) ? antiData($_POST['id_he']) : '';
+	$id_nganh = isset($_POST['id_nganh']) ? antiData($_POST['id_nganh']) : '';
 	if($ht_id<0) die();
 	
-	$sql="SELECT `id_khoa`,`id_he`,`id_nganh` FROM tbl_dangky_tuyensinh WHERE masv='$masv'";
+	$res_dkts = SysGetList('tbl_dangky_tuyensinh', array('id_khoa','id_he','id_nganh'), "AND masv='".$masv."'");
+	if(!isset($res_dkts[0])) die("Không tồn tại thông tin hồ sơ");
+	$row_dkts = $res_dkts[0];
+	$id_he = $row_dkts['id_he'];
+	$id_nganh = $row_dkts['id_nganh'];
 
-	$obj->Query($sql);
-	$r=$obj->Fetch_Assoc();
-	$id_he=$r['id_he'];
-	$id_nganh=$r['id_nganh'];
 	// lay du lieu hoc phan khung
 	$sql="SELECT * FROM tbl_hocphan_khung WHERE id_he='$id_he' AND id_nganh='$id_nganh' AND id_monhoc='$id_mon'";
-
 	$obj->Query($sql);
 	$arrHP = array();
 	while($r=$obj->Fetch_Assoc()) $arrHP=$r;
-	
-	//var_dump($arrHP); die();
 	if(count($arrHP)==0) $str.="Không có học phần khung!";
+
 	// lay du lieu diem cu
 	$sql="SELECT diem FROM tbl_hoctap WHERE id='$ht_id'";
 	$obj->Query($sql);
@@ -41,7 +39,6 @@ if(isset($_POST['ht_id'])) {
 	$diem1 = isset($diem['chuyencan']) ? $diem['chuyencan'] : "";
 	$diem2 = isset($diem['diemkt']) ? $diem['diemkt'] : "";
 	$diem3 = isset($diem['diemthi']) ? $diem['diemthi'] : "";
-	
 	if($diem1=='' || $diem2=='' || $diem3=='') die('Học viên chưa có điểm!');
 
 	$kq=0;
@@ -54,9 +51,10 @@ if(isset($_POST['ht_id'])) {
 	if($diem_kiemtra>=0) $kq += $diem_kiemtra/100*$diem2;
 	if($diem_thi>=0) $kq += $diem_thi/100*$diem3;
 	
-	$pass=0; $str='';
+	$pass='HT04'; $str='';
 	if($kq>$diem_pass) {
-		$pass=1; $str.="SV #$masv Đạt";
+		$pass='HT05'; 
+		$str.="SV #$masv Đạt";
 		$note = "KQ: Đạt môn $id_mon"; 
 	}else {
 		$str.="SV #$masv Không đạt";

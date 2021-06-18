@@ -10,8 +10,10 @@ require_once('../../libs/cls.khoa.php');
 
 $objuser=new CLS_USER;
 if(!$objuser->isLogin()) die("E01");
-$action = isset($_POST['action'])?addslashes(htmlentities(strip_tags($_POST['action']))):'';
-$id = isset($_POST['id'])?addslashes(htmlentities(strip_tags($_POST['id']))):'';
+
+$id = isset($_POST['id']) ? antiData($_POST['id']) : '';
+$action = isset($_POST['action']) ? antiData($_POST['action']) : '';
+
 $objkhoa = new CLS_KHOA;
 $objkhoa->getList(" AND id='$id'");
 $r=$objkhoa->Fetch_Assoc();

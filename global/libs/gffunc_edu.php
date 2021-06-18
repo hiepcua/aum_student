@@ -1,6 +1,6 @@
 <?php
-function create_masv($khoa,$he,$nganh,$stt){
-	$masv=substr($khoa,-2).$he.$nganh.$stt;
+function create_masv($he,$nganh,$stt){
+	$masv=$he.$nganh.$stt;
 	return $masv;
 }
 function create_sbd($so,$num_char) {

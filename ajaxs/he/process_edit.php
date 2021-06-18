@@ -23,5 +23,34 @@ if(isset($_POST['id'])) {
 	`hocphi_thict`='$hocphi_thict',`hocphi_hoclai`='$hocphi_hoclai',
 	`hocphi_hocct`='$hocphi_hocct',`sohocky`='$hocky' WHERE id='$id'";
 	$obj->Exec($sql);
+
+	// Import data to json file
+	$url_file = DOCUMENT_ROOT.'jsons/he.json';
+	$json = file_get_contents($url_file);
+	$arr_json = json_decode($json, true);
+
+	$arr_new = array();
+	if(count($arr_json)>0){
+		foreach ($arr_json as $key => $value) {
+			$tmp = array();
+			$tmp['id'] = $id;
+			$tmp['name'] = $name;
+			$tmp['hocphi'] = $hocphi;
+			$tmp['hocphi_thilai'] = $hocphi_thilai;
+			$tmp['hocphi_thict'] = $hocphi_thict;
+			$tmp['hocphi_hoclai'] = $hocphi_hoclai;
+			$tmp['hocphi_hocct'] = $hocphi_hocct;
+			$tmp['sohocky'] = $hocky;
+			$tmp['isactive'] = $value['isactive'];
+
+			if($value['id'] == $id){
+				$arr_new[] = $tmp;
+			}else{
+				$arr_new[] = $value;
+			}
+		}
+		$arr_json = $arr_new;
+	}
+	file_put_contents($url_file, json_encode($arr_json));
 	die('success');
 }?>

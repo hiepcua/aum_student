@@ -1,34 +1,144 @@
 <?php
 defined('ISHOME') or die("You can't access this page!");
 if(!isset($_GET['id'])) die("<br>Vui lòng chọn hồ sơ cần xem");
-$_masv 	= addslashes(strip_tags(htmlentities($_GET['id']))); // masv
+$_masv = antiData($_GET['id']);
+if($_masv=='') die("Không có dữ liệu");
 $_SESSION['THIS_YEAR'] = $_SESSION['THIS_BAC'] = $_SESSION['THIS_NGANH'] = '';
+$hocky=8; $slot=24;
+//---------------------------------------
+$obj = new CLS_MYSQL;
+$sql="SELECT * FROM tbl_nganh";
+$obj->Query($sql);
+$_NGANH=array();
+while($r=$obj->Fetch_Assoc()){
+	$_NGANH[$r['id']]=$r['name'];
+}
+
+//---------------------------------------
+$sql="SELECT * FROM tbl_lop";
+$obj->Query($sql);
+$_HE=array();
+while($r=$obj->Fetch_Assoc()){
+	$_LOP[$r['id']]=$r['name'];
+}
+
+
+// Tình trạng HV theo mã sinh viên
+$_ARR_STATUS_SV = array();
+$res_dkts = SysGetList('tbl_dangky_tuyensinh', array('masv', 'tinhtrang_sv'));
+foreach ($res_dkts as $key => $value) {
+	$_ARR_STATUS_SV[$value['masv']] = $value['tinhtrang_sv'];
+}
+
+/* Handle GET parameter */
+$id_he 			= isset($_SESSION['THIS_BAC']) ? $_SESSION['THIS_BAC'] : '';
+$id_nganh 		= isset($_SESSION['THIS_NGANH']) ? $_SESSION['THIS_NGANH'] : '';
+$get_order 		= isset($_GET['order']) && $_GET['order']!=="" ? antiData($_GET['order']) : '';
+$get_lop 		= isset($_GET['lop']) && $_GET['lop']!=="" ? antiData($_GET['lop']) : '';
+$get_hocky 		= isset($_GET['hocky']) ? antiData($_GET['hocky'], 'int') : '';
+$get_slot 		= isset($_GET['slot']) ? antiData($_GET['slot'], 'int') : '';
+$get_status 	= isset($_GET['status']) && $_GET['status']!=="" ? addslashes($_GET['status']) : '';
+
+//---- Lấy danh sách đợt đóng học phí ---------
+$url='http://uid.aumsys.net/api/student/order';
+$json = array();
+$json['key'] = PIT_API_KEY;
+$json['id_school'] = SCHOOL_CODE;
+
+$jsondata = encrypt(json_encode($json, JSON_UNESCAPED_UNICODE), PIT_API_KEY);
+$params = json_encode(array('data'=>$jsondata));
+$res_data = Curl_Post($url, $params);
+
+$res_order = $res_data['data'];
+$arr_order = array();
+if(is_array($res_order) && count($res_order)>0){
+	foreach ($res_order as $key => $value) {
+		$arr_order[$value['id']] = $value;
+	}
+}
+
+//---- Get order detail by masv ---------
+$url='http://uid.aumsys.net/api/student/order_detail';
+$json = array();
+$json['key'] = PIT_API_KEY;
+$json['masv'] 		= $_masv;
+$json['id_order']	= $get_order; 			// varchar
+$json['ma_nganh']	= $id_nganh; 			// varchar
+$json['ma_lop']		= $get_lop; 			// varchar
+$json['hocky'] 		= $get_hocky;			// int
+$json['slot'] 		= $get_slot;			// int
+$json['status']		= $get_status; 			// int
+
+$jsondata = encrypt(json_encode($json, JSON_UNESCAPED_UNICODE), PIT_API_KEY);
+$params = json_encode(array('data'=>$jsondata));
+$res_data = Curl_Post($url, $params);
+$res_status = $res_data['status'];
+if($res_status!=="yes") die("Không có dữ liệu");
+$res_order_detail = $res_data['data'];
+
+$arr_soluong = array();
+$tong_hocphi=$tong_dadong=$tong_conlai=0;
+foreach ($res_order_detail as $key => $value) {
+	$tong_hocphi+= $value['hocphi'];
+	$tong_dadong+= $value['dadong'];
+	$tong_conlai+= $value['conlai'];
+	$arr_soluong[$value['id_order']] = $value['id_order'];
+}
+
+/* LỊCH SỬ ĐÓNG HỌC PHÍ */
+$url='http://uid.aumsys.net/api/student/order_pay';
+$json = array();
+$json['key'] = PIT_API_KEY;
+$json['masv'] = $_masv;
+
+$jsondata = encrypt(json_encode($json, JSON_UNESCAPED_UNICODE), PIT_API_KEY);
+$params = json_encode(array('data'=>$jsondata));
+$res_data = Curl_Post($url, $params);
+$row_order_history = $res_data['data'];
 
 //---------------------------------------
 $res_dkts = SysGetList('tbl_dangky_tuyensinh', array(), "AND masv='".$_masv."'");
-if(count($res_dkts)<=0) die('Không có dữ liệu');
-$row = $res_dkts[0];
-$he = $row['id_he'];
-$nganh = $row['id_nganh'];
-$masv = $row['masv'];
-$malop = $row['malop'];
-$id_hoso = $row['id_hoso'];
+if(count($res_dkts)<=0) die('Không có dữ liệu sinh viên');
+$row_dkts = $res_dkts[0];
+$he = $row_dkts['id_he'];
+$nganh = $row_dkts['id_nganh'];
+$masv = $row_dkts['masv'];
+$malop = $row_dkts['malop'];
+$id_hoso = $row_dkts['id_hoso'];
+$status = $row_dkts['status'];
 
 //---------------------------------------
 $objhs = new CLS_HS;
 $objhs->getList(" AND ma='$id_hoso'");
 $r=$objhs->Fetch_Assoc();
 $fullname = $r['ho_dem'].' '.$r['name'];
-$gender = $GLOBALS['ARR_GENDER'][$r['gioitinh']];
+$gender = $r['gioitinh']=='nam' ? 'Nam' : 'Nữ';
 $ngaysinh = date("Y-m-d",$r['ngaysinh']);
 $hokhau = $r['hktt'];
 
 //---------------------------------------
-$dm = isset($_GET['dm'])?addslashes(htmlentities(strip_tags($_GET['dm']))):"";
-$hocky = isset($_GET['hocky'])?(int)$_GET['hocky']:"";
 ?>
 <style type="text/css">
-	.price{color: red; font-weight: bold; font-size: 16px;}
+	.price{
+		color: red; 
+		font-weight: bold; 
+		font-size: 16px;
+	}
+	.label.price{
+		color: #FFF !important;
+		font-size: 12px;
+	}
+	.list-flex{
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.list-flex .item:first-child .panel {
+		position: relative;
+		height: calc(100% - 20px);
+	}
+	#frm_search .form-control{
+		margin-bottom: 10px;
+	}
 </style>
 <div class='body profile_view'>
 	<div class="page-bar">
@@ -45,8 +155,8 @@ $hocky = isset($_GET['hocky'])?(int)$_GET['hocky']:"";
 	</div>
 
 	<div class="container-fluid">
-		<div class="flex row">
-			<div class="col-md-5 col-xs-12">
+		<div class="list-flex row">
+			<div class="col-md-5 col-xs-12 item">
 				<div class="panel panel-warning">
 					<div class="panel-body">
 						<h4>THÔNG TIN SINH VIÊN</h4>
@@ -74,80 +184,51 @@ $hocky = isset($_GET['hocky'])?(int)$_GET['hocky']:"";
 							<div class="col-md-3 col-xs-4 text">Hộ khẩu</div>
 							<div class="col-md-9 col-xs-8"><?php echo $hokhau;?></div>
 						</div>
-						<div class="row form-group">	
-							<div class="col-md-3 col-xs-4 text">Trạng thái</div>
-							<div class="col-md-9 col-xs-8">
-								<label class="label <?php echo $trangthai_label;?>"><?php echo $trangthai;?></label>
-							</div>
-						</div><br>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-md-3 col-xs-12">
-				<div class="panel panel-warning">
-					<div class="panel-body">
-						<h4>SỐ LƯỢNG</h4>
-						<?php
-						$count_money = $paid_money = $miss_money = 0;
-						$res_hocphi_pay = SysGetList('tbl_hocphi_pay', array(), 'AND masv="'.$masv.'"');
-						if(count($res_hocphi_pay)>0){
-							foreach ($res_hocphi_pay as $key => $value) {
-								$paid_money += $value['sotien'];
-							}
-						}
-
-						// Get SUM hocphi
-						$obj=new CLS_MYSQL;
-						$sql="SELECT SUM(hocphi) AS tonghocphi FROM tbl_hocphi WHERE masv='".$masv."'";
-						$obj->Query($sql);
-						if($obj->Num_rows()>0){
-							$res_sum_hocphi = $obj->Fetch_Assoc();
-							$count_money = $res_sum_hocphi['tonghocphi'];
-						}
-
-						if($count_money!=0 && $paid_money!=0){
-							$miss_money = $count_money - $paid_money;
-						}else{
-							$miss_money = $count_money;
-						}
-						?>
-						<div class="box_count">
-							<div class="form-group">
-								<label>Tổng học phí:</label>
-								<span class="price count_money"><?php echo number_format($count_money);?> VNĐ</span>
-							</div>
-							<div class="form-group">
-								<label>Đã đóng:</label>
-								<span class="price paid"><?php echo number_format($paid_money);?> VNĐ</span>
-							</div>
-							<div class="form-group">
-								<label>Còn lại:</label>
-								<span class="price miss_money"><?php echo number_format($miss_money);?> VNĐ</span>
-							</div>
+			<div class="col-md-3 col-xs-12 item panel panel-warning">
+				<div class="panel-body">
+					<h4>SỐ LƯỢNG</h4>
+					<div class="box_count">
+						<div class="form-group">
+							<label>Tổng học phí:</label>
+							<span class="price count_money"><?php echo number_format($tong_hocphi);?> VNĐ</span>
+						</div>
+						<div class="form-group">
+							<label>Tổng đã đóng:</label>
+							<span class="price paid"><?php echo number_format($tong_dadong);?> VNĐ</span>
+						</div>
+						<div class="form-group">
+							<label>Phải thu:</label>
+							<span class="price miss_money"><?php echo number_format($tong_conlai);?> VNĐ</span>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-md-4 col-xs-12">
+			<div class="col-md-4 col-xs-12 item">
 				<div class="panel panel-warning">
 					<div class="panel-body">
 						<h4>LỊCH SỬ ĐÓNG HỌC PHÍ</h4>
 						<div class="box_history">
 							<ul>
-								<?php $sql = "SELECT * FROM tbl_hocphi_pay WHERE masv='$masv' ORDER BY date_pay DESC";
-								$obj = new CLS_MYSQL; $obj->Query($sql);
-								while($r_note=$obj->Fetch_Assoc()) { ?>
-									<li>
-										<div class="note"><i class="fa fa-caret-right"></i> Đã đóng <?php echo number_format($r_note['sotien']);?> VNĐ</div>
-										<small class="date">
-											<span class="pull-left">Bởi <?php echo $r_note['author'];?></span>
-											<span class="pull-right"><?php echo date("d/m/y H:i",$r_note['date_pay']);?></span>
-										</small>
-										<div class="clearfix"></div>
-									</li>
-								<?php } ?>
+								<?php 
+								foreach ($row_order_history as $key => $value) {
+									$sotien = (int)$value['sotien']>0 ? number_format($value['sotien']) .'vnđ' : '';
+									$author = $value['author'];
+									$date_pay = date("d/m/y H:i",$value['date_pay']);
+									echo '<li>
+									<div class="note"><i class="fa fa-caret-right"></i> Đã đóng '.$sotien.'</div>
+									<small class="date">
+									<span class="pull-left">Bởi '.$author.'</span>
+									<span class="pull-right">'.$date_pay.'</span>
+									</small>
+									<div class="clearfix"></div>
+									</li>';
+								}
+								?>
 							</ul>
 						</div>
 
@@ -158,34 +239,54 @@ $hocky = isset($_GET['hocky'])?(int)$_GET['hocky']:"";
 		</div>
 
 		<div class="col-md-12 col-xs-12 panel panel-warning">
-			<div class="panel-body">
-				<form name="frmsearch" id="frmsearch" action="#" method="get">
-					<div class="col-md-1 col-xs-12 text">Tên mục</div>
-					<div class="col-md-2 col-xs-12">
-						<input type="text" name="dm" id="dm" value="<?php echo $dm;?>" class="form-control">
-					</div>
-					<div class="col-md-1 col-xs-12 text">Học kỳ</div>
-					<div class="col-md-2 col-xs-12">
-						<?php $objhe = new CLS_HE;
-						$objhe->getList(" AND id='$he'");
-						$r=$objhe->Fetch_Assoc();
-						$sohocky=$r['sohocky']; ?>
-						<select id='hocky' name='hocky' class='form-control'>
-							<option value="">Tất cả</option>
-							<?php for($i=1;$i<=$sohocky;$i++){
-								if($i==$hocky) echo "<option value='$i' selected>Học kỳ $i</option>";
-								else echo "<option value='$i'>Học kỳ $i</option>";
-							}?>
-						</select>
-					</div>
-					<div class="box-function pull-right">
-						<button type="button" dataid="<?php echo $masv;?>" class="btn btn-success btn-add" title="Thêm học phí"><i class="fa fa-plus"></i> Thêm học phí</button>
-						<button type="button" dataid="<?php echo $masv;?>" class="btn btn-warning btn-print" title="In hồ sơ"><i class="fa fa-print"></i> In</button>
-						<button type="button" dataid="<?php echo $masv;?>" id="btn_donghocphi" class="btn btn-success">ĐÓNG HỌC PHÍ</button>
-						<button type="button" dataid="<?php echo $masv;?>" id="btn_donghocphivainbienlai" class="btn btn-warning"><i class="fa fa-print"></i> ĐÓNG & IN BIÊN LAI</button>
-					</div>
-					<div class="col-md-1 col-xs-8">
-						<button type="submit" class="btn btn-primary">Tìm</button>
+			<div class="search_box panel-body">
+				<form name="frmsearch" id="frm_search" action="#" method="get" class="row">
+					<input type="hidden" name="txtaction" id="txtaction">
+					<input type="hidden" name="txtids" id="txtids" value="">
+					<div class="row">
+						<div class="col-md-10 col-sm-8">
+							<div class="col-md-3 col-xs-6">
+								<select name="order" id="cbo_order" class="form-control" >
+									<option value="">-- Đợt đóng --</option>
+									<?php
+									foreach ($arr_order as $key => $value) {
+										$selected = $get_order==$key ? 'selected' : '';
+										echo '<option value="'.$key.'" '.$selected.'>'.$value.'</option>';
+									}
+									?>
+								</select>
+							</div>
+
+							<div class="col-md-3 col-xs-6">
+								<select name="lop" id="cbo_lop" class="form-control" >
+									<option value="">-- Lớp học --</option>
+									<?php 
+									foreach ($_LOP as $key => $value) {
+										$selected = $get_lop==$key ? 'selected' : '';
+										echo '<option value="'.$key.'" '.$selected.'>Lớp: '.$value.'</option>';
+									}
+									?>
+								</select>
+							</div>
+
+							<div class="col-md-2 col-xs-6">
+								<select name="status" id="cbo_status" class="form-control" >
+									<option value="">-- Trạng thái đóng HP --</option>
+									<option value="yes" <?php echo $get_status=='yes'?'selected':'';?>>Đủ</option>
+									<option value="no" <?php echo $get_status=='no'?'selected':'';?>>Còn thiếu</option>
+								</select>
+							</div>
+							<div class="col-md-2 col-xs-6">
+								<button type="submit" id="tk_btnsearch" class="btn btn-primary form-control"><i class="fa fa-search"></i> Lọc</button>
+							</div>
+						</div>
+
+						<div class="col-md-2 col-sm-4">
+							<div class="pull-right">
+								<button type="button" dataid="<?php echo $masv;?>" class="btn btn-warning btn-print" title="In hồ sơ"><i class="fa fa-print"></i> In</button>
+								<button type="button" dataid="<?php echo $masv;?>" id="btn_xuat_excel" class="btn btn-info btn-excel"><i class="fas fa-file-csv"></i> Xuất File Excel</button>
+							</div>
+						</div>
 					</div>
 				</form>
 			</div>
@@ -229,67 +330,99 @@ $hocky = isset($_GET['hocky'])?(int)$_GET['hocky']:"";
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<th width='30'>STT</th>
-							<th width='30'>Xóa</th>
-							<th>Tên danh mục</th>
-							<th class='text-right'>Học phí</th>
-							<th class='text-center'>Học kỳ</th>
+							<tr class="header">
+								<th class="text-center">STT</th>
+								<th>Đợt học phí</th>
+								<th class="text-center">Học phí</th>
+								<th class="text-center">Đã đóng</th>
+								<th class="text-center">Phải thu</th>
+								<th class="text-center">Tình trạng SV</th>
+								<th class="text-center">Flag</th>
+								<th class="text-center">Trạng thái</th>
+								<th>Hạn đóng HP</th>
+								<th>Ngành</th>
+								<th>Mã lớp</th>
+							</tr>
 						</tr>
 					</thead>
 					<tbody>
-						<?php 
-						$obj=new CLS_MYSQL;
-						$sql="SELECT * FROM tbl_monhoc";
-						$obj->Query($sql);
-						$arrMon=array();
-						while($r=$obj->Fetch_Assoc()){
-							$arrMon[$r['id']]=$r;
-						}
-						$strwhere = "";
-						if($dm!=="") $strwhere.=" AND ten_hp LIKE '%$dm%' ";
-						if($hocky!=="" && $hocky!==0) $strwhere.=" AND hocky=$hocky ";
+						<?php
+						if(isset($res_order_detail) && count($res_order_detail)>0){
+							foreach ($res_order_detail as $key => $row) {
+								$stt = $key + 1;
+								$id_order = $row['id_order'];
+								$order_name = isset($arr_order[$id_order]) ? $arr_order[$id_order]['name'] : "";
+								$name_nganh = isset($_NGANH[$row['ma_nganh']]) ? $_NGANH[$row['ma_nganh']] : "";
+								$ma_lop = $row['ma_lop'];
+								$masv = $row['masv'];
+								$hodem = $row['hodem'];
+								$ten = $row['ten'];
+								$hotenSV = $hodem.' '.$ten;
+								$hocky = $row['hocky'];
+								$slot = $row['slot'];
+								$status = $row['status'];
+								$ghichu = $row['ghichu'];
+								$flag_class = $row['flag']=='0' ? 'other' : 'label-primary';
+								$tonghocphi = number_format($row['hocphi']);
+								$dadong = $row['dadong']!=="" ? number_format($row['dadong']) : '0';
+								$canthu = $row['conlai']!=="" ? number_format($row['conlai']) : '0';
+								$sdate = isset($row['start_date']) && $row['start_date']!=="" ? date('d/m/Y',$row['start_date']):"";
+								$edate = isset($row['end_date']) && $row['end_date']!=="" ? date('d/m/Y',$row['end_date']):"";
 
-						$sql="SELECT * FROM tbl_hocphi WHERE masv='$masv' $strwhere";
-						$obj->Query($sql);
-						$stt=0; $tong_hp=0;
-						if($obj->Num_rows()>0){
-							while($hp=$obj->Fetch_Assoc()) {
-								$id_hp=$hp['id'];
-								$hocphi=$hp['hocphi']; 
-								$type_hocphi=$hp['type_hp'];
-								$ten_hp = stripslashes($hp['ten_hp']);
-								if($type_hocphi=="hoc_phan" && isset($arrMon[$hp['ma_hp']]['name'])) $ten_hp = $arrMon[$hp['ma_hp']]['name'];
-								$stt++; $tong_hp+=$hocphi;
+								switch($status){
+									case 'no': $html_status="<strong>Thiếu</strong>"; break;
+									case 'yes': $html_status="<strong class='cgreen'>Đủ</strong>"; break;
+									default: $html_status="<strong>Thiếu</strong>"; break;
+								}
 
-								$html.='
-								<tr>
-								<td class="text-center">'.$stt.'</td>
-								<td>'.$ten_hp.'</td>
-								<td class="text-right">'.number_format($hocphi).'</td>
-								<td class="text-center">'.$hp['hocky'].'</td>
+								$tinhtrang_sv = isset($_ARR_STATUS_SV[$masv]) ? $_ARR_STATUS_SV[$masv] : 'S01';
+								$txt_tinhtrang_sv = $STATUS_SV[$tinhtrang_sv];
+
+								echo '<tr>
+								<td align="center">'.$stt.'</td>
+								<td>'.$order_name.'</td>
+								<td align="center"><strong>'.$tonghocphi.'<strong></td>
+								<td align="center"><strong>'.$dadong.'<strong></td>
+								<td align="center"><strong class="cred">'.$canthu.'<strong></td>
+								<td align="center" title="'.$txt_tinhtrang_sv.'">
+								<a href="javascript:void(0)" class="label label-success" onclick="frm_status_sv(this)" data-masv="'.$masv.'" data-status-sv="'.$tinhtrang_sv.'">'.$tinhtrang_sv.'</a>
+								<div class="txt_status">'.$txt_tinhtrang_sv.'</div>
+								</td>';
+
+								if($status=="no"){
+									echo '<td align="center">
+									<a href="javascript:void(0)" data-id-order-detail="'.$id_order.'" onclick="note_flag(this)" class="label '.$flag_class.'">Complaint</a>
+									<div class="txt_ghichu">'.$ghichu.'</div>
+									</td>';
+								}else{
+									echo '<td align="center"</td>';
+								}
+
+								echo '<td align="center">'.$html_status.'</td>
+								<td><div class="start_date">'.$sdate.'</div><div class="end_date">'.$edate.'</div></td>
+								<td>'.$name_nganh.'</td>
+								<td>'.$ma_lop.'</td>
 								</tr>';
-								?>
-								<tr class="hp_row">
-									<td class='text-center'><?php echo $stt;?></td>
-									<td>
-										<i class="fa fa-trash btn_xoa" aria-hidden="true" title="Xóa" dataid="<?php echo $id_hp;?>" dataname="<?php echo $ten_hp;?>"></i>
-									</td>
-									<td><?php echo $ten_hp;?></td>
-									<td class='text-right'><?php echo number_format($hocphi);?></td>
-									<td class='text-center'><?php echo $hp['hocky'];?></td>
-								</tr>
-							<?php } ?>
-							<tr style="background:#ccc;font-weight:bold"><td></td>
-								<td></td><td class='text-right'>TỔNG</td>
-								<td class='text-right'><?php echo number_format($tong_hp);?></td>
-								<td></td>
-							</tr>
-							<?php 
+							}
+							echo '<tr style="background:#ccc;font-weight:bold;">
+							<td></td>
+							<td class="text-right" style="font-size:1.2em;">TỔNG</td>
+							<td class="text-right" style="font-size:1.2em;">'.number_format($tong_hocphi).'</td>
+							<td class="text-right" style="font-size:1.2em;">'.number_format($tong_dadong).'</td>
+							<td class="text-right" style="font-size:1.2em;">'.number_format($tong_conlai).'</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							</tr>';
+
 							$html.='
 							<tr style="background:#ccc;font-weight:bold">
 							<td></td>
 							<td class="text-right">TỔNG</td>
-							<td class="text-right">'.number_format($tong_hp).'</td>
+							<td class="text-right"></td>
 							<td></td>
 							</tr>';
 						} ?>
@@ -313,52 +446,8 @@ $hocky = isset($_GET['hocky'])?(int)$_GET['hocky']:"";
 			}
 			$("#frmsearch").submit();
 		}
-	})
-	$("#btn_donghocphi").click(function(){
-		var _id=$(this).attr('dataid');
-		var _url='<?php echo ROOTHOST;?>ajaxs/hocphi/frm_donghocphi.php';
-		$('#myModalPopup .modal-body').html('Loading...');
-		$('#myModalPopup .modal-title').html('Đóng học phí');
-		$.post(_url,{'masv':_id},function(req){
-			$('#myModalPopup .modal-body').html(req);
-			$('#myModalPopup').modal('show');
-		});
-	})
-	$("#btn_donghocphivainbienlai").click(function(){
-		var _id=$(this).attr('dataid');
-		var _url='<?php echo ROOTHOST;?>ajaxs/hocphi/frm_donghocphi_inbienlai.php';
-		$('#myModalPopup .modal-body').html('Loading...');
-		$('#myModalPopup .modal-title').html('Đóng học phí & in biên lai');
-		$.post(_url,{'masv':_id},function(req){
-			$('#myModalPopup .modal-body').html(req);
-			$('#myModalPopup').modal('show');
-		});
-	})
-	$(".btn_xoa").click(function(){
-		var id = $(this).attr('dataid');
-		var name = $(this).attr('dataname');
-		if(confirm("Bạn chắc chắn muốn xóa mục học phí '"+name+"' ?")) {
-			showLoading();
-			var _url='<?php echo ROOTHOST;?>ajaxs/hocphi/process_del.php';
-			$.post(_url,{'id':id,'name':name,'masv':'<?php echo $masv;?>'},function(req){
-				hideLoading();
-				if(req=="success") { 
-					showMess("Đã xóa mục học phí '"+name+"'");
-					setTimeout(function(){window.location.reload(); }, 2000);
-				}else showMess('Lỗi không thể xóa');
-			});
-		}
-	})
-	$(".box-function .btn-add").click(function(){
-		var masv = $(this).attr('dataid');
-		var _url='<?php echo ROOTHOST;?>ajaxs/hocphi/frm_add.php';
-		$('#myModalPopup .modal-body').html('Loading...');
-		$('#myModalPopup .modal-title').html('Thêm thông tin học phí');
-		$.post(_url,{'masv':masv},function(req){
-			$('#myModalPopup .modal-body').html(req);
-			$('#myModalPopup').modal('show');
-		});
-	})
+	});
+
 	$(".btn-print").click(function(){
 		showLoading();
 		var screenW =screen.width;
@@ -373,4 +462,40 @@ $hocky = isset($_GET['hocky'])?(int)$_GET['hocky']:"";
 		popupWin.document.close();
 		hideLoading();
 	})
+
+	function note_flag(e){
+		var _id_order_detail = e.getAttribute('data-id-order-detail');
+		if(_id_order_detail.length > 0){
+			var _url = '<?php echo ROOTHOST;?>ajaxs/hocphi/frm_note_flag.php';
+			var _data = {
+				'id_order_detail' : _id_order_detail,
+			};
+			$.post(_url, _data, function(res){
+				$('#myModalPopup .modal-dialog').removeClass('modal-lg modal-sm');
+				$('#myModalPopup .modal-dialog').addClass('modal-md');
+				$('#myModalPopup .modal-title').html('Xác nhận học phí');
+				$('#myModalPopup .modal-body').html(res);
+				$('#myModalPopup').modal('show');
+			})
+		}
+	}
+
+	function frm_status_sv(e){
+		var _masv = e.getAttribute('data-masv');
+		var _status_sv = e.getAttribute('data-status-sv');
+		if(_masv.length>0){
+			var _url = '<?php echo ROOTHOST;?>ajaxs/student/frm_status_sv.php';
+			var _data = {
+				'masv' : _masv,
+				'status_sv' : _status_sv
+			};
+			$.post(_url, _data, function(res){
+				$('#myModalPopup .modal-dialog').removeClass('modal-lg modal-sm');
+				$('#myModalPopup .modal-dialog').addClass('modal-md');
+				$('#myModalPopup .modal-title').html('Cập nhật tình trạng học viên');
+				$('#myModalPopup .modal-body').html(res);
+				$('#myModalPopup').modal('show');
+			})
+		}
+	};
 </script>

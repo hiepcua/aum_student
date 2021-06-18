@@ -61,13 +61,13 @@ class CLS_USER{
 			$flag=false;
 		}
 		if($flag==true){
-			$_SESSION[MD5($_SERVER['HTTP_HOST']).'_USERLOGIN']=$rows;
+			$_SESSION[MD5($_SERVER['HTTP_HOST']).'_MEMBER_LOGIN']=$rows;
 			$this->UpdateLogin($user,1);
 		}
 		return $flag;
 	}
 	public function isLogin(){
-		if(isset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_USERLOGIN'])){
+		if(isset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_MEMBER_LOGIN'])){
 			return true;
 		}
 		return false;
@@ -75,7 +75,7 @@ class CLS_USER{
 	public function LOGOUT(){
 		$user=$this->getInfo('username');
 		$this->UpdateLogin($user,0);
-		unset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_USERLOGIN']);
+		unset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_MEMBER_LOGIN']);
 	}
 	public function UpdateLogin($user,$flag){
 		$value='';
@@ -174,7 +174,7 @@ class CLS_USER{
 		return $this->objmysql->Query($sql);
 	}
 	public function getInfo($name){
-		if(isset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_USERLOGIN'][$name])) return $_SESSION[MD5($_SERVER['HTTP_HOST']).'_USERLOGIN'][$name];
+		if(isset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_MEMBER_LOGIN'][$name])) return $_SESSION[MD5($_SERVER['HTTP_HOST']).'_MEMBER_LOGIN'][$name];
 		else return 'N/A';
 	}
 	//-------------------------------------------------------
@@ -267,7 +267,7 @@ class CLS_USER{
         return $row['fullname'];
     }
 	public function Permission($com='') {
-		if(isset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_USERLOGIN'])){
+		if(isset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_MEMBER_LOGIN'])){
 			return true;
 		}
 		return false;

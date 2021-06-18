@@ -63,5 +63,6 @@ function LogIn($user,$pass){
 function LogOut($user){
 	if(isset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_MEMBER_LOGIN'])){
 		unset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_MEMBER_LOGIN']);
+		unset($_SESSION['USER_INFO']);
 	}
 }

@@ -67,10 +67,18 @@ RewriteRule ^student/hstrungtuyen/?$  			index.php?com=student&task=hstrungtuyen
 RewriteRule ^student/hsnhaphoc/?$  				index.php?com=student&task=hsnhaphoc [QSA]
 RewriteRule ^student/hocphi/([0-9A-Za-z\-]+)?$  index.php?com=student&task=hocphi&id=$1 [QSA]
 RewriteRule ^student/hocphi_history/([0-9A-Za-z\-]+)?$ index.php?com=student&task=hocphi_history&id=$1 [QSA]
-RewriteRule ^student/diem/([0-9A-Za-z]+)?$  	index.php?com=student&task=diem&id=$1 [QSA]
+RewriteRule ^student/diem/([0-9A-Za-z\-]+)?$  	index.php?com=student&task=diem&id=$1 [QSA]
 RewriteRule ^student/soyeulylich/([0-9A-Za-z]+)?$  	index.php?com=student&task=soyeulylich&id=$1 [QSA]
 
+RewriteRule ^student/vanbang/([0-9A-Za-z]+)?$  	index.php?com=student&task=vanbang&id=$1 [QSA]
+RewriteRule ^student/cuocgoi/([0-9A-Za-z]+)?$  	index.php?com=student&task=cuocgoi&id=$1 [QSA]
+
 #RewriteRule ^student/xettotnghiep?$  			index.php?com=student&task=xettotnghiep [QSA]
+
+RewriteRule ^student/hosol8/?$ 					index.php?com=student&task=hosol8  [QSA]
+RewriteRule ^student/import_hosol8/?$ 			index.php?com=student&task=hosol8_import  [QSA]
+RewriteRule ^student/save_hosol8/?$ 			index.php?com=student&task=hosol8_save  [QSA]
+RewriteRule ^student/hosol8/([0-9A-Za-z\-]+)?$ 	index.php?com=student&task=hosol8-detail&id=$1  [QSA]
 
 # config
 RewriteRule ^config/?$ 							index.php?com=config  [QSA]
@@ -108,6 +116,10 @@ RewriteRule ^user/changepass/([0-9]+)?$ 		index.php?com=user&task=changepass&id=
 
 # notify
 RewriteRule ^notify/?$ 							index.php?com=notify [QSA]
+
+# API
+RewriteRule ^api/get-hosol8?$ 					test2.php
+RewriteRule ^api/hocphi/status?$ 				api/hocphi/status.php
 
 <Ifmodule mod_php5.c>
 	php_value upload_max_filesize 20M

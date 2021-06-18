@@ -20,7 +20,7 @@ $id_hoso = isset($_POST['id_hoso']) ? htmlentities(strip_tags($_POST['id_hoso'])
 
 // Get ho_dem and ten of hocsinh
 $name='';
-$res_hocsinh = SysGetList('tbl_hocsinh', array(), 'AND ma='.$id_hoso);
+$res_hocsinh = SysGetList('tbl_hocsinh', array(), "AND ma='".$id_hoso."'");
 if(count($res_hocsinh)>0){
 	$res_hocsinh = $res_hocsinh[0];
 	$name = $res_hocsinh['ho_dem'].' '.$res_hocsinh['name'];
@@ -51,7 +51,8 @@ if(count($res_nganh_registed)>0){
 	<div class="col-md-6 col-xs-12">
 		<label class="col-md-4">Khóa</label>
 		<div class="col-md-8">
-			<select name="cbokhoa" id="cbokhoa" class="form-control" required>
+			<select name="cbokhoa" id="cbokhoa" class="form-control">
+				<option value="">-- Khóa học --</option>
 				<?php 
 				$res_khoa = SysGetList('tbl_khoa', array(), '');
 				if(count($res_khoa)>0){
@@ -64,7 +65,7 @@ if(count($res_nganh_registed)>0){
 	</div>
 
 	<div class="col-md-6 col-xs-12">
-		<label class="col-md-4">Bậc đào tạo</label>
+		<label class="col-md-4">Bậc đào tạo<small class="cred"> *</small></label>
 		<div class="col-md-8">
 			<select name="cbobac" id="cbobac" class="form-control" required>
 				<?php 
@@ -80,7 +81,7 @@ if(count($res_nganh_registed)>0){
 </div>	
 <div class="form-group row">
 	<div class="col-md-6 col-xs-12">
-		<label class="col-md-4">Ngành</label>
+		<label class="col-md-4">Ngành<small class="cred"> *</small></label>
 		<div class="col-md-8">
 			<select name="ma_nganh" id="ma_nganh" class="form-control" required>
 				<option value=""></option>
@@ -136,6 +137,8 @@ if(count($res_nganh_registed)>0){
 							setTimeout(function(){
 								window.location.reload();
 							}, 2000);
+						}else if(req=="error"){
+							showMess("Lỗi", 'error');
 						}
 					})
 			} return false;
@@ -146,7 +149,6 @@ if(count($res_nganh_registed)>0){
 		var ma_nganh = $("#ma_nganh").val();
 		var name = $("#txtname").val();
 		var bac = $("#cbobac").val();
-		var khoa = $("#cbokhoa").val();
 		if(ma_nganh=="") {
 			$("#ma_nganh").focus();
 			return false;
@@ -155,9 +157,6 @@ if(count($res_nganh_registed)>0){
 			return false;
 		}if(bac=="") {
 			$("#cbobac").focus();
-			return false;
-		}if(khoa=="") {
-			$("#cbokhoa").focus();
 			return false;
 		}
 		return true;

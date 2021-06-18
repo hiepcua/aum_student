@@ -1,36 +1,45 @@
 <?php
 defined('ISHOME') or die("You can't access this page!");
-$id_he=$id_nganh=$id_khoa='';
-$cur_page=isset($_GET['page'])?(int)$_GET['page']:1;
-$cur_page=isset($_POST['txtCurnpage'])?(int)$_POST['txtCurnpage']:1;
-
+$id_he=$id_nganh=$id_khoa=''; $obj = new CLS_MYSQL;
 $khoa 	= isset($_SESSION['THIS_YEAR']) ? $_SESSION['THIS_YEAR'] : '';
 $he 	= isset($_SESSION['THIS_BAC']) ? $_SESSION['THIS_BAC'] : '';
 $nganh 	= isset($_SESSION['THIS_NGANH']) ? $_SESSION['THIS_NGANH'] : '';
 
-$obj=new CLS_MYSQL;
+$DKTS = $HOCTAP = array();
 //---------------------------------------
-$sql="SELECT * FROM tbl_khoa";
-$obj->Query($sql);
-$_KHOA=array();
-while($r=$obj->Fetch_Assoc()){
-	$_KHOA['K'.$r['id']]=$r['name'];
-}
-//---------------------------------------
-$sql="SELECT * FROM tbl_he";
-$obj->Query($sql);
-$_HE=array();
-while($r=$obj->Fetch_Assoc()){
-	$_HE['H'.$r['id']]=$r['name'];
-}
-//---------------------------------------
-$sql="SELECT * FROM tbl_nganh";
-$obj->Query($sql);
-$_NGANH=array();
-while($r=$obj->Fetch_Assoc()){
-	$_NGANH['N'.$r['id']]=$r['name'];
+$KHOA = array();
+$json_khoa = file_get_contents(DOCUMENT_ROOT.'jsons/khoa.json');
+$arr_khoa = json_decode($json_khoa, true);
+foreach ($arr_khoa as $key => $value) {
+	$KHOA[$value['id']] = $value;
 }
 
+//---------------------------------------
+$HE = array();
+$json_he = file_get_contents(DOCUMENT_ROOT.'jsons/he.json');
+$arr_he = json_decode($json_he, true);
+foreach ($arr_he as $key => $value) {
+	$HE[$value['id']] = $value;
+}
+
+//---------------------------------------
+$NGANH = array();
+$json_nganh = file_get_contents(DOCUMENT_ROOT.'jsons/nganh.json');
+$arr_nganh = json_decode($json_nganh, true);
+foreach ($arr_nganh as $key => $value) {
+	$NGANH[$value['id']] = $value;
+}
+
+//---------------------------------------
+$DKTS_LOP = array();
+$res_dkts = SysGetList('tbl_dangky_tuyensinh', array());
+if(count($res_dkts)>0){
+	foreach ($res_dkts as $key => $value) {
+		$DKTS_LOP[$value["malop"]][] = $value;
+	}
+}
+
+//---------------------------------------
 $strWhere='';
 if($khoa!='') $strWhere.=" AND id_khoa='$khoa'";
 if($he!='') $strWhere.=" AND id_he='$he'";
@@ -46,7 +55,7 @@ $cur_page = postCurentPage($max_pages);
 $start = ($cur_page - 1) * MAX_ROWS;
 $limit = ' LIMIT '.$start.','. MAX_ROWS;
 
-$sql="SELECT * FROM tbl_lop WHERE 1=1 $strWhere";
+$sql="SELECT * FROM tbl_lop WHERE 1=1 $strWhere ORDER BY cdate DESC";
 $obj->Query($sql.$limit);
 $arr_lop = array(); $str_lop = '';
 while($r = $obj->Fetch_Assoc()) {
@@ -67,7 +76,66 @@ if($str_lop!='') {
 		$malop = $r['malop'];
 		if(isset($arr_lop["$malop"])) $arr_lop["$malop"]['siso'] = $r['total'];
 	}
-}?>
+}
+
+foreach ($arr_lop as $key => $value) {
+	$arr_lop[$key]['S00'] = isset($arr_lop[$key]['S00']) ? $arr_lop[$key]['S00'] : 0;
+	$arr_lop[$key]['S01'] = isset($arr_lop[$key]['S01']) ? $arr_lop[$key]['S01'] : 0;
+	$arr_lop[$key]['S02A'] = isset($arr_lop[$key]['S02A']) ? $arr_lop[$key]['S02A'] : 0;
+	$arr_lop[$key]['S02B'] = isset($arr_lop[$key]['S02B']) ? $arr_lop[$key]['S02B'] : 0;
+	$arr_lop[$key]['S02C'] = isset($arr_lop[$key]['S02C']) ? $arr_lop[$key]['S02C'] : 0;
+	$arr_lop[$key]['S03A'] = isset($arr_lop[$key]['S03A']) ? $arr_lop[$key]['S03A'] : 0;
+	$arr_lop[$key]['S03B'] = isset($arr_lop[$key]['S03B']) ? $arr_lop[$key]['S03B'] : 0;
+	$arr_lop[$key]['S03C'] = isset($arr_lop[$key]['S03C']) ? $arr_lop[$key]['S03C'] : 0;
+	$arr_lop[$key]['S04A'] = isset($arr_lop[$key]['S04A']) ? $arr_lop[$key]['S04A'] : 0;
+	$arr_lop[$key]['S04B'] = isset($arr_lop[$key]['S04B']) ? $arr_lop[$key]['S04B'] : 0;
+
+	if(isset($DKTS_LOP[$key])){
+		foreach ($DKTS_LOP[$key] as $k => $v) {
+			$status_sv = $v['tinhtrang_sv'];
+			switch ($status_sv) {
+				case 'S01':
+				$arr_lop[$key]['S01'] = $arr_lop[$key]['S01'] + 1;
+				break;
+				case 'S02A':
+				$arr_lop[$key]['S02A'] = $arr_lop[$key]['S02A'] + 1;
+				break;
+				case 'S02B':
+				$arr_lop[$key]['S02B'] = $arr_lop[$key]['S02B'] + 1;
+				break;
+				case 'S02C':
+				$arr_lop[$key]['S02C'] = $arr_lop[$key]['S02C'] + 1;
+				break;
+				case 'S03A':
+				$arr_lop[$key]['S03A'] = $arr_lop[$key]['S03A'] + 1;
+				break;
+				case 'S03B':
+				$arr_lop[$key]['S03B'] = $arr_lop[$key]['S03B'] + 1;
+				break;
+				case 'S03C':
+				$arr_lop[$key]['S03C'] = $arr_lop[$key]['S03C'] + 1;
+				break;
+				case 'S04A':
+				$arr_lop[$key]['S04A'] = $arr_lop[$key]['S04A'] + 1;
+				break;
+				case 'S04B':
+				$arr_lop[$key]['S04B'] = $arr_lop[$key]['S04B'] + 1;
+				break;
+				default:
+				$arr_lop[$key]['S00'] = $arr_lop[$key]['S00'] + 1;
+				break;
+			}
+		}
+	}
+}
+?>
+<style type="text/css">
+.wr-status .el {
+	width: 120px;
+	display: inline-block;
+	text-align: left;
+}
+</style>
 <div class='body profile_view'>
 	<div class="page-bar">
 		<div class="page-title-breadcrumb">
@@ -80,18 +148,17 @@ if($str_lop!='') {
 		</div>
 	</div>
 
-	<table class="list table table-striped table-bordered">
+	<table class="table table-striped table-bordered">
 		<thead>
 			<tr class="header">
 				<th class="text-center">STT</th>
 				<th class="text-center">Mã Lớp</th>
-				<th class="text-center">Chương trình học</th>
+				<th class="text-center">Lịch học</th>
 				<th class="text-center">Ngành</th>
-				<th class="text-center">Hệ</th>
 				<th class="text-center">Khóa</th>
-				<th class="text-center">sĩ số</th>
-				<th class="text-center">Chương trình</th>
-				<th class="text-center">Ngày tạo</th>
+				<th class="text-center">Sĩ số</th>
+				<th class="text-center">Trạng thái SV</th>
+				<th class="text-center">Ngày mở lớp</th>
 				<th class="text-center">Chi tiết</th>
 				<th class="text-center">Tác vụ</th>
 			</tr>
@@ -100,26 +167,47 @@ if($str_lop!='') {
 			<?php $i=1;
 			foreach($arr_lop as $r){
 				$siso=0+$r['siso'];
+				$ma_he = $r['id_he'];
+				$ma_khoa = $r['id_khoa'];
+				$ma_nganh = $r['id_nganh'];
+				$ma_lop = $r['id'];
+
+				$name_he = isset($HE[$ma_he]) ? $HE[$ma_he]['name'] : "";
+				$name_nganh = isset($NGANH[$r['id_nganh']]) ? $NGANH[$r['id_nganh']]['name'] : "";
+				if(isset($KHOA[$ma_khoa])){
+					$name_khoa = isset($KHOA[$ma_khoa]) ? $KHOA[$ma_khoa]['name'] : "";
+				}else{
+					$name_khoa = '<a href="javascript:void(0)" title="Chọn khóa" data-lop="'.$ma_lop.'" data-khoa="'.$ma_khoa.'" onclick="select_khoa(this)" class="btn btn-primary">Chọn khóa</a>';
+				}
 				?>
 				<tr dataid="<?php echo $r['id'];?>">
 					<td align="center"><?php echo $i;?></td>
-					<td class="text-center"><?php echo stripslashes($r['id']);?></td>
-					<td class="text-center" dataid="<?php echo $r['id'];?>">
+					<td align="center"><?php echo stripslashes($r['id']);?></td>
+					<td align="center" dataid="<?php echo $r['id'];?>">
 						<a class="btn btn-info" href="<?php echo ROOTHOST;?>?com=student&task=chitiet_lop&id=<?php echo $r['id'];?>">
-						Chương trình học</a>
+						Lịch học</a>
 					</td>
-					<td class="text-center"><?php echo strlen($r['id_nganh'])>0 ? $_NGANH['N'.$r['id_nganh']] : '';?></td>
-					<td class="text-center"><?php echo strlen($r['id_he'])>0 ? $_HE['H'.$r['id_he']] : '';?></td>
-					<td class="text-center"><?php echo strlen($r['id_khoa'])>0 ? $_KHOA['K'.$r['id_khoa']] : '';?></td>
-					<td class="text-center"><?php echo $siso;?></td>
-					<td class="text-center"><i class='fa fa-check cgreen' aria-hidden='true'></i></td>
-					<td class="text-center"><?php echo date('d/m/Y',$r['cdate']);?></td>
-					<td class="text-center">
-						<a class="btn btn-success" href="<?php echo ROOTHOST;?>hsdaotao?khoa=<?= $r['id_khoa']?>&he=<?= $r['id_he']?>&nganh=<?= $r['id_nganh']?>&malop=<?= $r['id']?>">
+					<td align="center"><?php echo $name_nganh;?></td>
+					<td align="center"><?php echo $name_khoa;?></td>
+					<td align="center"><?php echo $siso;?></td>
+					<td align="center" style="max-width: 300px;">
+						<div class="wr-status">
+							<?php
+							echo '<div class="el"><span class="txt">Chưa học: </span> <strong class="number">'.$r["S00"].'</strong></div>';
+							foreach ($STATUS_SV as $key => $value) {
+								$number = isset($r[$key]) ? $r[$key] : "";
+								echo '<div class="el"><span class="txt">'.$value.': </span> <strong class="number">'.$number.'</strong></div>';
+							}
+							?>
+						</div>
+					</td>
+					<td align="center"><?php echo date('d/m/Y',$r['opendate']);?></td>
+					<td align="center">
+						<a class="btn btn-success" href="<?php echo ROOTHOST;?>hsdaotao?he=<?= $r['id_he']?>&nganh=<?= $r['id_nganh']?>&malop=<?= $r['id']?>">
 						Danh sách lớp</a>
 					</td>
-					<td class="text-center">
-						<i class='fa fa-trash cgray btn_delete' dataid='<?php echo $r['id'];?>' datass='<?php echo $siso;?>' aria-hidden='true'></i>
+					<td align="center">
+						<a href="javascript:void(0)" class="btn_delete" dataid='<?php echo $r['id'];?>' datass='<?php echo $siso;?>' title="Xóa lớp"><i class='fa fa-trash cgray' aria-hidden='true'></i></a>
 					</td>
 				</tr>
 				<?php $i++;
@@ -132,7 +220,7 @@ if($str_lop!='') {
 		</td></tr>
 	</table>
 </div>
-<script>
+<script type="text/javascript">
 	$(document).ready(function(){
 		$("#btn_add").click(function(){
 			var url = "<?php echo ROOTHOST;?>ajaxs/lop/frm_add.php";
@@ -143,7 +231,8 @@ if($str_lop!='') {
 				$('#myModalPopup .modal-body').html(req);
 				$('#myModalPopup').modal('show');
 			})
-		})
+		});
+
 		$(".btn_delete").click(function(){
 			var id = $(this).attr('dataid');
 			var siso = parseInt($(this).attr('datass'));
@@ -162,6 +251,26 @@ if($str_lop!='') {
 					})
 				}
 			}
-		})
-	})
+		});
+	});
+
+	function select_khoa(e){
+		var _id_lop = e.getAttribute('data-lop');
+		var _cur_khoa = e.getAttribute('data-khoa');
+
+		if(_id_lop.length>0){
+			var _url = '<?php echo ROOTHOST;?>ajaxs/lop/frm_select_khoa.php';
+			var _data = {
+				'ma_lop' : _id_lop,
+				'ma_khoa' : _cur_khoa,
+			};
+			$.post(_url, _data, function(res){
+				$('#myModalPopup .modal-dialog').removeClass('modal-lg modal-sm');
+				$('#myModalPopup .modal-dialog').addClass('modal-md');
+				$('#myModalPopup .modal-title').html('Chọn khóa cho lớp');
+				$('#myModalPopup .modal-body').html(res);
+				$('#myModalPopup').modal('show');
+			})
+		}
+	}
 </script>

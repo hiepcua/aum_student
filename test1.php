@@ -783,7 +783,6 @@ foreach($rows as $r){
 	$hktt 		= isset($cols[11]) && $cols[11]!='' ? antiData($cols[11]) : '';
 	$ngaysinh 	= isset($cols[12]) && $cols[12]!='' ? strtotime($cols[12]) : '';
 	$gioitinh 	= isset($cols[15]) && $cols[15]!='' && antiData($cols[15])=='Nam' ? 'nam' : 'nu';
-	$hetotnghiep 	= isset($cols[14]) && $cols[14]!='' ? antiData($cols[14]) : '';
 	$ngayBG 		= isset($cols[16]) && $cols[16]!='' ? strtotime($cols[16]) : '';
 	$tinhtrangBG 	= isset($cols[17]) && $cols[17]!='' ? antiData($cols[17]) : '';
 	$lydoBG 		= isset($cols[18]) && $cols[18]!='' ? antiData($cols[18]) : '';
@@ -793,11 +792,11 @@ foreach($rows as $r){
 		$sql="INSERT INTO tbl_hocsinh (
 		`ma`,`ho_dem`,`name`,`ngaysinh`,`noisinh`,
 		`gioitinh`,`diachi`,`dienthoai`,`nguyenquan`,`hktt`,`email`,`cdate`,
-		`hetotnghiep`,`ngayBG`,`tinhtrangBG`,`lydoBG`
+		`ngayBG`,`tinhtrangBG`,`lydoBG`
 		) VALUES (
 		'$ma_hoso','$hodem','$name','$ngaysinh','$noisinh',
 		'$gioitinh','$hktt','$dienthoai','$noisinh','$hktt','$email','$ngaytao',
-		'$hetotnghiep','$ngayBG','$tinhtrangBG','$lydoBG')";
+		'$ngayBG','$tinhtrangBG','$lydoBG')";
 
 		$result1 = $objmysql->Exec($sql);
 		if(!$result1) {
@@ -842,6 +841,7 @@ foreach($rows as $r){
 	$tinhtrang_sv 		= isset($cols[39]) && $cols[39]!='' ? antiData($cols[39]) : '';
 	$tinhtrang_hocphi 	= isset($cols[40]) && $cols[40]!='' ? antiData($cols[40]) : '';
 	$last_contact 		= isset($cols[0]) && $cols[0]!='' ? strtotime($cols[0]) : 0;
+	$hetotnghiep 		= isset($cols[14]) && $cols[14]!='' ? antiData($cols[14]) : '';
 
 	/* Fix dữ liệu demo */
 	$nganhdangky = '111';
@@ -857,7 +857,7 @@ foreach($rows as $r){
 		`date_level_up`,`namnhaphoc`,`kyhoc`,
 		`hs_tinhtrang`,`hs_vo`,`hs_anh`,`hs_bang`,
 		`hs_cn_totnghiep`,`hs_bangdiem`,`hs_hocba`,`hs_pdk`,
-		`hs_giay_ks`,`hs_cmt`,`hs_mota`,`dotnhaphoc`,
+		`hs_giay_ks`,`hs_cmt`,`hs_mota`,`dotnhaphoc`,`hetotnghiep`,
 		`qd_trungtuyen`,`qd_congnhansv`,`tinhtrang_sv`,`tinhtrang_hocphi`,`last_contact`
 		) VALUES (
 		'$khoa','$he','$nganhdangky','$malop','$masv','$status',
@@ -865,7 +865,7 @@ foreach($rows as $r){
 		'$date_level_up','$namnhaphoc','$kyhoc',
 		'$hs_tinhtrang','$hs_vo','$hs_anh','$hs_bang',
 		'$hs_cn_totnghiep','$hs_bangdiem','$hs_hocba','$hs_pdk',
-		'$hs_giay_ks','$hs_cmt','$hs_mota','$dotnhaphoc',
+		'$hs_giay_ks','$hs_cmt','$hs_mota','$dotnhaphoc','$hetotnghiep',
 		'$qd_trungtuyen','$qd_congnhansv','$tinhtrang_sv','$tinhtrang_hocphi','$last_contact')";
 
 		$result2 = $objmysql->Exec($sql2);

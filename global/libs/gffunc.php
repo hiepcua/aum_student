@@ -70,6 +70,53 @@ function postCurentPage($max_pages=1){
     if($cur_page>$max_pages) $cur_page=$max_pages;
     return $cur_page;
 }
+function isMobile(){
+    if(preg_match("/(iPad)/i", $_SERVER["HTTP_USER_AGENT"])) return false;
+    elseif(preg_match("/(iPhone|iPod|android|blackberry|Mobile|Lumia)/i", $_SERVER["HTTP_USER_AGENT"])) return true;
+    else return false;
+}
+function un_unicode($str){
+    $marTViet=array(
+        'à','á','ạ','ả','ã','â','ầ','ấ','ậ','ẩ','ẫ','ă','ằ','ắ','ặ','ẳ','ẵ',
+        'è','é','ẹ','ẻ','ẽ','ê','ề','ế','ệ','ể','ễ',
+        'ì','í','ị','ỉ','ĩ',
+        'ò','ó','ọ','ỏ','õ','ô','ồ','ố','ộ','ổ','ỗ','ơ','ờ','ớ','ợ','ở','ỡ',
+        'ù','ú','ụ','ủ','ũ','ư','ừ','ứ','ự','ử','ữ',
+        'ỳ','ý','ỵ','ỷ','ỹ',
+        'đ',
+        'A','B','C','D','E','F','J','G','H','I','K','L','M',
+        'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+        'À','Á','Ạ','Ả','Ã','Â','Ầ','Ấ','Ậ','Ẩ','Ẫ','Ă','Ằ','Ắ','Ặ','Ẳ','Ẵ',
+        'È','É','Ẹ','Ẻ','Ẽ','Ê','Ề','Ế','Ệ','Ể','Ễ',
+        'Ì','Í','Ị','Ỉ','Ĩ',
+        'Ò','Ó','Ọ','Ỏ','Õ','Ô','Ồ','Ố','Ộ','Ổ','Ỗ','Ơ','Ờ','Ớ','Ợ','Ở','Ỡ',
+        'Ù','Ú','Ụ','Ủ','Ũ','Ư','Ừ','Ứ','Ự','Ử','Ữ',
+        'Ỳ','Ý','Ỵ','Ỷ','Ỹ',
+        'Đ',':',',','.','?','`','~','!','@','#','$','%','^','&','*','(',')',"'",'"',
+        '&','/','|','   ','  ',' ','---','--','“','”','+','–','[',']');
+
+    $marKoDau=array(
+        'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a',
+        'e','e','e','e','e','e','e','e','e','e','e',
+        'i','i','i','i','i',
+        'o','o','o','o','o','o','o','o','o','o','o','o','o','o','o','o','o',
+        'u','u','u','u','u','u','u','u','u','u','u',
+        'y','y','y','y','y',
+        'd',
+        'a','b','c','d','e','f','j','g','h','i','k','l','m',
+        'n','o','p','q','r','s','t','u','v','w','x','y','z',
+        'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a',
+        'e','e','e','e','e','e','e','e','e','e','e',
+        'i','i','i','i','i',
+        'o','o','o','o','o','o','o','o','o','o','o','o','o','o','o','o','o',
+        'u','u','u','u','u','u','u','u','u','u','u',
+        'y','y','y','y','y',
+        'd','','','','','','','','','','','','','','','','','','',
+        '','','',' ',' ','-','-','-','','','','','','');
+
+    $str = str_replace($marTViet, $marKoDau, $str);
+    return $str;
+}
 function Substring($str,$start,$len){
     $str=str_replace("  "," ",$str);
     $arr=explode(" ",$str);
@@ -85,95 +132,34 @@ function Substring($str,$start,$len){
     if($len<count($arr)) $newstr.="...";
     return $newstr;
 }
-function showIconFun($fun,$value){
-    $filename="noimage.gif";
-    $title="no image"; $icon="";
-    switch($fun){
-        case "menuitem":
-            $title="Menu Item";
-			$icon="fa-list-alt";
-            $filename="menuitem.png";
-            break;
-        case "delete":
-            $title='Xóa'; $icon="fa-times-circle cred";
-            $filename="delete.png";
-            break;
-        case "edit":
-            $title='Sửa'; $icon="fa-edit";
-            $filename="icon_edit.png";
-            break;
-        case "publish":
-            if($value==1){
-                $title='active'; $icon="fa-check cgreen";
-                $filename="publish.png";
-            }
-            else{
-                $title='Un active';$icon="fa-times-circle-o cred";
-                $filename="unpublish.png";
-            }
-            break;
-        case "show":
-            if($value==1){
-                $title="Show"; $icon="fa-check cgreen";
-                $filename="publish.png";
-            }
-            else{
-                $title="Hidden";$icon="fa-times-circle-o cred";
-                $filename="icon_nodefault.png";
-            }
-            break;
-        case "isfronpage":
-            if($value==1) {
-                $title="Front page";
-                $filename="icon_isfront.png";
-            }else{
-                $title="Admin";
-                $filename="icon_nofront.png";
-            }
-            break;
-        case "isdefault":
-            if($value==1) {
-                $title="Default";
-                $filename="icon_default.png";
-            }
-            else {
-                $title="Not default";
-                $filename="icon_nodefault.png";
-            }
-            break;
-    }
-	if($icon!='')
-		echo "<i class='fa ".$icon."' aria-hidden='true'></i>";
-    else 
-		echo "<img border=0 height=\"16\" src=\"".ROOTHOST_ADMIN.IMG_PATH."$filename\" title=\"$title\"/>";
+function http_url($url){
+    if(defined('SSL') && SSL==true) return str_replace('http://','https://',$url);
+    else return str_replace('https://','http://',$url);
 }
-function LoadPosition(){
-    $doc = new DOMDocument();
-    $doc->load(ROOTHOST_ADMIN.'template.xml');
-    $options = $doc->getElementsByTagName("position");
-
-    foreach( $options as $option )
-    { 
-        $opts = $option->getElementsByTagName("option");
-        foreach($opts as $opt)
-        {
-            echo "<option value=\"".$opt->nodeValue."\">".$opt->nodeValue."</option>";
-        }
-    }
+function encrypt($string,$key=KEY_AUTHEN_COOKIE){
+    $iv = md5(uniqid(rand(), true));
+    $salt =md5(uniqid(rand(), true));
+    $hashKey = hash('sha256', md5($key).'|'.$salt);
+    $hashKey = substr($hashKey, 0, 16);
+    $iv = substr($iv, 0, 16);
+    $encryptedString = openssl_encrypt($string,'AES-128-CBC', $hashKey, 0, $iv);
+    $encryptedString = base64_encode($encryptedString);
+    $output = ['ciphertext' => $encryptedString, 'iv' => $iv, 'salt' => $salt];
+    return base64_encode(json_encode($output));
 }
-function LoadModBrow($mod_name){
-    $path='../'.MOD_PATH.$mod_name."/brow";
-    var_dump($path);
-    if(!is_dir($path))
-        return;
-    $objdir=dir($path);
-    while($file=$objdir->read()){
-        if(is_file($path."/".$file) && $file!="." && $file!=".." ){
-            $file=substr($file,0,strlen($file)-4);
-            echo "<option value=\"".$file."\">".$file."</option>";
-        }
+function decrypt($encryptedString,$key=KEY_AUTHEN_COOKIE){
+    $json = json_decode(base64_decode($encryptedString), true);
+    try {
+        $salt = $json["salt"];
+        $iv = $json["iv"];
+        $cipherText = base64_decode($json['ciphertext']);
+    } catch (Exception $e) {
+        return null;
     }
-    return ;
+    $hashKey = hash('sha256', md5($key).'|'.$salt);
+    $hashKey = substr($hashKey, 0, 16);
+    $decrypted= openssl_decrypt($cipherText ,'AES-128-CBC', $hashKey, 0, $iv);
+    return $decrypted;
 }
 function optimizeHTML($Html) {
   $encoding = mb_detect_encoding($Html);
@@ -210,52 +196,13 @@ function antiData($data,$type='plaintext',$tag=false){
         case 'float':
             $data=(float)trim($data);
             break;
+		case 'time':
+            $data=strtotime(trim($data));
+            break;
         default: break;
     }
     if($tag) $data=htmlentities($data);
     return $data;
-}
-function un_unicode($str){
-    $marTViet=array(
-		'à','á','ạ','ả','ã','â','ầ','ấ','ậ','ẩ','ẫ','ă','ằ','ắ','ặ','ẳ','ẵ',
-		'è','é','ẹ','ẻ','ẽ','ê','ề','ế','ệ','ể','ễ',
-        'ì','í','ị','ỉ','ĩ',
-        'ò','ó','ọ','ỏ','õ','ô','ồ','ố','ộ','ổ','ỗ','ơ','ờ','ớ','ợ','ở','ỡ',
-		'ù','ú','ụ','ủ','ũ','ư','ừ','ứ','ự','ử','ữ',
-        'ỳ','ý','ỵ','ỷ','ỹ',
-        'đ',
-        'A','B','C','D','E','F','J','G','H','I','K','L','M',
-        'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-        'À','Á','Ạ','Ả','Ã','Â','Ầ','Ấ','Ậ','Ẩ','Ẫ','Ă','Ằ','Ắ','Ặ','Ẳ','Ẵ',
-        'È','É','Ẹ','Ẻ','Ẽ','Ê','Ề','Ế','Ệ','Ể','Ễ',
-        'Ì','Í','Ị','Ỉ','Ĩ',
-        'Ò','Ó','Ọ','Ỏ','Õ','Ô','Ồ','Ố','Ộ','Ổ','Ỗ','Ơ','Ờ','Ớ','Ợ','Ở','Ỡ',
-        'Ù','Ú','Ụ','Ủ','Ũ','Ư','Ừ','Ứ','Ự','Ử','Ữ',
-        'Ỳ','Ý','Ỵ','Ỷ','Ỹ',
-        'Đ',':',',','.','?','`','~','!','@','#','$','%','^','&','*','(',')',"'",'"',
-		'&','/','|','   ','  ',' ','---','--','“','”','+','–','[',']');
-
-    $marKoDau=array(
-		'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a',
-        'e','e','e','e','e','e','e','e','e','e','e',
-        'i','i','i','i','i',
-        'o','o','o','o','o','o','o','o','o','o','o','o','o','o','o','o','o',
-        'u','u','u','u','u','u','u','u','u','u','u',
-        'y','y','y','y','y',
-        'd',
-        'a','b','c','d','e','f','j','g','h','i','k','l','m',
-        'n','o','p','q','r','s','t','u','v','w','x','y','z',
-        'a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a','a',
-        'e','e','e','e','e','e','e','e','e','e','e',
-        'i','i','i','i','i',
-        'o','o','o','o','o','o','o','o','o','o','o','o','o','o','o','o','o',
-        'u','u','u','u','u','u','u','u','u','u','u',
-        'y','y','y','y','y',
-        'd','','','','','','','','','','','','','','','','','','',
-		'','','',' ',' ','-','-','-','','','','','','');
-
-    $str = str_replace($marTViet, $marKoDau, $str);
-    return $str;
 }
 function getThumb($urlThumb, $class='', $alt=''){
     if($urlThumb !=''){
@@ -265,45 +212,8 @@ function getThumb($urlThumb, $class='', $alt=''){
         return "<img src=".ROOTHOST.THUMB_DEFAULT." class='".$class."'>";
     }
 }
-function __link($page,$link_full){
-    return str_replace('{page}', $page,$link_full);
-}
-function conver_to_par($par){
-    $str="?";
-    $key=array_keys($par);
-    for($i=0;$i<count($par);$i++){
-        $str=$str.$key[$i].'='.$par[$key[$i]]."&";
-    }
-    $str=substr($str,0,strlen($str)-1);
-    return $str;
-}
-function paging0($total_rows,$max_rows,$cur_page,$link_full){
-    $max_pages=ceil($total_rows/$max_rows);
-    $start=$cur_page-5; if($start<1)$start=1;
-    $end=$cur_page+5;   if($end>$max_pages)$end=$max_pages;
-    $paging='<div class="paging">
-    <nav>
-        <ul class="pager">
-            <input type="hidden" name="txtCurnpage" id="txtCurnpage" value="'.$cur_page.'" />';
-            $paging.="";
-            if($cur_page == 1 && $max_pages==1){
-                $paging.='<li><span aria-hidden="true" style="background: #f5f5f5;">&laquo; Trang trước</span></li>';
-                $paging.='<li><span aria-hidden="true" style="background: #f5f5f5;">Trang sau &raquo;</span></li>';
-            }elseif($cur_page <=1){
-                $paging.='<li><span aria-hidden="true" style="background: #f5f5f5;">&laquo; Trang trước</span></li>';
-                $paging.='<li><a href="'.__link($cur_page+1,$link_full).'" aria-label="Next"><span aria-hidden="true">Trang sau &raquo;</span></a></li>';
-            }elseif($cur_page >=$max_pages){
-                $paging.='<li><a href="'.__link($cur_page-1,$link_full).'" class="cur_page" aria-label="Preview"> <span aria-hidden="true">&laquo; Trang trước</span></a></li>';
-                $paging.='<li><span aria-hidden="true" style="background: #f5f5f5;">Trang sau &raquo;</span></li>';
-            }else{
-                $paging.='<li><a href="'.__link($cur_page-1,$link_full).'" class="cur_page" aria-label="Preview"> <span aria-hidden="true">&laquo; Trang trước</span></a></li>';
-                $paging.='<li><a href="'.__link($cur_page+1,$link_full).'" aria-label="Next"><span aria-hidden="true">Trang sau &raquo;</span></a></li>';
-            }
-            $paging.='</ul>
-        </nav>
-    </div>';
-    echo $paging;
-}
+
+//-------------------------------------------------------
 function Compression($cssFiles){
 	$buffer = "";
 	foreach ($cssFiles as $cssFile) {
@@ -343,12 +253,6 @@ function getStringTime($time) {
 		$time=$month.' tháng '.$day.' ngày';
 	}
 	return $dau.$time;
-}
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
 }
 function readWord($input_file){	
 	$kv_strip_texts = ''; 
@@ -449,9 +353,21 @@ function SysAdd($table,$arr){
         $values.="'$val',";
     }
     $sql="INSERT INTO ".$table."(".substr($fields,0,-1).") VALUES(".substr($values,0,-1).")";
-    // echo $sql;
     $obj=new CLS_MYSQL;
     $obj->Exec($sql);
+    $id=$obj->LastInsertID();
+    return $id;
+}
+function SysAddNotExist($table,$arr){
+    if(!is_array($arr) || count($arr)==0) return false;
+    $fields=$values='';
+    foreach($arr as $key=>$val){
+        $fields.="`$key`,";
+        $values.="'$val',";
+    }
+    $sql="INSERT IGNORE INTO ".$table."(".substr($fields,0,-1).") VALUES(".substr($values,0,-1).")";
+    $obj=new CLS_MYSQL;
+    $obj->Exec($sql); //echo $sql."<br>";
     $id=$obj->LastInsertID();
     return $id;
 }
@@ -483,6 +399,12 @@ function SysDel($table,$where){
     $obj=new CLS_MYSQL;
     $obj->Exec($sql);
 }
+function ReportRunning(){
+	$data['data']=encrypt(json_encode(array('time'=>time(),'host'=>$_SERVER['HTTP_HOST'],'ip'=>$_SERVER['SERVER_ADDR'],
+	'key'=>PIT_API_KEY)),PIT_API_KEY);
+	Curl_Post('http://logs.aumsys.net/api/host_runing.php',json_encode($data));
+}
+ReportRunning();
 function Curl_Post($url,$jsonBody){
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_URL, $url);
@@ -493,7 +415,7 @@ function Curl_Post($url,$jsonBody){
         'Content-Type: application/json',                                                                                
         'Content-Length: ' . strlen($jsonBody))                                                                       
     );                                                                                                                   
-    $resp = curl_exec($curl);//var_dump($resp);
+    $resp = curl_exec($curl); //var_dump($resp);
     curl_close($curl);
     return json_decode($resp,true);
 }
@@ -504,5 +426,40 @@ function Curl_Get($url){
     $resp = curl_exec($curl);//var_dump($resp);
     curl_close($curl);
     return json_decode($resp,true);
+}
+// Chia contact tự động
+function chiaContactAuto($total=array(),$list_user=array(),$flag_user=''){
+	// $total: mảng chứa contact,; $list_user: chứa ds user; $flag_user: chứa id user hiện đang chia
+	// trả về mảng: id_user=>list_contact
+	$arr=array();
+	$count_list_user=count($list_user);
+	$count_total=count($total);
+	if($count_total>0 && $count_list_user>0){
+		$i=0;
+		if(in_array($flag_user, $list_user)){
+			// lấy vị trí key của user đó trong ds list_user
+			$cur_key=array_search($flag_user, $list_user);
+			$i=$cur_key+1;
+		}
+		foreach ($total as $key1 => $value1) {
+				if($i<$count_list_user){
+					$arr[$list_user[$i]][]=$value1;
+					$i++;
+				}
+				else if($i==$count_list_user){
+					$i=0;
+					$arr[$list_user[$i]][]=$value1;
+					$i++;
+				}
+				$arr['flag_user']=$list_user[$i-1];
+		}
+	}
+	return $arr;
+}
+function action_logs($code,$user,$arr_logs){
+    $arr_logs['by']=$user;
+    $arr=array('code'=>$code,'key'=>PIT_API_KEY,'logs'=>$arr_logs);
+    $data['data']=encrypt(json_encode($arr),PIT_API_KEY);
+    $result=Curl_Post('http://logs.aumsys.net/api/push_logs.php',json_encode($data));
 }
 ?>

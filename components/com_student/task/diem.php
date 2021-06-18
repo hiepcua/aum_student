@@ -5,27 +5,27 @@ $obj = new CLS_MYSQL;
 $_masv = addslashes(strip_tags(htmlentities($_GET['id']))); // masv
 
 //---------------------------------------
-$sql="SELECT * FROM tbl_nganh";
-$obj->Query($sql);
-$_NGANH=array();
-while($r=$obj->Fetch_Assoc()){
-	$_NGANH['N'.$r['id']]=$r['name'];
+$KHOA = array();
+$json_khoa = file_get_contents(DOCUMENT_ROOT.'jsons/khoa.json');
+$arr_khoa = json_decode($json_khoa, true);
+foreach ($arr_khoa as $key => $value) {
+	$KHOA[$value['id']] = $value;
 }
 
 //---------------------------------------
-$sql="SELECT * FROM tbl_khoa";
-$obj->Query($sql);
-$_KHOA=array();
-while($r=$obj->Fetch_Assoc()){
-	$_KHOA['K'.$r['id']]=$r['name'];
+$HE = array();
+$json_he = file_get_contents(DOCUMENT_ROOT.'jsons/he.json');
+$arr_he = json_decode($json_he, true);
+foreach ($arr_he as $key => $value) {
+	$HE[$value['id']] = $value;
 }
 
 //---------------------------------------
-$sql="SELECT * FROM tbl_he";
-$obj->Query($sql);
-$_HE=array();
-while($r=$obj->Fetch_Assoc()){
-	$_HE['H'.$r['id']]=$r['name'];
+$NGANH = array();
+$json_nganh = file_get_contents(DOCUMENT_ROOT.'jsons/nganh.json');
+$arr_nganh = json_decode($json_nganh, true);
+foreach ($arr_nganh as $key => $value) {
+	$NGANH[$value['id']] = $value;
 }
 
 //---------------------------------------
@@ -36,15 +36,15 @@ WHERE a.masv='$_masv'";
 $obj->Query($sql);
 $r_ts = $obj->Fetch_Assoc();
 $fullname = $r_ts['ho_dem'].' '.$r_ts['name'];
-$gender = $GLOBALS['ARR_GENDER'][$r_ts['gioitinh']];
+$gender = $r_ts['gioitinh']=='nam' ? 'Nam' : 'Nữ';
 $ngaysinh = date("Y-m-d",$r_ts['ngaysinh']);
 
 $id_he = $r_ts['id_he'];
 $id_nganh = $r_ts['id_nganh'];
 $masv = $r_ts['masv'];
-$ten_khoa = $_KHOA['K'.$r_ts['id_khoa']];
-$ten_nganh = $_NGANH['N'.$r_ts['id_nganh']];
-$ten_he = $_HE['H'.$r_ts['id_he']];
+$ten_khoa = $r_ts['id_khoa']!=='' ? $KHOA[$r_ts['id_khoa']]['name'] : '';
+$ten_nganh = $r_ts['id_nganh']!=='' ? $NGANH[$r_ts['id_nganh']]['name'] : '';
+$ten_he = $r_ts['id_he']!=='' ? $HE[$r_ts['id_he']]['name'] : '';
 
 $html .='<div class="page-bar">
 <div class="page-title-breadcrumb">
@@ -115,39 +115,33 @@ $html .='<div class="page-bar">
 	</table>
 	<table class="table table-bordered" id="tbl_hocphan">
 	<thead><tr> 
-	<th width="30" rowspan="2">STT</th>
-	<th rowspan="2">Môn học</th>
-	<th rowspan="2">Tín chỉ</th>
-	<th rowspan="2">chuyên cần</th>
-	<th rowspan="2">Kiểm tra</th>
-	<th rowspan="2">Thi</th>
-	<th rowspan="2">Thi lại</th>
-	<th rowspan="2">Cập nhật gần nhất</th>
-	<th colspan="3">Thang điểm</th>
-	<th rowspan="2">Đạt/ không đạt</th>
-	<th rowspan="2">Xếp loại</th>
+	<thwidth="30" >STT</th>
+	<th>Môn học</th>
+	<th>Tín chỉ</th>
+	<th>chuyên cần</th>
+	<th>Kiểm tra</th>
+	<th>Thi</th>
+	<th>Thi lại</th>
+	<th>Cập nhật gần nhất</th>
+	<th>Đạt/ không đạt</th>
 	</tr>
-	<tr><th>10</th><th>Chữ</th><th>4</th></tr>
 	</thead>
 	<tbody>'; ?>
 	<div class="clearfix">
 		<table class="table table-bordered" id="tbl_hocphan">
 			<thead>
 				<tr> 
-					<th width="30" rowspan="2">STT</th>
-					<th rowspan="2">Môn học</th>
-					<th rowspan="2">Tín chỉ</th>
-					<th rowspan="2">chuyên cần</th>
-					<th rowspan="2">Kiểm tra</th>
-					<th rowspan="2">Thi</th>
-					<th rowspan="2">Thi lại</th>
-					<th rowspan="2">Note</th>
-					<th rowspan="2">ngày cập nhật</th>
-					<th colspan="3">Thang điểm</th>
-					<th rowspan="2">Trạng thái</th>
-					<th rowspan="2">Xếp loại</th>
+					<th width="30">STT</th>
+					<th>Môn học</th>
+					<th class="text-center">Tín chỉ</th>
+					<th class="text-center">chuyên cần</th>
+					<th class="text-center">Kiểm tra</th>
+					<th class="text-center">Thi</th>
+					<th class="text-center">Thi lại</th>
+					<th class="text-center">Note</th>
+					<th class="text-center">Ngày cập nhật điểm</th>
+					<th class="text-center">Trạng thái</th>
 				</tr>
-				<tr><th>10</th><th>Chữ</th><th>4</th></tr>
 			</thead>
 			<tbody>
 				<?php 
@@ -173,32 +167,47 @@ $html .='<div class="page-bar">
 					$tinchi=$r['tinchi'];
 					$diem = json_decode($r['diem'],true); $status = $r['status'];
 					$kq=$r['ketqua']; $kq2=$r['ketqua2'];
-					$kq_chu=$kq_4=$xeploai=''; $diem_pass=4;
-					if($r['status']!=-1) { /*Chỉ xét khi đã có kết quả Đạt/không đạt*/
+
+					$txt_status = '';
+					if($r['status']!==null) { 
+						/* Chỉ xét khi đã có kết quả Đạt/không đạt*/
 						$diem_pass = $arrHP['total'];
-						if($kq2!==null && $kq2!=='') $kq=$kq2;	
-						if ($kq!==null && $kq!=='') {			
-							if($kq>=8.5 && $kq<=10){ $kq_chu='A'; $kq_4="4"; $xeploai="Giỏi";}
-							if($kq>=7.0 && $kq<8.5){ $kq_chu='B'; $kq_4="3"; $xeploai="Khá"; }
-							if($kq>=5.5 && $kq<7.0){ $kq_chu='C'; $kq_4="2"; $xeploai="TB"; }
-							if($kq>=4.0 && $kq<5.5){ $kq_chu='D'; $kq_4="1"; $xeploai="TB yếu"; }
-							if($kq>=0 && $kq<4.0){ $kq_chu='F'; $kq_4="0"; $xeploai="Kém"; }
-							if($kq<$diem_pass) $kq="<span class='red'>$kq</span>";
-						}else { 
-							$kq_chu='F'; $kq_4="0"; $xeploai="Kém";
-						} 
 						switch($r['status']){
-							case '0':$status="<label class='label label-danger'>Không Đạt</label>"; break;
-							case '1':$status="<label class='label label-success'>Đạt</label>"; break;
-							case '2':$status="<label class='label label-warning'>Thi lại</label>"; break;
-							case '3':$status="<label class='label label-warning'>Thi cải thiện</label>"; break;
-							case '4':$status="<label class='label label-danger'>Học lại</label>"; break;
-							case '5':$status="<label class='label label-danger'>Học cải thiện</label>"; break;
-						} 
-					}?>
+							case 'HT01': 
+							$html_status="<a class='label other' data-id='".$id_ht."' data-status='".$status."' onclick='frm_status_hoctap(this)'>Chưa học</a>"; 
+							$txt_status = 'Chưa học';
+							break;
+							case 'HT02': 
+							$html_status="<a class='label label-success' data-id='".$id_ht."' data-status='".$status."' onclick='frm_status_hoctap(this)'>Đang học</a>"; 
+							$txt_status = 'Đang học';
+							break;
+							case 'HT03': 
+							$html_status="<a class='label label-success' data-id='".$id_ht."' data-status='".$status."' onclick='frm_status_hoctap(this)'>Đang thi</a>"; 
+							$txt_status = 'Đang thi';
+							break;
+							case 'HT04': 
+							$html_status="<a class='label label-warning' data-id='".$id_ht."' data-status='".$status."' onclick='frm_status_hoctap(this)'>Không đạt</a>"; 
+							$txt_status = 'Không đạt';
+							break;
+							case 'HT05': 
+							$html_status="<a class='label label-success' data-id='".$id_ht."' data-status='".$status."' onclick='frm_status_hoctap(this)'>Đạt</a>"; 
+							$txt_status = 'Đạt';
+							break;
+							case 'HT06': 
+							$html_status="<a class='label label-danger' data-id='".$id_ht."' data-status='".$status."' onclick='frm_status_hoctap(this)'>Thi lại</a>"; 
+							$txt_status = 'Thi lại';
+							break;
+							default: 
+							$html_status="<a class='label other' data-id='".$id_ht."' data-status='".$status."' onclick='frm_status_hoctap(this)'>Chưa học</a>"; 
+							$txt_status = 'Chưa học';
+							break;
+						}
+					}
+					?>
 					<tr dataid="<?php echo $id_ht;?>" datama="<?php echo $r['masv'];?>" datamon="<?php echo $r['id_monhoc'];?>">
 						<td align="center"><?php echo $stt;?></td>
 						<td><?php echo $arrMon[$r['id_monhoc']]['name'];?></td>
+
 						<td align="center"><?php echo $r['tinchi'];?></td>
 						<td align="center">
 							<?php if($r['status']!=-1) {
@@ -224,11 +233,7 @@ $html .='<div class="page-bar">
 							</a>
 						</td>
 						<td align="center"><?php if($r['mdate']!='') echo date("d/m/y H:i",$r['mdate']);?></td>
-						<td align="center"><?php echo $kq;?></td>
-						<td align="center"><?php echo $kq_chu;?></td>
-						<td align="center"><?php echo $kq_4;?></td>
-						<td align="center"><?php echo $status;?></td>
-						<td align="center"><?php echo $xeploai;?></td>
+						<td align="center"><?php echo $html_status;?></td>
 					</tr>
 					<?php 
 					$html.='<tr>
@@ -244,14 +249,10 @@ $html .='<div class="page-bar">
 					$html.='</td><td align="center">';
 					if($r['status']!=-1)
 						if(isset($diem['diemthi']))$html.=$diem['diemthi']; 
-					$html.='</td><td></td><td align="center">';
+					$html.='</td><td align="center">';
 					if($r['mdate']!='') $html.=date("d/m/y H:i",$r['mdate']);
 					$html.='</td>
-					<td align="center">'.$kq.'</td>
-					<td align="center">'.$kq_chu.'</td>
-					<td align="center">'.$kq_4.'</td>
-					<td align="center">'.$status.'</td>
-					<td align="center">'.$xeploai.'</td>
+					<td align="center">'.$txt_status.'</td>
 					</tr>';
 				} 
 				$html.='</tbody></table>';?>
@@ -293,5 +294,24 @@ $(".btn-print").click(function(){
 	popupWin.document.write('</body></html>');
 	popupWin.document.close();
 	hideLoading();
-})
+});
+
+function frm_status_hoctap(e){
+	var _id = e.getAttribute('data-id');
+	var _status = e.getAttribute('data-status');
+	if(_status.length>0 && _id.length>0){
+		var _url = '<?php echo ROOTHOST;?>ajaxs/hoctap/frm_status_hoctap.php';
+		var _data = {
+			'id' : _id,
+			'status' : _status,
+		};
+		$.post(_url, _data, function(res){
+			$('#myModalPopup .modal-dialog').removeClass('modal-lg modal-sm');
+			$('#myModalPopup .modal-dialog').addClass('modal-md');
+			$('#myModalPopup .modal-title').html('Cập nhật trạng thái học tập');
+			$('#myModalPopup .modal-body').html(res);
+			$('#myModalPopup').modal('show');
+		})
+	}
+}
 </script>

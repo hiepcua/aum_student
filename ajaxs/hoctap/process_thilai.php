@@ -10,7 +10,7 @@ require_once('../../libs/cls.configsite.php');
 $obj = new CLS_MYSQL; 
 $objuser=new CLS_USER;
 if(!$objuser->isLogin()) die("E01");
-$user = $objuser->getInfo('username');
+$user = $objuser->getInfo('user');
 
 // get config
 $hp_thilai=$hp_thict=$hp_hoclai=$hp_hocct=0;
@@ -56,27 +56,28 @@ if(isset($_POST['ht_id'])) {
 	$json = json_encode($arr_diem,JSON_UNESCAPED_UNICODE);
 	
 	// Update thi lại, status=2: thi lại
-	$cdate =time(); 
-	$status=2; // thi lại
+	$cdate = time(); 
+	// $status=2; // thi lại
+	$status = 'HT06'; // thi lại
 	if($type==2) $status=3; // thi cải thiện
 	$sql = "UPDATE tbl_hoctap SET diem='$json',mdate=$cdate,status=$status WHERE id='$ht_id'";
 	$obj->Exec("BEGIN");
-	$result1 = $obj->Exec($sql); //echo $sql." ; ";
+	$result1 = $obj->Exec($sql); //echo $sql;
 	
-	// Thêm khoản phí thi lại/thi cải thiện
-	$sql = "INSERT INTO tbl_hocphi (masv,hocky,hocphi,ten_hp,type_hp) 
-	VALUES('$masv','$hocky','$hp_thilai','Lệ phí thi lại môn $id_mon','khac')";
-	if($type==2)
-		$sql = "INSERT INTO tbl_hocphi (masv,hocky,hocphi,ten_hp,type_hp) 
-		VALUES('$masv','$hocky','$hp_thict','Lệ phí thi cải thiện môn $id_mon','khac')";
-	$result2 = $obj->Exec($sql); //echo $sql." ; ";
+	// // Thêm khoản phí thi lại/thi cải thiện
+	// $sql = "INSERT INTO tbl_hocphi (masv,hocky,hocphi,ten_hp,type_hp) 
+	// VALUES('$masv','$hocky','$hp_thilai','Lệ phí thi lại môn $id_mon','khac')";
+	// if($type==2)
+	// 	$sql = "INSERT INTO tbl_hocphi (masv,hocky,hocphi,ten_hp,type_hp) 
+	// 	VALUES('$masv','$hocky','$hp_thict','Lệ phí thi cải thiện môn $id_mon','khac')";
+	// $result2 = $obj->Exec($sql); //echo $sql." ; ";
 	
 	// Note bảng tbl_hoctap_note
 	$note = "Đăng ký thi lại môn $id_mon"; 
 	if($type==2) $note = "Đăng ký thi cải thiện điểm môn $id_mon"; 
 	$sql = "INSERT INTO tbl_hoctap_note (id_hoctap,masv,id_monhoc,notes,cdate,author) 
 	VALUES('$ht_id','$masv','$id_mon','$note',$cdate,'$user')";
-	$result3 = $obj->Exec($sql); //echo $sql." ; ";
+	$result3 = $obj->Exec($sql); //echo $sql;
 	
 	// note bảng tbl_notify
 	$note = "#$masv đăng ký thi lại."; 
@@ -84,7 +85,7 @@ if(isset($_POST['ht_id'])) {
 	$sql = "INSERT INTO tbl_notify (masv,notes,cdate,author) VALUES('$masv','$note',$cdate,'$user')";
 	$result4 = $obj->Exec($sql); //echo $sql." ; ";
 	
-	if($result1 && $result2 && $result3 && $result4) {
+	if($result1 && $result3 && $result4) {
 		$obj->Exec("COMMIT"); echo "success";
 	}else { 
 		$obj->Exec("ROLLBACK"); echo "error";

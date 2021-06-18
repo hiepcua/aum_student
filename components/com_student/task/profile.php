@@ -1,408 +1,270 @@
 <?php
 defined('ISHOME') or die("You can't access this page!");
 if(!isset($_GET['id'])) die("<br>Vui lòng chọn hồ sơ cần xem");
-$ma = addslashes(strip_tags(htmlentities($_GET['id'])));
+$ma_hoso = antiData($_GET['id']);
+$res_hocsinh = SysGetList('tbl_hocsinh', array(), "AND ma='".$ma_hoso."'");
+if(!isset($res_hocsinh[0])) die('Không có thông tin học viên này.');
+$r = $res_hocsinh[0];
 
-if(isset($_SESSION["SV$ma"]['TAB_QHGD'])) unset($_SESSION["SV$ma"]['TAB_QHGD']);
-if(isset($_SESSION["SV$ma"]['TAB_QHHT'])) unset($_SESSION["SV$ma"]['TAB_QHHT']);
-if(isset($_SESSION["SV$ma"]['TAB_QHHOC'])) unset($_SESSION["SV$ma"]['TAB_QHHOC']);
-if(isset($_SESSION["SV$ma"]['TAB_KHENTHUONG'])) unset($_SESSION["SV$ma"]['TAB_KHENTHUONG']);
-if(isset($_SESSION["SV$ma"]['TAB_KYLUAT'])) unset($_SESSION["SV$ma"]['TAB_KYLUAT']);
-
-$obj = new CLS_MYSQL;
 //---------------------------------------
-$sql="SELECT * FROM tbl_khoa";
-$obj->Query($sql);
-$_KHOA=array();
-while($r=$obj->Fetch_Assoc()){
-	$_KHOA['K'.$r['id']]=$r['name'];
-}
-//---------------------------------------
-$sql="SELECT * FROM tbl_he";
-$obj->Query($sql);
-$_HE=array();
-while($r=$obj->Fetch_Assoc()){
-	$_HE['H'.$r['id']]=$r['name'];
-}
-//---------------------------------------
-$sql="SELECT * FROM tbl_nganh";
-$obj->Query($sql);
-$_NGANH=array();
-while($r=$obj->Fetch_Assoc()){
-	$_NGANH['N'.$r['id']]=$r['name'];
+$KHOA = array();
+$json_khoa = file_get_contents(DOCUMENT_ROOT.'jsons/khoa.json');
+$arr_khoa = json_decode($json_khoa, true);
+foreach ($arr_khoa as $key => $value) {
+	$KHOA[$value['id']] = $value;
 }
 
-$objhs = new CLS_HS;
-$objhs->getList(" AND ma='$ma'");
-$r=$objhs->Fetch_Assoc();
-$dmhoso = ($r['dmhoso']!==null && $r['dmhoso']!=='') ? json_decode($r['dmhoso'],true) : array();
-$dmhoso_ids='';
-if(count($dmhoso)>0) {
-	foreach($dmhoso as $k=>$v){
-		if($v['status']==1)
-			$dmhoso_ids.=$v['id'].",";
+//---------------------------------------
+$HE = array();
+$json_he = file_get_contents(DOCUMENT_ROOT.'jsons/he.json');
+$arr_he = json_decode($json_he, true);
+foreach ($arr_he as $key => $value) {
+	$HE[$value['id']] = $value;
+}
+
+//---------------------------------------
+$NGANH = array();
+$json_nganh = file_get_contents(DOCUMENT_ROOT.'jsons/nganh.json');
+$arr_nganh = json_decode($json_nganh, true);
+foreach ($arr_nganh as $key => $value) {
+	$NGANH[$value['id']] = $value;
+}
+?>
+<style type="text/css">
+	.box-infosv{
+		position: relative;
+		padding-left: 60px;
 	}
-}
-$_SESSION["SV$ma"]['TAB_QHGD'] = json_decode($r['qhgiadinh'],true);
-$_SESSION["SV$ma"]['TAB_QTHT'] = json_decode($r['qthoctap'],true);
-$_SESSION["SV$ma"]['TAB_QHHOC'] = json_decode($r['qthoc'],true);
-$_SESSION["SV$ma"]['TAB_KHENTHUONG'] = json_decode($r['khenthuong'],true);
-$_SESSION["SV$ma"]['TAB_KYLUAT'] = json_decode($r['kyluat'],true);
-
-$objts = new CLS_TUYENSINH;
-$objts->getList(" AND id_hoso='$ma' ");
-$id_khoa = $id_he = $id_nganh=''; $id_dky = 0;$_id_hoso = $ma;
-$masv = $ptxt = $diadiem = $sbd = '';
-$mon1 = $mon2 = $mon3 = '';$id_dky=$tongdiem=0;
-$readonly = "";
-if($objts->Num_rows()>0) {
-	$row=$objts->Fetch_Assoc();
-	$masv = $row['masv'];
-	$id_khoa = $row['id_khoa'];
-	$id_he 	= $row['id_he'];
-	$id_nganh = $row['id_nganh'];
-	$ptxt = $row['xettuyen']; 
-	$diadiem = $row['diadiemhoc'];
-	$id_dky = $row['id'];
-	$sbd = $row['sbd'];
-	$mon1 = $row['mon1'];
-	$mon2 = $row['mon2'];
-	$mon3 = $row['mon3'];
-	$tongdiem=(float)($mon1+$mon2+$mon3);
-	if($row['trungtuyen']!=null) $readonly=" readonly";
-} ?>
+	.box-infosv .xoa_nganh {
+		position: absolute;
+		left: 0;
+		width: 40px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #ccc;
+	}
+	.profile_view .flex{
+		display: flex;
+		flex-wrap: wrap;
+	}
+</style>
 <div class='body profile_view'>
-	<div class="page-bar">
-		<div class="page-title-breadcrumb">
-			<div class="pull-left">
-				<div class="page-title tab-title">
-					<ul><li class="active"><a href="<?php echo ROOTHOST;?>student/profile/<?php echo $ma;?>">
-					Hồ sơ</a></li></ul>
-				</div>
-			</div>
-			<ul class="box-function pull-right">
-				<li>
-					<a href="<?php echo ROOTHOST;?>student" class="btn btn-default btn-close" title="Quay lại"><i class="fa fa-reply"></i> Quay lại</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="card">
-		<div class="card-body">
-			<div class="card-block">
-				<div class="media">
-					<div class="row">
-						<div class="col-md-3 col-xs-12">
-							<div class="col-md-12 text-center">
-								<div class="avatar"></div>
-								<input type="file" id="FileUpload" style="display: none" accept="image/*"/>
+	<div class="row flex">
+		<div class="col-md-6 col-sm-6 card">
+			<div class="">
+				<div class="card-body">
+					<div class="card-block">
+						<div class="box-profile">
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<div class="el">
+										<span>Mã hồ sơ :</span>
+										<div class="field"><?php echo $r['ma'];?></div>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6">
+									<div class="el">
+										<span>Họ tên :</span>
+										<div class="field"><?php echo $r['ho_dem'].' '.$r['name'];?></div>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6">
+									<div class="el">
+										<span>Số điện thoại :</span>
+										<div class="field"><?php echo $r['dienthoai'];?></div>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6">
+									<div class="el">
+										<span>Email :</span>
+										<div class="field"><?php echo $r['email'];?></div>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="col-md-9 col-xs-12">
-							<div class="row form-group">
-								<div class="col-md-2 col-xs-4 text">ID</div>
-								<div class="col-md-4 col-xs-8">
-									<input type="number" name="ma" id="" class="form-control" value="<?php echo $r['ma'];?>" readonly>
-								</div>
-							</div>
-							<div class="row form-group">
-								<div class="col-md-2 col-xs-4 text">Họ và tên</div>
-								<div class="col-md-4 col-xs-8">
-									<input type="text" name="hoten" id="hoten" class="form-control" value="<?php echo $r['ho_dem'].' '.$r['name'];?>" readonly>
-								</div>
-								<div class="col-md-2 col-xs-4 text">Giới tính</div>
-								<div class="col-md-4 col-xs-8"><fieldset id="group1">
-									<input type="radio" name="gender" value="0" <?php if($r['gioitinh']==0) echo 'checked';?>> 
-									<?php echo $GLOBALS['ARR_GENDER'][0];?>
-									<input type="radio" name="gender" value="1" <?php if($r['gioitinh']==1) echo 'checked';?>> 
-									<?php echo $GLOBALS['ARR_GENDER'][1];?>
-								</fieldset></div>
-							</div>
-							<div class="row form-group">
-								<div class="col-md-2 col-xs-4 text">Tên thường gọi</div>
-								<div class="col-md-4 col-xs-8">
-									<input type="text" name="tengoi" id="tengoi" class="form-control" value="<?php echo $r['nickname'];?>" readonly>
-								</div>
-								<div class="col-md-2 col-xs-4 text">Quốc tịch</div>
-								<div class="col-md-4 col-xs-8">
-									<input type="text" name="quoctich" id="quoctich" class="form-control" value="<?php echo $r['quoctich'];?>" readonly>
-								</div>
-							</div>
-							<div class="row form-group">
-								<div class="col-md-2 col-xs-4 text">Ngày sinh</div>
-								<div class="col-md-4 col-xs-8">
-									<input type="date" name="ngaysinh" id="ngaysinh" class="form-control" value="<?php echo date("Y-m-d",$r['ngaysinh']);?>" readonly  placeholder="tháng/ngày/năm">
-								</div>
-								<div class="col-md-2 col-xs-4 text">Nơi sinh</div>
-								<div class="col-md-4 col-xs-8">
-									<input type="text" name="noisinh" id="noisinh" class="form-control" value="<?php echo $r['noisinh'];?>" readonly>
-								</div>
-							</div>
-							<div class="row form-group">
-								<div class="col-md-2 col-xs-4 text">Nguyên quán</div>
-								<div class="col-md-4 col-xs-8">
-									<input type="text" name="nguyenquan" id="nguyenquan" class="form-control" value="<?php echo $r['nguyenquan'];?>" readonly>
-								</div>
-								<div class="col-md-2 col-xs-4 text">Hộ khẩu</div>
-								<div class="col-md-4 col-xs-8">
-									<input type="text" name="hokhau" id="hokhau" class="form-control" value="<?php echo $r['hktt'];?>" readonly>
-								</div>
-							</div><br>
+						<br>
+						<div class="form-group">
+							<a href="<?php echo ROOTHOST.'student/soyeulylich/'.$r['ma'];?>" class="btn btn-primary"><i class="fa fa-book" aria-hidden="true"></i> Sơ yếu lý lịch</a>
+							<a href="<?php echo ROOTHOST;?>student/vanbang/<?php echo $ma_hoso;?>" class="btn btn-primary" title="Thêm văn bằng"><i class="fa fa-plus"></i> Thêm chương trình học</a>
+							<a href="javascript:viod(0)" class="btn btn-primary add_workinglog" title="Thêm cuộc gọi"><i class="fa fa-plus"></i> Thêm cuộc gọi</a>
 						</div>
-						<div class="clearfix"></div>
 					</div>
-					<div class="form-group text-center">
-						<a href="<?php echo ROOTHOST.'student/soyeulylich/'.$r['ma'];?>" class="btn btn-primary">Xem chi tiết sơ yếu lý lịch >></a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<div class="page-bar" style="margin-bottom: 10px;">
-		<div class="page-title-breadcrumb">
-			<div class="pull-left">
-				<div class="page-title tab-title">
-					<ul>
-						<li class="active">Danh sách ngành đăng ký</li>
-						<a href="javascript:void(0)" id="dk_nganh" class="btn btn-primary" dataid="<?php echo $row['id_hoso'];?>" dataid-dkts="<?php echo $row['id'];?>"><i class="fa fa-plus-circle" aria-hidden="true"></i> Đăng ký thêm ngành học</a>
-					</ul>
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<section class="card" style="position: unset;">
-		<div class="card-body">
-			<div class="card-block">
-				<div class="media">
 					<div id="list_profile" class="table-responsive">
-						<table class="list table table-striped table-bordered">
+						<table class="table table-striped table-bordered">
 							<thead>
 								<tr class="header">
-									<th class="text-center">STT</th>
-									<th class="text-center">Xóa</th>
-									<th class="text-center">Khóa</th>
-									<th class="text-center">Bậc</th>
-									<th class="text-center">Ngành</th>
-									<th class="text-center">Mã SV</th>
-									<th class="text-center">Lớp</th>
-									<th class="text-center">Trạng thái</th>
-									<th class="text-center">Chuyển lớp</th>
-									<th class="text-center">KQ học tập</th>
-									<th class="text-center">QL học phí</th>
-									<th class="text-center">Điểm</th>
+									<th colspan="2" class="text-center">Thông tin sinh viên</th>
+								</tr>
+								<tr class="header">
+									<th colspan="1" class="text-center">Level và các trạng thái</th>
+									<th colspan="1" class="text-center">Thông tin đào tạo</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php
-								$res_nganhdk = SysGetList('tbl_dangky_tuyensinh',array(),'AND id_hoso="'.$ma.'"');
+								$res_nganhdk = SysGetList('tbl_dangky_tuyensinh',array(),'AND id_hoso="'.$ma_hoso.'"');
 								if(count($res_nganhdk)>0){
 									foreach ($res_nganhdk as $key => $value) {
 										$i = $key+1; $id=$value['id']; $str='';
-										$status=$value['status'];
+										$status = $value['status'] != '' ? $LEVEL_STUDENT[$value['status']] : '';
 										$dataid = $id;
 										$hoso = $value['id_hoso'];
-										if($status=='' || $status==null || $status=='L0') 
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-default change_status">'.$STATUS_DKTS['L0'].'</label>';
-										elseif($status=='L1') 
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-info change_status">'.$STATUS_DKTS[$status].'</label>';
-										elseif($status=='L2') 
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-info change_status">'.$STATUS_DKTS[$status].'</label>';
-										elseif($status=='L3')
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-info change_status">'.$STATUS_DKTS[$status].'</label>';
-										elseif($status=='L4')
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-warning change_status">'.$STATUS_DKTS[$status].'</label>'; 
-										elseif($status=='L5')
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-warning change_status">'.$STATUS_DKTS[$status].'</label>';
-										elseif($status=='L8')
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-success change_status">'.$STATUS_DKTS[$status].'</label>';
-										elseif($status=='L9A')
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-warning change_status">'.$STATUS_DKTS[$status].'</label>';
-										elseif($status=='L9B')
-											$str='<label dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-danger change_status">'.$STATUS_DKTS[$status].'</label>';
+										$masv = $value['masv'];
 
-										echo '<tr dataid="'.$ma.'">';
-										echo '<td align="center">'.$i.'</td>';
-										echo '<td align="center"><a href="javascript:void(0)" data-id_dkts="'.$value['id'].'" class="xoa_nganh cred"><i class="fa fa-trash btn_xoa" aria-hidden="true" title="Xóa"></i></a></td>';
+										$name_nganh = isset($NGANH[$value['id_nganh']]) ? $NGANH[$value['id_nganh']]['name'] : "";
+										$name_he = isset($HE[$value['id_he']]) ? $HE[$value['id_he']]['name'] : "";
+										$name_khoa = isset($KHOA[$value['id_khoa']])? $KHOA[$value['id_khoa']]['name'] : "";
 
-										echo '<td align="center">';
-										if(strlen($value['id_khoa'])>0) echo $_KHOA['K'.$value['id_khoa']];
-										echo '</td>';
+										$tinhtrang_sv = strlen($value['tinhtrang_sv'])>0 ? $value['tinhtrang_sv'] : '---';
+										$txt_tinhtrang_sv = $tinhtrang_sv!=='---' ? $STATUS_SV[$tinhtrang_sv] : '';
 
-										echo '<td align="center">';
-										if(strlen($value['id_he'])>0) echo $_HE['H'.$value['id_he']];
-										echo '</td>';
+										$tinhtrang_hocphi = strlen($value['tinhtrang_hocphi'])>0 ? $value['tinhtrang_hocphi'] : '---';
+										$txt_tinhtrang_hocphi = $tinhtrang_hocphi!=='---' ? $STATUS_HOCPHI[$tinhtrang_hocphi] : '---';
 
-										echo '<td align="center">';
-										if(strlen($value['id_nganh'])>0) echo $_NGANH['N'.$value['id_nganh']];
-										else{
-											echo '<button class="dk_nganh btn btn-default" dataid="'.$value['id_hoso'].'" dataid-dkts="'.$value['id'].'"><i class="fa fa-plus cgray"></i> Đăng ký</button>';
-										}
-										echo '</td>';
+										$tinhtrang_call = strlen($value['tinhtrang_call'])>0 ? $value['tinhtrang_call'] : '---';
+										$txt_tinhtrang_call = $tinhtrang_call!=='---' ? $STATUS_CALL[$tinhtrang_call] : '';
+										$last_contact = (int)$value['last_contact']>0 ? date('d/m/Y', $value['last_contact']) : '';
 
-										echo '<td align="center">'.$value['masv'].'</td>';
-										echo '<td align="center">';
+										echo '<tr>';
+
+										echo '<td colspan="2">
+										<div class="box-infosv">
+										<a href="javascript:void(0)" data-id_dkts="'.$value['id'].'" class="xoa_nganh cred" title="Xóa chương trình học"><i class="fa fa-trash btn_xoa" aria-hidden="true" title="Xóa"></i></a>
+										<strong><a href="#">'.$value['masv'].'</a></strong>
+										<div class="lienhecuoi">Liên hệ cuối: '.$last_contact.'</div>
+										</td>
+										</div>
+										</tr>';
+
+										echo '<tr>
+										<td>
+										<div class="box-all-status">
+
+										<div class="el level">
+										<span>Level: </span>
+										<a href="javascript:void(0)" title="Cập nhật trạng thái" dataid="'.$dataid.'" data-hoso="'.$hoso.'" class="label label-default change_status">'.$status.'</a>
+										</div>
+
+										<div class="el status_sv" title="'.$txt_tinhtrang_sv.'">
+										<span>Tình trạng SV: </span>
+										<a href="javascript:void(0)" class="label label-success" onclick="frm_status_sv(this)" data-masv="'.$masv.'" data-status-sv="'.$tinhtrang_sv.'">'.$txt_tinhtrang_sv.'</a>
+										</div>
+
+										<div class="el status_hp" title="'.$txt_tinhtrang_hocphi.'">
+										<span>Tình trạng HP: </span>
+										<a href="javascript:void(0)" class="label label-success" onclick="frm_status_hocphi(this)"  data-masv="'.$masv.'" data-status-hp="'.$tinhtrang_hocphi.'">'.$txt_tinhtrang_hocphi.'</a>
+										</div>
+
+										<div class="el status_call" title="'.$txt_tinhtrang_call.'">
+										<span>Tình trạng cuộc gọi: </span>
+										<a href="javascript:void(0)" class="label label-success" onclick="frm_status_call(this)" data-masv="'.$masv.'" data-status-call="'.$tinhtrang_call.'">'.$txt_tinhtrang_call.'</a>
+										</div>
+
+										</div>
+										</td>';
+
+										echo '<td>
+										<div class="daotao-info">
+										<div class="el nganh"><strong>'.$name_nganh.'</strong></div>
+										<div class="el khoa">Khóa: <strong>'.$name_khoa.'</strong></div>
+										<div class="el he">Hệ/bậc: <strong>'.$name_he.'</strong></div>';
+
 										if($value['malop']!="") {
-											echo $value['malop'];
+											echo 'Lớp: <a href="javascript:void(0)" title="Chuyển lớp" data-masv="'.$value['masv'].'" class="chuyen_lop label label-primary">'.$value['malop'].'</a>';
 										}else {
-											echo '<a href="javascript:void(0)" class="btn btn-default btn_nhaplop" dataid="'.$value['id_hoso'].'" dataids="'.$value['id'].'-'.$value['id_khoa'].'-'.$value['id_he'].'-'.$value['id_nganh'].'">Nhập lớp</a>';
+											echo '<a href="javascript:void(0)" class="btn btn-default btn_nhaplop" data-masv="'.$value['masv'].'">Nhập lớp</a>';
 										}
-										echo '</td>';
 
-										echo '<td align="center">'.$str.'</td>';
-
-										if(in_array($status, array('L2','L3','L4','L5'))){
-											echo '<td align="center"><a href="javascript:void(0)" dataids="'.$value['id'].'-'.$value['id_khoa'].'-'.$value['id_he'].'-'.$value['id_nganh'].'" class="chuyen_lop label label-primary">Chuyển lớp</a></td>';
-											echo '<td align="center"><a href="'.ROOTHOST.'student/diem/'.$value['masv'].'" class="label label-primary">Kết quả học tập</a></td>';
-											echo '<td align="center"><a href="'.ROOTHOST.'student/hocphi/'.$value['masv'].'" target="_blank" class="label label-primary">Ql học phí</a></td>';
-											echo '<td align="center"><a href="'.ROOTHOST.'?com=student&task=qlhoctap&manganh='.$value['id_nganh'].'&malop='.$value['malop'].'&masv='.$value['masv'].'" target="_blank" class="label label-primary">Ql học tập</a></td>';
-										}elseif(in_array($status, array('L0','L1'))){
-											echo '<td></td>';
-											echo '<td></td>';
-											echo '<td></td>';
-											echo '<td></td>';
-										}elseif(in_array($status, array('L8','L9A','L9B'))){
-											echo '<td></td>';
-											echo '<td align="center"><a href="'.ROOTHOST.'student/diem/'.$value['id_hoso'].'" dataid="'.$value['masv'].'" class="label label-primary">Kết quả học tập</a></td>';
-											echo '<td align="center"><a href="'.ROOTHOST.'student/hocphi/'.$value['masv'].'" target="_blank" class="label label-primary">Ql học phí</a></td>';
-											echo '<td align="center"><a href="'.ROOTHOST.'?com=student&task=qlhoctap&manganh='.$value['id_nganh'].'&malop='.$value['malop'].'&masv='.$value['masv'].'" target="_blank" class="label label-primary">Ql học tập</a></td>';
-										}else{
-											echo '<td></td>';
-											echo '<td></td>';
-											echo '<td></td>';
-											echo '<td></td>';
-										}
-										echo '</tr>';
+										echo '</div>
+										</td>
+										</tr>';
 									}
-								}
-								?>
+								} else {
+									echo '<tr><td colspan="12">Chưa có dữ liệu</td></tr>';
+								} ?>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
 
-	<!-- Card lịch sử tương tác -->
-	<?php $sql=''; ?>
-	<div class="page-bar" style="margin-bottom: 10px;">
-		<div class="page-title-breadcrumb">
-			<div class="pull-left">
-				<div class="page-title tab-title" style="display: flex; align-items: center;">
-					<ul>
-						<li class="active">Lịch sử tương tác</li>
-					</ul>
-					<form name="frm_search" id="frm_search" method="get" action="" style="margin-left: 15px;">
-						<select id="cbo_masv" name="cbo_masv" class="form-control">
-							<option value="">Tất cả</option>
-							<?php
-							$cbo_masv = isset($_GET['cbo_masv']) && $_GET['cbo_masv']!=='' ? antiData($_GET['cbo_masv']) : '';
-							if($cbo_masv!==''){
-								$sql.=' AND masv="'.$cbo_masv.'"';
-							}
-							if(count($res_nganhdk)>0){
-								foreach ($res_nganhdk as $key => $value) {
-									echo '<option value="'.$value['masv'].'">'.$value['masv'].'</option>';
-								}
-							}
-							?>
-						</select>
-						<script type="text/javascript">
-							$(document).ready(function(){
-								cbo_Selected('cbo_masv', '<?php echo $cbo_masv;?>');
-							});
-						</script>
-					</form>
+		<div class="col-md-6 col-sm-6">
+			<div class="card">
+				<div class="card-body">
+					<div class="box-history table-responsive">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th class="text-center">Xóa</th>
+										<th colspan="1">Ngày</th>
+										<th colspan="1">Trạng thái</th>
+										<th colspan="1">Người thực hiện</th>
+									</tr>
+									<tr>
+										<th class="text-center" colspan="4">Nội dung tương tác</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+									$strWhere=' AND id_hoso="'.$ma_hoso.'"';
+									$strWhere.=' ORDER BY `date` DESC LIMIT 0,10';
+									$res_workinglog = SysGetList('tbl_working_log',array(),$strWhere);
+									if(count($res_workinglog)>0){
+										$stt = 1;
+										foreach ($res_workinglog as $key => $value) {
+											$masv = $value['masv'];
+											$date = date('d-m-Y', $value['date']);
+											$cdate = date('d-m-Y H:i', $value['cdate']);
+											$author = $value['author'];
+
+											echo '<tr class="header">';
+											if($value['finish']==1){
+												$hoanthanh = "<span class='cgreen'>Hoàn thành</span>";
+												echo '<td></td>';
+												echo '<td>'.$date.'</td>';
+												echo '<td>'.$hoanthanh.'</td>';
+												echo '<td>'.$author.'</td>';
+											}else{
+												$hoanthanh = "<span>Chưa hoàn thành</span>";
+												echo '<td width="30" align="center"><a href="javascript:void(0)"><i class="fa fa-trash cred del_workinglog" dataid="'.$value['id'].'"></i></a></td>';
+												echo '<td><div class="date" title="Sửa"><a href="javascript:void(0)" dataid="'.$value['id'].'" class="edit_workinglog">'.$date.'</a></div></td>';
+												echo '<td>'.$hoanthanh.'</td>';
+												echo '<td>'.$author.'</td>';
+											}
+											echo '</tr>';
+
+											echo '<tr>
+											<td colspan="4">
+											<div class="noidung"><strong>Nội dung: </strong>'.$value['noidung'].'</div>
+											<div class="Kết quả"><strong>Kết quả: </strong>'.$value['ketqua'].'</div>
+											</td>
+											</tr>';
+											$stt++;
+										}
+									} else { echo '<tr><td align="center" colspan="8">Chưa có dữ liệu</td></tr>'; }
+									?>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<section class="card" style="position: unset;">
-		<div class="card-body">
-			<div class="card-block">
-				<div class="media">
-					<div class="table-responsive">
-						<table class="list table table-striped table-bordered">
-							<thead>
-								<tr class="header">
-									<th class="text-center">STT</th>
-									<th class="text-center">Mã HS</th>
-									<th class="text-center">Mã SV</th>
-									<th class="text-center">Ngày</th>
-									<th>Nội dung tương tác</th>
-									<th class="text-center">Kết quả</th>
-									<th class="text-center">Ngày cập nhật</th>
-									<th class="text-center">Hoàn thành</th>
-									<th class="text-center">Sửa</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php
-								$sql.=' AND id_hoso="'.$_id_hoso.'"';
-								$MAX_ROWS = 50;
-								$total_rows = SysCount('tbl_working_log', $sql);
-								$max_pages = ceil($total_rows/$MAX_ROWS);
-								$cur_page = getCurentPage($max_pages);
-								$start = ($cur_page - 1) * $MAX_ROWS;
-								$limit = ' LIMIT '.$start.','. $MAX_ROWS;
-								$sql.=' ORDER BY finish ASC, `date` DESC'.$limit;
-
-								$res_workinglog = SysGetList('tbl_working_log',array(),$sql);
-								if(count($res_workinglog)>0){
-									foreach ($res_workinglog as $key => $value) {
-										$i = $key+1;
-										$masv = $value['masv'];
-										$id_hoso = $value['id_hoso'];
-										$date = date('d-m-Y', $value['date']);
-										$cdate = date('d-m-Y H:i', $value['cdate']);
-										if($value['finish']==1){
-											$edit = '';
-											$finish = '<i class="fa fa-check cgreen" aria-hidden="true"></i>';
-										}else{
-											$edit = '<i class="fa fa-pencil-square-o edit_workinglog" dataid="'.$value['id'].'" aria-hidden="true"></i>';
-											$finish = '<i class="fa fa-times cgray finish_workinglog" dataid="'.$value['id'].'" aria-hidden="true"></i>';
-										}
-										
-										echo '<tr>';
-										echo '<td align="center">'.$i.'</td>';
-										echo '<td align="center">'.$id_hoso.'</td>';
-										echo '<td align="center">'.$masv.'</td>';
-										echo '<td align="center">'.$date.'</td>';
-										echo '<td>'.$value['noidung'].'</td>';
-										echo '<td align="center">'.$value['ketqua'].'</td>';
-										echo '<td align="center">'.$cdate.'</td>';
-										echo '<td align="center">'.$finish.'</td>';
-										echo '<td align="center">'.$edit.'</td>';
-										echo '</tr>';
-									}
-								}
-								?>
-							</tbody>
-						</table>
-
-						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Footer_list">
-							<tr><td align="center">
-								<?php paging($total_rows,$MAX_ROWS,$cur_page); ?>
-							</td></tr>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- /.End Card lịch sử tương tác -->
 </div>
 
-<script>
+<script type="text/javascript">
 	$(document).ready(function(){
 		$(".chuyen_lop").click(function(){
-			var ids = $(this).attr('dataids');
+			var masv = $(this).attr('data-masv');
 			var url = "<?php echo ROOTHOST;?>ajaxs/lop/frm_chuyen_lop.php";
-			$.post(url,{'ids':ids},function(req){
-				$('#myModalPopup .modal-dialog').removeClass('modal-lg, modal-sm');
+			$.post(url,{'masv': masv},function(req){
+				$('#myModalPopup .modal-dialog').removeClass('modal-lg modal-sm');
 				$('#myModalPopup .modal-dialog').addClass('modal-md');
 				$('#myModalPopup .modal-title').html('Thông tin chuyển lớp');
 				$('#myModalPopup .modal-body').html(req);
@@ -455,6 +317,33 @@ if($objts->Num_rows()>0) {
 					}, 1500);
 				}
 			})
+		});
+		$('.add_workinglog').click(function(){
+			var url = "<?php echo ROOTHOST;?>ajaxs/student/frm_add_workinglog.php";
+			$.post(url,{'ma_hoso': '<?php echo $ma_hoso;?>'},function(req){
+				$('#myModalPopup .modal-dialog').removeClass('modal-sm');
+				$('#myModalPopup .modal-dialog').addClass('modal-lg');
+				$('#myModalPopup .modal-title').html('Thêm tương tác sinh viên');
+				$('#myModalPopup .modal-body').html(req);
+				$('#myModalPopup').modal('show');
+			});
+		});
+
+		$('.del_workinglog').click(function(){
+			if(confirm("Bạn muốn xóa lịch sử tương tác này?")){
+				var id = $(this).attr('dataid');
+				var url = "<?php echo ROOTHOST;?>ajaxs/student/process_del_workinglog.php";
+				$.post(url,{'id':id},function(req) {
+					if(req=="E01") showMess("Vui lòng đăng nhập hệ thống","error");
+					else if(req=="error") showMess("Lỗi trong quá trình lưu dữ liệu!","error");
+					else if(req==="success") {
+						showMess("Xóa thông tin thành công!",""); 
+						setTimeout(function(){ 
+							window.location.reload(); 
+						}, 1500);
+					}
+				})
+			}
 		});
 
 		$(".btn_nhaplop").click(function(){
@@ -550,6 +439,63 @@ if($objts->Num_rows()>0) {
 					}
 				});
 			}
+		}
+	}
+
+	function frm_status_sv(e){
+		var _masv = e.getAttribute('data-masv');
+		var _status_sv = e.getAttribute('data-status-sv');
+		if(_masv.length>0){
+			var _url = '<?php echo ROOTHOST;?>ajaxs/student/frm_status_sv.php';
+			var _data = {
+				'masv' : _masv,
+				'status_sv' : _status_sv
+			};
+			$.post(_url, _data, function(res){
+				$('#myModalPopup .modal-dialog').removeClass('modal-lg modal-sm');
+				$('#myModalPopup .modal-dialog').addClass('modal-md');
+				$('#myModalPopup .modal-title').html('Cập nhật tình trạng học viên');
+				$('#myModalPopup .modal-body').html(res);
+				$('#myModalPopup').modal('show');
+			})
+		}
+	}
+
+	function frm_status_hocphi(e){
+		var _masv = e.getAttribute('data-masv');
+		var _status_hp = e.getAttribute('data-status-hp');
+		if(_status_hp.length>0 && _masv.length>0){
+			var _url = '<?php echo ROOTHOST;?>ajaxs/student/frm_status_hocphi.php';
+			var _data = {
+				'masv' : _masv,
+				'status_hp' : _status_hp
+			};
+			$.post(_url, _data, function(res){
+				$('#myModalPopup .modal-dialog').removeClass('modal-lg modal-sm');
+				$('#myModalPopup .modal-dialog').addClass('modal-md');
+				$('#myModalPopup .modal-title').html('Cập nhật tình trạng học phí');
+				$('#myModalPopup .modal-body').html(res);
+				$('#myModalPopup').modal('show');
+			})
+		}
+	}
+
+	function frm_status_call(e){
+		var _masv = e.getAttribute('data-masv');
+		var _status_call = e.getAttribute('data-status-call');
+		if(_status_call.length>0 && _masv.length>0){
+			var _url = '<?php echo ROOTHOST;?>ajaxs/student/frm_status_call.php';
+			var _data = {
+				'masv' : _masv,
+				'status_call' : _status_call
+			};
+			$.post(_url, _data, function(res){
+				$('#myModalPopup .modal-dialog').removeClass('modal-lg modal-sm');
+				$('#myModalPopup .modal-dialog').addClass('modal-md');
+				$('#myModalPopup .modal-title').html('Cập nhật tình trạng cuộc gọi');
+				$('#myModalPopup .modal-body').html(res);
+				$('#myModalPopup').modal('show');
+			})
 		}
 	}
 </script>

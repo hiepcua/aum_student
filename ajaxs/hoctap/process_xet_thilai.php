@@ -44,9 +44,9 @@ if(isset($_POST['ht_id'])) {
 	if($diem_kiemtra>=0) $kq2 += $diem_kiemtra/100*$diem2;
 	if($diem_thi>=0) $kq2 += $diem_thi/100*$thilai;
 	
-	$pass=0; $str='';
+	$pass='HT06'; $str='';
 	if($kq2>$diem_pass) {
-		$pass=1; $str.="SV #$masv Đạt";
+		$pass='HT05'; $str.="SV #$masv Đạt";
 		$note = "KQ lần 2: Đạt môn $id_mon"; 
 	}else {
 		$str.="SV #$masv Không đạt";
@@ -56,16 +56,16 @@ if(isset($_POST['ht_id'])) {
 	// tien hanh update status bang hoc tap
 	$cdate = time();
 	$sql = "UPDATE tbl_hoctap SET ketqua2=$kq2,status='$pass',mdate=$cdate WHERE id=$ht_id";
-	$result1 = $obj->Exec($sql); //echo $sql.' ; ';
+	$result1 = $obj->Exec($sql); echo $sql;
 	
 	// Note bảng tbl_hoctap_note
 	$sql = "INSERT INTO tbl_hoctap_note (id_hoctap,masv,id_monhoc,notes,cdate,author) 
 	VALUES('$ht_id','$masv','$id_mon','$note',$cdate,'$user')";
-	$result2 = $obj->Exec($sql); //echo $sql.' ; ';
+	$result2 = $obj->Exec($sql); echo $sql;
 	
 	$sql = "INSERT INTO tbl_notify (id_hoso,masv,notes,cdate,author) 
 	VALUES('','','#$masv $note',$cdate,'$user')";
-	$result3 = $obj->Exec($sql); //echo $sql.' ; ';
+	$result3 = $obj->Exec($sql); echo $sql;
 	
 	if($result1 && $result2 && $result3) {
 		$obj->Exec("COMMIT"); echo $str;

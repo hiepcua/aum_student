@@ -39,6 +39,68 @@ global $conf;
 if(!isset($_SESSION['THIS_YEAR'])) $_SESSION['THIS_YEAR'] = '';
 if(!isset($_SESSION['THIS_BAC'])) $_SESSION['THIS_BAC'] = '';
 if(!isset($_SESSION['THIS_NGANH'])) $_SESSION['THIS_NGANH'] = '';
+if(!isset($_SESSION['THIS_STAFF'])) $_SESSION['THIS_STAFF'] = '';
+
+$USER_ACCOUNT = array('uid'=>'', 'gcode'=>'', 'pcode'=>'');
+if(isset($_SESSION[MD5($_SERVER['HTTP_HOST']).'_MEMBER_LOGIN'])){
+	$USER_ACCOUNT['gcode'] = $_SESSION[MD5($_SERVER['HTTP_HOST']).'_MEMBER_LOGIN']['gcode'];
+	$USER_ACCOUNT['pcode'] = $_SESSION[MD5($_SERVER['HTTP_HOST']).'_MEMBER_LOGIN']['pcode'];
+	$USER_ACCOUNT['uid'] = $_SESSION[MD5($_SERVER['HTTP_HOST']).'_MEMBER_LOGIN']['uid'];
+}
+
+//---- Lấy danh sách staff ---------
+$url='http://uid.aumsys.net/api/user-list';
+$json = array();
+$json['key'] = PIT_API_KEY;
+$json['page'] = '';
+$json['maxrow'] = '';
+$json['g_code'] = 'G04';
+$json['p_code'] = '';
+
+$jsondata = encrypt(json_encode($json, JSON_UNESCAPED_UNICODE), PIT_API_KEY);
+$params = json_encode(array('data'=>$jsondata));
+$res_data = Curl_Post($url, $params);
+$STAFF_ALL = isset($res_data['data']) ? $res_data['data'] : array();	
+$STAFF_NV = array(); // Mảng staff quyền nhân viên
+
+if(count($STAFF_ALL)>0){
+	foreach ($STAFF_ALL as $key => $value) {
+		if($value['p_code']=='G04_NV'){
+			$STAFF_NV[$value['id']] = $value;
+		}
+	}
+}
+
+if(array_key_exists($USER_ACCOUNT['uid'], $STAFF_NV)){
+	$IS_NV = true;
+	$_SESSION['THIS_STAFF'] = $USER_ACCOUNT['uid'];
+}else{
+	$IS_NV = false;
+}
+
+//---------------------------------------
+$KHOA = array();
+$json_khoa = file_get_contents(DOCUMENT_ROOT.'jsons/khoa.json');
+$arr_khoa = json_decode($json_khoa, true);
+foreach ($arr_khoa as $key => $value) {
+	$KHOA[$value['id']] = $value;
+}
+
+//---------------------------------------
+$HE = array();
+$json_he = file_get_contents(DOCUMENT_ROOT.'jsons/he.json');
+$arr_he = json_decode($json_he, true);
+foreach ($arr_he as $key => $value) {
+	$HE[$value['id']] = $value;
+}
+
+//---------------------------------------
+$NGANH = array();
+$json_nganh = file_get_contents(DOCUMENT_ROOT.'jsons/nganh.json');
+$arr_nganh = json_decode($json_nganh, true);
+foreach ($arr_nganh as $key => $value) {
+	$NGANH[$value['id']] = $value;
+}
 
 // style print
 $html ='<style>
@@ -128,6 +190,7 @@ $html ='<style>
 	<link rel='stylesheet' href='<?php echo ROOTHOST;?>css/style.css'/>
 	<script>var ROOTHOST = '<?php echo ROOTHOST;?>';</script>
 	<script src='<?php echo ROOTHOST;?>global/js/jquery.min.js'></script>
+	<script src='<?php echo ROOTHOST;?>global/js/jquery.validate.min.js'></script>
 	<script src='<?php echo ROOTHOST;?>global/js/bootstrap.min.js'></script>
 	<script src='<?php echo ROOTHOST;?>global/js/select2.min.js'></script>
 	<script src='<?php echo ROOTHOST;?>global/js/bootstrap-datepicker.min.js'></script>
@@ -145,6 +208,7 @@ if(!isLogin()){
 	include_once(COM_PATH."com_user/task/login.php");
 }else{
 	?>
+	<?php if(!in_array($USER_ACCOUNT['gcode'], $PERMISSION_ACCESS)) die($GLOBALS['MSG_PERMIS']); ?>
 	<?php include('modules/mod_top_menu.php');?>
 	<div id='site_body'>
 		<div id='site_main' style="margin-left:0px!important">
@@ -156,7 +220,7 @@ if(!isLogin()){
 			</div>
 		</div>
 	</div>
-	<div id="myModalPopup" class="modal fade" role="dialog">
+	<div id="myModalPopup" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="modal-content">
@@ -169,6 +233,7 @@ if(!isLogin()){
 		</div>
 	</div>
 	<div class="loading"></div>
+	<div id="modal_mask"></div>
 <?php } ?>
 <script>
 $(document).ready(function(){
@@ -177,7 +242,18 @@ $(document).ready(function(){
 		$.post(url,function(req){
 			window.location.reload();
 		});
-	})
+	});
+
+	$('#myModalPopup').on('show.bs.modal', function() {
+		$('#modal_mask').addClass('active');
+	});
+
+	$('#myModalPopup').on('hidden.bs.modal', function() {
+		$('#modal_mask').removeClass('active');
+	});
+
+	
+
 	//prevent form resubmission when page is refreshed (F5 / CTRL+R)
 	if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
@@ -276,13 +352,6 @@ $(document).ready(function(){
 		debugger;
 		showMess('Không được phép xóa hồ sơ','error');
 	})
-
-
-
-	$("#contextMenu .dangky_ts").click(function(){
-		var ma = $('#right_click_id').val();
-		frm_dangky(ma);
-	})
 	
 	$("#contextMenu .nhapdiem").click(function(){
 		var ma = $('#right_click_id').val();
@@ -342,16 +411,6 @@ function hideLoading() {
 	$(".loading").hide();
 }
 
-function frm_dangky(ma){
-	var url = "<?php echo ROOTHOST;?>ajaxs/tuyensinh/dangky.php";
-	$.post(url,{'ma':ma},function(req){
-		$('#myModalPopup .modal-dialog').removeClass('modal-sm');
-		$('#myModalPopup .modal-dialog').addClass('modal-lg');
-		$('#myModalPopup .modal-title').html('Đăng ký ngành học');
-		$('#myModalPopup .modal-body').html(req);
-		$('#myModalPopup').modal('show');
-	})
-}
 function frm_nhapdiem(ma){
 	var url = "<?php echo ROOTHOST;?>ajaxs/tuyensinh/nhapdiem.php";
 	$.post(url,{'ma':ma},function(req){

@@ -7,9 +7,10 @@ require_once('../../includes/gfconfig.php');
 require_once('../../libs/cls.mysql.php');
 require_once('../../libs/cls.users.php');
 $obj = new CLS_MYSQL; 
-$objuser=new CLS_USER;
+$objuser = new CLS_USER;
 if(!$objuser->isLogin()) die("E01");
-$user = $objuser->getInfo('username');
+$user = $objuser->getInfo('user');
+
 if(isset($_POST['arr_masv'])) {
 	$arr_masv = isset($_POST['arr_masv'])?addslashes(strip_tags($_POST['arr_masv'])):'';
 	$arr_diem = isset($_POST['arr_diem'])?addslashes(strip_tags($_POST['arr_diem'])):'';
@@ -21,10 +22,7 @@ if(isset($_POST['arr_masv'])) {
 	$obj->Exec("BEGIN");
 	$result1 = $obj->Exec($sql); //echo $sql;
 	
-	$note = "#$masv cập nhật điểm:"; 
-	if($chuyencan!='') $note.=" chuyên cần ($chuyencan)";
-	if($diemkt!='') $note.=" điểm kiểm tra ($diemkt)";
-	if($diemthi!='') $note.=" điểm thi ($diemthi)";
+	$note = "#$masv cập nhật điểm:";
 	$sql = "INSERT INTO tbl_notify (id_hoso,masv,notes,cdate,author) VALUES('','$masv','$note',".time().",'$user')";
 	$result2 = $obj->Exec($sql); //echo $sql;
 	

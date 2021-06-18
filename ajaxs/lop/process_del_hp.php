@@ -44,6 +44,10 @@ if(isset($_POST['id'])){
 			// xóa nội dung học của sinh viên
 			$sql = "DELETE FROM tbl_hoctap WHERE masv='$ma' AND id_monhoc='$mon'";
 			$result3 = $obj->Exec($sql);
+
+			/* Xóa lộ trình chăm sóc học tập của sinh viên */
+			$sql = "DELETE FROM tbl_working_log WHERE masv='$ma' AND ma_mon='$mon'";
+			$result4 = $obj->Exec($sql);
 		}
 	}
 	echo "success";

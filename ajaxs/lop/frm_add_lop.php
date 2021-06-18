@@ -20,7 +20,7 @@ if($ids!==''){
 	$arr_id['id_he'] = $tml_arr[2];
 	$arr_id['id_nganh'] = $tml_arr[3];
 }
-if($arr_id['id']=="" || $arr_id['id_khoa']=="" || $arr_id['id_he']=="" || $arr_id['id_nganh']=="")die("Thông tin sinh viên chưa đủ.");
+if($arr_id['id']=="" || $arr_id['id_he']=="" || $arr_id['id_nganh']=="")die("Thông tin sinh viên chưa đủ.");
 
 $id = $arr_id['id'];
 $id_khoa = $arr_id['id_khoa'];
@@ -41,10 +41,10 @@ $masv = $row['masv'];
 	<div class="col-md-6 col-xs-8">
 		<?php 
 		$obj=new CLS_MYSQL;
-		$sql = "SELECT * FROM tbl_lop WHERE id_khoa='$id_khoa' AND id_he='$id_he' AND id_nganh='$id_nganh'";
+		$sql = "SELECT * FROM tbl_lop WHERE id_he='$id_he' AND id_nganh='$id_nganh'";
 		$obj->Query($sql); 
 		if($obj->Num_rows()==0){
-			echo "Chưa có lớp nào (thuộc khóa $id_khoa, hệ $id_he, ngành $id_nganh) được tạo.";
+			echo "Chưa có lớp nào (thuộc hệ $id_he, ngành $id_nganh) được tạo.";
 		}else {?>
 		<select name="cbo_lop" id="cbo_lop" class="form-control" required>
 			<?php 

@@ -18,13 +18,16 @@ if(isset($_POST['ht_id'])) {
 	$chuyencan = isset($_POST['chuyencan'])?(float)$_POST['chuyencan']:'';
 	$diemkt = isset($_POST['diemkt'])?(float)$_POST['diemkt']:'';
 	$diemthi = isset($_POST['diemthi'])?(float)$_POST['diemthi']:'';
+	$dieukienthi = isset($_POST['dkthi'])?(int)$_POST['dkthi']:'';
+	$diem_thilai = isset($_POST['diemthilai'])?(float)$_POST['diemthilai']:'';
+
 	$arr_diem['chuyencan'] = $chuyencan;
 	$arr_diem['diemkt'] = $diemkt;
 	$arr_diem['diemthi'] = $diemthi;
 	
 	$json = json_encode($arr_diem,JSON_UNESCAPED_UNICODE);
 	$cdate =time();
-	$sql = "UPDATE tbl_hoctap SET diem='$json',mdate=$cdate WHERE id IN ('$ht_id')";
+	$sql = "UPDATE tbl_hoctap SET diem='$json',mdate=$cdate, dieukienthi=$dieukienthi, ketqua2=$diem_thilai WHERE id IN ('$ht_id')";
 	$obj->Exec("BEGIN");
 	$result1 = $obj->Exec($sql); //echo $sql;
 	

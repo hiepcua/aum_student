@@ -1,11 +1,5 @@
 <?php
 defined('ISHOME') or die("You can't access this page!");
-$ma = time();
-if(isset($_SESSION["SV$ma"]['TAB_QHGD'])) unset($_SESSION["SV$ma"]['TAB_QHGD']);
-if(isset($_SESSION["SV$ma"]['TAB_QTHT'])) unset($_SESSION["SV$ma"]['TAB_QTHT']);
-if(isset($_SESSION["SV$ma"]['TAB_QTHOC'])) unset($_SESSION["SV$ma"]['TAB_QTHOC']);
-if(isset($_SESSION["SV$ma"]['TAB_KHENTHUONG'])) unset($_SESSION["SV$ma"]['TAB_KHENTHUONG']);
-if(isset($_SESSION["SV$ma"]['TAB_KYLUAT'])) unset($_SESSION["SV$ma"]['TAB_KYLUAT']);
 ?>
 <div class='body profile_view'>
 	<div class="page-bar">
@@ -17,10 +11,7 @@ if(isset($_SESSION["SV$ma"]['TAB_KYLUAT'])) unset($_SESSION["SV$ma"]['TAB_KYLUAT
 			</div>
 			<ul class="box-function pull-right">
 				<li>
-					<button type="button" class="btn btn-success btn-save"  title="Lưu hồ sơ"><i class="fa fa-save"></i> Lưu</button>
-				</li>
-				<li>
-					<a href="<?php echo ROOTHOST;?>?com=student&task=hoso" class="btn btn-default btn-close" title="Thoát"><i class="fa fa-reply"></i> Thoát</a>
+					<a href="<?php echo ROOTHOST;?>/student/hoso" class="btn btn-default btn-close" title="Thoát"><i class="fa fa-reply"></i> Thoát</a>
 				</li>
 			</ul>
 		</div>
@@ -58,17 +49,17 @@ if(isset($_SESSION["SV$ma"]['TAB_KYLUAT'])) unset($_SESSION["SV$ma"]['TAB_KYLUAT
 							</div>
 							<div class="col-md-9 col-xs-12">
 								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Mã hồ sơ</div>
+									<div class="col-md-2 col-xs-4 text">Mã hồ sơ <span class="cred">*</span></div>
 									<div class="col-md-4 col-xs-8">
-										<input type="number" name="ma" id="ma" class="form-control" value="<?php echo $ma;?>" required>
+										<input type="number" name="ma" id="ma" class="form-control" value="" required>
 									</div>
 								</div>
 								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Họ và tên</div>
+									<div class="col-md-2 col-xs-4 text">Họ và tên <span class="cred">*</span></div>
 									<div class="col-md-4 col-xs-8">
 										<input type="text" name="hoten" id="hoten" class="form-control" required>
 									</div>
-									<div class="col-md-2 col-xs-4 text">Giới tính</div>
+									<div class="col-md-2 col-xs-4 text">Giới tính <span class="cred">*</span></div>
 									<div class="col-md-4 col-xs-8"><fieldset id="group1">
 										<input type="radio" name="gender" value="0"> <?php echo $GLOBALS['ARR_GENDER'][0];?>
 										<input type="radio" name="gender" value="1"> <?php echo $GLOBALS['ARR_GENDER'][1];?>
@@ -79,35 +70,33 @@ if(isset($_SESSION["SV$ma"]['TAB_KYLUAT'])) unset($_SESSION["SV$ma"]['TAB_KYLUAT
 									<div class="col-md-4 col-xs-8">
 										<input type="text" name="tengoi" id="tengoi" class="form-control">
 									</div>
-									<div class="col-md-2 col-xs-4 text">Quốc tịch</div>
+									<div class="col-md-2 col-xs-4 text">Quốc tịch <span class="cred">*</span></div>
 									<div class="col-md-4 col-xs-8">
-										<input type="text" name="quoctich" id="quoctich" class="form-control" required>
+										<input type="text" name="quoctich" id="quoctich" class="form-control" value="Việt Nam" required>
 									</div>
 								</div>
 								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Ngày sinh</div>
+									<div class="col-md-2 col-xs-4 text">Ngày sinh <span class="cred">*</span></div>
 									<div class="col-md-4 col-xs-8">
 										<input type="date" name="ngaysinh" id="ngaysinh" class="form-control" required placeholder="tháng/ngày/năm">
 									</div>
-									<div class="col-md-2 col-xs-4 text">Nơi sinh</div>
+									<div class="col-md-2 col-xs-4 text">Nơi sinh <span class="cred">*</span></div>
 									<div class="col-md-4 col-xs-8">
 										<input type="text" name="noisinh" id="noisinh" class="form-control" required>
 									</div>
 								</div>
 								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Nguyên quán</div>
-									<div class="col-md-10 col-xs-8">
+									<div class="col-md-2 col-xs-4 text">Nguyên quán <span class="cred">*</span></div>
+									<div class="col-md-4 col-xs-8">
 										<input type="text" name="nguyenquan" id="nguyenquan" class="form-control" required>
 									</div>
-								</div>
-								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Hộ khẩu</div>
-									<div class="col-md-10 col-xs-8">
-										<input type="text" name="hokhau" id="hokhau" class="form-control" required>
+									<div class="col-md-2 col-xs-4 text">Hộ khẩu <span class="cred">*</span></div>
+									<div class="col-md-4 col-xs-8">
+										<input type="text" name="hokhau" id="hokhau" class="form-control">
 									</div>
 								</div>
 								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Tỉnh/Thành</div>
+									<div class="col-md-2 col-xs-4 text">Tỉnh/Thành <span class="cred">*</span></div>
 									<div class="col-md-4 col-xs-8">
 										<select name="cbo_city[]" id="cbo_city" class="form-control" required>
 											<option value=""></option>
@@ -121,201 +110,19 @@ if(isset($_SESSION["SV$ma"]['TAB_KYLUAT'])) unset($_SESSION["SV$ma"]['TAB_KYLUAT
 										</select>
 									</div>
 								</div>
-								<div class="row form-group"></div>
 								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Dân tộc</div>
+									<div class="col-md-2 col-xs-4 text">Điện thoại</div>
 									<div class="col-md-4 col-xs-8">
-										<input type="text" name="dantoc" id="dantoc" class="form-control" required>
-									</div>
-									<div class="col-md-2 col-xs-4 text">Tôn giáo</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="text" name="tongiao" id="tongiao" class="form-control" required>
-									</div>
-								</div>
-								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Khu vực TS</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="text" name="khuvuc" id="khuvuc" class="form-control">
-									</div>
-									<div class="col-md-2 col-xs-4 text">Đối tượng</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="text" name="doituong" id="doituong" class="form-control">
-									</div>
-								</div>
-								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Đạo đức</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="text" name="daoduc" id="daoduc" class="form-control">
-									</div>
-									<div class="col-md-2 col-xs-4 text">Trình độ VH</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="text" name="trinhdo" id="trinhdo" class="form-control">
-									</div>
-								</div>
-								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Diện chính sách</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="text" name="diencs" id="diencs" class="form-control">
-									</div>
-									<div class="col-md-2 col-xs-4 text">T.phần gia đình</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="text" name="thanhphan" id="thanhphan" class="form-control">
-									</div>
-								</div>
-								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Ngày vào Đoàn</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="date" name="doan" id="doan" class="form-control">
-									</div>
-									<div class="col-md-2 col-xs-4 text">Ngày vào Đảng</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="date" name="dang" id="dang" class="form-control">
-									</div>
-								</div>
-								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Ngày chính thức</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="text" name="ngayct" id="ngayct" class="form-control">
-									</div>
-									<div class="col-md-2 col-xs-4 text">CMND/CCCD</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="text" name="cmnd" id="cmnd" class="form-control">
-									</div>
-								</div>
-								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Ngày cấp</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="text" name="ngaycap" id="ngaycap" class="form-control">
-									</div>
-									<div class="col-md-2 col-xs-4 text">Nơi cấp</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="text" name="noicap" id="noicap" class="form-control">
-									</div>
-								</div>
-								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Số tài khoản</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="text" name="stk" id="stk" class="form-control">
+										<input type="text" name="dienthoai" id="dienthoai" class="form-control">
 									</div>
 									<div class="col-md-2 col-xs-4 text">Email</div>
 									<div class="col-md-4 col-xs-8">
 										<input type="email" name="email" id="email" class="form-control">
 									</div>
 								</div>
-								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Địa chỉ liên lạc</div>
-									<div class="col-md-10 col-xs-8">
-										<input type="text" name="diachi" id="diachi" class="form-control">
-									</div>
-								</div>
-								<div class="row form-group">
-									<div class="col-md-2 col-xs-4 text">Điện thoại</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="text" name="dienthoai" id="dienthoai" class="form-control">
-									</div>
-									<div class="col-md-2 col-xs-4 text">Ghi chú</div>
-									<div class="col-md-4 col-xs-8">
-										<input type="text" name="ghichu" id="ghichu" class="form-control">
-									</div>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-							<div class="box-tabs box-add">
-								<ul class="tabs-function">
-									<li>
-										<button type="button" class="btn btn-default add-row" title="Thêm hàng"><i class="fa fa-folder-open"></i></button>
-									</li>
-								</ul>
-								<ul class="nav nav-tabs step-form" role="tablist">
-									<li>
-										<a href="#tab1" role="tab" data-toggle="tab">
-											<div class="item">QH gia đình</div>
-										</a>
-									</li><li class="">
-										<a href="#tab2" role="tab" data-toggle="tab">
-											<div class="item">QT học tập</div>
-										</a>
-									</li><li class="">
-										<a href="#tab3" role="tab" data-toggle="tab">
-											<div class="item">QT học tại trường</div>
-										</a>
-									</li><li class="">
-										<a href="#tab4" role="tab" data-toggle="tab">
-											<div class="item">Khen thưởng</div>
-										</a>
-									</li><li class="">
-										<a href="#tab5" role="tab" data-toggle="tab">
-											<div class="item">Kỷ luật</div>
-										</a>
-									</li>
-								</ul>
-								<div class="tab-content">
-									<div class="tab-pane fade active in" id="tab1">
-										<table class="table table-striped">
-											<thead><tr><th></th>
-												<th>STT</th>
-												<th>Quan hệ</th>
-												<th>Họ và tên</th>
-												<th>Năm sinh</th>
-												<th>Nghề nghiệp</th>
-												<th>Hộ khẩu</th>
-												<th>Ghi chú</th>
-											</tr></thead>
-											<tbody></tbody>
-										</table>
-									</div>
-									<div class="tab-pane fade" id="tab2">
-										<table class="table table-striped">
-											<thead><tr><th></th>
-												<th>STT</th>
-												<th>Từ năm</th>
-												<th>Đến năm</th>
-												<th>Học gì</th>
-												<th>Nơi đâu</th>
-												<th>Chức vụ</th>
-											</tr></thead>
-											<tbody></tbody>
-										</table>
-									</div>
-									<div class="tab-pane fade" id="tab3">
-										<table class="table table-striped">
-											<thead><tr><th></th>
-												<th>STT</th>
-												<th>Thời gian</th>
-												<th>Nội dung</th>
-												<th>Lớp</th>
-											</tr></thead>
-											<tbody></tbody>
-										</table>
-									</div>
-									<div class="tab-pane fade" id="tab4">
-										<table class="table table-striped">
-											<thead><tr><th></th>
-												<th>STT</th>
-												<th>Học kỳ</th>
-												<th>Hình thức</th>
-												<th>Lý do</th>
-												<th>Quyết định</th>
-												<th>Ngày</th>
-												<th>Ghi chú</th>
-											</tr></thead>
-											<tbody></tbody>
-										</table>
-									</div>
-									<div class="tab-pane fade" id="tab5">
-										<table class="table table-striped">
-											<thead><tr><th></th>
-												<th>STT</th>
-												<th>Học kỳ</th>
-												<th>Hình thức</th>
-												<th>Lý do</th>
-												<th>Quyết định</th>
-												<th>Từ ngày</th>
-												<th>Đến ngày</th>
-											</tr></thead>
-											<tbody></tbody>
-										</table>
-									</div>
+								<div class="text-center form-group"><br/>
+									<button type="button" class="btn btn-success btn-save"  title="Lưu hồ sơ">
+									<i class="fa fa-save"></i> Lưu hồ sơ</button>
 								</div>
 							</div>
 						</form>
@@ -327,6 +134,7 @@ if(isset($_SESSION["SV$ma"]['TAB_KYLUAT'])) unset($_SESSION["SV$ma"]['TAB_KYLUAT
 </div>
 <script>
 	$(document).ready(function(){
+		$("#student_add").validate();
 		$(".avatar").click(function(){
 			$("#FileUpload").click();
 		});
@@ -335,27 +143,7 @@ if(isset($_SESSION["SV$ma"]['TAB_KYLUAT'])) unset($_SESSION["SV$ma"]['TAB_KYLUAT
 			readURL(this);
 		});
 
-		$(".tabs-function .add-row").click(function(){
-			var idtab = $(".tab-content .active").attr('id');
-			var ma = "<?php echo $ma;?>";
-			var url = "";
-			if(idtab=="tab1")
-				url = "<?php echo ROOTHOST;?>ajaxs/student/add_qhgd.php?ma="+ma;
-			if(idtab=="tab2")
-				url = "<?php echo ROOTHOST;?>ajaxs/student/add_qtht.php?ma="+ma;
-			if(idtab=="tab3")
-				url = "<?php echo ROOTHOST;?>ajaxs/student/add_qthoc.php?ma="+ma;
-			if(idtab=="tab4")
-				url = "<?php echo ROOTHOST;?>ajaxs/student/add_khenthuong.php?ma="+ma;
-			if(idtab=="tab5")
-				url = "<?php echo ROOTHOST;?>ajaxs/student/add_kyluat.php?ma="+ma;
-			$.get(url,function(new_row){
-				$("#"+idtab).html(new_row);
-			})
-		});
-
-		$(".box-function .btn-save").click(function(){
-			var ma = "<?php echo $ma;?>";
+		$("#student_add .btn-save").click(function(){
 			if(checkinput()==true) {
 				var url = "<?php echo ROOTHOST;?>ajaxs/student/process_add.php";
 				$.ajax({
@@ -363,14 +151,18 @@ if(isset($_SESSION["SV$ma"]['TAB_KYLUAT'])) unset($_SESSION["SV$ma"]['TAB_KYLUAT
 					url: url,
 					data: $("#student_add").serialize(),
 					success: function(req){
-						// console.log(req);
-						if(req=="error") showMess("Lỗi trong quá trình lưu dữ liệu!","error");
-						else if(ma===req) {
+						console.log(req);
+						if(req == "success") {
+							var ma = $("#ma").val();
 							showMess("Lưu hồ sơ thành công!",""); 
 							setTimeout(function(){ 
 								window.location="<?php echo ROOTHOST;?>student/profile/"+ma; 
 							}, 2000);
-						}
+						}if(req == "exist") {
+							showMess("Mã hồ sơ đã có trong hệ thống. Vui lòng nhập mã khác.","error");
+							$("#ma").focus();
+						}else 
+							showMess("Lỗi trong quá trình lưu dữ liệu!","error");
 					}
 				});
 			}
@@ -398,23 +190,15 @@ if(isset($_SESSION["SV$ma"]['TAB_KYLUAT'])) unset($_SESSION["SV$ma"]['TAB_KYLUAT
 		$('.fileupload-preview').empty();
 		$("#file_image").val('');
 	}
-	$(".edit_qhgd").click(function(){
-		var ma = "<?php echo $ma;?>";
-		var row_id = $(this).attr('dataid');
-		var url = "<?php echo ROOTHOST;?>ajaxs/student/edit_qhgd.php";
-		$.post(url,{'ma':ma,'row_id':row_id},function(req){
-			$("#tab1").html(req);
-		})
-	})
-	$(".del_qhgd").click(function(){
-		var ma = "<?php echo $ma;?>";
-		var row_id = $(this).attr('dataid');
-		var url = "<?php echo ROOTHOST;?>ajaxs/student/del_qhgd.php";
-		$.post(url,{'ma':ma,'row_id':row_id},function(req){
-			$("#tab1").html(req);
-		})
-	})
+	
 	function checkinput(){
+		if($("#ma").val()=="") {
+			$("#ma").focus();
+			$("#ma").addClass('novalid');
+			return false;
+		}else {
+			$("#ma").removeClass('novalid');
+		}
 		if($("#hoten").val()=="") {
 			$("#hoten").focus();
 			$("#hoten").addClass('novalid');

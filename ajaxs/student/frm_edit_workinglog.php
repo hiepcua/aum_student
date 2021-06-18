@@ -5,86 +5,120 @@ require_once('../../global/libs/gffunc.php');
 require_once('../../includes/gfconfig.php');
 require_once('../../libs/cls.mysql.php');
 require_once('../../libs/cls.users.php');
-require_once('../../libs/cls.hocsinh.php');
-require_once('../../libs/cls.he.php');
-require_once('../../libs/cls.khoa.php');
-require_once('../../libs/cls.nganh.php');
-require_once('../../libs/cls.tuyensinh.php');
 
-$objuser=new CLS_USER;
-if(!$objuser->isLogin()) die("E01");
-$id = isset($_POST['id']) ? (int)$_POST['id'] : '';
-if($id == '') die('Chưa lựa tương tác nào');
+$id_log   = $_POST['id'] ? (int)$_POST['id'] : '';
+$rs_log   = SysGetList('tbl_working_log',array()," AND id = ".$id_log."");
+if(count($rs_log) == 0) die('Chưa có thông tin');
+$row = $rs_log[0];
 
-$res_wklog = SysGetList('tbl_working_log', array(), "AND id=".$id);
-$row = $res_wklog[0];
-$date = isset($row['date']) && $row['date']!=='' && $row['date']!==null ? date('Y-m-d', $row['date']) : null;
+/* Get all hồ sơ */
+$DKTS = array();
+$res_dkts = SysGetList('tbl_dangky_tuyensinh', array("id_hoso", "masv"), "AND id_hoso='".$row['id_hoso']."'");
+if(count($res_dkts)>0){
+	foreach ($res_dkts as $key => $value) {
+		$DKTS[] = $value;
+	}
+}
 ?>
 <style type="text/css">
-	.row-status{
-		position: relative;
-		padding-right: 40px;
-	}
-	input.chk_done {
-	    position: absolute;
-	    right: 20px;
-	    top: 8px;
-	    margin-top: 0;
-	    width: 20px;
-	    height: 20px;
+	#frmAddWordLog .form-control{
+		border: 1px solid #ccc;
 	}
 </style>
-<form id="frm_status" method="post">
-	<input type="hidden" id="id_working_log" name="id_working_log" value="<?php echo $id;?>">
-	<label>Báo cáo tương tác</label>
-	<div class="form-group row row-status">
-		<input type="checkbox" name="chk_done" class="chk_done" id="chk_done">
-		<div class="col-md-3"><input type="date" name="date_done" id="date_done" class="form-control" value="<?php echo $date;?>"></div>
-		<div class="col-md-5"><input type="text" name="noidung_done" id="noidung_done" class="form-control" value="<?php echo $row['noidung'];?>" placeholder="Nội dung (Không để trống)"></div>
-		<div class="col-md-4"><input type="text" name="ketqua_done" id="ketqua_done" class="form-control" value="<?php echo $row['ketqua'];?>" placeholder="Kết quả"></div>
+<form name="frmAddWordLog" id="frmAddWordLog" class="form">
+	<div class="form-group msg_error text-danger"></div>
+	<input type="hidden" name="id_log" id="id_log" value="<?php echo $id_log;?>"/>
+	<input type="hidden" name="ma_hoso" id="ma_hoso" value="<?php echo $row['id_hoso'];?>" class="form-control"/>
+
+	<div class="form-group">
+		<div class="row">
+			<div class="col-md-6">
+				<label>Mã SV</label>
+				<select name="cbo_masv" id="cbo_masv" class="form-control">
+					<?php foreach($DKTS as $item) { ?>
+						<option value="<?php echo $item['masv'];?>"><?php echo $row['masv'];?></option>
+					<?php } ?>
+				</select>
+			</div>
+			<div class="col-md-6">
+				<label>Ngày liên hệ</label>
+				<input type="date" name="ngay_lienhe" id="ngay_lienhe" class="form-control" value="<?php echo  date("Y-m-d",$row['date']);?>"/>
+			</div>
+		</div>
 	</div>
-	<div class="row form-group text-right" style="margin-top: 20px;"><div class="col-md-12 col-xs-12">
-		<button type="button" name="btnsave" id="btnsave" class="btn btn-primary">Lưu</button>
-		<button type="button" name="btncancel" id="btncancel" class="btn btn-default" data-dismiss="modal">Thoát</button>
-	</div></div>
+
+	<label>Nội dung tương tác</label>
+	<div class="form-group">
+		<textarea type="text" name="nd_tuongtac" id="nd_tuongtac" class="form-control"><?php echo $row['noidung'];?></textarea>
+	</div>
+	
+	<label>Trạng thái</label>
+	<div class="form-group">
+		<select name="hoanthanh" id="hoanthanh" class="form-control">
+			<option value="0" <?php if($row['finish'] == 0) echo 'selected';?>>Chưa hoàn thành</option>
+			<option value="1" <?php if($row['finish'] == 1) echo 'selected';?>>Đã hoàn thành</option>
+		</select>
+	</div>
+
+	<div class="row form-group text-center">
+		<button type="button" name="btnsave" id="btnsave" class="btn btn-primary"><i class="fa fa-save"></i> Lưu thông tin</button>
+		<button type="button" name="btncancel" id="btncancel" class="btn btn-default" data-dismiss="modal">Hủy</button>
+	</div>
+	<div class="clearfix"></div>
 </form>
-<div class="clearfix"></div>
 <script>
 	$(document).ready(function(){
-		$("#btnsave").click(function(){	
+		$("#frmAddWordLog #btnsave").click(function(){
 			if(checkinput()==true) {
-				showLoading();
-				var url = "<?php echo ROOTHOST;?>ajaxs/student/process_workinglog.php";
+				var url = "<?php echo ROOTHOST;?>ajaxs/student/process_edit_workinglog.php";
 				$.ajax({
 					type: "POST",
 					url: url,
-					data: $("#frm_status").serialize(),
+					data: $("#frmAddWordLog").serialize(),
 					success: function(req){
-						hideLoading();
-						if(req=="E01") showMess("Vui lòng đăng nhập hệ thống","error");
-						else if(req=="error") showMess("Lỗi trong quá trình lưu dữ liệu!","error");
-						else if(req==="success") {
-							showMess("Cập nhật thành công!",""); 
+						console.log(req);
+						if(req == "success") {
+							showMess("Cập nhật thông tin thành công.");
 							setTimeout(function(){ 
-								window.location.reload(); 
-							}, 1500);
-						}
+								location.reload();
+							}, 2000);
+						} else if(req == "E01") {
+							showMess("Lỗi! Không có thông tin đăng nhập.","error");
+						} else if(req == "error")
+						showMess("Xảy ra lỗi.","error");
 					}
-				});
-			} return false;
+				})
+			}
 		})
-	});
-
+	})
 	function checkinput(){
-		var id_dkts = $("#id_working_log").val();
-		noidung_done = $('#noidung_done').val();
-
-		if(id_dkts=="" || id_dkts=="undefined") {
+		if($("#cbo_masv").val()=="") {
+			$("#cbo_masv").focus();
+			$("#cbo_masv").addClass('novalid');
 			return false;
+		}else {
+			$("#cbo_masv").removeClass('novalid');
 		}
-		if(noidung_done=="") {
-			$('#noidung_done').focus();
+		if($("#ma_hoso").val()=="") {
+			$("#ma_hoso").focus();
+			$("#ma_hoso").addClass('novalid');
 			return false;
+		}else {
+			$("#ma_hoso").removeClass('novalid');
+		}
+		if($("#ngay_lienhe").val()=="") {
+			$("#ngay_lienhe").focus();
+			$("#ngay_lienhe").addClass('novalid');
+			return false;
+		}else {
+			$("#ngay_lienhe").removeClass('novalid');
+		}
+		if($("#nd_tuongtac").val()=="") {
+			$("#nd_tuongtac").focus();
+			$("#nd_tuongtac").addClass('novalid');
+			return false;
+		}else {
+			$("#nd_tuongtac").removeClass('novalid');
 		}
 		return true;
 	}

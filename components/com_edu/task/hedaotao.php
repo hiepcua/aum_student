@@ -1,7 +1,26 @@
 <?php
 defined('ISHOME') or die('Can not acess this page, please come back!');
-$key=isset($_GET['q'])?addslashes(strip_tags($_GET['q'])):'';
-$strwhere=" AND (id LIKE '%$key%' OR name LIKE '%$key%') ";
+//---------------------------------------
+$HE = array();
+$json_he = file_get_contents(DOCUMENT_ROOT.'jsons/he.json');
+$arr_he = json_decode($json_he, true);
+foreach ($arr_he as $key => $value) {
+	$HE[$value['id']] = $value;
+}
+$arr_data = $HE;
+
+//---------------------------------------
+$get_q = isset($_GET['q']) ? antiData($_GET['q']):'';
+if($get_q!=''){
+	$new_array = array();
+	foreach ($arr_data as $key => $value) {
+		$position = stripos($value['name'], $get_q);
+		if(strcasecmp($value['id'], $get_q) == 0 || $position!==false){
+			$new_array[] = $value;
+		}
+	}
+	$arr_data = $new_array;
+}
 ?>
 <div class='page-title'>BẬC ĐÀO TẠO</div>
 <div class="container-fluid">
@@ -10,13 +29,13 @@ $strwhere=" AND (id LIKE '%$key%' OR name LIKE '%$key%') ";
 			<div class="col-md-4"><div class="row">
 				<input type="hidden" class="form-control" name="com" id="com" value="edu">
 				<input type="hidden" class="form-control" name="task" id="task" value="hedaotao">
-				<input type="text" class="form-control" name="q" id="txt_q" placeholder="Mã, tên bậc đào tạo" value="<?php echo $key;?>">
+				<input type="text" class="form-control" name="q" id="txt_q" placeholder="Mã, tên bậc đào tạo" value="<?php echo $get_q;?>">
 			</div></div>
 			<div class="col-md-1">
 				<button type="submit" class="btn btn-primary" name="cmdsearch" id="cmdsearch"><i class="fa fa-search"></i> Tìm</button>
 			</div>
 			<div class="col-md-1">
-				<button type="button" class="btn btn-primary" name="filterDebt" id="btn_add"><i class="fa fa-dollar"></i> Thêm mới</button>
+				<button type="button" class="btn btn-primary" name="filterDebt" onclick="dongbo_he()"><i class="fa fa-refresh" aria-hidden="true"></i> Đồng bộ</button>
 			</div>
 		</form>
 	</div>
@@ -26,80 +45,39 @@ $strwhere=" AND (id LIKE '%$key%' OR name LIKE '%$key%') ";
 			<table class="table table-bordered">
 				<thead><tr>
 					<th width='30'>STT</th>
-					<th width='30'></th>
-					<th class='text-center'>Mã BĐT</th>
-					<th class='text-left'>Tên bậc đào tạo</th>
-					<th class='text-center'>Số học kỳ</th>
-					<th class='text-right'>Học phí/tín chỉ</th>
-					<th class='text-right'>Lệ phí thi lại/môn</th>
-					<th class='text-right'>Lệ phí thi CT/môn</th>
-					<th class='text-right'>Học phí học lại/tín chỉ</th>
-					<th class='text-right'>Học phí học CT/tín chỉ</th>
-					<th class='text-center'></th>
+					<th>Tên hệ</th>
 				</tr></thead>
 				<tbody>
-				<?php 
-				$obj=new CLS_MYSQL;
-				$sql="SELECT * FROM tbl_he WHERE isactive=1 $strwhere";
-				$obj->Query($sql);
-				$stt=0;
-				while($r=$obj->Fetch_Assoc()) {
-					$id=$r['id'];
-					$stt++;
-				?>
-				<tr><td class='text-center'><?php echo $stt;?></td>
-					<td><i class="fa fa-trash btn_xoa" aria-hidden="true" title='Xóa' dataid='<?php echo $id;?>'></i></td>
-					<td class='text-center'><?php echo stripslashes($r['id']);?></td>
-					<td><?php echo stripslashes($r['name']);?></td>
-					<td class='text-center'><?php echo number_format($r['sohocky']);?></td>
-					<td class='text-right'><?php echo number_format($r['hocphi']);?> đ</td>
-					<td class='text-right'><?php echo number_format($r['hocphi_thilai']);?> đ</td>
-					<td class='text-right'><?php echo number_format($r['hocphi_thict']);?> đ</td>
-					<td class='text-right'><?php echo number_format($r['hocphi_hoclai']);?> đ</td>
-					<td class='text-right'><?php echo number_format($r['hocphi_hocct']);?> đ</td>
-					<td class='text-center'>
-					<i class="fa fa-pencil-square-o btn_edit" aria-hidden="true" title='Sửa' dataid='<?php echo $id;?>'></i>
-					</td>
-				</tr>
-				<?php } ?>
+					<?php 
+					$stt=0;
+					foreach ($arr_data as $key => $r) {
+						$stt = $stt + 1;
+						?>
+						<tr>
+							<td align="center"><?php echo $stt;?></td>
+							<td><?php echo stripslashes($r['name']);?></td>
+						</tr>
+					<?php } ?>
 				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
-<script>
-$('.btn_xoa').click(function(){
-	if(confirm('Bạn có chắc chắn muốn xóa bậc đào tạo này?')){
-		var _id=$(this).attr('dataid');
-		var _url='ajaxs/he/process_del.php';
-		$.post(_url,{'id':_id},function(req){
-			if(req=='success'){
-				window.location.reload();
-			}else{
-				console.log(req);
-				alert('Error:'+req);
-			}
-		});
+<script type="text/javascript">
+	function dongbo_he(){
+		if(confirm("Đồng bộ lại dữ liệu.")){
+			var _url = "<?php echo ROOTHOST;?>ajaxs/he/dongbo_he.php";
+			$.post(_url, function(res){
+				if(res == "success") {
+					showMess("Đồng bộ thành công.");
+					setTimeout(function(){ 
+						location.reload();
+					}, 2000);
+				} else if(res == "E01") {
+					showMess("Lỗi! Không có thông tin đăng nhập.","error");
+				} else if(res == "error")
+				showMess("Xảy ra lỗi.","error");
+			})
+		}
 	}
-});
-$('.btn_edit').click(function(){
-	var _id=$(this).attr('dataid');
-	var _url='ajaxs/he/frm_edit.php';
-	$('#myModalPopup .modal-body').html('Loading...');
-	$('#myModalPopup .modal-title').html('Sửa bậc đào tạo');
-	$.post(_url,{'id':_id},function(req){
-		$('#myModalPopup .modal-body').html(req);
-		$('#myModalPopup').modal('show');
-	});
-});
-$('#btn_add').click(function(){
-	var _id=$(this).attr('dataid');
-	var _url='ajaxs/he/frm_add.php';
-	$('#myModalPopup .modal-body').html('Loading...');
-	$('#myModalPopup .modal-title').html('Thêm mới bậc đào tạo');
-	$.post(_url,{'id':_id},function(req){
-		$('#myModalPopup .modal-body').html(req);
-		$('#myModalPopup').modal('show');
-	});
-});
 </script>
